@@ -1,0 +1,133 @@
+﻿@inherits WAComponentBase
+<wa-copy-button @ref="@Element"
+                id="@Id"
+                @attributes="@AdditionalAttributes"
+                style="@StyleNames"
+                class="@ClassNames"
+                value="@Value"
+                copy-label="@HoverLabel"
+                success-label="@SuccessLabel"
+                error-label="@ErrorLabel"
+                disabled="@Disabled"
+                feedback-duration="@FeedbackDuration"
+                tooltip-placement="@TooltipPositionString">
+    @if (!String.IsNullOrEmpty(IconName))
+    {
+        <wa-icon name="@IconName" variant="@IconVariant" family="@IconFamily" slot="copy-icon"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(SuccessIconName))
+    {
+        <wa-icon name="@SuccessIconName" variant="@SuccessIconVariant" family="@SuccessIconFamily" slot="success-icon"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(ErrorIconName))
+    {
+        <wa-icon name="@ErrorIconName" variant="@ErrorIconVariant" family="@ErrorIconFamily" slot="error-icon"></wa-icon>
+    }
+</wa-copy-button>
+
+@code {
+    [Parameter]
+    public string? Value { get; set; }
+
+    /// <summary>
+    /// A custom label to show in the tooltip.
+    /// </summary>
+    [Parameter]
+    public string HoverLabel { get; set; } = "Copy";
+
+    /// <summary>
+    /// A custom label to show in the tooltip after copying.
+    /// </summary>
+    [Parameter]
+    public string? SuccessLabel { get; set; } = "Copied";
+
+    /// <summary>
+    /// A custom label to show in the tooltip when a copy error occurs.
+    /// </summary>
+    [Parameter]
+    public string? ErrorLabel { get; set; } = "Not supported";
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? IconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? IconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? IconVariant { get; set; }
+
+
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? SuccessIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? SuccessIconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? SuccessIconVariant { get; set; }
+
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? ErrorIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ErrorIconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ErrorIconVariant { get; set; }
+
+
+
+
+    /// <summary>
+    /// Disables the copy button.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// The length of time to show feedback before restoring the default trigger.
+    /// </summary>
+    [Parameter]
+    public int FeedbackDuration { get; set; } = 1000;
+
+
+    [Parameter]
+    public Enums.Position TooltipPosition { get; set; } = Enums.Position.Top;
+    string TooltipPositionString
+    {
+        get
+        {
+            return TooltipPosition switch
+            {
+                Enums.Position.Top => "top",
+                Enums.Position.Left => "left",
+                Enums.Position.Right => "right",
+                Enums.Position.Bottom => "bottom",
+                _ => "top"
+            };
+        }
+    }
+}

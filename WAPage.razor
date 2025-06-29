@@ -1,0 +1,63 @@
+﻿@using Microsoft.JSInterop
+@inherits WALayoutComponentBase
+
+<wa-page id="@Id" @attributes="@AdditionalAttributes" navigation-placement="@NavigationPlacementString" mobile-breakpoint="@MobileBreakpoint" nav-open="@NavOpen">
+    @ChildContent
+</wa-page>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Whether or not the navigation drawer is open. Note, the navigation drawer is only "open" on mobile views.
+    /// </summary>
+    [Parameter]
+    public bool NavOpen { get; set; } = false;
+
+    /// <summary>
+    /// Where to place the navigation when in the mobile viewport.
+    /// </summary>
+    [Parameter]
+    public Enums.NavigationPlacement NavigationPlacement { get; set; } = Enums.NavigationPlacement.Start;
+    string NavigationPlacementString
+    {
+        get
+        {
+            return NavigationPlacement switch
+            {
+                Enums.NavigationPlacement.Start => "start",
+                Enums.NavigationPlacement.End => "end",
+                _ => "start"
+            };
+        }
+    }
+
+    /// <summary>
+    /// At what page width to hide the "navigation" slot and collapse into a hamburger button. Accepts both numbers (interpreted as px) and CSS lengths (e.g. 50em), which are resolved based on the root element.
+    /// </summary>
+    [Parameter]
+    public string? MobileBreakpoint { get; set; } = "768px";
+
+    /// <summary>
+    /// Shows the mobile navigation drawer
+    /// </summary>
+    public async Task ShowNavigation()
+    {
+        await JSRuntime.InvokeVoidAsync("window.showNavigation", Id);
+    }
+
+    /// <summary>
+    /// Hides the mobile navigation drawer
+    /// </summary>
+    public async Task HideNavigation()
+    {
+        await JSRuntime.InvokeVoidAsync("window.hideNavigation", Id);
+    }
+
+    public async Task ToggleNavigation()
+    {
+        await JSRuntime.InvokeVoidAsync("window.toggleNavigation", Id);
+    }
+
+}

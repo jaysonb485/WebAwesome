@@ -1,0 +1,83 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+<HeadContent>
+    @if(ThemeName != null) {
+        <link rel="stylesheet" href="@ThemeStyleSheetUrl" />
+    }
+    @if (Color != null)
+    {
+        <link rel="stylesheet" href="@ColorStyleSheetUrl" />
+    }
+    @if (Palette != null)
+    {
+        <link rel="stylesheet" href="@PaletteStyleSheetUrl" />
+    }
+</HeadContent>
+
+@code {
+    [Parameter]
+    public Theme? ThemeName { get; set; }
+
+    [Parameter]
+    public BrandColor? Color { get; set; }
+
+    [Parameter]
+    public ColorPalette? Palette { get; set; }
+
+    private string? ThemeStyleSheetUrl { get; set; }
+    private string? ColorStyleSheetUrl { get; set; }
+    private string? PaletteStyleSheetUrl { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        @if (ThemeName != null) ThemeStyleSheetUrl = $"https://early.webawesome.com/webawesome@3.0.0-alpha.13/dist/styles/themes/{ThemeName.ToString()!.ToLower()}.css";
+        @if (Color != null) ColorStyleSheetUrl = $"https://early.webawesome.com/webawesome@3.0.0-alpha.13/dist/styles/brand/{Color.ToString()!.ToLower()}.css";
+        @if (Palette != null) PaletteStyleSheetUrl = $"https://early.webawesome.com/webawesome@3.0.0-alpha.13/dist/styles/color/{Palette.ToString()!.ToLower()}.css";
+    }
+
+    public async Task SetDarkMode(bool DarkMode)
+    {
+        await JSRuntime.InvokeVoidAsync("window.toggleDarkMode", DarkMode);
+    }
+
+    public enum Theme
+    {
+        Default,
+        Classic,
+        Awesome,
+        Brutalist,
+        Glossy,
+        Matter,
+        Mellow,
+        Playful,
+        Premium,
+        Tailspin
+    }
+
+    public enum BrandColor
+    {
+        Red,
+        Orange,
+        Yellow,
+        Green,
+        Cyan,
+        Blue,
+        Indigo,
+        Purple, 
+        Pink,
+        Gray
+    }
+
+    public enum ColorPalette
+    {
+        Default,
+        Anodized,
+        Bright,
+        Classic,
+        Elegant,
+        Mild,
+        Natural,
+        Rudimentary,
+        Vogue
+    }
+}

@@ -1,0 +1,97 @@
+﻿@inherits WAComponentBase
+<wa-details @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            style="@StyleNames"
+            class="@ClassNames"
+            summary="@Title"
+            disabled="@Disabled"
+            appearance="@AppearanceString"
+            open="@IsOpen">
+    @if (!String.IsNullOrEmpty(ExpandIconName))
+    {
+        <wa-icon name="@ExpandIconName" variant="@ExpandIconVariant" family="@ExpandIconFamily" slot="expand-icon"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(CollapseIconName))
+    {
+        <wa-icon name="@CollapseIconName" variant="@CollapseIconVariant" family="@CollapseIconFamily" slot="collapse-icon"></wa-icon>
+    }
+    @ChildContent
+</wa-details>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// The element's visual appearance.
+    /// </summary>
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.Outlined;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.FilledOutlined => "filled outlined",
+                Enums.Appearance.Outlined => "outlined",
+                Enums.Appearance.Plain => "plain",
+                _ => "outlined"
+            };
+        }
+    }
+
+
+    /// <summary>
+    /// Disables the details so it can't be toggled.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// The summary to show in the header.
+    /// </summary>
+    [Parameter]
+    public string? Title { get; set; }
+
+    /// <summary>
+    /// Indicates whether or not the details is open.
+    /// </summary>
+    [Parameter]
+    public bool IsOpen { get; set; } = false;
+
+    /// <summary>
+    /// The name of the icon to draw for the expand indicator. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the expand icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconFamily { get; set; }
+    /// <summary>
+    /// The name of the expand icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconVariant { get; set; }
+
+    /// <summary>
+    /// The name of the icon to draw on for the collapse indicator. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? CollapseIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the Collapse icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? CollapseIconFamily { get; set; }
+    /// <summary>
+    /// The name of the Collapse icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? CollapseIconVariant { get; set; }
+
+}

@@ -1,0 +1,44 @@
+﻿@inherits WAComponentBase
+<wa-progress-bar @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+style="@StyleNames"
+class="@ClassNames"
+value="@Value"
+label="@Label">
+    @Text
+</wa-progress-bar>
+@code {
+    /// <summary>
+    /// The current progress as a percentage, 0 to 100.
+    /// </summary>
+    [Parameter]
+    public decimal Value { get; set; } = 0;
+
+    /// <summary>
+    /// When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state.
+    /// </summary>
+    [Parameter]
+    public bool Indeterminate { get; set; } = false;
+
+    /// <summary>
+    /// A custom label for assistive devices.
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// Text to display over the progress bar
+    /// </summary>
+    [Parameter]
+    public string? Text { get; set; }
+
+    /// <summary>
+    /// Height of the progress bar in CSS units.
+    /// </summary>
+    [Parameter]
+    public string? Height { get; set; }
+
+    protected override string? StyleNames => BuildStyleNames(Style, ($"height: {Height}", !String.IsNullOrEmpty(Height)));
+
+}

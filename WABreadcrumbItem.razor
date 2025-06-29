@@ -1,0 +1,77 @@
+﻿@inherits WAComponentBase
+<wa-breadcrumb-item @ref="@Element"
+                    id="@Id"
+                    @attributes="@AdditionalAttributes" 
+                    @onclick="@OnClick"
+                    style="@StyleNames"
+                    class="@ClassNames">
+    @if (!String.IsNullOrEmpty(StartIconName))
+    {
+        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="prefix"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(EndIconName))
+    {
+        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="suffix"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(SeparatorIconName))
+    {
+        <wa-icon slot="separator" name="@SeparatorIconName" variant="@SeparatorIconVariant" family="@SeparatorIconFamily"></wa-icon>
+    }
+    @ChildContent</wa-breadcrumb-item>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs?> OnClick { get; set; }
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? SeparatorIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? SeparatorIconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? SeparatorIconVariant { get; set; }
+
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? StartIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? StartIconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? StartIconVariant { get; set; }
+    /// <summary>
+    /// The name of the icon to draw in the suffix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? EndIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the suffix slot. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? EndIconFamily { get; set; }
+    /// <summary>
+    /// The name of the suffix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? EndIconVariant { get; set; }
+
+}

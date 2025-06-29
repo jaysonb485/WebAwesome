@@ -1,0 +1,82 @@
+﻿@inherits WAComponentBase
+<wa-dropdown @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             placement="@PlacementString"
+             disabled="@Disabled"
+             distance="@Distance"
+             stay-open-on-select="@StayOpenOnSelect"
+             skidding="@Offset">
+    <wa-button slot="trigger" caret="@ShowTriggerCaret">@TriggerButtonText</wa-button>
+    @ChildContent
+</wa-dropdown>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+
+    /// <summary>
+    /// Text to display on the trigger button.
+    /// </summary>
+    [Parameter]
+    public string? TriggerButtonText { get; set; }
+
+    /// <summary>
+    /// Show the caret arrow indicating a dropdown action. Defaults to true.
+    /// </summary>
+    [Parameter]
+    public bool ShowTriggerCaret { get; set; } = true;
+
+    [Parameter]
+    public Enums.Placement PanelPlacement { get; set; } = Enums.Placement.BottomStart;
+    string PlacementString
+    {
+        get
+        {
+            return PanelPlacement switch
+            {
+                Enums.Placement.Top => "top",
+                Enums.Placement.TopStart => "top-start",
+                Enums.Placement.TopEnd => "top-end",
+                Enums.Placement.Bottom => "bottom",
+                Enums.Placement.BottomStart => "bottom-start",
+                Enums.Placement.BottomEnd => "bottom-end",
+                Enums.Placement.Right => "right",
+                Enums.Placement.RightStart => "right-start",
+                Enums.Placement.RightEnd => "right-end",
+                Enums.Placement.Left => "left",
+                Enums.Placement.LeftStart => "left-start",
+                Enums.Placement.LeftEnd => "left-end",
+                _ => "bottom-start"
+            };
+        }
+    }
+    /// <summary>
+    /// Disables the dropdown so the panel will not open.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for dropdowns that allow for multiple interactions.
+    /// </summary>
+    [Parameter]
+    public bool StayOpenOnSelect { get; set; } = false;
+
+    /// <summary>
+    /// The distance in pixels from which to offset the panel away from its trigger.
+    /// </summary>
+    [Parameter]
+    public int Distance { get; set; } = 0;
+
+    /// <summary>
+    /// The distance in pixels from which to offset the panel along its trigger.
+    /// </summary>
+    [Parameter]
+    public int Offset { get; set; } = 0;
+
+
+}

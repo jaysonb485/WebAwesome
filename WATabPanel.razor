@@ -1,0 +1,45 @@
+﻿@inherits WAComponentBase
+<wa-tab @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+style="@StyleNames"
+class="@ClassNames"
+panel="@Name"
+Disabled="@Disabled">@Label</wa-tab>
+@if (Closeable)
+{
+    <wa-icon-button slot="nav" tabindex="-1" name="xmark" label="@($"Close the {Label} tab")"></wa-icon-button>
+}
+<wa-tab-panel name="@Name"
+style="@StyleNames"
+class="@ClassNames">
+    @ChildContent
+</wa-tab-panel>
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// The text to display in the tab nav
+    /// </summary>
+    [Parameter, EditorRequired]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// Allow the tab to be closed.
+    /// </summary>
+    [Parameter]
+    public bool Closeable { get; set; } = false;
+
+    /// <summary>
+    /// The name of the tab panel this tab is associated with.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// Disables the tab and prevents selection.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+}

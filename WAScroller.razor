@@ -1,0 +1,35 @@
+﻿@inherits WAComponentBase
+<wa-scroller @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             orientation="@OrientationString"
+             without-shadow="@(!ShowShadow)"
+             without-scrollbar="@(!ShowScrollbar)">
+    @ChildContent
+</wa-scroller>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Set the orientation of the line. Defaults to horizontal.
+    /// </summary>
+    [Parameter]
+    public Enums.Orientation Orientation { get; set; } = Enums.Orientation.Vertical;
+    string OrientationString
+    {
+        get
+        {
+            return (Orientation == Enums.Orientation.Vertical) ? "vertical" : "horizontal";
+        }
+    }
+
+    [Parameter]
+    public bool ShowShadow { get; set; } = true;
+
+    [Parameter]
+    public bool ShowScrollbar { get; set; } = true;
+}

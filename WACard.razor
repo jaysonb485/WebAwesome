@@ -1,0 +1,96 @@
+﻿@inherits WAComponentBase
+<wa-card @ref="@Element"
+         id="@Id"
+         @attributes="@AdditionalAttributes"
+         size="@SizeString"
+         appearance="@AppearanceString"
+         style="@StyleNames"
+         class="@ClassNames">
+    @if (!String.IsNullOrEmpty(ImageSource))
+    {
+        <img slot="image" src="@ImageSource" alt="@ImageAltText" />
+    }
+    @if (HeaderContent != null)
+    {
+        <div slot="header" class="@HeaderCSSClass">
+            @HeaderContent
+        </div>
+    }
+    @BodyContent
+    @if (FooterContent != null)
+    {
+        <div slot="footer" class="@FooterCSSClass">
+            @FooterContent
+        </div>
+    }
+</wa-card>
+
+@code {
+    [Parameter]
+    public RenderFragment? BodyContent { get; set; } = default!;
+
+    [Parameter]
+    public RenderFragment? FooterContent { get; set; }
+
+    [Parameter]
+    public string? FooterCSSClass { get; set; }
+
+    [Parameter]
+    public RenderFragment? HeaderContent { get; set; }
+
+    [Parameter]
+    public string? HeaderCSSClass { get; set; }
+
+    /// <summary>
+    /// The card's visual appearance.
+    /// </summary>
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.Outlined;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Accent => "accent",
+                Enums.Appearance.AccentOutlined => "accent outlined",
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.FilledOutlined => "filled outlined",
+                Enums.Appearance.Outlined => "outlined",
+                Enums.Appearance.Plain => "plain",
+                _ => "outlined"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The component's size. Will be inherited by any descendants with a size attribute.
+    /// </summary>
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    /// <summary>
+    /// An optional image to render at the start of the card.
+    /// </summary>
+    [Parameter]
+    public string? ImageSource { get; set; }
+    /// <summary>
+    /// Alt text for the optional image.
+    /// </summary>
+    [Parameter]
+    public string? ImageAltText { get; set; }
+}

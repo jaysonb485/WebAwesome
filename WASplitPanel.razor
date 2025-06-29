@@ -1,0 +1,129 @@
+﻿@inherits WAComponentBase
+<wa-split-panel @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+style="@StyleNames"
+class="@ClassNames"
+position="@PositionPercent"
+position-in-pixels="@PositionPixels"
+vertical="@(Orientation == Enums.Orientation.Vertical)"
+snap="@SnapPoints"
+snap-threshold="@SnapThreshold"
+disabled="@Disabled"
+primary="@PrimaryPanelString">
+    @if (!String.IsNullOrEmpty(DividerIconName))
+    {
+        <wa-icon name="@DividerIconName" variant="@DividerIconVariant" family="@DividerIconFamily" slot="divider"></wa-icon>
+    }
+    <div slot="start">@StartContent</div>
+    <div slot="end">@EndContent</div>
+</wa-split-panel>
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment StartContent { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public RenderFragment EndContent { get; set; } = default!;
+
+    /// <summary>
+    /// The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the container's initial size.
+    /// </summary>
+    [Parameter]
+    public int? PositionPercent { get; set; }
+
+    /// <summary>
+    /// The current position of the divider from the primary panel's edge in pixels.
+    /// </summary>
+    [Parameter]
+    public int? PositionPixels { get; set; }
+
+    /// <summary>
+    /// Draws the split panel in a vertical orientation with the start and end panels stacked. You must set a height when using vertical.
+    /// </summary>
+    [Parameter]
+    public Enums.Orientation Orientation { get; set; } = Enums.Orientation.Horizontal;
+
+    /// <summary>
+    /// Disables resizing. Note that the position may still change as a result of resizing the host element.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// If no primary panel is designated, both panels will resize proportionally when the host element is resized. If a primary panel is designated, it will maintain its size and the other panel will grow or shrink as needed when the host element is resized.
+    /// </summary>
+    [Parameter]
+    public Enums.PrimaryPanel? PrimaryPanel { get; set; }
+    string? PrimaryPanelString
+    {
+        get
+        {
+            return PrimaryPanel switch
+            {
+                Enums.PrimaryPanel.Start => "start",
+                Enums.PrimaryPanel.End => "end",
+                _ => null
+            };
+        }
+    }
+
+    /// <summary>
+    /// One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g. "100px 50%".
+    /// </summary>
+    [Parameter]
+    public string? SnapPoints { get; set; }
+
+    /// <summary>
+    /// How close the divider must be to a snap point until snapping occurs.
+    /// </summary>
+    [Parameter]
+    public int SnapThreshold { get; set; } = 12;
+
+    /// <summary>
+    /// The name of the icon to draw for the Divider. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? DividerIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the Divider icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? DividerIconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix divider icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? DividerIconVariant { get; set; }
+
+    /// <summary>
+    /// If set, defines the minimum allowed width of the primary panel in CSS units.
+    /// </summary>
+    [Parameter]
+    public string? PrimaryMinWidth { get; set; }
+
+    /// <summary>
+    /// Height of the container in CSS units.
+    /// </summary>
+    [Parameter]
+    public string? Height { get; set; }
+
+    /// <summary>
+    /// Width of the container in CSS units.
+    /// </summary>
+    [Parameter]
+    public string? Width { get; set; }
+    
+
+    /// <summary>
+    /// If set, defines the maximum allowed width of the primary panel in CSS units.
+    /// </summary>
+    [Parameter]
+    public string? PrimaryMaxWidth { get; set; }
+
+    protected override string StyleNames => BuildStyleNames(Style,
+        ($"--min: {PrimaryMinWidth}", !String.IsNullOrEmpty(PrimaryMinWidth)),
+        ($"--max: {PrimaryMaxWidth}", !String.IsNullOrEmpty(PrimaryMaxWidth)),
+        ($"height: {Height}", !String.IsNullOrEmpty(Height)),
+        ($"width: {Width}", !String.IsNullOrEmpty(Width))
+    );
+}

@@ -1,0 +1,186 @@
+﻿@inherits WAComponentBase
+
+<wa-button @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           appearance="@AppearanceString"
+           variant="@VariantString"
+           caret="@Caret"
+           disabled="@Disabled"
+           loading="@Loading"
+           pill="@Pill"
+           type="@ButtonTypeString"
+           style="@StyleNames"
+           class="@ClassNames"
+           @onclick="@OnClick"
+           size="@SizeString">
+    @if (!String.IsNullOrEmpty(StartIconName))
+    {
+        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="prefix"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(EndIconName))
+    {
+        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="suffix"></wa-icon>
+    }
+    @ChildContent
+    @Text
+</wa-button>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    [Parameter]
+    public string? Text { get; set; }
+
+    /// <summary>
+    /// The button's theme variant. Defaults to neutral if not within another element with a variant.
+    /// </summary>
+    [Parameter]
+    public Enums.Variant Variant { get; set; } = Enums.Variant.Inherit;
+    string VariantString
+    {
+        get
+        {
+            return Variant switch
+            {
+                Enums.Variant.Brand => "brand",
+                Enums.Variant.Success => "success",
+                Enums.Variant.Neutral => "neutral",
+                Enums.Variant.Warning => "warning",
+                Enums.Variant.Danger => "danger",
+                Enums.Variant.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The button's visual appearance.
+    /// </summary>
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.Accent;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Accent => "accent",
+                Enums.Appearance.AccentOutlined => "accent outlined",
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.FilledOutlined => "filled outlined",
+                Enums.Appearance.Outlined => "outlined",
+                Enums.Appearance.Plain => "plain",
+                _ => "accent"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The button's size.
+    /// </summary>
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    /// <summary>
+    /// Draws the button with a caret. Used to indicate that the button triggers a dropdown menu or similar behavior.
+    /// </summary>
+    [Parameter]
+    public bool Caret { get; set; } = false;
+
+    /// <summary>
+    /// Disables the button. Does not apply to link buttons.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// Draws the button in a loading state.
+    /// </summary>
+    [Parameter]
+    public bool Loading { get; set; } = false;
+
+    /// <summary>
+    /// Draws a pill-style button with rounded edges.
+    /// </summary>
+    [Parameter]
+    public bool Pill { get; set; } = false;
+
+    /// <summary>
+    /// The type of button. When the type is submit, the button will submit the surrounding form.
+    /// </summary>
+    [Parameter]
+    public Enums.ButtonType ButtonType { get; set; } = Enums.ButtonType.Button;
+    string ButtonTypeString
+    {
+        get
+        {
+            return ButtonType switch
+            {
+                Enums.ButtonType.Button => "button",
+                Enums.ButtonType.Submit => "submit",
+                Enums.ButtonType.Reset => "reset",
+                _ => "button"
+            };
+        }
+    }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs?> OnClick { get; set; }
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? StartIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? StartIconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? StartIconVariant { get; set; }
+    /// <summary>
+    /// The name of the icon to draw in the suffix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? EndIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the suffix slot. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? EndIconFamily { get; set; }
+    /// <summary>
+    /// The name of the suffix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? EndIconVariant { get; set; }
+
+    /// <summary>
+    /// Turn off or on the loading indicator.
+    /// </summary>
+    /// <param name="LoadingState">Set to true to show the loading indicator.</param>
+    public void SetLoading(bool LoadingState)
+    {
+        Loading = LoadingState;
+        StateHasChanged();
+    }
+}

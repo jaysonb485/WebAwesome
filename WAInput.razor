@@ -1,0 +1,237 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+<wa-input @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+type="@InputTypeString"
+value="@Value"
+size="@SizeString"
+appearance="@AppearanceString"
+pill="@Pill"
+label="@Label"
+hint="@Hint"
+placeholder="@Placeholder"
+clearable="@Clearable"
+readonly="@ReadOnly"
+password-toggle="@PasswordToggle"
+style="@StyleNames"
+class="@ClassNames"
+required="@Required"
+disabled="@Disabled"
+@onchange="valueChanged">
+    @if (!String.IsNullOrEmpty(StartIconName))
+    {
+        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="prefix"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(EndIconName))
+    {
+        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="suffix"></wa-icon>
+    }
+
+    @ChildContent
+</wa-input>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    /// <summary>
+    /// The type of input.
+    /// </summary>
+    [Parameter]
+    public Enums.InputType InputType { get; set; } = Enums.InputType.Text;
+    string InputTypeString
+    {
+        get
+        {
+            return InputType switch
+            {
+                Enums.InputType.Date => "date",
+                Enums.InputType.DateTimeLocal => "datetime-local",
+                Enums.InputType.Time => "time",
+                Enums.InputType.Telephone => "tel",
+                Enums.InputType.Number => "number",
+                Enums.InputType.Text => "text",
+                Enums.InputType.Url => "url",
+                Enums.InputType.Email => "email",
+                Enums.InputType.Search => "search",
+                Enums.InputType.Password => "password",
+                _ => "text"
+            };
+        }
+    }
+
+    [CascadingParameter] private EditContext EditContext { get; set; } = default!;
+
+    string _value { get; set; } = default!;
+
+    [Parameter]
+    public string Value
+    {
+        get
+        {
+            return _value;
+        }
+        set
+        {
+            // if (_value != value)
+            //{
+            _value = value;
+            //JSRuntime.InvokeVoidAsync("window.updateComponentValue", Id, value);
+            //}
+        }
+    }
+
+
+    [Parameter]
+    public EventCallback<string?> ValueChanged { get; set; } = default!;
+
+    [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
+
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.Outlined;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.Outlined => "outlined",
+                _ => "outlined"
+                //Only filled and outlined are valid for inputs
+            };
+        }
+    }
+    /// <summary>
+    /// The input's size.
+    /// </summary>
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    /// <summary>
+    /// Draws a pill-style input with rounded edges.
+    /// </summary>
+    [Parameter]
+    public bool Pill { get; set; } = false;
+
+    /// <summary>
+    /// The input's label
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// The input's hint text.
+    /// </summary>
+    [Parameter]
+    public string? Hint { get; set; }
+
+    /// <summary>
+    /// Placeholder text to show as a hint when the input is empty.
+    /// </summary>
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    /// <summary>
+    /// Adds a clear button when the input is not empty.
+    /// </summary>
+    [Parameter]
+    public bool Clearable { get; set; } = false;
+
+    /// <summary>
+    /// Makes the input readonly.
+    /// </summary>
+    [Parameter]
+    public bool ReadOnly { get; set; } = false;
+
+    /// <summary>
+    /// Makes the input disabled.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// Adds a button to toggle the password's visibility. Only applies to password types.
+    /// </summary>
+    [Parameter]
+    public bool PasswordToggle
+    {
+        get
+        {
+            return ((InputType == Enums.InputType.Password) ? passwordToggle : false);
+        }
+        set
+        {
+            if (passwordToggle != value)
+                passwordToggle = value;
+        }
+    }
+    private bool passwordToggle { get; set; } = false;
+
+    /// <summary>
+    /// Ensures a child radio is checked before allowing the containing form to submit.
+    /// </summary>
+    [Parameter]
+    public bool Required { get; set; } = false;
+
+    /// <summary>
+    /// Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false.
+    /// </summary>
+    [Parameter]
+    public bool NoSpinButtons { get; set; } = false;
+
+    [Parameter]
+    public string? StartIconName { get; set; }
+    [Parameter]
+    public string? StartIconFamily { get; set; }
+    [Parameter]
+    public string? StartIconVariant { get; set; }
+
+    [Parameter]
+    public string? EndIconName { get; set; }
+    [Parameter]
+    public string? EndIconFamily { get; set; }
+    [Parameter]
+    public string? EndIconVariant { get; set; }
+
+
+    async Task valueChanged(ChangeEventArgs e)
+    {
+        await ValueChanged.InvokeAsync((string?)e.Value ?? string.Empty);
+        EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+    private FieldIdentifier fieldIdentifier = default!;
+
+    protected override void OnInitialized()
+    {
+        AdditionalAttributes ??= new Dictionary<string, object>();
+
+        fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+
+        base.OnInitialized();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+            await JSRuntime.InvokeVoidAsync("window.updateComponentValue", Id, _value);
+    }
+}

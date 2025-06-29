@@ -1,0 +1,230 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+@typeparam TValue
+<wa-select @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           value="@Value"
+           label="@Label"
+           hint="@Hint"
+           name="@Id"
+           size="@SizeString"
+           required="@Required"
+           @onchange="@OnChange"
+           placeholder="@Placeholder"
+           clearable="@Clearable"
+           appearance="@AppearanceString"
+           pill="@Pill"
+           disabled="@Disabled">
+    @if (!String.IsNullOrEmpty(StartIconName))
+    {
+        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="prefix"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(EndIconName))
+    {
+        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="suffix"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(ExpandIconName))
+    {
+        <wa-icon name="@ExpandIconName" variant="@ExpandIconVariant" family="@ExpandIconFamily" slot="expand-icon"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(ClearIconName))
+    {
+        <wa-icon name="@ClearIconName" variant="@ClearIconVariant" family="@ClearIconFamily" slot="clear-icon"></wa-icon>
+    }
+    @ChildContent
+</wa-select>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    [Parameter]
+    public TValue? Value { get; set; }
+
+    // [Parameter]
+    // public string[]? Values { get; set; }
+
+
+    // string? InitialValue
+    // {
+    //     get
+    //     {
+    //         //return MultiSelect ? String.Join(" ", Values) : Value ;
+    //         return Value;
+    //     }
+    // }
+
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+    // [Parameter]
+    // public EventCallback<string[]> ValuesChanged { get; set; }
+
+    async Task OnChange(ChangeEventArgs e)
+    {
+        // if (MultiSelect)
+        // {
+        //     await ValuesChanged.InvokeAsync(((string[])e.Value ?? []));
+        //     return;
+        // }
+        // ;
+        var value = e.Value!.ConvertTo<TValue>();
+        await ValueChanged.InvokeAsync(value);
+        EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+    [Parameter] public Expression<Func<TValue>> ValueExpression { get; set; } = default!;
+    [CascadingParameter] private EditContext EditContext { get; set; } = default!;
+
+    private FieldIdentifier fieldIdentifier = default!;
+
+    protected override void OnInitialized()
+    {
+        AdditionalAttributes ??= new Dictionary<string, object>();
+
+        fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+
+        base.OnInitialized();
+    }
+
+
+    /// <summary>
+    /// A custom label for assistive devices.
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+
+    /// <summary>
+    /// The input's hint text.
+    /// </summary>
+    [Parameter]
+    public string? Hint { get; set; }
+
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    [Parameter]
+    public bool Clearable { get; set; } = false;
+
+    /// <summary>
+    /// Ensures a child radio is checked before allowing the containing form to submit.
+    /// </summary>
+    [Parameter]
+    public bool Required { get; set; } = false;
+
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.Outlined;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.Outlined => "outlined",
+                _ => "outlined"
+                //Only filled and outlined are valid for inputs
+            };
+        }
+    }
+
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    // [Parameter]
+    // public bool MultiSelect { get; set; } = false;
+
+
+    /// <summary>
+    /// Draws a pill-style input with rounded edges.
+    /// </summary>
+    [Parameter]
+    public bool Pill { get; set; } = false;
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? StartIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? StartIconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? StartIconVariant { get; set; }
+    /// <summary>
+    /// The name of the icon to draw in the suffix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? EndIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the suffix slot. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? EndIconFamily { get; set; }
+    /// <summary>
+    /// The name of the suffix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? EndIconVariant { get; set; }
+
+    /// <summary>
+    /// The name of the icon to draw for the clear icon. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? ClearIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the clear icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ClearIconFamily { get; set; }
+    /// <summary>
+    /// The name of the clear icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ClearIconVariant { get; set; }
+
+    /// <summary>
+    /// The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the expand icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconFamily { get; set; }
+    /// <summary>
+    /// The name of the expand icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconVariant { get; set; }
+
+}

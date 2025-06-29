@@ -1,0 +1,14 @@
+﻿@inherits WAComponentBase
+<wa-carousel-item @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  class="@ClassNames">
+    @ChildContent
+</wa-carousel-item>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+}

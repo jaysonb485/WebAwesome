@@ -1,0 +1,145 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+<wa-textarea @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+value="@Value"
+size="@SizeString"
+appearance="@AppearanceString"
+label="@Label"
+hint="@Hint"
+rows="@Rows"
+placeholder="@Placeholder"
+readonly="@ReadOnly"
+disabled="@Disabled"
+style="@StyleNames"
+class="@ClassNames"
+required="@Required"
+resize="@ResizeString"
+@onchange="valueChanged">
+</wa-textarea>
+
+@code {
+    [Parameter]
+    public string? Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string?> ValueChanged { get; set; } = default!;
+
+    [Parameter]
+    public int? Rows { get; set; } = 4;
+
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.Outlined;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.Outlined => "outlined",
+                _ => "outlined"
+                //Only filled and outlined are valid for inputs
+            };
+        }
+    }
+    /// <summary>
+    /// The input's size.
+    /// </summary>
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The input's label
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// The input's hint text.
+    /// </summary>
+    [Parameter]
+    public string? Hint { get; set; }
+
+    /// <summary>
+    /// Placeholder text to show as a hint when the input is empty.
+    /// </summary>
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    /// <summary>
+    /// Makes the input readonly.
+    /// </summary>
+    [Parameter]
+    public bool ReadOnly { get; set; } = false;
+
+    /// <summary>
+    /// Disables the textarea.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+
+    /// <summary>
+    /// Ensures a child radio is checked before allowing the containing form to submit.
+    /// </summary>
+    [Parameter]
+    public bool Required { get; set; } = false;
+
+    /// <summary>
+    /// Controls how the textarea can be resized. Defaults to vertical.
+    /// </summary>
+    [Parameter]
+    public Enums.TextAreaResize ResizeMode { get; set; } = Enums.TextAreaResize.Vertical;
+    string ResizeString
+    {
+        get
+        {
+            return ResizeMode switch
+            {
+                Enums.TextAreaResize.None => "none",
+                Enums.TextAreaResize.Vertical => "vertical",
+                Enums.TextAreaResize.Horizontal => "horizontal",
+                Enums.TextAreaResize.Both => "both",
+                Enums.TextAreaResize.Auto => "auto",
+                _ => "vertical"
+            };
+        }
+    }
+
+    void valueChanged(ChangeEventArgs e)
+    {
+        ValueChanged.InvokeAsync((string?)e.Value ?? string.Empty);
+        EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+    [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
+    [CascadingParameter] private EditContext EditContext { get; set; } = default!;
+
+    private FieldIdentifier fieldIdentifier = default!;
+
+    protected override void OnInitialized()
+    {
+        AdditionalAttributes ??= new Dictionary<string, object>();
+
+        fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+
+        base.OnInitialized();
+    }
+}

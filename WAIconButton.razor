@@ -1,0 +1,55 @@
+﻿@inherits WAComponentBase
+<wa-icon-button @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+style="@StyleNames"
+class="@ClassNames" 
+name="@IconName" 
+variant="@IconVariant" 
+family="@IconFamily" 
+label="@Label" 
+disabled="@Disabled"
+@onclick="@OnClick"></wa-icon-button>
+@if(!String.IsNullOrEmpty(Tooltip))
+{
+    <wa-tooltip for="@Id">@Tooltip</wa-tooltip>
+}
+@code {
+
+    /// <summary>
+    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? IconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? IconFamily { get; set; }
+    /// <summary>
+    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? IconVariant { get; set; }
+
+
+
+
+    /// <summary>
+    /// An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and ignored by assistive devices.
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// Disables the button.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<MouseEventArgs?> OnClick { get; set; }
+
+    [Parameter]
+    public string? Tooltip { get; set; }
+}

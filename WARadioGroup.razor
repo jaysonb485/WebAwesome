@@ -1,0 +1,102 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+<wa-radio-group @ref="@Element"
+                id="@Id"
+                @attributes="@AdditionalAttributes"
+                style="@StyleNames"
+                class="@ClassNames"
+                value="@Value"
+                label="@Label"
+                hint="@Hint"
+                name="@Id"
+                orientation="@OrientationString"
+                size="@SizeString"
+                required="@Required"
+                @onchange="@OnChange">
+    @ChildContent
+</wa-radio-group>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+    /// <summary>
+    /// The current progress as a percentage, 0 to 100.
+    /// </summary>
+    [Parameter]
+    public string Value { get; set; } = "0";
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    async Task OnChange(ChangeEventArgs e)
+    {
+        await ValueChanged.InvokeAsync((string?)e.Value);
+        EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+    [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
+    [CascadingParameter] private EditContext EditContext { get; set; } = default!;
+
+    private FieldIdentifier fieldIdentifier = default!;
+
+    protected override void OnInitialized()
+    {
+        AdditionalAttributes ??= new Dictionary<string, object>();
+
+        fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+
+        base.OnInitialized();
+    }
+
+
+    /// <summary>
+    /// A custom label for assistive devices.
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+
+    /// <summary>
+    /// The input's hint text.
+    /// </summary>
+    [Parameter]
+    public string? Hint { get; set; }
+
+    /// <summary>
+    /// The orientation in which to show radio items.
+    /// </summary>
+    [Parameter]
+    public Enums.Orientation Orientation { get; set; } = Enums.Orientation.Vertical;
+    string OrientationString
+    {
+        get
+        {
+            return (Orientation == Enums.Orientation.Vertical) ? "vertical" : "horizontal";
+        }
+    }
+
+    /// <summary>
+    /// Ensures a child radio is checked before allowing the containing form to submit.
+    /// </summary>
+    [Parameter]
+    public bool Required { get; set; } = false;
+}

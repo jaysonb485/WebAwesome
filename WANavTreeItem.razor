@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+@inherits NavLink
+@inject NavigationManager navigationManager
+<wa-tree-item></wa-tree-item>
+
+@code {
+    [Parameter]
+    public string? Text { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await OnAfterRenderAsync(firstRender);
+        
+    }
+
+}

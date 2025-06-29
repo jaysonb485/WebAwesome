@@ -1,0 +1,12 @@
+﻿@inherits WAComponentBase
+<wa-tree @ref="@Element"
+         id="@Id"
+         @attributes="@AdditionalAttributes"
+         style="@StyleNames"
+         class="@ClassNames">
+    @ChildContent
+</wa-tree>
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

@@ -1,0 +1,144 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-tag @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+variant="@VariantString"
+appearance="@AppearanceString"
+pill="@Pill"
+removable="@Removable"
+style="@StyleNames"
+class="@ClassNames"
+size="@SizeString">
+    @Text
+    @ChildContent
+</wa-tag>
+
+
+@code {
+    private DotNetObjectReference<WATag> objRef = default!;
+    /// <summary>
+    /// The text to display in the tag.
+    /// </summary>
+    [Parameter]
+    public string? Text { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// The tag's theme variant. Defaults to neutral if not within another element with a variant.
+    /// </summary>
+    [Parameter]
+    public Enums.Variant Variant { get; set; } = Enums.Variant.Neutral;
+    string VariantString
+    {
+        get
+        {
+            return Variant switch
+            {
+                Enums.Variant.Brand => "brand",
+                Enums.Variant.Success => "success",
+                Enums.Variant.Neutral => "neutral",
+                Enums.Variant.Warning => "warning",
+                Enums.Variant.Danger => "danger",
+                _ => "neutral"
+            };
+        }
+    }
+    /// <summary>
+    /// The tag's visual appearance. Valid options for tag are: Accent, AccentOutlined, Filled, FilledOutlined, Outlined.
+    /// </summary>
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.FilledOutlined;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Accent => "accent",
+                Enums.Appearance.AccentOutlined => "accent outlined",
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.FilledOutlined => "filled outlined",
+                Enums.Appearance.Outlined => "outlined",
+                _ => "filled outlined"
+                //Plain is not valid for badge
+            };
+        }
+    }
+
+    /// <summary>
+    /// Draws a pill-style tag with rounded edges.
+    /// </summary>
+    [Parameter]
+    public bool Pill { get; set; } = false;
+    /// <summary>
+    /// Makes the tag removable and shows a remove button.
+    /// </summary>
+    [Parameter]
+    public bool Removable { get; set; } = false;
+
+    /// <summary>
+    /// The tag's size.
+    /// </summary>
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    [Parameter]
+    public EventCallback OnRemoveClick { get; set; }
+
+    [JSInvokable]
+    public async Task HandleRemove(string eventType, EventArgs eventArgs)
+    {
+        await OnRemoveClick.InvokeAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("addTagRemovedListener", Id, objRef, "HandleRemove");
+        }
+    }
+
+
+    protected override async ValueTask DisposeAsyncCore(bool disposing)
+    {
+        if (disposing)
+        {
+            try
+            {
+                // if (IsRenderComplete)
+                // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+            }
+            catch (JSDisconnectedException)
+            {
+                // do nothing
+            }
+
+            objRef?.Dispose();
+
+            // if (ModalService is not null && IsServiceModal)
+            //     ModalService.OnShow -= OnShowAsync;
+        }
+
+        await base.DisposeAsyncCore(disposing);
+    }
+}

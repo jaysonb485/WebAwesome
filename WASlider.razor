@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using System.Linq.Expressions
+@inherits WAComponentBase
+
+
+<wa-slider @ref="@Element"
+id="@Id"
+@attributes="@AdditionalAttributes"
+style="@StyleNames"
+class="@ClassNames"
+label="@Label"
+hint="@Hint"
+min="@MinimumValue"
+max="@MaximumValue"
+step="@Step"
+disabled="@Disabled"
+tooltip="@(ShowTooltip ? TooltipPositionString : "none")"
+value="@Value"></wa-slider>
+@code {
+    [Parameter]
+    public int? Value { get; set; }
+    [Parameter]
+    public EventCallback<int?> ValueChanged { get; set; }
+
+    private DotNetObjectReference<WASlider> objRef = default!;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("interceptChangeEvent", Id, objRef);
+        }
+    }
+
+    protected override async ValueTask DisposeAsyncCore(bool disposing)
+    {
+        if (disposing)
+        {
+            try
+            {
+                // if (IsRenderComplete)
+                // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+            }
+            catch (JSDisconnectedException)
+            {
+                // do nothing
+            }
+
+            objRef?.Dispose();
+
+            // if (ModalService is not null && IsServiceModal)
+            //     ModalService.OnShow -= OnShowAsync;
+        }
+
+        await base.DisposeAsyncCore(disposing);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        objRef ??= DotNetObjectReference.Create(this);
+
+        // if (ModalService is not null && IsServiceModal)
+        //     ModalService.OnShow += OnShowAsync;
+        AdditionalAttributes ??= new Dictionary<string, object>();
+
+        fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+
+        await base.OnInitializedAsync();
+    }
+
+    [JSInvokable("OnValueChanged")]
+    public void OnSelectionChanged(int value)
+    {
+        Console.WriteLine($"onchange {value}");
+        ValueChanged.InvokeAsync(value);
+        EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+    [Parameter] public Expression<Func<int>> ValueExpression { get; set; } = default!;
+    [CascadingParameter] private EditContext EditContext { get; set; } = default!;
+
+    private FieldIdentifier fieldIdentifier = default!;
+
+
+
+
+    /// <summary>
+    /// The input's label
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// The input's hint text.
+    /// </summary>
+    [Parameter]
+    public string? Hint { get; set; }
+
+    /// <summary>
+    /// The minimum acceptable value of the slider.
+    /// </summary>
+    [Parameter]
+    public int? MinimumValue { get; set; } = 0;
+
+    /// <summary>
+    /// The maximum acceptable value of the slider.
+    /// </summary>
+    [Parameter]
+    public int? MaximumValue { get; set; } = 100;
+
+    /// <summary>
+    /// The interval at which the slider will increase and decrease.
+    /// </summary>
+    [Parameter]
+    public int? Step { get; set; } = 1;
+
+
+    /// <summary>
+    /// Disables the slider.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// Shows the tooltip. Defaults to true.
+    /// </summary>
+    [Parameter]
+    public bool ShowTooltip { get; set; } = true;
+
+    /// <summary>
+    /// The preferred placement of the slider tooltip. Acceptable values are Position.Top and Position.Bottom
+    /// </summary>
+    [Parameter]
+    public Enums.Position TooltipPosition { get; set; } = Enums.Position.Top;
+    string TooltipPositionString
+    {
+        get
+        {
+            return TooltipPosition switch
+            {
+                Enums.Position.Top => "top",
+                Enums.Position.Bottom => "bottom",
+                _ => "top"
+            };
+        }
+    }
+
+
+
+}
