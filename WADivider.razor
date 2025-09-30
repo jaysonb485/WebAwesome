@@ -4,7 +4,8 @@
             @attributes="@AdditionalAttributes"
             style="@StyleNames"
             class="@ClassNames"
-            vertical="@(Orientation == Enums.Orientation.Vertical)"></wa-divider>
+            slot="@Slot"
+            orientation="@OrientationString"></wa-divider>
 
 @code {
     /// <summary>
@@ -35,4 +36,16 @@
     /// </summary>
     [Parameter]
     public Enums.Orientation Orientation { get; set; } = Enums.Orientation.Horizontal;
+    string OrientationString
+    {
+        get
+        {
+            return Orientation switch
+            {
+                Enums.Orientation.Horizontal => "horizontal",
+                Enums.Orientation.Vertical => "vertical",
+                _ => "horizontal"
+            };
+        }
+    }
 }

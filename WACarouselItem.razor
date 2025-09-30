@@ -3,12 +3,11 @@
                   id="@Id"
                   @attributes="@AdditionalAttributes"
                   style="@StyleNames"
-                  class="@ClassNames">
+                  class="@ClassNames"
+                  slot="@Slot">
     @ChildContent
 </wa-carousel-item>
 
 @code {
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
 
 }

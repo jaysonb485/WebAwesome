@@ -2,6 +2,7 @@
 <wa-animation @ref="@Element"
               id="@Id"
               @attributes="@AdditionalAttributes"
+              slot="@Slot"
               name="@Name"
               play="@Play"
               delay="@Delay"
@@ -16,9 +17,6 @@
 </wa-animation>
 
 @code {
-    [Parameter]
-    public RenderFragment ChildContent { get; set; } = default!;
-
     /// <summary>
     /// The name of the built-in animation to use.
     /// </summary>

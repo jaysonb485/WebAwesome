@@ -1,34 +1,38 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @using System.Linq.Expressions
 @using Microsoft.JSInterop
+
+
 @inherits WAComponentBase
 
 <wa-input @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-type="@InputTypeString"
-value="@Value"
-size="@SizeString"
-appearance="@AppearanceString"
-pill="@Pill"
-label="@Label"
-hint="@Hint"
-placeholder="@Placeholder"
-clearable="@Clearable"
-readonly="@ReadOnly"
-password-toggle="@PasswordToggle"
-style="@StyleNames"
-class="@ClassNames"
-required="@Required"
-disabled="@Disabled"
-@onchange="valueChanged">
+          id="@Id"
+          @attributes="@AdditionalAttributes"
+          style="@StyleNames"
+          class="@ClassNames"
+          type="@InputTypeString"
+          value="@Value"
+          size="@SizeString"
+          appearance="@AppearanceString"
+          pill="@Pill"
+          label="@Label"
+          hint="@Hint"
+          placeholder="@Placeholder"
+          with-clear="@Clearable"
+          readonly="@ReadOnly"
+          password-toggle="@PasswordToggle"
+          required="@Required"
+          disabled="@Disabled"
+          slot="@Slot"
+          without-spin-buttons="@WithoutSpinButtons"
+          @onchange="valueChanged">
     @if (!String.IsNullOrEmpty(StartIconName))
     {
-        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="prefix"></wa-icon>
+        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="start"></wa-icon>
     }
     @if (!String.IsNullOrEmpty(EndIconName))
     {
-        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="suffix"></wa-icon>
+        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="end"></wa-icon>
     }
 
     @ChildContent
@@ -42,23 +46,23 @@ disabled="@Disabled"
     /// The type of input.
     /// </summary>
     [Parameter]
-    public Enums.InputType InputType { get; set; } = Enums.InputType.Text;
+    public InputType Type { get; set; } = InputType.Text;
     string InputTypeString
     {
         get
         {
-            return InputType switch
+            return Type switch
             {
-                Enums.InputType.Date => "date",
-                Enums.InputType.DateTimeLocal => "datetime-local",
-                Enums.InputType.Time => "time",
-                Enums.InputType.Telephone => "tel",
-                Enums.InputType.Number => "number",
-                Enums.InputType.Text => "text",
-                Enums.InputType.Url => "url",
-                Enums.InputType.Email => "email",
-                Enums.InputType.Search => "search",
-                Enums.InputType.Password => "password",
+                InputType.Date => "date",
+                InputType.DateTimeLocal => "datetime-local",
+                InputType.Time => "time",
+                InputType.Telephone => "tel",
+                InputType.Number => "number",
+                InputType.Text => "text",
+                InputType.Url => "url",
+                InputType.Email => "email",
+                InputType.Search => "search",
+                InputType.Password => "password",
                 _ => "text"
             };
         }
@@ -77,11 +81,11 @@ disabled="@Disabled"
         }
         set
         {
-            // if (_value != value)
-            //{
-            _value = value;
-            //JSRuntime.InvokeVoidAsync("window.updateComponentValue", Id, value);
-            //}
+            if (_value != value)
+            {
+                _value = value;
+                JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, value);
+            }
         }
     }
 
@@ -151,7 +155,7 @@ disabled="@Disabled"
     public string? Placeholder { get; set; }
 
     /// <summary>
-    /// Adds a clear button when the input is not empty.
+    /// Adds a clear button (with-clear) when the input is not empty.
     /// </summary>
     [Parameter]
     public bool Clearable { get; set; } = false;
@@ -176,7 +180,7 @@ disabled="@Disabled"
     {
         get
         {
-            return ((InputType == Enums.InputType.Password) ? passwordToggle : false);
+            return ((Type == InputType.Password) ? passwordToggle : false);
         }
         set
         {
@@ -212,6 +216,8 @@ disabled="@Disabled"
     [Parameter]
     public string? EndIconVariant { get; set; }
 
+    [Parameter]
+    public bool WithoutSpinButtons { get; set; } = false;
 
     async Task valueChanged(ChangeEventArgs e)
     {
@@ -230,8 +236,70 @@ disabled="@Disabled"
         base.OnInitialized();
     }
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnAfterRenderAsync(bool FirstRender)
     {
-            await JSRuntime.InvokeVoidAsync("window.updateComponentValue", Id, _value);
+        if (FirstRender)
+            await JSRuntime.InvokeVoidAsync("window.vengage.input.initialize", Id, objRef, _value);
     }
+
+    [JSInvokable]
+    public async Task HandleInputClear()
+    {
+        await ValueChanged.InvokeAsync(string.Empty);
+        EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+
+    protected override async ValueTask DisposeAsyncCore(bool disposing)
+    {
+        if (disposing)
+        {
+            try
+            {
+                // if (IsRenderComplete)
+                // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+            }
+            catch (JSDisconnectedException)
+            {
+                // do nothing
+            }
+
+            objRef?.Dispose();
+
+            // if (ModalService is not null && IsServiceModal)
+            //     ModalService.OnShow -= OnShowAsync;
+        }
+
+        await base.DisposeAsyncCore(disposing);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        objRef ??= DotNetObjectReference.Create(this);
+
+        // if (ModalService is not null && IsServiceModal)
+        //     ModalService.OnShow += OnShowAsync;
+        AdditionalAttributes ??= new Dictionary<string, object>();
+
+
+        await base.OnInitializedAsync();
+    }
+
+
+    private DotNetObjectReference<WAInput> objRef = default!;
+    public enum InputType
+    {
+
+        Date,
+        DateTimeLocal,
+        Email,
+        Number,
+        Password,
+        Search,
+        Telephone,
+        Text,
+        Time,
+        Url,
+    }
+
 }

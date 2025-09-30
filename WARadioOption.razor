@@ -1,12 +1,17 @@
 ﻿@inherits WAComponentBase
 <wa-radio @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames"
-value="@Value"
-disabled="@Disabled"
-hint="@Hint">@Label</wa-radio>
+          id="@Id"
+          @attributes="@AdditionalAttributes"
+          style="@StyleNames"
+          class="@ClassNames"
+          slot="@Slot"
+          value="@Value"
+          disabled="@Disabled"
+          appearance="@AppearanceString"
+          hint="@Hint">
+    @Label
+    @ChildContent
+</wa-radio>
 
 @code {
     /// <summary>
@@ -48,6 +53,20 @@ hint="@Hint">@Label</wa-radio>
                 Enums.Size.Large => "large",
                 Enums.Size.Inherit => "inherit",
                 _ => "inherit"
+            };
+        }
+    }
+
+    [Parameter]
+    public Enums.RadioAppearance Appearance { get; set; } = Enums.RadioAppearance.Default;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.RadioAppearance.Button => "button",
+                _ => "default"
             };
         }
     }

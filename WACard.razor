@@ -2,41 +2,57 @@
 <wa-card @ref="@Element"
          id="@Id"
          @attributes="@AdditionalAttributes"
-         size="@SizeString"
          appearance="@AppearanceString"
          style="@StyleNames"
-         class="@ClassNames">
-    @if (!String.IsNullOrEmpty(ImageSource))
+         class="@ClassNames"
+         slot="@Slot"
+         orientation="@_orientationString">
+    @if (CardMedia != null)
     {
-        <img slot="image" src="@ImageSource" alt="@ImageAltText" />
-    }
-    @if (HeaderContent != null)
-    {
-        <div slot="header" class="@HeaderCSSClass">
-            @HeaderContent
+        <div slot="media">
+            @CardMedia
         </div>
     }
-    @BodyContent
-    @if (FooterContent != null)
+    @if (Orientation == Enums.Orientation.Vertical)
     {
-        <div slot="footer" class="@FooterCSSClass">
-            @FooterContent
+        @if (CardHeader != null)
+        {
+            <div slot="header" class="@HeaderCSSClass">
+                @CardHeader
+            </div>
+        }
+        @if (CardFooter != null)
+        {
+            <div slot="footer" class="@FooterCSSClass">
+                @CardFooter
+            </div>
+        }
+    }
+    @if (Orientation == Enums.Orientation.Horizontal && HorizontalActions != null)
+    {
+        <div slot="actions">
+            @HorizontalActions
         </div>
     }
+    @ChildContent
 </wa-card>
 
 @code {
+    
     [Parameter]
-    public RenderFragment? BodyContent { get; set; } = default!;
+    public RenderFragment? CardFooter { get; set; }
 
     [Parameter]
-    public RenderFragment? FooterContent { get; set; }
+    public RenderFragment? CardMedia { get; set; }
 
     [Parameter]
     public string? FooterCSSClass { get; set; }
 
     [Parameter]
-    public RenderFragment? HeaderContent { get; set; }
+    public RenderFragment? CardHeader { get; set; }
+
+    [Parameter]
+    public RenderFragment? HorizontalActions { get; set; }
 
     [Parameter]
     public string? HeaderCSSClass { get; set; }
@@ -64,26 +80,6 @@
     }
 
     /// <summary>
-    /// The component's size. Will be inherited by any descendants with a size attribute.
-    /// </summary>
-    [Parameter]
-    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
-    string SizeString
-    {
-        get
-        {
-            return Size switch
-            {
-                Enums.Size.Small => "small",
-                Enums.Size.Medium => "medium",
-                Enums.Size.Large => "large",
-                Enums.Size.Inherit => "inherit",
-                _ => "inherit"
-            };
-        }
-    }
-
-    /// <summary>
     /// An optional image to render at the start of the card.
     /// </summary>
     [Parameter]
@@ -93,4 +89,20 @@
     /// </summary>
     [Parameter]
     public string? ImageAltText { get; set; }
+
+    [Parameter]
+    public Enums.Orientation Orientation { get; set; } = Enums.Orientation.Vertical;
+
+    string _orientationString
+    {
+        get
+        {
+            return Orientation switch
+            {
+                Enums.Orientation.Horizontal => "horizontal",
+                Enums.Orientation.Vertical => "vertical",
+                _ => "vertical"
+            };
+        }
+    }
 }

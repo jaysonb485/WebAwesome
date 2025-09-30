@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAwesome
+namespace Vengage.WebAwesome
 {
     public class Enums
     {
@@ -15,7 +15,8 @@ namespace WebAwesome
             Neutral,
             Warning,
             Danger,
-            Inherit
+            Inherit,
+            Default
         }
 
         public enum Appearance
@@ -26,6 +27,12 @@ namespace WebAwesome
             FilledOutlined,
             Outlined,
             Plain
+        }
+
+        public enum RadioAppearance
+        {
+            Default,
+            Button
         }
 
         public enum Size
@@ -43,20 +50,7 @@ namespace WebAwesome
             Reset
         }
 
-        public enum InputType
-        {
 
-            Date,
-            DateTimeLocal,
-            Email,
-            Number,
-            Password,
-            Search,
-            Telephone,
-            Text,
-            Time,
-            Url,
-        }
 
         public enum AnimationName
         {
@@ -189,10 +183,8 @@ namespace WebAwesome
 
         public enum Position
         {
-            Top,
-            Right,
-            Bottom,
-            Left
+            Start,
+            End
         }
 
         public enum Placement
@@ -209,7 +201,8 @@ namespace WebAwesome
             Left,
             LeftStart,
             LeftEnd,
-
+            End,
+            Start
         }
 
         public enum RelativeTimeFormat
@@ -284,5 +277,13 @@ namespace WebAwesome
             Footer,
 
         }
+
+        public enum BadgePulse
+        {
+            None,
+            Pulse,
+            Bounce
+        }
+
     }
 }

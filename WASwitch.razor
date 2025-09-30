@@ -2,16 +2,20 @@
 @using Microsoft.AspNetCore.Components.Forms
 @inherits WAComponentBase
 <wa-switch @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-value="@Value"
-style="@StyleNames"
-class="@ClassNames"
-checked="@Value"
-disabled="@Disabled"
-size="@SizeString"
-hint="@Hint"
-@onchange="valueChanged">@Label@ChildContent</wa-switch>
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           slot="@Slot"
+           value="@Value"
+           checked="@Value"
+           disabled="@Disabled"
+           size="@SizeString"
+           hint="@Hint"
+           @onchange="valueChanged">
+    @Label
+    @ChildContent
+</wa-switch>
 
 @code {
     [Parameter]
@@ -23,8 +27,6 @@ hint="@Hint"
     [Parameter]
     public EventCallback<bool> ValueChanged { get; set; } = default!;
 
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
 
     void valueChanged(ChangeEventArgs e)
     {

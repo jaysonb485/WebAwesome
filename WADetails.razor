@@ -4,10 +4,13 @@
             @attributes="@AdditionalAttributes"
             style="@StyleNames"
             class="@ClassNames"
+            slot="@Slot"
             summary="@Title"
             disabled="@Disabled"
             appearance="@AppearanceString"
-            open="@IsOpen">
+            open="@IsOpen"
+            name="@GroupName"
+            icon-placement="@IconPlacementString">
     @if (!String.IsNullOrEmpty(ExpandIconName))
     {
         <wa-icon name="@ExpandIconName" variant="@ExpandIconVariant" family="@ExpandIconFamily" slot="expand-icon"></wa-icon>
@@ -20,8 +23,6 @@
 </wa-details>
 
 @code {
-    [Parameter, EditorRequired]
-    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// The element's visual appearance.
@@ -93,5 +94,24 @@
     /// </summary>
     [Parameter]
     public string? CollapseIconVariant { get; set; }
+
+    /// <summary>
+    /// Groups related details elements. When one opens, others with the same name will close.
+    /// </summary>
+    [Parameter]
+    public string? GroupName { get; set; }
+
+    [Parameter]
+    public Enums.Placement IconPlacement { get; set; } = Enums.Placement.End;
+    string IconPlacementString {get
+        {
+            return IconPlacement switch
+            {
+                Enums.Placement.End => "end",
+                Enums.Placement.Start => "Start",
+                _ => "end"
+            };
+        }
+    }
 
 }

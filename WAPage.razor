@@ -1,13 +1,20 @@
 ﻿@using Microsoft.JSInterop
 @inherits WALayoutComponentBase
 
-<wa-page id="@Id" @attributes="@AdditionalAttributes" navigation-placement="@NavigationPlacementString" mobile-breakpoint="@MobileBreakpoint" nav-open="@NavOpen">
+<wa-page @ref="@Element"
+         id="@Id"
+         @attributes="@AdditionalAttributes"
+         style="@StyleNames"
+         class="@ClassNames"
+         slot="@Slot"
+         navigation-placement="@NavigationPlacementString"
+         mobile-breakpoint="@MobileBreakpoint"
+         nav-open="@NavOpen"
+         disable-stick="@DisableSticky">
     @ChildContent
 </wa-page>
 
 @code {
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// Whether or not the navigation drawer is open. Note, the navigation drawer is only "open" on mobile views.
@@ -39,12 +46,51 @@
     [Parameter]
     public string? MobileBreakpoint { get; set; } = "768px";
 
+    [Parameter]
+    public bool IsStickyBanner { get; set; } = true;
+
+    [Parameter]
+    public bool IsStickyHeader { get; set; } = true;
+
+    [Parameter]
+    public bool IsStickySubHeader { get; set; } = true;
+
+    [Parameter]
+    public bool IsStickyMenu { get; set; } = true;
+
+    [Parameter]
+    public bool IsStickyAside { get; set; } = true;
+
+    private string? DisableSticky
+    {
+        get
+        {
+            (string? cssClass, bool when)[] cssClassList = { ($"banner", !IsStickyBanner),
+                ($"header", !IsStickyHeader),
+                ($"sub-header", !IsStickySubHeader),
+                ($"menu", !IsStickyMenu),
+                ($"aside", !IsStickyAside)};
+
+            var list = new HashSet<string>();
+
+            if (cssClassList is not null && cssClassList.Any())
+                foreach (var (cssClass, when) in cssClassList)
+                    if (!string.IsNullOrWhiteSpace(cssClass) && when)
+                        list.Add(cssClass);
+
+            if (list.Any())
+                return string.Join(" ", list);
+
+            return string.Empty;
+        }
+    }
+
     /// <summary>
     /// Shows the mobile navigation drawer
     /// </summary>
     public async Task ShowNavigation()
     {
-        await JSRuntime.InvokeVoidAsync("window.showNavigation", Id);
+        await JSRuntime.InvokeVoidAsync("window.vengage.navigation.show", Id);
     }
 
     /// <summary>
@@ -52,12 +98,12 @@
     /// </summary>
     public async Task HideNavigation()
     {
-        await JSRuntime.InvokeVoidAsync("window.hideNavigation", Id);
+        await JSRuntime.InvokeVoidAsync("window.vengage.navigation.hide", Id);
     }
 
     public async Task ToggleNavigation()
     {
-        await JSRuntime.InvokeVoidAsync("window.toggleNavigation", Id);
+        await JSRuntime.InvokeVoidAsync("window.vengage.navigation.toggle", Id);
     }
 
 }

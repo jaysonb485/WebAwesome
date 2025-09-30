@@ -3,6 +3,7 @@
     <wa-carousel @ref="@Element"
                  id="@Id"
                  @attributes="@AdditionalAttributes" 
+                 slot="@Slot"
                  pagination="@ShowPagination"
                  loop="@AllowLooping"
                  navigation="@ShowNavigation"
@@ -18,8 +19,6 @@
     </wa-carousel>
 </CascadingValue>
 @code {
-    [Parameter, EditorRequired]
-    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// When true, show the carousel's pagination indicators.

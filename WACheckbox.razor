@@ -3,16 +3,20 @@
 
 @inherits WAComponentBase
 <wa-checkbox @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-value="@Value"
-style="@StyleNames"
-class="@ClassNames"
-checked="@Value"
-disabled="@Disabled"
-size="@SizeString"
-hint="@Hint"
-@onchange="valueChanged">@Label</wa-checkbox>
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             value="@Value"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             checked="@Value"
+             disabled="@Disabled"
+             size="@SizeString"
+             hint="@Hint"
+             @onchange="valueChanged">
+    @Label
+    @ChildContent
+</wa-checkbox>
 
 @code {
     [Parameter]
@@ -20,9 +24,54 @@ hint="@Hint"
 
     [Parameter]
     public bool Value { get; set; } = false;
-    
+
+    /// <summary>
+    /// Disables the checkbox.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// The checkbox's hint text.
+    /// </summary>
+    [Parameter]
+    public string? Hint { get; set; }
+
+    /// <summary>
+    /// The color of the checked and indeterminate icons.
+    /// </summary>
+    [Parameter]
+    public string? CheckIconColor { get; set; }
+
+    /// <summary>
+    /// The size of the checked and indeterminate icons relative to the checkbox.
+    /// </summary>
+    [Parameter]
+    public string? CheckIconScale { get; set; }
+
+
+    /// <summary>
+    /// The checkbox's size.
+    /// </summary>
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
     [CascadingParameter] private EditContext EditContext { get; set; } = default!;
-    
+
     [Parameter]
     public EventCallback<bool> ValueChanged { get; set; } = default!;
 
@@ -45,35 +94,8 @@ hint="@Hint"
         base.OnInitialized();
     }
 
-    /// <summary>
-    /// The checkbox's size.
-    /// </summary>
-    [Parameter]
-    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
-    string SizeString
-    {
-        get
-        {
-            return Size switch
-            {
-                Enums.Size.Small => "small",
-                Enums.Size.Medium => "medium",
-                Enums.Size.Large => "large",
-                Enums.Size.Inherit => "inherit",
-                _ => "inherit"
-            };
-        }
-    }
-
-    /// <summary>
-    /// Disables the checkbox.
-    /// </summary>
-    [Parameter]
-    public bool Disabled { get; set; } = false;
-
-    /// <summary>
-    /// The checkbox's hint text.
-    /// </summary>
-    [Parameter]
-    public string? Hint { get; set; }
+    protected override string? StyleNames => BuildStyleNames(Style,
+            ($"--checked-icon-color:{CheckIconColor}", !String.IsNullOrEmpty(CheckIconColor)),
+            ($"--checked-icon-scale:{CheckIconScale}", !String.IsNullOrEmpty(CheckIconScale))
+    );
 }

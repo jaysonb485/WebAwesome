@@ -4,6 +4,7 @@
             @attributes="@AdditionalAttributes"
             style="@StyleNames"
             class="@ClassNames"
+            slot="@Slot"
             for="@TargetId"
             placement="@PlacementString"
             disabled="@Disabled"
@@ -12,13 +13,12 @@
             skidding="@Offset"
             show-delay="@ShowDelay"
             hide-delay="@HideDelay"
-            trigger="@TriggerString">
+            trigger="@TriggerString"
+            without-arrow="@WithoutArrow">
     @ChildContent
 </wa-tooltip>
 
 @code {
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// Size of the tooltip arrow. Set to 0 to hide the arrow.
@@ -96,7 +96,15 @@
     [Parameter]
     public int HideDelay { get; set; } = 0;
 
+    /// <summary>
+    /// Removes the arrow from the tooltip.
+    /// </summary>
+    [Parameter]
+    public bool? WithoutArrow { get; set; }
 
+    /// <summary>
+    /// Indicates whether or not the tooltip is open. 
+    /// </summary>
     [Parameter]
     public bool Open { get; set; } = false;
 

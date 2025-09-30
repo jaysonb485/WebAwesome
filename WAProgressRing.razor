@@ -1,13 +1,15 @@
 ﻿@inherits WAComponentBase
 <wa-progress-ring @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames"
-value="@Value"
-label="@Label"
-slot="@Slot">
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  class="@ClassNames"
+                  slot="@Slot"
+                  value="@Value"
+                  label="@Label"
+                  slot="@Slot">
     @Text
+    @ChildContent
 </wa-progress-ring>
 
 @code {
@@ -59,12 +61,12 @@ slot="@Slot">
     [Parameter]
     public string? IndicatorColor { get; set; }
 
-    protected override string StyleNames => BuildStyleNames(Style, 
-        ($"--size: {Size}", !String.IsNullOrEmpty(Size)), 
+    protected override string StyleNames => BuildStyleNames(Style,
+        ($"--size: {Size}", !String.IsNullOrEmpty(Size)),
         ($"--track-width: {TrackWidth}", !String.IsNullOrEmpty(TrackWidth)),
         ($"--indicator-width: {IndicatorWidth}", !String.IsNullOrEmpty(IndicatorWidth)),
         ($"--track-color: {TrackColor}", !String.IsNullOrEmpty(TrackColor)),
         ($"--indicator-color: {IndicatorColor}", !String.IsNullOrEmpty(IndicatorColor))
     );
-    
+
 }

@@ -4,13 +4,14 @@
                 @attributes="@AdditionalAttributes"
                 style="@StyleNames"
                 class="@ClassNames"
+                slot="@Slot"
                 value="@Value"
                 copy-label="@HoverLabel"
                 success-label="@SuccessLabel"
                 error-label="@ErrorLabel"
                 disabled="@Disabled"
                 feedback-duration="@FeedbackDuration"
-                tooltip-placement="@TooltipPositionString">
+                tooltip-placement="@TooltipPlacementString">
     @if (!String.IsNullOrEmpty(IconName))
     {
         <wa-icon name="@IconName" variant="@IconVariant" family="@IconFamily" slot="copy-icon"></wa-icon>
@@ -115,17 +116,17 @@
 
 
     [Parameter]
-    public Enums.Position TooltipPosition { get; set; } = Enums.Position.Top;
-    string TooltipPositionString
+    public Enums.Placement TooltipPlacement { get; set; } = Enums.Placement.Top;
+    string TooltipPlacementString
     {
         get
         {
-            return TooltipPosition switch
+            return TooltipPlacement switch
             {
-                Enums.Position.Top => "top",
-                Enums.Position.Left => "left",
-                Enums.Position.Right => "right",
-                Enums.Position.Bottom => "bottom",
+                Enums.Placement.Top => "top",
+                Enums.Placement.Left => "left",
+                Enums.Placement.Right => "right",
+                Enums.Placement.Bottom => "bottom",
                 _ => "top"
             };
         }

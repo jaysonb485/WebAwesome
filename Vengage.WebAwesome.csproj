@@ -5,8 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <IsPackable>true</IsPackable>
-	  <AssemblyVersion>1.0.6</AssemblyVersion>
+	  <AssemblyVersion>1.1.0</AssemblyVersion>
+	  <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="WAIconButton.razor" />
+    <Content Remove="WAMenu.razor" />
+    <Content Remove="WAMenuGroupLabel.razor" />
+    <Content Remove="WAMenuItem.razor" />
+    <Content Remove="WARadioButton.razor" />
+  </ItemGroup>
 
 
   <ItemGroup>

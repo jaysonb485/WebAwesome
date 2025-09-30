@@ -6,6 +6,7 @@
                 @attributes="@AdditionalAttributes"
                 style="@StyleNames"
                 class="@ClassNames"
+                slot="@Slot"
                 value="@Value"
                 label="@Label"
                 hint="@Hint"
@@ -13,14 +14,12 @@
                 orientation="@OrientationString"
                 size="@SizeString"
                 required="@Required"
+                disabled="@Disabled"
                 @onchange="@OnChange">
     @ChildContent
 </wa-radio-group>
 
 @code {
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; } = default!;
     /// <summary>
     /// The current progress as a percentage, 0 to 100.
     /// </summary>
@@ -99,4 +98,10 @@
     /// </summary>
     [Parameter]
     public bool Required { get; set; } = false;
+
+    /// <summary>
+    /// Disables the radio group and all child radios.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
 }

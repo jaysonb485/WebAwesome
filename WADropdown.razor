@@ -1,34 +1,55 @@
-﻿@inherits WAComponentBase
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using System.Linq.Expressions
+@inherits WAComponentBase
+
 <wa-dropdown @ref="@Element"
              id="@Id"
              @attributes="@AdditionalAttributes"
              style="@StyleNames"
              class="@ClassNames"
+             slot="@Slot"
              placement="@PlacementString"
              disabled="@Disabled"
              distance="@Distance"
              stay-open-on-select="@StayOpenOnSelect"
-             skidding="@Offset">
-    <wa-button slot="trigger" caret="@ShowTriggerCaret">@TriggerButtonText</wa-button>
+             skidding="@Offset"
+             open="@Open"
+             @onmouseenter="@(() => { if (OpenOnHover) Open = true; })"
+             @onmouseleave="@(() => { if (OpenOnHover) Open = false; })">
+    @if (!HideTriggerButton)
+    {
+        <wa-button slot="trigger"
+                   with-caret="@ShowTriggerCaret"
+                   appearance="@TriggerButtonAppearanceString"
+                   variant="@TriggerButtonVariantString">@TriggerButtonContent</wa-button>
+    }
+    @DropdownItems
     @ChildContent
 </wa-dropdown>
 
 @code {
     [Parameter]
-    public RenderFragment ChildContent { get; set; } = default!;
+    public RenderFragment? DropdownItems { get; set; } = default!;
 
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; } = default!;
 
     /// <summary>
     /// Text to display on the trigger button.
     /// </summary>
     [Parameter]
-    public string? TriggerButtonText { get; set; }
+    public RenderFragment? TriggerButtonContent { get; set; }
+
 
     /// <summary>
     /// Show the caret arrow indicating a dropdown action. Defaults to true.
     /// </summary>
     [Parameter]
     public bool ShowTriggerCaret { get; set; } = true;
+
+    [Parameter]
+    public bool HideTriggerButton { get; set; } = false;
 
     [Parameter]
     public Enums.Placement PanelPlacement { get; set; } = Enums.Placement.BottomStart;
@@ -77,6 +98,117 @@
     /// </summary>
     [Parameter]
     public int Offset { get; set; } = 0;
+
+    /// <summary>
+    /// The button's visual appearance.
+    /// </summary>
+    [Parameter]
+    public Enums.Appearance TriggerButtonAppearance { get; set; } = Enums.Appearance.Accent;
+    string TriggerButtonAppearanceString
+    {
+        get
+        {
+            return TriggerButtonAppearance switch
+            {
+                Enums.Appearance.Accent => "accent",
+                Enums.Appearance.AccentOutlined => "accent outlined",
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.FilledOutlined => "filled outlined",
+                Enums.Appearance.Outlined => "outlined",
+                Enums.Appearance.Plain => "plain",
+                _ => "accent"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The trigger button's theme variant. Defaults to neutral if not within another element with a variant.
+    /// </summary>
+    [Parameter]
+    public Enums.Variant TriggerButtonVariant { get; set; } = Enums.Variant.Inherit;
+    string TriggerButtonVariantString
+    {
+        get
+        {
+            return TriggerButtonVariant switch
+            {
+                Enums.Variant.Brand => "brand",
+                Enums.Variant.Success => "success",
+                Enums.Variant.Neutral => "neutral",
+                Enums.Variant.Warning => "warning",
+                Enums.Variant.Danger => "danger",
+                Enums.Variant.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    /// <summary>
+    /// Opens the menu when the user hovers over the trigger button.
+    /// Closes the menu when the users mouse exits the component.
+    /// </summary>
+    [Parameter]
+    public bool OpenOnHover { get; set; } = false;
+
+    [Parameter]
+    public bool Open { get; set; } = false;
+
+    // [Parameter]
+    // public EventCallback<string> ItemSelected { get; set; }
+
+    // [JSInvokable]
+    // public async Task OnDropdownItemSelected(string ItemValue)
+    // {
+    //     if (ItemSelected.HasDelegate)
+    //         await ItemSelected.InvokeAsync(ItemValue);
+    // }
+
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     if (firstRender)
+    //     {
+    //         await JSRuntime.InvokeVoidAsync("window.vengage.dropdown.initialize", Id, objRef);
+    //     }
+    // }
+
+    // protected override async ValueTask DisposeAsyncCore(bool disposing)
+    // {
+    //     if (disposing)
+    //     {
+    //         try
+    //         {
+    //             // if (IsRenderComplete)
+    //             // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+    //         }
+    //         catch (JSDisconnectedException)
+    //         {
+    //             // do nothing
+    //         }
+
+    //         objRef?.Dispose();
+
+    //         // if (ModalService is not null && IsServiceModal)
+    //         //     ModalService.OnShow -= OnShowAsync;
+    //     }
+
+    //     await base.DisposeAsyncCore(disposing);
+    // }
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     objRef ??= DotNetObjectReference.Create(this);
+
+    //     // if (ModalService is not null && IsServiceModal)
+    //     //     ModalService.OnShow += OnShowAsync;
+    //     AdditionalAttributes ??= new Dictionary<string, object>();
+
+
+    //     await base.OnInitializedAsync();
+    // }
+
+
+    // private DotNetObjectReference<WADropdown> objRef = default!;
+
 
 
 }

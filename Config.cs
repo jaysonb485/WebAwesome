@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAwesome
+namespace Vengage.WebAwesome
 {
     public static class Config
     {
+        public const string WebAwesomeBaseURL = "https://early.webawesome.com/webawesome@3.0.0-beta.5/dist";
         public static IServiceCollection AddWebAwesome(this IServiceCollection services)
         {
             services.AddScoped<ToastService>();

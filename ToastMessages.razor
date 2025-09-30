@@ -73,7 +73,14 @@
         /// </summary>
         public string? IconVariant { get; set; }
 
+        /// <summary>
+        /// Shows a close button to manually dismiss the toast. If timeout is set to a value greater than 0, the toast will automatically dismiss after the timeout period even if this property is false.
+        /// </summary>
         public bool Dismissable { get; set; } = true;
+
+        /// <summary>
+        /// The number of milliseconds to wait before automatically dismissing the toast.
+        /// </summary>
         public int Timeout { get; set; } = 0;
         public WebAwesome.Enums.Variant Variant { get; set; } = Enums.Variant.Brand;
     }

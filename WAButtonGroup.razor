@@ -4,15 +4,13 @@
                  @attributes="@AdditionalAttributes"
                  label="@Label"
                  orientation="@OrientationString"
-                 size="@SizeString"
                  variant="@VariantString"
                  style="@StyleNames"
-                 class="@ClassNames">
+                 class="@ClassNames"
+                 slot="@Slot">
     @ChildContent
 </wa-button-group>
 @code {
-    [Parameter, EditorRequired]
-    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// A label to use for the button group. This won't be displayed on the screen, but it will be announced by assistive devices when interacting with the control and is strongly recommended.
@@ -30,26 +28,6 @@
         get
         {
             return (Orientation == Enums.Orientation.Horizontal) ? "horizontal" : "vertical";
-        }
-    }
-
-    /// <summary>
-    /// The component's size. While you can still set the size of buttons individually, and it will override the inherited size, it is rarely a good idea to mix sizes within the same button group.
-    /// </summary>
-    [Parameter]
-    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
-    string SizeString
-    {
-        get
-        {
-            return Size switch
-            {
-                Enums.Size.Small => "small",
-                Enums.Size.Medium => "medium",
-                Enums.Size.Large => "large",
-                Enums.Size.Inherit => "inherit",
-                _ => "inherit"
-            };
         }
     }
 

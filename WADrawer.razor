@@ -6,24 +6,25 @@
            @attributes="@AdditionalAttributes"
            style="@StyleNames"
            class="@ClassNames"
+           slot="@Slot"
            label="@Title"
            with-header="@withHeader"
-           with-footer="@withFooter">
+           with-footer="@withFooter"
+           placement="@PlacementString">
     @if (HeaderActions != null)
     {
         <span slot="header-actions">@HeaderActions</span>
     }
-    @BodyContent
+    @ChildContent
     @if (withFooter)
     {
-        <span slot="footer">@FooterContent</span>
+        <span slot="footer">@DrawerFooter</span>
     }
 </wa-drawer>
 
 @code {
     private DotNetObjectReference<WADrawer> objRef = default!;
-    [Parameter]
-    public RenderFragment BodyContent { get; set; } = default!;
+
     bool isVisible { get; set; } = false;
 
     /// <summary>
@@ -42,8 +43,8 @@
     /// Renders the drawer with a footer.
     /// </summary>
     [Parameter]
-    public RenderFragment? FooterContent { get; set; }
-    bool withFooter { get { return FooterContent != null; } }
+    public RenderFragment? DrawerFooter { get; set; }
+    bool withFooter { get { return DrawerFooter != null; } }
 
     [Parameter]
     public RenderFragment? HeaderActions { get; set; }
@@ -54,20 +55,20 @@
     public bool LightDismiss { get; set; } = true;
 
     /// <summary>
-    /// The direction from which the drawer will open.
+    /// The direction from which the drawer will open. Valid options are top, end, bottom, start. Default is end.
     /// </summary>
     [Parameter]
-    public Enums.Position Position { get; set; } = Enums.Position.Right;
-    string PositionString
+    public Enums.Placement Placement { get; set; } = Enums.Placement.End;
+    string PlacementString
     {
         get
         {
-            return Position switch
+            return Placement switch
             {
-                Enums.Position.Top => "top",
-                Enums.Position.Right => "end",
-                Enums.Position.Left => "start",
-                Enums.Position.Bottom => "bottom",
+                Enums.Placement.Top => "top",
+                Enums.Placement.Right => "end",
+                Enums.Placement.Left => "start",
+                Enums.Placement.Bottom => "bottom",
                 _ => "end"
             };
         }

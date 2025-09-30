@@ -1,0 +1,159 @@
+﻿@inherits WAComponentBase
+<wa-dropdown-item @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  class="@ClassNames"
+                  disabled="@Disabled" 
+                  slot="@(IsSubMenu ? "submenu" : Slot)"
+                  variant="@VariantString"
+                  type="@(IsCheckbox ? "checkbox" : "normal")"
+                  checked="@Checked"
+                  @onclick="@OnClick"
+                  submenuOpen="@SubmenuOpen"
+                  value="@Value">
+    @if (!String.IsNullOrEmpty(IconName))
+    {
+        <wa-icon name="@IconName" variant="@IconVariant" family="@IconFamily" slot="icon"></wa-icon>
+    }
+    @Label
+    @ChildContent
+    @if (DetailsContent != null)
+    {
+        <span slot="details">
+            @DetailsContent
+        </span>
+    }
+</wa-dropdown-item>
+
+@code {
+
+    /// <summary>
+    /// Additional content or details to display after the label.
+    /// </summary>
+    [Parameter]
+    public RenderFragment? DetailsContent { get; set; }
+
+    /// <summary>
+    /// If true, the menu item is rendered as a submenu item.
+    /// </summary>
+    [Parameter]
+    public bool IsSubMenu { get; set; } = false;
+
+
+    [Parameter]
+    public string? Value { get; set; }
+
+    /// <summary>
+    ///
+    /// </summary>
+    [Parameter]
+    public Enums.Variant Variant { get; set; } = Enums.Variant.Default;
+    string VariantString
+    {
+        get
+        {
+            return Variant switch
+            {
+                Enums.Variant.Default => "default",
+                Enums.Variant.Danger => "danger",
+                _ => "default"
+            };
+        }
+    }
+
+
+    /// <summary>
+    /// Adds the disabled attribute to disable the menu item so it cannot be selected.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// The text to display on the menu item
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+
+    /// <summary>
+    /// Adds a loading spinner to indicate that a menu item is busy. Like a disabled menu item, clicks will be suppressed until the loading state is removed.
+    /// </summary>
+    [Parameter]
+    public bool Loading { get; set; } = false;
+
+    /// <summary>
+    /// Indicates the menu item can be checked. To use Checked, this value must be true.
+    /// </summary>
+    [Parameter]
+    public bool IsCheckbox { get; set; } = false;
+
+    /// <summary>
+    /// Draws the item in a checked state.
+    /// </summary>
+    [Parameter]
+    public bool Checked { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<bool> CheckedChanged { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<MouseEventArgs?> OnClick { get; set; }
+
+    /// <summary>
+    /// Whether the submenu is currently open.
+    /// </summary>
+    [Parameter]
+    public bool SubmenuOpen { get; set; } = false;
+
+    private async Task OnChange(ChangeEventArgs e)
+    {
+        var oldValue = Checked;
+        var newValue = e.Value is not null && (bool)e.Value;
+
+        await CheckedChanged.InvokeAsync(newValue);
+
+        //EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+    private async Task Clicked(MouseEventArgs e)
+    {
+        if (IsCheckbox)
+        {
+            await CheckedChanged.InvokeAsync(!Checked);
+            return;
+        }
+        await OnClick.InvokeAsync();
+        //EditContext?.NotifyFieldChanged(fieldIdentifier);
+    }
+
+    /// <summary>
+    /// Turn off or on the loading indicator.
+    /// </summary>
+    /// <param name="LoadingState">Set to true to show the loading indicator.</param>
+    public void SetLoading(bool LoadingState)
+    {
+        Loading = LoadingState;
+        StateHasChanged();
+    }
+
+
+    /// <summary>
+    /// The name of the icon to draw in the start slot. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? IconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the start slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? IconFamily { get; set; }
+    /// <summary>
+    /// The name of the start slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? IconVariant { get; set; }
+    /// <summary>
+    /// The name of the icon to draw in the end slot. Available names depend on the icon library being used.
+    /// </summary>
+}

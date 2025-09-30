@@ -1,29 +1,32 @@
 ﻿@using Microsoft.JSInterop
 @inherits WAComponentBase
 <wa-dialog @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames"
-label="@Title"
-with-header="@withHeader"
-with-footer="@withFooter"
-light-dismiss="@LightDismiss">
-    @if (HeaderActions != null)
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           slot="@Slot"
+           label="@Title"
+           without-header="@withoutHeader"
+           without-footer="@withoutFooter"
+           light-dismiss="@LightDismiss">
+    @if (isVisible)
     {
-        <span slot="header-actions">@HeaderActions</span>
-    }
-    @BodyContent
-    @if (withFooter)
-    {
-        <span slot="footer">@FooterContent</span>
+        @if (HeaderActions != null)
+        {
+            <span slot="header-actions">@HeaderActions</span>
+        }
+        @ChildContent
+        @if (!withoutFooter)
+        {
+            <span slot="footer">@DialogFooter</span>
+        }
     }
 </wa-dialog>
 
 @code {
     private DotNetObjectReference<WADialog> objRef = default!;
-    [Parameter]
-    public RenderFragment BodyContent { get; set; } = default!;
+
     bool isVisible { get; set; } = false;
 
     /// <summary>
@@ -31,19 +34,19 @@ light-dismiss="@LightDismiss">
     /// </summary>
     [Parameter]
     public string? Title { get; set; }
-    bool withHeader
+    bool withoutHeader
     {
         get
         {
-            return (!String.IsNullOrEmpty(Title) || (HeaderActions != null));
+            return (String.IsNullOrEmpty(Title) && (HeaderActions == null));
         }
     }
     /// <summary>
     /// Renders the drawer with a footer.
     /// </summary>
     [Parameter]
-    public RenderFragment? FooterContent { get; set; }
-    bool withFooter { get { return FooterContent != null; } }
+    public RenderFragment? DialogFooter { get; set; }
+    bool withoutFooter { get { return DialogFooter == null; } }
 
     [Parameter]
     public RenderFragment? HeaderActions { get; set; }
@@ -67,8 +70,8 @@ light-dismiss="@LightDismiss">
         {
             try
             {
-                // if (IsRenderComplete)
-                // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                 // if (IsRenderComplete)
+                 // await JSRuntime.InvokeVoidAsync("window.vengage.dialog.dispose", Id);
             }
             catch (JSDisconnectedException)
             {
@@ -101,7 +104,8 @@ light-dismiss="@LightDismiss">
     public async Task HideAsync()
     {
         isVisible = false;
-        await JSRuntime.InvokeVoidAsync("window.changeModal", Id, false);
+        await InvokeAsync(StateHasChanged);
+        await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, false);
     }
 
     /// <summary>
@@ -109,7 +113,8 @@ light-dismiss="@LightDismiss">
     /// </summary>
     public async Task ShowAsync()
     {
-        isVisible = false;
-        await JSRuntime.InvokeVoidAsync("window.changeModal", Id, true);
+        isVisible = true;
+        await InvokeAsync(StateHasChanged);
+        await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, true);
     }
 }

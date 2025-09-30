@@ -1,19 +1,21 @@
 ﻿@inherits WAComponentBase
-<wa-icon-button @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames" 
-name="@IconName" 
-variant="@IconVariant" 
-family="@IconFamily" 
-label="@Label" 
-disabled="@Disabled"
-@onclick="@OnClick"></wa-icon-button>
-@if(!String.IsNullOrEmpty(Tooltip))
-{
-    <wa-tooltip for="@Id">@Tooltip</wa-tooltip>
-}
+<wa-button @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           appearance="@AppearanceString"
+           variant="@VariantString"
+           disabled="@Disabled"
+           loading="@Loading"
+           pill="@Pill"
+           type="@ButtonTypeString"
+           style="@StyleNames"
+           class="@ClassNames"
+           @onclick="@OnClick"
+           size="@SizeString">
+           <wa-icon slot="label" name="@IconName" family="@IconFamily" variant="@IconVariant"></wa-icon>
+</wa-button>
+
+
 @code {
 
     /// <summary>
@@ -32,7 +34,36 @@ disabled="@Disabled"
     [Parameter]
     public string? IconVariant { get; set; }
 
+    /// <summary>
+    /// Draws the button in a loading state.
+    /// </summary>
+    [Parameter]
+    public bool Loading { get; set; } = false;
 
+    /// <summary>
+    /// Draws a pill-style button with rounded edges.
+    /// </summary>
+    [Parameter]
+    public bool Pill { get; set; } = false;
+
+    /// <summary>
+    /// The type of button. When the type is submit, the button will submit the surrounding form.
+    /// </summary>
+    [Parameter]
+    public Enums.ButtonType ButtonType { get; set; } = Enums.ButtonType.Button;
+    string ButtonTypeString
+    {
+        get
+        {
+            return ButtonType switch
+            {
+                Enums.ButtonType.Button => "button",
+                Enums.ButtonType.Submit => "submit",
+                Enums.ButtonType.Reset => "reset",
+                _ => "button"
+            };
+        }
+    }
 
 
     /// <summary>
@@ -52,4 +83,69 @@ disabled="@Disabled"
 
     [Parameter]
     public string? Tooltip { get; set; }
+
+    /// <summary>
+    /// The button's theme variant. Defaults to neutral if not within another element with a variant.
+    /// </summary>
+    [Parameter]
+    public Enums.Variant Variant { get; set; } = Enums.Variant.Inherit;
+    string VariantString
+    {
+        get
+        {
+            return Variant switch
+            {
+                Enums.Variant.Brand => "brand",
+                Enums.Variant.Success => "success",
+                Enums.Variant.Neutral => "neutral",
+                Enums.Variant.Warning => "warning",
+                Enums.Variant.Danger => "danger",
+                Enums.Variant.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The button's visual appearance.
+    /// </summary>
+    [Parameter]
+    public Enums.Appearance Appearance { get; set; } = Enums.Appearance.Accent;
+    string AppearanceString
+    {
+        get
+        {
+            return Appearance switch
+            {
+                Enums.Appearance.Accent => "accent",
+                Enums.Appearance.AccentOutlined => "accent outlined",
+                Enums.Appearance.Filled => "filled",
+                Enums.Appearance.FilledOutlined => "filled outlined",
+                Enums.Appearance.Outlined => "outlined",
+                Enums.Appearance.Plain => "plain",
+                _ => "accent"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The button's size.
+    /// </summary>
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Inherit;
+    string SizeString
+    {
+        get
+        {
+            return Size switch
+            {
+                Enums.Size.Small => "small",
+                Enums.Size.Medium => "medium",
+                Enums.Size.Large => "large",
+                Enums.Size.Inherit => "inherit",
+                _ => "inherit"
+            };
+        }
+    }
+
 }

@@ -1,28 +1,35 @@
 ﻿@inherits WAComponentBase
 <wa-tab @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames"
-panel="@Name"
-Disabled="@Disabled">@Label</wa-tab>
+        id="@Id"
+        @attributes="@AdditionalAttributes"
+        style="@StyleNames"
+        class="@ClassNames"
+        slot="@Slot"
+        panel="@Name"
+        Disabled="@Disabled">
+    @TabContent
+    @Label
+</wa-tab>
 @if (Closeable)
 {
     <wa-icon-button slot="nav" tabindex="-1" name="xmark" label="@($"Close the {Label} tab")"></wa-icon-button>
 }
 <wa-tab-panel name="@Name"
-style="@StyleNames"
-class="@ClassNames">
-    @ChildContent
+              style="@StyleNames"
+              class="@ClassNames">
+    @PanelContent
 </wa-tab-panel>
 @code {
     [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    public RenderFragment? PanelContent { get; set; }
+
+    [Parameter]
+    public RenderFragment? TabContent { get; set; }
 
     /// <summary>
     /// The text to display in the tab nav
     /// </summary>
-    [Parameter, EditorRequired]
+    [Parameter]
     public string? Label { get; set; }
 
     /// <summary>

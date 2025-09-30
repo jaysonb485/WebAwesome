@@ -2,10 +2,11 @@
 <CascadingValue Value="@(this)" IsFixed="true">
     <wa-breadcrumb @ref="@Element"
                    id="@Id"
-                   @attributes="@AdditionalAttributes" 
+                   @attributes="@AdditionalAttributes"
                    label="@Label"
                    style="@StyleNames"
-                   class="@ClassNames">
+                   class="@ClassNames"
+                   slot="@Slot">
         @if (!String.IsNullOrEmpty(SeparatorIconName))
         {
             <wa-icon slot="separator" name="@SeparatorIconName" variant="@SeparatorIconVariant" family="@SeparatorIconFamily"></wa-icon>
@@ -14,8 +15,6 @@
     </wa-breadcrumb>
 </CascadingValue>
 @code {
-    [Parameter, EditorRequired]
-    public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
     /// </summary>

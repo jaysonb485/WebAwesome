@@ -1,0 +1,208 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@inherits WAComponentBase
+@typeparam TValue
+@typeparam TItem
+
+
+<wa-popup active="@ShowPopup" placement="bottom-start" @ref="@Element" style="@StyleNames" class="@ClassNames" id="@Id" @attributes="@AdditionalAttributes">
+    <span slot="anchor">
+        <WAInput @bind-Value="SearchText" Placeholder="Search..." Clearable="true" @oninput="OnSearchChanged" autocomplete="off" Label="@Label" />
+    </span>
+    <div id="menu" part="menu" role="menu" class="autocomplete-dropdown">
+        @if (Items is not null && Items.Any())
+        {
+            foreach (var item in Items)
+            {
+                <WADropdownItem Value="@GetPropertyValue(item)" OnClick="@(() => SelectItem(item))">@GetPropertyName(item)</WADropdownItem>
+            }
+        }
+        else if (searchInProgress)
+        {
+            <WADropdownItem Disabled="true">@LoadingText</WADropdownItem>
+        }
+        else
+        {
+            <WADropdownItem Disabled="true">@EmptyText</WADropdownItem>
+        }
+        @if (AllowNewItems)
+        {
+            <WADropdownItem OnClick="NewItemSelected">Create new: @SearchText</WADropdownItem>
+        }
+    </div>
+</wa-popup>
+
+@code {
+
+    [Parameter]
+    public string? SearchText { get; set; }
+
+    [Parameter]
+    public Func<string, Task<List<TItem>>>? SearchFunction { get; set; }
+
+    [Parameter]
+    public TValue? Value { get; set; }
+
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+    [Parameter]
+    public Expression<Func<TValue>> ValueExpression { get; set; } = default!;
+
+    [Parameter]
+    public int MinimumSearchLength { get; set; } = 3;
+
+    [Parameter]
+    public Func<string, Task<TItem>> AddNewItemFunction { get; set; } = default!;
+
+    [Parameter]
+    public string? LoadingText { get; set; } = "Loading...";
+
+    [Parameter]
+    public string? EmptyText { get; set; } = "Nothing found";
+
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter]
+    public string? ItemNameProperty { get; set; }
+
+    [Parameter]
+    public string? ItemValueProperty { get; set; }
+
+    [Parameter]
+    public bool AllowNewItems { get; set; } = false;
+
+    List<TItem> Items { get; set; } = new List<TItem>();
+    bool ShowPopup { get; set; } = false;
+    bool searchInProgress { get; set; } = false;
+
+    async Task OnSearchChanged(ChangeEventArgs e)
+    {
+
+        SearchText = e.Value?.ToString();
+        if (SearchText == string.Empty)
+        {
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync((TValue)(object)null);
+                searchInProgress = false;
+                return;
+            }
+        }
+
+        if (SearchText != null && SearchText.Length >= MinimumSearchLength && SearchFunction != null)
+        {
+            searchInProgress = true;
+            ShowPopup = true;
+            await Task.Delay(300); // Debounce delay
+
+            Items = await SearchFunction.Invoke(SearchText);
+
+        }
+        else
+        {
+            ShowPopup = false;
+            Items.Clear();
+        }
+
+        searchInProgress = false;
+
+        //await InvokeAsync(StateHasChanged);
+
+    }
+
+    async Task ItemSelected(string? selectedValue)
+    {
+        if (string.IsNullOrWhiteSpace(ItemValueProperty))
+            return;
+
+        var propertyInfo = typeof(TItem).GetProperty(ItemValueProperty);
+        if (propertyInfo == null)
+            return;
+
+        var item = Items.FirstOrDefault(item =>
+        {
+            var value = propertyInfo.GetValue(item)?.ToString();
+            return string.Equals(value, selectedValue, StringComparison.OrdinalIgnoreCase);
+        });
+
+        await SelectItem(item);
+    }
+
+    private async Task SelectItem(TItem item)
+    {
+
+        if (ValueChanged.HasDelegate)
+        {
+            await ValueChanged.InvokeAsync((TValue)(object)item);
+        }
+
+        ShowPopup = false;
+        SearchText = @GetPropertyName(item);
+        Items.Clear();
+    }
+
+    async Task NewItemSelected()
+    {
+        var newItem = await AddNewItemFunction.Invoke(SearchText);
+        await SelectItem(newItem);
+
+        ShowPopup = false;
+        Items.Clear();
+    }
+
+
+    private string? GetPropertyName(TItem item)
+    {
+        if (item == null)
+            return string.Empty;
+
+        // Handle string and primitive types directly
+        var itemType = typeof(TItem);
+        if (itemType == typeof(string) || itemType.IsPrimitive || itemType.IsValueType)
+        {
+            return item.ToString();
+        }
+
+        // If no property name is provided, fallback to ToString
+        if (string.IsNullOrWhiteSpace(ItemNameProperty))
+            return item.ToString();
+
+        // Use reflection for complex types
+        var propertyInfo = itemType.GetProperty(ItemNameProperty);
+        if (propertyInfo == null)
+            return $"[Missing property: {ItemNameProperty}]";
+
+        var value = propertyInfo.GetValue(item);
+        return value?.ToString();
+
+    }
+
+    private string? GetPropertyValue(TItem item)
+    {
+        if (item == null)
+            return string.Empty;
+
+        // Handle string and primitive types directly
+        var itemType = typeof(TItem);
+        if (itemType == typeof(string) || itemType.IsPrimitive || itemType.IsValueType)
+        {
+            return item.ToString();
+        }
+
+        // If no property name is provided, fallback to ToString
+        if (string.IsNullOrWhiteSpace(ItemValueProperty))
+            return item.ToString();
+
+        // Use reflection for complex types
+        var propertyInfo = itemType.GetProperty(ItemValueProperty);
+        if (propertyInfo == null)
+            return $"[Missing property: {ItemValueProperty}]";
+
+        var value = propertyInfo.GetValue(item);
+        return value?.ToString();
+
+    }
+
+}

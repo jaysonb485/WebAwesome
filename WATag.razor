@@ -3,15 +3,16 @@
 
 
 <wa-tag @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-variant="@VariantString"
-appearance="@AppearanceString"
-pill="@Pill"
-removable="@Removable"
-style="@StyleNames"
-class="@ClassNames"
-size="@SizeString">
+        id="@Id"
+        @attributes="@AdditionalAttributes"
+        style="@StyleNames"
+        class="@ClassNames"
+        slot="@Slot"
+        variant="@VariantString"
+        appearance="@AppearanceString"
+        pill="@Pill"
+        with-remove="@Removable"
+        size="@SizeString">
     @Text
     @ChildContent
 </wa-tag>
@@ -24,8 +25,7 @@ size="@SizeString">
     /// </summary>
     [Parameter]
     public string? Text { get; set; }
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+
 
     /// <summary>
     /// The tag's theme variant. Defaults to neutral if not within another element with a variant.
@@ -75,7 +75,7 @@ size="@SizeString">
     [Parameter]
     public bool Pill { get; set; } = false;
     /// <summary>
-    /// Makes the tag removable and shows a remove button.
+    /// Makes the tag removable (with-remove) and shows a remove button.
     /// </summary>
     [Parameter]
     public bool Removable { get; set; } = false;
@@ -104,7 +104,7 @@ size="@SizeString">
     public EventCallback OnRemoveClick { get; set; }
 
     [JSInvokable]
-    public async Task HandleRemove(string eventType, EventArgs eventArgs)
+    public async Task HandleTagRemove(string eventType, EventArgs eventArgs)
     {
         await OnRemoveClick.InvokeAsync();
     }
@@ -114,7 +114,7 @@ size="@SizeString">
         if (firstRender)
         {
             objRef = DotNetObjectReference.Create(this);
-            await JSRuntime.InvokeVoidAsync("addTagRemovedListener", Id, objRef, "HandleRemove");
+            await JSRuntime.InvokeVoidAsync("window.vengage.tag.initialize", Id, objRef);
         }
     }
 

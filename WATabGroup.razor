@@ -4,15 +4,14 @@
                 @attributes="@AdditionalAttributes"
                 style="@StyleNames"
                 class="@ClassNames"
+              slot="@Slot"
                 placement="@TabPlacementString"
                 active="@ActiveTab"
-                no-scroll-controls="@(!ShowScrollControls)">
+                without-scroll-controls="@(!ShowScrollControls)">
     @ChildContent
 </wa-tab-group>
 
 @code {
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// Enables the scroll arrows that appear when tabs overflow. Defaults to true.

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAwesome
+namespace Vengage.WebAwesome
 {
     public abstract class WAComponentBase : ComponentBase, IDisposable, IAsyncDisposable
     {
@@ -14,6 +14,9 @@ namespace WebAwesome
         [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; } = default!;
 
         [Parameter] public string? Class { get; set; }
+
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
 
         protected virtual string? ClassNames => Class;
 
@@ -121,7 +124,7 @@ namespace WebAwesome
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {

@@ -1,14 +1,18 @@
 ﻿@inherits WAComponentBase
 <wa-icon @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames"
-name="@IconName"
-variant="@IconVariant"
-family="@IconFamily"
-label="@Label"
-slot="@Slot"></wa-icon>
+         id="@Id"
+         @attributes="@AdditionalAttributes"
+         style="@StyleNames"
+         class="@ClassNames"
+         name="@IconName"
+         variant="@IconVariant"
+         family="@IconFamily"
+         label="@Label"
+         slot="@Slot"
+         auto-width="@AutoWidth"
+         swap-opacity="@SwapOpacity"
+         library="@Library"
+         src="@IconSourceURL"></wa-icon>
 
 @code {
 
@@ -28,11 +32,65 @@ slot="@Slot"></wa-icon>
     [Parameter]
     public string? IconVariant { get; set; }
 
-
-
     /// <summary>
     /// An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and ignored by assistive devices.
     /// </summary>
     [Parameter]
     public string? Label { get; set; }
+
+    /// <summary>
+    /// Sets the width of the icon to match the cropped SVG viewBox. This operates like the Font fa-width-auto class.
+    /// </summary>
+    [Parameter]
+    public bool AutoWidth { get; set; } = false;
+
+    /// <summary>
+    /// Swaps the opacity of duotone icons.
+    /// </summary>
+    [Parameter]
+    public bool SwapOpacity { get; set; } = false;
+
+    /// <summary>
+    /// The name of a registered custom icon library.
+    /// </summary>
+    [Parameter]
+    public string? Library { get; set; }
+
+    /// <summary>
+    /// An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and can result in XSS attacks.
+    /// </summary>
+    [Parameter]
+    public string? IconSourceURL { get; set; }
+
+    /// <summary>
+    /// Sets a duotone icon's primary color.
+    /// </summary>
+    [Parameter]
+    public string? PrimaryColor { get; set; }
+
+    /// <summary>
+    /// Sets a duotone icon's secondary color.
+    /// </summary>
+    [Parameter]
+    public string? SecondaryColor { get; set; }
+
+    /// <summary>
+    /// Sets a duotone icon's primary opacity.
+    /// </summary>
+    [Parameter]
+    public string? PrimaryOpacity { get; set; }
+
+    /// <summary>
+    /// Sets a duotone icon's secondary opacity.
+    /// </summary>
+    [Parameter]
+    public string? SecondaryOpacity { get; set; }
+
+    protected override string? StyleNames => BuildStyleNames(Style,
+        ($"--primary-color: {PrimaryColor}", !String.IsNullOrEmpty(PrimaryColor)),
+        ($"--secondary-color: {SecondaryColor}", !String.IsNullOrEmpty(SecondaryColor)),
+        ($"--primary-opacity: {PrimaryOpacity}", !String.IsNullOrEmpty(PrimaryOpacity)),
+        ($"--secondary-opacity: {SecondaryOpacity}", !String.IsNullOrEmpty(SecondaryOpacity))
+    );
 }
+

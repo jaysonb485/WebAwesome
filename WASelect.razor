@@ -8,6 +8,7 @@
            style="@StyleNames"
            class="@ClassNames"
            value="@Value"
+           slot="@Slot"
            label="@Label"
            hint="@Hint"
            name="@Id"
@@ -15,17 +16,17 @@
            required="@Required"
            @onchange="@OnChange"
            placeholder="@Placeholder"
-           clearable="@Clearable"
+           with-clear="@Clearable"
            appearance="@AppearanceString"
            pill="@Pill"
            disabled="@Disabled">
     @if (!String.IsNullOrEmpty(StartIconName))
     {
-        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="prefix"></wa-icon>
+        <wa-icon name="@StartIconName" variant="@StartIconVariant" family="@StartIconFamily" slot="start"></wa-icon>
     }
     @if (!String.IsNullOrEmpty(EndIconName))
     {
-        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="suffix"></wa-icon>
+        <wa-icon name="@EndIconName" variant="@EndIconVariant" family="@EndIconFamily" slot="end"></wa-icon>
     }
     @if (!String.IsNullOrEmpty(ExpandIconName))
     {
@@ -39,9 +40,6 @@
 </wa-select>
 
 @code {
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; } = default!;
 
     [Parameter]
     public TValue? Value { get; set; }
@@ -126,6 +124,9 @@
     [Parameter]
     public string? Placeholder { get; set; }
 
+    /// <summary>
+    /// Adds a clear button (with-clear) when the select is not empty.
+    /// </summary>
     [Parameter]
     public bool Clearable { get; set; } = false;
 
@@ -165,32 +166,32 @@
     public bool Pill { get; set; } = false;
 
     /// <summary>
-    /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
+    /// The name of the icon to draw in the start slot. Available names depend on the icon library being used.
     /// </summary>
     [Parameter]
     public string? StartIconName { get; set; }
     /// <summary>
-    /// The family of icons to choose from for the prefix slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// The family of icons to choose from for the start slot icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
     /// </summary>
     [Parameter]
     public string? StartIconFamily { get; set; }
     /// <summary>
-    /// The name of the prefix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// The name of the start slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
     /// </summary>
     [Parameter]
     public string? StartIconVariant { get; set; }
     /// <summary>
-    /// The name of the icon to draw in the suffix slot. Available names depend on the icon library being used.
+    /// The name of the icon to draw in the end slot. Available names depend on the icon library being used.
     /// </summary>
     [Parameter]
     public string? EndIconName { get; set; }
     /// <summary>
-    /// The family of icons to choose from for the suffix slot. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// The family of icons to choose from for the end slot. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
     /// </summary>
     [Parameter]
     public string? EndIconFamily { get; set; }
     /// <summary>
-    /// The name of the suffix slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// The name of the end slot icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
     /// </summary>
     [Parameter]
     public string? EndIconVariant { get; set; }
@@ -226,5 +227,22 @@
     /// </summary>
     [Parameter]
     public string? ExpandIconVariant { get; set; }
+
+    /// <summary>
+    /// The duration of the show animation.
+    /// </summary>
+    [Parameter]
+    public string? ShowDuration { get; set; }
+
+    /// <summary>
+    /// The duration of the hide animation.
+    /// </summary>
+    [Parameter]
+    public string? HideDuration { get; set; }
+
+    protected override string? StyleNames => BuildStyleNames(Style,
+        ($"--show-duration: {ShowDuration}", !String.IsNullOrEmpty(ShowDuration)),
+        ($"--hide-duration: {HideDuration}", !String.IsNullOrEmpty(HideDuration))
+    );
 
 }

@@ -1,16 +1,17 @@
 ﻿@inherits WAComponentBase
 <wa-split-panel @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames"
-position="@PositionPercent"
-position-in-pixels="@PositionPixels"
-vertical="@(Orientation == Enums.Orientation.Vertical)"
-snap="@SnapPoints"
-snap-threshold="@SnapThreshold"
-disabled="@Disabled"
-primary="@PrimaryPanelString">
+                id="@Id"
+                @attributes="@AdditionalAttributes"
+                style="@StyleNames"
+                class="@ClassNames"
+                slot="@Slot"
+                position="@PositionPercent"
+                position-in-pixels="@PositionPixels"
+                orientation="@OrientationString"
+                snap="@SnapPoints"
+                snap-threshold="@SnapThreshold"
+                disabled="@Disabled"
+                primary="@PrimaryPanelString">
     @if (!String.IsNullOrEmpty(DividerIconName))
     {
         <wa-icon name="@DividerIconName" variant="@DividerIconVariant" family="@DividerIconFamily" slot="divider"></wa-icon>
@@ -42,6 +43,18 @@ primary="@PrimaryPanelString">
     /// </summary>
     [Parameter]
     public Enums.Orientation Orientation { get; set; } = Enums.Orientation.Horizontal;
+    string OrientationString
+    {
+        get
+        {
+            return Orientation switch
+            {
+                Enums.Orientation.Horizontal => "horizontal",
+                Enums.Orientation.Vertical => "vertical",
+                _ => "horizontal"
+            };
+        }
+    }
 
     /// <summary>
     /// Disables resizing. Note that the position may still change as a result of resizing the host element.
@@ -112,7 +125,7 @@ primary="@PrimaryPanelString">
     /// </summary>
     [Parameter]
     public string? Width { get; set; }
-    
+
 
     /// <summary>
     /// If set, defines the maximum allowed width of the primary panel in CSS units.

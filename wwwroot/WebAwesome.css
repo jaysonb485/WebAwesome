@@ -1,4 +1,5 @@
-﻿.toast-container {
+﻿
+.toast-container {
     position: fixed;
     top: 0;
     right: 0;
@@ -52,3 +53,22 @@
 .justify-content-space-around {
     justify-content: space-around;
 }
+
+.autocomplete-dropdown {
+    display: flex;
+    flex-direction: column;
+    width: var(--auto-size-available-width) !important;
+    margin: 0;
+    padding: 0.25em;
+    border: var(--wa-border-style) var(--wa-border-width-s) var(--wa-color-surface-border);
+    border-radius: var(--wa-border-radius-m);
+    background-color: var(--wa-color-surface-raised);
+    box-shadow: var(--wa-shadow-m);
+    color: var(--wa-color-text-normal);
+    text-align: start;
+    user-select: none;
+    overflow: auto;
+    max-width: var(--auto-size-available-width) !important;
+    max-height: var(--auto-size-available-height) !important;
+}
+

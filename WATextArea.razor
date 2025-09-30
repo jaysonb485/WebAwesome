@@ -2,22 +2,24 @@
 @using Microsoft.AspNetCore.Components.Forms
 @inherits WAComponentBase
 <wa-textarea @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-value="@Value"
-size="@SizeString"
-appearance="@AppearanceString"
-label="@Label"
-hint="@Hint"
-rows="@Rows"
-placeholder="@Placeholder"
-readonly="@ReadOnly"
-disabled="@Disabled"
-style="@StyleNames"
-class="@ClassNames"
-required="@Required"
-resize="@ResizeString"
-@onchange="valueChanged">
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             value="@Value"
+             size="@SizeString"
+             appearance="@AppearanceString"
+             label="@Label"
+             hint="@Hint"
+             rows="@Rows"
+             placeholder="@Placeholder"
+             readonly="@ReadOnly"
+             disabled="@Disabled"
+             required="@Required"
+             resize="@ResizeString"
+             @onchange="valueChanged">
+    @ChildContent
 </wa-textarea>
 
 @code {
@@ -138,7 +140,8 @@ resize="@ResizeString"
     {
         AdditionalAttributes ??= new Dictionary<string, object>();
 
-        fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+        if (ValueExpression != null)
+            fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 
         base.OnInitialized();
     }

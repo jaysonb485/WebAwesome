@@ -6,7 +6,8 @@
             appearance="@AppearanceString"
             size="@SizeString"
             style="@StyleNames"
-            class="@ClassNames">
+            class="@ClassNames"
+            slot="@Slot">
     @if (!String.IsNullOrEmpty(IconName))
     {
         <wa-icon name="@IconName" variant="@IconVariant" family="@IconFamily" slot="icon"></wa-icon>
@@ -14,8 +15,7 @@
     @ChildContent
 </wa-callout>
 @code {
-    [Parameter]
-    public RenderFragment ChildContent { get; set; } = default!;
+
     /// <summary>
     /// The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.
     /// </summary>

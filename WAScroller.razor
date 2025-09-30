@@ -4,6 +4,7 @@
              @attributes="@AdditionalAttributes"
              style="@StyleNames"
              class="@ClassNames"
+             slot="@Slot"
              orientation="@OrientationString"
              without-shadow="@(!ShowShadow)"
              without-scrollbar="@(!ShowScrollbar)">
@@ -11,8 +12,6 @@
 </wa-scroller>
 
 @code {
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// Set the orientation of the line. Defaults to horizontal.

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static WebAwesome.ToastMessages;
+using static Vengage.WebAwesome.ToastMessages;
 
-namespace WebAwesome
+namespace Vengage.WebAwesome
 {
     public class ToastService
     {

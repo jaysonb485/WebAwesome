@@ -1,12 +1,14 @@
 ﻿@inherits WAComponentBase
 <wa-progress-bar @ref="@Element"
-id="@Id"
-@attributes="@AdditionalAttributes"
-style="@StyleNames"
-class="@ClassNames"
-value="@Value"
-label="@Label">
+                 id="@Id"
+                 @attributes="@AdditionalAttributes"
+                 style="@StyleNames"
+                 class="@ClassNames"
+                 slot="@Slot"
+                 value="@Value"
+                 label="@Label">
     @Text
+    @ChildContent
 </wa-progress-bar>
 @code {
     /// <summary>
@@ -37,8 +39,24 @@ label="@Label">
     /// Height of the progress bar in CSS units.
     /// </summary>
     [Parameter]
-    public string? Height { get; set; }
+    public string? TrackHeight { get; set; }
 
-    protected override string? StyleNames => BuildStyleNames(Style, ($"height: {Height}", !String.IsNullOrEmpty(Height)));
+    /// <summary>
+    /// The color of the track.
+    /// </summary>
+    [Parameter]
+    public string? TrackColor { get; set; }
+
+    /// <summary>
+    /// The color of the indicator.
+    /// </summary>
+    [Parameter]
+    public string? IndicatorColor { get; set; }
+
+    protected override string? StyleNames => BuildStyleNames(Style,
+        ($"--track-height: {TrackHeight}", !String.IsNullOrEmpty(TrackHeight)),
+        ($"--track-color: {TrackColor}", !String.IsNullOrEmpty(TrackColor)),
+        ($"--indicator-color: {IndicatorColor}", !String.IsNullOrEmpty(IndicatorColor))
+    );
 
 }

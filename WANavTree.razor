@@ -3,10 +3,77 @@
          id="@Id"
          @attributes="@AdditionalAttributes"
          style="@StyleNames"
-         class="@ClassNames">
+         class="@ClassNames"
+         slot="@Slot"
+         selection="@SelectionString">
+    @if (!String.IsNullOrEmpty(ExpandIconName))
+    {
+        <wa-icon name="@ExpandIconName" variant="@ExpandIconVariant" family="@ExpandIconFamily" slot="expand-icon"></wa-icon>
+    }
+    @if (!String.IsNullOrEmpty(CollapseIconName))
+    {
+        <wa-icon name="@CollapseIconName" variant="@CollapseIconVariant" family="@CollapseIconFamily" slot="collapse-icon"></wa-icon>
+    }
     @ChildContent
 </wa-tree>
 @code {
+    
+    /// <summary>
+    /// The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple displays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected.
+    /// </summary>
     [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    public TreeSelection? Selection { get; set; } = TreeSelection.Single;
+    public string SelectionString
+    {
+        get
+        {
+            return Selection switch
+            {
+                TreeSelection.Single => "single",
+                TreeSelection.Multiple => "multiple",
+                TreeSelection.Leaf => "leaf",
+                _ => "single"
+            };
+        }
+    }
+
+    public enum TreeSelection
+    {
+        Single,
+        Multiple,
+        Leaf
+    }
+
+    /// <summary>
+    /// The name of the icon to draw for the expand indicator. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the expand icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconFamily { get; set; }
+    /// <summary>
+    /// The name of the expand icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? ExpandIconVariant { get; set; }
+
+    /// <summary>
+    /// The name of the icon to draw on for the collapse indicator. Available names depend on the icon library being used.
+    /// </summary>
+    [Parameter]
+    public string? CollapseIconName { get; set; }
+    /// <summary>
+    /// The family of icons to choose from for the Collapse icon. For Font Awesome Free (default), valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, and brands. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? CollapseIconFamily { get; set; }
+    /// <summary>
+    /// The name of the Collapse icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property.
+    /// </summary>
+    [Parameter]
+    public string? CollapseIconVariant { get; set; }
+
 }

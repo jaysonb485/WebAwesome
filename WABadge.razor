@@ -5,11 +5,12 @@
           variant="@VariantString"
           appearance="@AppearanceString"
           pill="@Pill"
-          pulse="@Pulse"
+          attention="@PulseString"
           style="@StyleNames"
           class="@ClassNames"
           slot="@Slot">
     @Text
+    @ChildContent
 </wa-badge>
 
 @code {
@@ -66,9 +67,33 @@
     /// </summary>
     [Parameter]
     public bool Pill { get; set; } = false;
+
     /// <summary>
-    /// Makes the badge pulsate to draw attention.
+    /// Adds an animation to draw attention to the badge.
     /// </summary>
     [Parameter]
-    public bool Pulse { get; set; } = false;
+    public Enums.BadgePulse Pulse { get; set; } = Enums.BadgePulse.None;
+    string PulseString
+    {
+        get
+        {
+            return Pulse switch
+            {
+                Enums.BadgePulse.None => "none",
+                Enums.BadgePulse.Pulse => "pulse",
+                Enums.BadgePulse.Bounce => "bounce",
+                _ => "none"
+            };
+        }
+    }
+
+    /// <summary>
+    /// The color of the badge's pulse effect when using attention="pulse".
+    /// </summary>
+    [Parameter]
+    public string? PulseColor { get; set; }
+
+    protected override string? StyleNames => BuildStyleNames(Style,
+        ($"--pulse-color: {PulseColor}", !String.IsNullOrEmpty(PulseColor))
+    );
 }

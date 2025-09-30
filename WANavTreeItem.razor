@@ -1,16 +1,77 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing
-@inherits NavLink
+@inherits WAComponentBase
 @inject NavigationManager navigationManager
-<wa-tree-item></wa-tree-item>
+<wa-tree-item @ref="@Element"
+              id="@Id"
+              @attributes="@AdditionalAttributes"
+              style="@StyleNames"
+              class="@ClassNames" 
+              slot="@Slot"
+              @onclick="ItemClicked"
+              selected="@IsActive(Href, Match)"
+              expanded="@Expanded"
+              disabled="@Disabled"
+              Lazy="@LazyLoading">
+
+    @ChildContent
+</wa-tree-item>
 
 @code {
-    [Parameter]
-    public string? Text { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    [Parameter]
+    public string? Href { get; set; }
+
+    [Parameter]
+    public EventCallback? TreeItemClicked { get; set; }
+
+    [Parameter]
+    public NavLinkMatch? Match { get; set; } = NavLinkMatch.All;
+
+    /// <summary>
+    /// Expands the tree item.
+    /// </summary>
+    [Parameter]
+    public bool Expanded { get; set; } = false;
+
+    /// <summary>
+    /// Disables the tree item.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// Enables lazy loading behavior.
+    /// </summary>
+    [Parameter]
+    public bool LazyLoading { get; set; } = false;
+
+    private async Task ItemClicked()
     {
-        await OnAfterRenderAsync(firstRender);
+        if (string.IsNullOrEmpty(Href))
+        {
+            return;
+        }
+        // Navigate to the URL specified in the Text property
+        navigationManager.NavigateTo(Href);
+        
+        if (TreeItemClicked.HasValue)
+        {
+            await TreeItemClicked.Value.InvokeAsync();
+        }
         
     }
+
+    private bool IsActive(string? href, NavLinkMatch? navLinkMatch = NavLinkMatch.Prefix)
+    {
+        if(string.IsNullOrEmpty(href))
+        {
+            return false;
+        }
+
+        var relativePath = navigationManager.ToBaseRelativePath(navigationManager.Uri).ToLower();
+        return navLinkMatch == NavLinkMatch.All ? relativePath == href.ToLower().TrimStart('/') : relativePath.StartsWith(href.ToLower().TrimStart('/'));
+    }
+
+
 
 }
