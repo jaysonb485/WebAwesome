@@ -1,4 +1,7 @@
-﻿Currently supports WebAwesome 3.0.0-beta 6.
+﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the WebAwesome UI framework. Feedback and contributions are welcome!
+# Vengage.WebAwesome
+
+Currently supports WebAwesome 3.0.0-beta 6.
 
 # Installation
 Add as a project dependency, or build from source.
