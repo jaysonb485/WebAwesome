@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using System.Linq.Expressions
+@inherits WAComponentBase
+
+<wa-dropdown @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             placement="@PlacementString"
+             disabled="@Disabled"
+             distance="@Distance"
+             stay-open-on-select="@StayOpenOnSelect"
+             skidding="@Offset"
+             open="@Open"
+             @onmouseenter="@(() => { if (OpenOnHover) Open = true; })"
+             @onmouseleave="@(() => { if (OpenOnHover) Open = false; })">
+    @if (!HideTriggerButton)
+    {
+        <wa-button slot="trigger"
+                   with-caret="@ShowTriggerCaret"
+                   appearance="@TriggerButtonAppearanceString"
+                   variant="@TriggerButtonVariantString">@TriggerButtonContent</wa-button>
+    }
+    @DropdownItems
+    @ChildContent
+</wa-dropdown>
+

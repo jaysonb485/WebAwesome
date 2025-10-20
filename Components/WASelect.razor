@@ -1,0 +1,40 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+
+<wa-select @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           value="@Value"
+           slot="@Slot"
+           label="@Label"
+           hint="@Hint"
+           name="@Id"
+           size="@SizeString"
+           required="@Required"
+           @onchange="@OnValueChanged"
+           placeholder="@Placeholder"
+           with-clear="@Clearable"
+           appearance="@AppearanceString"
+           pill="@Pill"
+           disabled="@Disabled">
+    @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
+    {
+        <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start" />
+    }
+    @if (EndIcon != null || !String.IsNullOrWhiteSpace(EndIconName))
+    {
+        <WAIcon Icon="@EndIcon" IconName="@EndIconName" Slot="end" />
+    } 
+    @if (ExpandIcon != null || !String.IsNullOrWhiteSpace(ExpandIconName))
+    {
+        <WAIcon Icon="@ExpandIcon" IconName="@ExpandIconName" Slot="expand-icon"></WAIcon>
+    }
+    @if (ClearIcon != null || !String.IsNullOrWhiteSpace(ClearIconName))
+    {
+        <WAIcon Icon="@ClearIcon" IconName="@ClearIconName" Slot="clear-icon"></WAIcon>
+    }
+    @ChildContent
+</wa-select>

@@ -158,6 +158,8 @@ namespace Vengage.WebAwesome
 
         protected virtual string? StyleNames => Style;
 
+        [Parameter] public string? Slot { get; set; }
+
         #endregion
 
         #region Other

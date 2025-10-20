@@ -1,0 +1,17 @@
+﻿@inherits WAComponentBase
+@typeparam TItem
+
+<wa-radio @ref="@Element"
+          id="@Id"
+          @attributes="@AdditionalAttributes"
+          style="@StyleNames"
+          class="@ClassNames"
+          slot="@Slot"
+          value="@Value"
+          disabled="@Disabled"
+          appearance="@AppearanceString"
+          size="@SizeString">
+    @Label
+    @ChildContent
+</wa-radio>
+

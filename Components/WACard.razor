@@ -1,0 +1,51 @@
+﻿@inherits WAComponentBase
+<wa-card @ref="@Element"
+         id="@Id"
+         @attributes="@AdditionalAttributes"
+         appearance="@AppearanceString"
+         style="@StyleNames"
+         class="@ClassNames"
+         slot="@Slot"
+         orientation="@_orientationString">
+    @if (CardMedia != null)
+    {
+        <div slot="media">
+            @CardMedia
+        </div>
+    }
+    @if (Orientation == CardOrientation.Vertical)
+    {
+        @if (CardHeader != null)
+        {
+            <div slot="header" class="@HeaderCSSClass">
+                @CardHeader
+            </div>
+        }
+        @if (CardFooter != null)
+        {
+            <div slot="footer" class="@FooterCSSClass">
+                @CardFooter
+            </div>
+        }
+        @if (HeaderActions != null)
+        {
+            <div slot="header-actions">
+                @HeaderActions
+            </div>
+        }
+        @if (FooterActions != null)
+        {
+            <div slot="footer-actions">
+                @FooterActions
+            </div>
+        }
+    }
+    @if (Orientation == CardOrientation.Horizontal && HorizontalActions != null)
+    {
+        <div slot="actions">
+            @HorizontalActions
+        </div>
+    }
+    @ChildContent
+    @CardBody
+</wa-card>

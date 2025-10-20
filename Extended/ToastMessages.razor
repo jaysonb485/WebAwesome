@@ -1,0 +1,11 @@
+﻿@inherits WAComponentBase
+@inject ToastService toastService
+<div class="toast-container">
+    @if (Toasts != null && Toasts.Count > 0)
+    {
+        foreach (ToastMessage toastMessage in Toasts)
+        {
+            <Toast toastMessage="@toastMessage" ToastDismissed="@(() => OnToastDismissed(toastMessage))" />
+        }
+    }
+</div>

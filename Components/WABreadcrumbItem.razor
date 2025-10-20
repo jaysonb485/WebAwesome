@@ -1,0 +1,23 @@
+﻿@inherits WAComponentBase
+<wa-breadcrumb-item @ref="@Element"
+                    id="@Id"
+                    @attributes="@AdditionalAttributes"
+                    @onclick="@OnClick"
+                    style="@StyleNames"
+                    slot="@Slot"
+                    class="@ClassNames">
+    @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
+    {
+        <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start" />
+    }
+    @if (EndIcon != null || !String.IsNullOrWhiteSpace(EndIconName))
+    {
+        <WAIcon Icon="@EndIcon" IconName="@EndIconName" Slot="end" />
+    }
+    @if (SeparatorIcon != null || !String.IsNullOrWhiteSpace(SeparatorIconName))
+    {
+        <WAIcon Icon="@SeparatorIcon" IconName="@SeparatorIconName" Slot="separator" />
+    }
+    @ChildContent
+</wa-breadcrumb-item>
+

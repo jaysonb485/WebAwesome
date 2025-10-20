@@ -1,0 +1,18 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-tag @ref="@Element"
+        id="@Id"
+        @attributes="@AdditionalAttributes"
+        style="@StyleNames"
+        class="@ClassNames"
+        slot="@Slot"
+        variant="@VariantString"
+        appearance="@AppearanceString"
+        pill="@Pill"
+        with-remove="@Removable"
+        size="@SizeString">
+    @Text
+    @ChildContent
+</wa-tag>

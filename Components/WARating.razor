@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using System.Linq.Expressions
+@inherits WAComponentBase
+<wa-rating @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           slot="@Slot"
+           value="@Value"
+           max="@MaximumRating"
+           precision="@RatingPrecision"
+           readonly="@ReadOnly"
+           disabled="@Disabled"
+           size="@SizeString"
+           label="@Label"></wa-rating>

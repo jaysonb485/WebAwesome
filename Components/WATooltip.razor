@@ -1,0 +1,19 @@
+﻿@inherits WAComponentBase
+<wa-tooltip @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            style="@StyleNames"
+            class="@ClassNames"
+            slot="@Slot"
+            for="@TargetId"
+            placement="@PlacementString"
+            disabled="@Disabled"
+            distance="@Distance"
+            open="@Open"
+            skidding="@Offset"
+            show-delay="@ShowDelay"
+            hide-delay="@HideDelay"
+            trigger="@TriggerString"
+            without-arrow="@WithoutArrow">
+    @ChildContent
+</wa-tooltip>

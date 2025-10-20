@@ -1,0 +1,21 @@
+﻿@inherits WAComponentBase
+<wa-split-panel @ref="@Element"
+                id="@Id"
+                @attributes="@AdditionalAttributes"
+                style="@StyleNames"
+                class="@ClassNames"
+                slot="@Slot"
+                position="@PositionPercent"
+                position-in-pixels="@PositionPixels"
+                orientation="@OrientationString"
+                snap="@SnapPoints"
+                snap-threshold="@SnapThreshold"
+                disabled="@Disabled"
+                primary="@PrimaryPanelString">
+    @if (DividerIcon != null || !String.IsNullOrWhiteSpace(DividerIconName))
+    {
+        <WAIcon Icon="@DividerIcon" IconName="@DividerIconName" Slot="divider"></WAIcon>
+    }
+    <div slot="start">@StartContent</div>
+    <div slot="end">@EndContent</div>
+</wa-split-panel>

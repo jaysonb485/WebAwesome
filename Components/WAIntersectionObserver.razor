@@ -1,0 +1,16 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+<wa-intersection-observer @ref="@Element"
+                          id="@Id"
+                          @attributes="@AdditionalAttributes"
+                          style="@StyleNames"
+                          class="@ClassNames"
+                          slot="@Slot"
+                          root="@RootElementId"
+                          root-margin="@RootMargin"
+                          threshold="@Threshold"
+                          intersect-class="@IntersectClass"
+                          once="@ShowOnce"
+                          disabled="@Disabled">
+    @ChildContent
+</wa-intersection-observer>

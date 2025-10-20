@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@using System.Globalization
+
+@typeparam TValue
+
+@inherits WAComponentBase
+
+<wa-input @ref="@Element"
+          id="@Id"
+          @attributes="@AdditionalAttributes"
+          style="@StyleNames"
+          class="@ClassNames"
+          type="number"
+          value="@Value"
+          size="@SizeString"
+          appearance="@AppearanceString"
+          pill="@Pill"
+          label="@Label"
+          hint="@Hint"
+          placeholder="@Placeholder"
+          with-clear="@Clearable"
+          readonly="@ReadOnly"
+          required="@Required"
+          disabled="@Disabled"
+          slot="@Slot"
+          without-spin-buttons="@WithoutSpinButtons"
+          @onchange="OnValueChanged">
+    @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
+    {
+        <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start"></WAIcon>
+    }
+    @if (EndIcon != null || !String.IsNullOrWhiteSpace(EndIconName))
+    {
+        <WAIcon Icon="@EndIcon" IconName="@EndIconName" Slot="end"></WAIcon>
+    }
+
+    @ChildContent
+</wa-input>

@@ -1,0 +1,21 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+<wa-color-picker @ref="@Element"
+                 id="@Id"
+                 @attributes="@AdditionalAttributes"
+                 style="@StyleNames"
+                 class="@ClassNames"
+                 slot="@Slot"
+                 label="@Label"
+                 value="@Value"
+                 hint="@Hint"
+                 format="@ColorFormatString"
+                 size="@SizeString"
+                 without-format-toggle="@(!AllowFormatSelector)"
+                 disabled="@Disabled"
+                 opacity="@ShowOpacitySlider"
+                 uppercase="@UppercaseValues"
+                 swatches="@Swatches"
+                 @onchange="OnChange"></wa-color-picker>
+

@@ -1,0 +1,19 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+<wa-switch @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           slot="@Slot"
+           value="@Value"
+           checked="@Value"
+           disabled="@Disabled"
+           size="@SizeString"
+           hint="@Hint"
+           @onchange="OnValueChanged">
+    @Label
+    @ChildContent
+</wa-switch>
+

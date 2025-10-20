@@ -1,0 +1,21 @@
+﻿@inherits WAComponentBase
+<wa-avatar @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           slot="@Slot"
+           label="@Label"
+           image="@ImageSource"
+           initials="@Initials"
+           style="@StyleNames"
+           class="@ClassNames"
+           loading="@Loading"
+           shape="@ShapeString">
+
+    @if (Icon != null)
+    {
+        <WAIcon Icon="@Icon" Slot="icon" />
+    } else if (!String.IsNullOrWhiteSpace(IconName) && String.IsNullOrWhiteSpace(Name))
+    {
+        <wa-icon slot="icon" name="@IconName"></wa-icon>
+    }
+</wa-avatar>

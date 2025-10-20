@@ -1,0 +1,27 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+@if (IsVisible)
+{
+    <wa-drawer @ref="@Element"
+               id="@Id"
+               @attributes="@AdditionalAttributes"
+               style="@StyleNames"
+               class="@ClassNames"
+               slot="@Slot"
+               label="@Title"
+               with-header="@WithHeader"
+               with-footer="@WithFooter"
+               placement="@PlacementString"
+               open="@IsVisible">
+        @if (HeaderActions != null)
+        {
+            <span slot="header-actions">@HeaderActions</span>
+        }
+        @ChildContent
+        @if (WithFooter)
+        {
+            <span slot="footer">@DrawerFooter</span>
+        }
+    </wa-drawer>
+}

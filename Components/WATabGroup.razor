@@ -1,0 +1,12 @@
+﻿@inherits WAComponentBase
+<wa-tab-group @ref="@Element"
+                id="@Id"
+                @attributes="@AdditionalAttributes"
+                style="@StyleNames"
+                class="@ClassNames"
+              slot="@Slot"
+                placement="@TabPlacementString"
+                active="@ActiveTab"
+                without-scroll-controls="@(!ShowScrollControls)">
+    @ChildContent
+</wa-tab-group>

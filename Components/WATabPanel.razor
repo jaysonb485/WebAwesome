@@ -1,0 +1,24 @@
+﻿@inherits WAComponentBase
+<wa-tab @ref="@Element"
+        id="@Id"
+        @attributes="@AdditionalAttributes"
+        style="@StyleNames"
+        class="@ClassNames"
+        slot="@Slot"
+        panel="@Name"
+        Disabled="@Disabled">
+    @TabContent
+    @Label
+</wa-tab>
+@* @if (Closeable)
+{
+    <wa-button slot="nav" tabindex="-1" appearance="plain" size="small">
+        <wa-icon name="xmark" label="@($"Close the {Label} tab")"></wa-icon>
+    </wa-button>
+} *@
+<wa-tab-panel name="@Name"
+              style="@StyleNames"
+              class="@ClassNames">
+    @PanelContent
+    @ChildContent
+</wa-tab-panel>

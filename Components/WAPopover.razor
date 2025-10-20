@@ -1,0 +1,18 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-popover @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            style="@StyleNames"
+            class="@ClassNames"
+            slot="@Slot"
+            for="@TargetId"
+            placement="@PlacementString"
+            open="@Open"
+            distance="@Distance"
+            skidding="@Skidding"
+            without-arrow="@WithoutArrow">
+    @ChildContent
+</wa-popover>

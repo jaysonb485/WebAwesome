@@ -1,0 +1,33 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@inherits WAComponentBase
+@typeparam TValue
+@typeparam TItem
+
+
+<wa-popup active="@ShowPopup" placement="bottom-start" @ref="@Element" style="@StyleNames" class="@ClassNames" id="@Id" @attributes="@AdditionalAttributes">
+    <span slot="anchor">
+        <WAInput @ref="SearchInputBox" @bind-Value="SearchText" Placeholder="Search..." Clearable="true" @oninput="OnSearchChanged" autocomplete="off" Label="@Label" />
+    </span>
+    <div id="menu" part="menu" role="menu" class="autocomplete-dropdown">
+        @if (Items is not null && Items.Any())
+        {
+            foreach (var item in Items)
+            {
+                <WADropdownItem Value="@GetPropertyValue(item)" OnClick="@(() => OnItemSelected(item))">@GetPropertyName(item)</WADropdownItem>
+            }
+        }
+        else if (SearchInProgress)
+        {
+            <WADropdownItem Disabled="true">@LoadingText</WADropdownItem>
+        }
+        else
+        {
+            <WADropdownItem Disabled="true">@EmptyText</WADropdownItem>
+        }
+        @if (AllowNewItems)
+        {
+            <WADropdownItem OnClick="OnNewItemSelected">Create new: @SearchText</WADropdownItem>
+        }
+    </div>
+</wa-popup>

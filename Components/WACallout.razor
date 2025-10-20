@@ -1,0 +1,16 @@
+﻿@inherits WAComponentBase
+<wa-callout @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            variant="@VariantString"
+            appearance="@AppearanceString"
+            size="@SizeString"
+            style="@StyleNames"
+            class="@ClassNames"
+            slot="@Slot">
+    @if (Icon != null || !String.IsNullOrWhiteSpace(IconName))
+    {
+        <WAIcon Icon="@Icon" IconName="@IconName" Slot="icon" />
+    }
+    @ChildContent
+</wa-callout>

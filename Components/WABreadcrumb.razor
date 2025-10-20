@@ -1,0 +1,19 @@
+﻿@inherits WAComponentBase
+<CascadingValue Value="@(this)" IsFixed="true">
+    <wa-breadcrumb @ref="@Element"
+                   id="@Id"
+                   @attributes="@AdditionalAttributes"
+                   label="@Label"
+                   style="@StyleNames"
+                   class="@ClassNames"
+                   slot="@Slot">
+        @if (SeparatorIcon != null || !String.IsNullOrWhiteSpace(SeparatorIconName))
+        {
+            <WAIcon Icon="@SeparatorIcon" IconName="@SeparatorIconName" Slot="separator" />
+        }
+        @ChildContent
+    </wa-breadcrumb>
+</CascadingValue>
+@code {
+
+}

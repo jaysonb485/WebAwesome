@@ -1,0 +1,21 @@
+﻿@inherits WAComponentBase
+<CascadingValue Value="@(this)" IsFixed="true">
+    <wa-carousel @ref="@Element"
+                 id="@Id"
+                 @attributes="@AdditionalAttributes" 
+                 slot="@Slot"
+                 pagination="@ShowPagination"
+                 loop="@AllowLooping"
+                 navigation="@ShowNavigation"
+                 autoplay="@Autoplay"
+                 autoplay-interval="@AutoplayInterval"
+                 slides-per-page="@SlidesPerPage"
+                 slides-per-move="@SlidesPerMove"
+                 orientation="@OrientationString"
+                 mouse-dragging="@MouseDraggingEnabled"
+                 style="@StyleNames"
+                 class="@ClassNames">
+        @ChildContent
+    </wa-carousel>
+</CascadingValue>
+

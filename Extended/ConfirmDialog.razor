@@ -1,0 +1,52 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+@* <wa-dialog @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           slot="@Slot"
+           label="@Title"
+           light-dismiss="false">
+    @if (IsVisible)
+    {
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        } else
+        {
+            <p>@Message</p>
+        }
+        <span slot="footer">
+            <wa-button appearance="plain" @onclick="() => OnNoClick()">@CancelButtonText</wa-button>
+            <wa-button appearance="accent" @onclick="() => OnYesClick()">@ConfirmButtonText</wa-button>
+        </span>
+    }
+</wa-dialog>
+ *@
+
+<WADialog @ref="@DialogReference"
+          Id="@Id"
+          @attributes="@AdditionalAttributes"
+          Style="@StyleNames"
+          Class="@ClassNames"
+          Slot="@Slot"
+          Title="@Title"
+          LightDismiss="false" DialogClosed="OnDialogClosed">
+    <DialogBody>
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        }
+        else if (!string.IsNullOrEmpty(Message))
+        {
+            <p>@Message</p>
+        }
+    </DialogBody>
+    <DialogFooter>
+        <WAButton Appearance="ButtonAppearance.Plain" @onclick="() => OnNoClick()">@CancelButtonText</WAButton>
+        <WAButton Appearance="ButtonAppearance.Accent" @onclick="() => OnYesClick()">@ConfirmButtonText</WAButton>
+    </DialogFooter>
+</WADialog>
+

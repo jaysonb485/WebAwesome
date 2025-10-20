@@ -1,0 +1,13 @@
+﻿@using System.Globalization
+@inherits WAComponentBase
+<wa-relative-time @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  slot="@Slot"
+                  class="@ClassNames"
+                  date="@DateTimeISOString"
+                  sync="@AutoRefresh"
+                  format="@FormatString"
+                  numeric="@(AlwaysNumeric ? "always" : "auto")"
+                  lang="@Culture.Name"></wa-relative-time>

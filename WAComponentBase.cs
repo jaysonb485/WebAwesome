@@ -10,7 +10,7 @@ namespace Vengage.WebAwesome
 {
     public abstract class WAComponentBase : ComponentBase, IDisposable, IAsyncDisposable
     {
-
+        #region Parameters
         [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; } = default!;
 
         [Parameter] public string? Class { get; set; }
@@ -18,20 +18,23 @@ namespace Vengage.WebAwesome
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 
-        protected virtual string? ClassNames => Class;
-
-        public ElementReference Element { get; set; }
-
         [Parameter] public string? Id { get; set; }
         [Parameter] public string? Slot { get; set; }
 
-        protected bool IsRenderComplete { get; private set; }
-
-        [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
-
         [Parameter] public string? Style { get; set; }
 
+        #endregion
+
+        #region Dependencies
+        [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
+        #endregion
+
+        #region Computed  Properties
+        protected virtual string? ClassNames => Class;
         protected virtual string? StyleNames => Style;
+        #endregion
+
+        #region Lifecycle
         protected override void OnAfterRender(bool firstRender)
         {
             // process queued tasks
@@ -47,6 +50,50 @@ namespace Vengage.WebAwesome
             Id ??= IdUtility.GetNextId();
         }
 
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    // cleanup
+                }
+
+                disposed = true;
+            }
+        }
+
+        protected virtual ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (!asyncDisposed)
+            {
+                if (disposing)
+                {
+                    // cleanup
+                }
+
+                asyncDisposed = true;
+            }
+
+            return ValueTask.CompletedTask;
+        }
+
+        ~WAComponentBase()
+        {
+            Dispose(false);
+        }
+        #endregion
+
+        #region State
+        protected bool IsRenderComplete { get; private set; }
+        public ElementReference Element { get; set; }
+        private bool disposed = false;
+        private bool asyncDisposed = false;
+
+        #endregion
+                
+        #region Public Methods
         public static string BuildClassNames(params (string? cssClass, bool when)[] cssClassList)
         {
             var list = new HashSet<string>();
@@ -103,9 +150,6 @@ namespace Vengage.WebAwesome
             else
                 return string.Empty;
         }
-
-        private bool disposed = false;
-        private bool asyncDisposed = false;
         public void Dispose()
         {
             Dispose(true);
@@ -122,38 +166,8 @@ namespace Vengage.WebAwesome
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    // cleanup
-                }
+        #endregion
 
-                disposed = true;
-            }
-        }
-
-        protected virtual ValueTask DisposeAsyncCore(bool disposing)
-        {
-            if (!asyncDisposed)
-            {
-                if (disposing)
-                {
-                    // cleanup
-                }
-
-                asyncDisposed = true;
-            }
-
-            return ValueTask.CompletedTask;
-        }
-        ~WAComponentBase()
-        {
-            Dispose(false);
-        }
-
-
+ 
     }
 }

@@ -1,0 +1,28 @@
+﻿@inherits WAComponentBase
+
+<wa-zoomable-frame @ref="@Element"
+                   id="@Id"
+                   @attributes="@AdditionalAttributes"
+                   style="@StyleNames"
+                   class="@ClassNames"
+                   slot="@Slot"
+                   src="@SourceUrl"
+                   srcdoc="@SourceHtml"
+                   allowfullscreen="@AllowFullScreen"
+                   loading="@(LazyLoad ? "lazy" : "eager")"
+                   referrerpolicy="@ReferrerPolicy"
+                   sandbox="@Sandbox"
+                   zoom="@Zoom"
+                   zoom-levels="@ZoomLevels"
+                   without-controls="@HideZoomControls"
+                   without-interaction="@DisableInteraction">
+    @if (ZoomInIcon != null || !String.IsNullOrWhiteSpace(ZoomInIconName))
+    {
+        <WAIcon IconName="@ZoomInIconName" Slot="zoom-in-icon"></WAIcon>
+    }
+    @if (ZoomOutIcon != null || !String.IsNullOrWhiteSpace(ZoomOutIconName))
+    {
+        <WAIcon IconName="@ZoomOutIconName" Slot="zoom-out-icon"></WAIcon>
+    }
+    @ChildContent
+</wa-zoomable-frame>

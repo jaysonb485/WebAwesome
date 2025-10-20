@@ -1,0 +1,12 @@
+﻿@inherits WAComponentBase
+<wa-scroller @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             orientation="@OrientationString"
+             without-shadow="@(!ShowShadow)"
+             without-scrollbar="@(!ShowScrollbar)">
+    @ChildContent
+</wa-scroller>

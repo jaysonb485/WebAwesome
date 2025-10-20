@@ -1,0 +1,31 @@
+﻿@inherits WAComponentBase
+<wa-details @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            style="@StyleNames"
+            class="@ClassNames"
+            slot="@Slot"
+            summary="@Title"
+            disabled="@Disabled"
+            appearance="@AppearanceString"
+            open="@IsOpen"
+            name="@GroupName"
+            icon-placement="@IconPlacementString">
+    @if (!String.IsNullOrEmpty(ExpandIconName))
+    {
+        <WAIcon Icon="@ExpandIcon" IconName="@ExpandIconName" Slot="expand-icon"></WAIcon>
+    }
+    @if (!String.IsNullOrEmpty(CollapseIconName))
+    {
+        <WAIcon Icon="@CollapseIcon" IconName="@CollapseIconName" Slot="collapse-icon"></WAIcon>
+    }
+    @if (DetailsTitle != null)
+    {
+        <span slot="summary">
+            @DetailsTitle
+        </span>
+    }
+    @ChildContent
+    @DetailsBody
+</wa-details>
+

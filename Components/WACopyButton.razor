@@ -1,0 +1,28 @@
+﻿@inherits WAComponentBase
+<wa-copy-button @ref="@Element"
+                id="@Id"
+                @attributes="@AdditionalAttributes"
+                style="@StyleNames"
+                class="@ClassNames"
+                slot="@Slot"
+                value="@Value"
+                copy-label="@HoverLabel"
+                success-label="@SuccessLabel"
+                error-label="@ErrorLabel"
+                disabled="@Disabled"
+                feedback-duration="@FeedbackDuration"
+                tooltip-placement="@TooltipPlacementString"
+                from="@FromElementIdAndAttribute">
+    @if (Icon != null || !String.IsNullOrWhiteSpace(IconName))
+    {
+        <WAIcon Icon="@Icon" IconName="@IconName" Slot="copy-icon"></WAIcon>
+    }
+    @if (SuccessIcon != null || !String.IsNullOrWhiteSpace(SuccessIconName))
+    {
+        <WAIcon Icon="@SuccessIcon" IconName="@SuccessIconName" Slot="success-icon"></WAIcon>
+    }
+    @if (ErrorIcon != null || !String.IsNullOrWhiteSpace(ErrorIconName))
+    {
+        <WAIcon Icon="@ErrorIcon" IconName="@ErrorIconName" Slot="error-icon"></WAIcon>
+    }
+</wa-copy-button>

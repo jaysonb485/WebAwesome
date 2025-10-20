@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using System.Linq.Expressions
+@inherits WAComponentBase
+
+
+<wa-slider @ref="@Element"
+           id="@Id"
+           @attributes="@AdditionalAttributes"
+           style="@StyleNames"
+           class="@ClassNames"
+           slot="@Slot"
+           label="@Label"
+           hint="@Hint"
+           min="@MinimumValue"
+           max="@MaximumValue"
+           default-value="@DefaultValue"
+           step="@Step"
+           disabled="@Disabled"
+           tooltip="@TooltipPlacementString"
+           with-tooltip="@ShowTooltip"
+           value="@Value"
+           orientation="@OrientationString"
+           range="@IsRange"
+           readonly="@ReadOnly"
+           size="@SizeString"
+           indictor-offset="@IndicatorOffset"
+           with-markers="@ShowMarkers">@ChildContent</wa-slider>

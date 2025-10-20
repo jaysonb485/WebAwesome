@@ -1,0 +1,32 @@
+﻿@using Microsoft.JSInterop
+@inherits WALayoutComponentBase
+
+
+<wa-resize-observer id="@_resizeId" Disabled="@(!ObserveResize)">
+
+    <wa-page @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             navigation-placement="@NavigationPlacementString"
+             mobile-breakpoint="@MobileBreakpoint"
+             nav-open="@NavOpen"
+             disable-stick="@DisableSticky">
+        <CascadingValue Value="IsMobilePageView">
+            @if (_hasRendered == false)
+            {
+                @if(LoadingContent != null){
+                    @LoadingContent
+                }
+            }
+            else
+            {
+                @LayoutContent
+                @ChildContent
+            }
+        </CascadingValue>
+    </wa-page>
+
+</wa-resize-observer>

@@ -1,0 +1,29 @@
+﻿@inherits WAComponentBase
+<wa-dropdown-item @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  class="@ClassNames"
+                  disabled="@Disabled" 
+                  slot="@(IsSubMenu ? "submenu" : Slot)"
+                  variant="@VariantString"
+                  type="@(IsCheckbox ? "checkbox" : "normal")"
+                  checked="@Checked"
+                  @onclick="@OnClick"
+                  submenuOpen="@SubmenuOpen"
+                  value="@Value">
+    @if (Icon != null || !String.IsNullOrWhiteSpace(IconName))
+    {
+        <WAIcon Icon="Icon" IconName="@IconName" Slot="icon"></WAIcon>
+    }
+    @Label
+    @ChildContent
+    @if (DetailsContent != null)
+    {
+        <span slot="details">
+            @DetailsContent
+        </span>
+    }
+</wa-dropdown-item>
+
+

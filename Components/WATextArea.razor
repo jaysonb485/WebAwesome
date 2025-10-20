@@ -1,0 +1,27 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+<wa-textarea @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             value="@Value"
+             size="@SizeString"
+             appearance="@AppearanceString"
+             label="@Label"
+             hint="@Hint"
+             rows="@Rows"
+             placeholder="@Placeholder"
+             readonly="@ReadOnly"
+             disabled="@Disabled"
+             required="@Required"
+             resize="@ResizeString"
+             autocorrect="@(AutoCorrectEnabled ? "on" : "off")"
+             autocapitalize="@AutoCapitalizeString"
+             spellcheck="@Spellcheck"
+             @onchange="OnValueChanged">
+    @ChildContent
+</wa-textarea>
+

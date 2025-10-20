@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+
+@inherits WAComponentBase
+<wa-checkbox @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             value="@Value"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             checked="@Value"
+             disabled="@Disabled"
+             size="@SizeString"
+             hint="@Hint"
+             @onchange="OnChange">
+    @Label
+    @ChildContent
+</wa-checkbox>

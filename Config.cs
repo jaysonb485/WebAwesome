@@ -9,10 +9,10 @@ namespace Vengage.WebAwesome
 {
     public static class Config
     {
-        public const string WebAwesomeBaseURL = "https://early.webawesome.com/webawesome@3.0.0-beta.5/dist";
+        public const string WebAwesomeBaseURL = "https://early.webawesome.com/webawesome@3.0.0-beta.6/dist";
         public static IServiceCollection AddWebAwesome(this IServiceCollection services)
         {
-            services.AddScoped<ToastService>();
+            services.AddScoped<Extended.ToastService>();
             return services;
         }
 
