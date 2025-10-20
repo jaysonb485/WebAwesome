@@ -14,7 +14,7 @@ Breadcrumbs provide a group of links so users can easily navigate a website's hi
 Breadcrumbs are usually placed before a page's main content with the current page shown last to indicate the user's position in the navigation.
 
 [WebAwesome docs](https://webawesome.com/docs/breadcrumb)
-[WABreadcrumbItem](/docs/WABreadcrumbItem)
+[WABreadcrumbItem](/docs/WABreadcrumbItem.md)
 
 ### Properties
 | Property | Type   | Default | Description                              |
