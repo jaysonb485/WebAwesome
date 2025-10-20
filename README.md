@@ -16,7 +16,7 @@ Add the following to your `_Imports.razor` file:
 @using Vengage.WebAwesome.Extended
 ```
 
-Add the following to your App.razor file:
+Add the following to your App.razor or wwwroot/index.html file:
 ```csharp
     <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/styles/webawesome.css" />
     <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/webawesome.loader.js"></script>
