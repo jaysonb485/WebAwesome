@@ -38,3 +38,4 @@ To animate an element, wrap it in `<WAAnimation>` and set an animation `Name`. T
 	<div class="box">Bounce Animation</div>
 </WAAnimation>
 ```
+![WAAnimation-bounce](https://github.com/user-attachments/assets/b2013315-ed32-4e8e-8ad0-88b0af7ff2ff)
