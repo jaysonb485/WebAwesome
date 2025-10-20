@@ -29,10 +29,11 @@ Avatars are used to represent a person or object.
 
 #### Using an icon definition
 ```HTML+Razor
-<WAAvatar Name="Joanna Smith" Icon="@new(){ Name = "github", Family = "brands" }" />
+<WAAvatar Name="Joanna Smith" Icon="@(new(){ Name = "github", Family = "brands" })" />
 ```
 
 #### Using an image source
 ```HTML+Razor
 <WAAvatar Name="Joanna Smith" ImageSource="https://randomuser.me/api/portraits/lego/1.jpg" />
 ```
+<img width="235" height="80" alt="image" src="https://github.com/user-attachments/assets/3b6fb103-0347-4071-8727-445d18a3d098" />
