@@ -11,24 +11,10 @@ namespace Vengage.WebAwesome.Components
     {
         #region Parameters
         /// <summary>
-        /// The text to display in the badge.
-        /// </summary>
-        [Parameter]
-        public string? Text { get; set; }
-
-        /// <summary>
-        /// The badge's theme variant. Defaults to brand if not within another element with a variant.
-        /// </summary>
-        [Parameter]
-        public BadgeVariant Variant { get; set; } = BadgeVariant.Brand;
-
-        /// <summary>
         /// The badge's visual appearance. Valid options for badge are: Accent, AccentOutlined, Filled, FilledOutlined, Outlined.
         /// </summary>
         [Parameter]
         public BadgeAppearance Appearance { get; set; } = BadgeAppearance.Accent;
-
-
         /// <summary>
         /// Draws a pill-style badge with rounded edges.
         /// </summary>
@@ -46,6 +32,23 @@ namespace Vengage.WebAwesome.Components
         /// </summary>
         [Parameter]
         public string? PulseColor { get; set; }
+
+        /// <summary>
+        /// The text to display in the badge.
+        /// </summary>
+        [Parameter]
+        public string? Text { get; set; }
+
+        /// <summary>
+        /// The badge's theme variant. Defaults to brand if not within another element with a variant.
+        /// </summary>
+        [Parameter]
+        public BadgeVariant Variant { get; set; } = BadgeVariant.Brand;
+
+
+
+
+
         #endregion
 
         #region Computed  Properties

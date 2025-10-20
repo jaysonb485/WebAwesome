@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vengage.WebAwesome", "Vengage.WebAwesome.csproj", "{E046D59A-733F-C9FA-5781-8968D92F8505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAwesomeTest", "..\WebAwesomeTest\WebAwesomeTest.csproj", "{3E8A2022-565F-A9CC-F2CF-C145FA7FCFF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAwesomeDemo", "..\WebAwesomeTest\WebAwesomeDemo.csproj", "{3E8A2022-565F-A9CC-F2CF-C145FA7FCFF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

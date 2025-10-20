@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Vengage.WebAwesome.Components
 {
-    public partial class WAAnimate : WAComponentBase
+    public partial class WAAnimation : WAComponentBase
     {
         #region Parameters
         /// <summary>
@@ -17,7 +17,7 @@ namespace Vengage.WebAwesome.Components
         public AnimationName? Name { get; set; }
 
         /// <summary>
-        /// Sets whether the animation will commence automatically when started.
+        /// Sets whether the animation will commence automatically when rendered.
         /// </summary>
         [Parameter]
         public bool AutoStart { get; set; } = true;
