@@ -18,10 +18,15 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public string? Title { get; set; }
         /// <summary>
-        /// Renders the drawer with a footer.
+        /// The drawer's footer, usually one or more buttons representing various options.
         /// </summary>
         [Parameter]
         public RenderFragment? DrawerFooter { get; set; }
+        /// <summary>
+        /// The drawer's main content.
+        /// </summary>
+        [Parameter]
+        public RenderFragment? DrawerBody { get; set; }
         /// <summary>
         /// Optional actions to add to the header. Works best with WAButton.
         /// </summary>
@@ -37,6 +42,13 @@ namespace Vengage.WebAwesome.Components
         /// </summary>
         [Parameter]
         public DrawerPlacement Placement { get; set; } = DrawerPlacement.End;
+
+        /// <summary>
+        /// Triggered when the drawer is closed.
+        /// </summary>
+        [Parameter]
+        public EventCallback<string> DrawerClosed { get; set; } = default!;
+
         #endregion
 
         #region Computed  Properties
@@ -71,6 +83,17 @@ namespace Vengage.WebAwesome.Components
         }
         #endregion
 
+
+        #region Event Handlers
+        [JSInvokable]
+        public async Task HandleDialogClosed(string TargetElementId)
+        {
+            IsVisible = false;
+            if (DrawerClosed.HasDelegate)
+                await DrawerClosed.InvokeAsync(TargetElementId);
+        }
+        #endregion
+
         #region Lifecycle
 
         protected override async ValueTask DisposeAsyncCore(bool disposing)
@@ -100,10 +123,14 @@ namespace Vengage.WebAwesome.Components
         {
             objRef ??= DotNetObjectReference.Create(this);
 
-            // if (ModalService is not null && IsServiceModal)
-            //     ModalService.OnShow += OnShowAsync;
-
             await base.OnInitializedAsync();
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.dialog.initialize", Id, objRef);
+            }
         }
         #endregion
 
@@ -121,8 +148,7 @@ namespace Vengage.WebAwesome.Components
         /// </summary>
         public async Task HideAsync()
         {
-            IsVisible = false;
-            await JSRuntime.InvokeVoidAsync("window.changeModal", Id, false);
+            await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, false);
         }
 
         /// <summary>
@@ -130,8 +156,11 @@ namespace Vengage.WebAwesome.Components
         /// </summary>
         public async Task ShowAsync()
         {
-            IsVisible = false;
-            await JSRuntime.InvokeVoidAsync("window.changeModal", Id, true);
+            
+            await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, true);
+            IsVisible = true;
+            await InvokeAsync(StateHasChanged);
+
         }
         #endregion
 

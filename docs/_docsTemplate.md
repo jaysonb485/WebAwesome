@@ -1,7 +1,7 @@
 ﻿# Component Name
 ## Vengage.WebAwesome.Components.componentname
 
-```html
+```HTML+Razor
 <WAComponoentName prop1="value1" prop2="value2" />
 ```
 
@@ -13,9 +13,9 @@ A brief description of what the Component Name does and its purpose within the V
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| prop1    | string | "default" | Description of prop1                     |
-| prop2    | number | 0       | Description of prop2                     |
-| prop3    | boolean| false   | Description of prop3                     |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
 
 ### Methods
 | Method      | Parameters       | Description                              |
@@ -32,11 +32,11 @@ A brief description of what the Component Name does and its purpose within the V
 ### Examples
 
 #### Basic Usage
-```html
+```HTML+Razor
 <WAComponoentName prop1="exampleValue" prop2="42" />
 ```
 
 #### Advanced Usage
-```html
+```HTML+Razor
 <WAComponoentName prop1="advancedValue" prop2="100" prop3={true} />
 ```

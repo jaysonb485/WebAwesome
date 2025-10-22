@@ -12,6 +12,12 @@ namespace Vengage.WebAwesome.Components
     {
         #region Parameters
         /// <summary>
+        /// The button's visual appearance.
+        /// </summary>
+        [Parameter]
+        public ButtonAppearance Appearance { get; set; } = ButtonAppearance.Accent;
+
+        /// <summary>
         /// The button's label.
         /// </summary>
         [Parameter]
@@ -23,11 +29,7 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.Inherit;
 
-        /// <summary>
-        /// The button's visual appearance.
-        /// </summary>
-        [Parameter]
-        public ButtonAppearance Appearance { get; set; } = ButtonAppearance.Accent;
+
         /// <summary>
         /// The button's size.
         /// </summary>

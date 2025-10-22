@@ -10,6 +10,13 @@
 //}
 
 window.vengage = {
+    colorPicker: {
+        getFormattedValue: (elementId, colorFormat) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+            return element.getFormattedValue(colorFormat);
+        }
+    },
     dialog: {
         initialize: (elementId, dotnetHelper) => {
             let element = document.getElementById(elementId);

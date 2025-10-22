@@ -19,9 +19,15 @@ namespace Vengage.WebAwesome.Components
 
         [Parameter] public Expression<Func<bool>> ValueExpression { get; set; } = default!;
 
+        /// <summary>
+        /// The checkbox's label.
+        /// </summary>
         [Parameter]
         public string? Label { get; set; }
 
+        /// <summary>
+        /// The value of the checkbox, submitted as a name/value pair with form data.
+        /// </summary>
         [Parameter]
         public bool Value { get; set; } = false;
 
@@ -44,10 +50,10 @@ namespace Vengage.WebAwesome.Components
         public string? CheckIconColor { get; set; }
 
         /// <summary>
-        /// The size of the checked and indeterminate icons relative to the checkbox.
+        /// The size of the checked and indeterminate icons relative to the checkbox represented by a decimal. 1 is full size, 0.5 is half size etc.
         /// </summary>
         [Parameter]
-        public string? CheckIconScale { get; set; }
+        public decimal? CheckIconScale { get; set; }
 
 
         /// <summary>
@@ -60,7 +66,7 @@ namespace Vengage.WebAwesome.Components
         #region Computed  Properties
         protected override string? StyleNames => BuildStyleNames(Style,
                 ($"--checked-icon-color:{CheckIconColor}", !String.IsNullOrEmpty(CheckIconColor)),
-                ($"--checked-icon-scale:{CheckIconScale}", !String.IsNullOrEmpty(CheckIconScale))
+                ($"--checked-icon-scale:{CheckIconScale?.ToString()}", CheckIconScale.HasValue)
         );
         string SizeString
         {
@@ -82,8 +88,8 @@ namespace Vengage.WebAwesome.Components
         protected override void OnInitialized()
         {
             AdditionalAttributes ??= new Dictionary<string, object>();
-
-            fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+            if (ValueExpression != null)
+                fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 
             base.OnInitialized();
         }

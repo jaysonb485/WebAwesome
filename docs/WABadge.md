@@ -1,7 +1,7 @@
 ﻿# WABadge
 ## Vengage.WebAwesome.Components.WABadge
 
-```html
+```html+Razor
 <WABadge Text="Badge" />
 ```
 

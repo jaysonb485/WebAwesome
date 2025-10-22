@@ -44,6 +44,9 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public string? PreferredWidth { get; set; }
 
+        /// <summary>
+        /// Triggered when the dialog is closed.
+        /// </summary>
         [Parameter]
         public EventCallback<string> DialogClosed { get; set; } = default!;
         #endregion
@@ -77,7 +80,6 @@ namespace Vengage.WebAwesome.Components
         {
             if (firstRender)
             {
-                objRef = DotNetObjectReference.Create(this);
                 await JSRuntime.InvokeVoidAsync("window.vengage.dialog.initialize", Id, objRef);
             }
         }

@@ -35,10 +35,13 @@ namespace Vengage.WebAwesome.Components
         public ButtonVariant TriggerButtonVariant { get; set; } = ButtonVariant.Inherit;
 
         /// <summary>
-        /// The button's visual appearance.
+        /// The trigger button's visual appearance.
         /// </summary>
         [Parameter]
         public ButtonAppearance TriggerButtonAppearance { get; set; } = ButtonAppearance.Accent;
+        /// <summary>
+        /// The placement of the dropdown menu in reference to the trigger. The menu will shift to a more optimal location if the preferred placement doesn't have enough room.
+        /// </summary>
         [Parameter]
         public DropdownPlacement PanelPlacement { get; set; } = DropdownPlacement.BottomStart;
         /// <summary>
@@ -72,6 +75,9 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public bool OpenOnHover { get; set; } = false;
 
+        /// <summary>
+        /// Opens or closes the dropdown.
+        /// </summary>
         [Parameter]
         public bool Open { get; set; } = false;
         #endregion

@@ -28,7 +28,7 @@ namespace Vengage.WebAwesome.Components
         public string? Value { get; set; }
 
         /// <summary>
-        ///
+        /// The type of menu item to render.
         /// </summary>
         [Parameter]
         public DropdownItemVariant Variant { get; set; } = DropdownItemVariant.Default;

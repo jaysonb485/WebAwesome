@@ -76,6 +76,9 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public string? GroupName { get; set; }
 
+        /// <summary>
+        /// The location of the expand/collapse icon.
+        /// </summary>
         [Parameter]
         public DetailsIconPlacement IconPlacement { get; set; } = DetailsIconPlacement.End;
         #endregion

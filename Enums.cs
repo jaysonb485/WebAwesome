@@ -291,6 +291,18 @@ namespace Vengage.WebAwesome
         HSV
     }
 
+    public enum PickerColorExtendedFormat
+    {
+        Hex,
+        RGB,
+        HSL,
+        HSV,
+        Hexa,
+        RGBA,
+        HSLA,
+        HSVA
+    }
+
 
     public enum PickerSize
     {

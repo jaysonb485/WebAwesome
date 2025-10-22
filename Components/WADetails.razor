@@ -11,11 +11,11 @@
             open="@IsOpen"
             name="@GroupName"
             icon-placement="@IconPlacementString">
-    @if (!String.IsNullOrEmpty(ExpandIconName))
+    @if (ExpandIcon != null || !String.IsNullOrWhiteSpace(ExpandIconName))
     {
         <WAIcon Icon="@ExpandIcon" IconName="@ExpandIconName" Slot="expand-icon"></WAIcon>
     }
-    @if (!String.IsNullOrEmpty(CollapseIconName))
+    @if (CollapseIcon != null || !String.IsNullOrWhiteSpace(CollapseIconName))
     {
         <WAIcon Icon="@CollapseIcon" IconName="@CollapseIconName" Slot="collapse-icon"></WAIcon>
     }

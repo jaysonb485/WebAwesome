@@ -59,6 +59,7 @@ namespace Vengage.WebAwesome.Components
             get
             {
                 if (String.IsNullOrEmpty(Name)) return String.Empty;
+                if (!String.IsNullOrEmpty(IconName) || Icon is not null) return String.Empty;
 
                 string[] names = Name.Split(" ");
                 if (names.Length == 0) return String.Empty;

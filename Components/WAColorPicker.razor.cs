@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,5 +129,21 @@ namespace Vengage.WebAwesome.Components
 
         #endregion
 
+        #region Public Methods
+        /// <summary>
+        /// Returns the current value as a string in the specified format.
+        /// </summary>
+        /// <param name="colorFormat">The format to convert to</param>
+        /// <returns></returns>
+        public async Task<string> GetFormattedValueAsync(PickerColorExtendedFormat colorFormat)
+        {
+            var result =
+                await JSRuntime.InvokeAsync<string>("window.vengage.colorPicker.getFormattedValue",
+                    Id, colorFormat.ToString().ToLower()
+                );
+
+            return result;
+        }
+        #endregion
     }
 }
