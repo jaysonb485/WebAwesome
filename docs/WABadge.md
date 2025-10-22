@@ -36,3 +36,5 @@ Badges are used to draw attention and display statuses or counts.
 ```HTML+Razor
 <WAButton>Alerts <WABadge Text="3" Pill="true" Appearance="BadgeAppearance.Filled" /></WAButton>
 ```
+
+![WABadge](https://github.com/user-attachments/assets/3ad6f9ec-2292-4ff1-ac4e-5732e9e281b5)
