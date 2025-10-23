@@ -26,7 +26,6 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public TValue Value { get; set; } = default!;
 
-
         [Parameter]
         public EventCallback<TValue?> ValueChanged { get; set; } = default!;
 
@@ -91,22 +90,26 @@ namespace Vengage.WebAwesome.Components
         public bool Required { get; set; } = false;
 
         /// <summary>
-        /// Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false.
+        /// An icon placed at the start of the input control.
         /// </summary>
         [Parameter]
-        public bool NoSpinButtons { get; set; } = false;
-
-        [Parameter]
         public string? StartIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the start of the input control.
+        /// </summary>
         [Parameter]
         public Icon? StartIcon { get; set; }
+        /// <summary>
+        /// An icon placed at the end of the input control.
+        /// </summary>
         [Parameter]
         public string? EndIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the end of the input control.
+        /// </summary>
         [Parameter]
         public Icon? EndIcon { get; set; }
 
-        [Parameter]
-        public bool WithoutSpinButtons { get; set; } = false;
         #endregion
 
         #region Computed  Properties

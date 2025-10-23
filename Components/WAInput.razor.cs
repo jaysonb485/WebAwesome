@@ -25,7 +25,9 @@ namespace Vengage.WebAwesome.Components
         public EventCallback<string> ValueChanged { get; set; } 
 
         [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
-
+        /// <summary>
+        /// The input's visual appearance.
+        /// </summary>
         [Parameter]
         public InputAppearance Appearance { get; set; } = InputAppearance.Outlined;
         /// <summary>
@@ -81,27 +83,35 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public bool PasswordToggle { get; set; } = false;
         /// <summary>
-        /// Ensures a child radio is checked before allowing the containing form to submit.
+        /// Makes the input a required field.
         /// </summary>
         [Parameter]
         public bool Required { get; set; } = false;
 
         /// <summary>
-        /// Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false.
+        /// An icon placed at the start of the input control.
         /// </summary>
         [Parameter]
-        public bool NoSpinButtons { get; set; } = false;
-
-        [Parameter]
         public string? StartIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the start of the input control.
+        /// </summary>
         [Parameter]
         public Icon? StartIcon { get; set; }
-
+        /// <summary>
+        /// An icon placed at the end of the input control.
+        /// </summary>
         [Parameter]
         public string? EndIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the end of the input control.
+        /// </summary>
         [Parameter]
         public Icon? EndIcon { get; set; }
 
+        /// <summary>
+        /// Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false.
+        /// </summary>
         [Parameter]
         public bool WithoutSpinButtons { get; set; } = false;
         #endregion

@@ -78,25 +78,37 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public bool Required { get; set; } = false;
 
+
+        /// <summary>
+        /// An icon placed at the start of the input control.
+        /// </summary>
+        [Parameter]
+        public string? StartIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the start of the input control.
+        /// </summary>
+        [Parameter]
+        public Icon? StartIcon { get; set; }
+        /// <summary>
+        /// An icon placed at the end of the input control.
+        /// </summary>
+        [Parameter]
+        public string? EndIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the end of the input control.
+        /// </summary>
+        [Parameter]
+        public Icon? EndIcon { get; set; }
+
+
         /// <summary>
         /// Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false.
         /// </summary>
-        [Parameter]
-        public bool NoSpinButtons { get; set; } = false;
-
-        [Parameter]
-        public string? StartIconName { get; set; }
-        [Parameter]
-        public Icon? StartIcon { get; set; }
-        [Parameter]
-        public string? EndIconName { get; set; }
-        [Parameter]
-        public Icon? EndIcon { get; set; }
 
         [Parameter]
         public bool WithoutSpinButtons { get; set; } = false;
         /// <summary>
-        /// Gets or sets the step.
+        /// Specifies the granularity that the value must adhere to
         /// </summary>
         /// <remarks>
         /// Default value is null.
@@ -105,38 +117,19 @@ namespace Vengage.WebAwesome.Components
         public double? Step { get; set; }
 
         /// <summary>
-        /// Gets or sets the max.
+        /// The input's maximum value
         /// Max ignored if EnableMinMax="false".
         /// </summary>
         [Parameter]
-        public TValue Max { get; set; } = default!;
+        public TValue? Max { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets the min.
+        /// The input's minimum value.
         /// Min ignored if EnableMinMax="false".
         /// </summary>
         [Parameter]
-        public TValue Min { get; set; } = default!;
+        public TValue? Min { get; set; } = default!;
 
-        /// <summary>
-        /// Determines whether to restrict the user input to Min and Max range.
-        /// If <see langword="true" />, restricts the user input between the Min and Max range. Else accepts the user input.
-        /// </summary>
-        /// <remarks>
-        /// Default value is false.
-        /// </remarks>
-        [Parameter]
-        public bool EnableMinMax { get; set; }
-
-        /// <summary>
-        /// Gets or sets the locale. Default locale is 'en-AU'.
-        /// </summary>
-        /// <remarks>
-        /// Default value is 'en-AU'.
-        /// </remarks>
-        [Parameter]
-        //[EditorRequired]
-        public string Locale { get; set; } = "en-AU";
         #endregion
 
         #region Computed  Properties
@@ -204,10 +197,10 @@ namespace Vengage.WebAwesome.Components
 
                 if (currentValue is null || !TryParseValue(currentValue, out var value))
                     Value = default!;
-                else if (EnableMinMax && Min is not null && IsLeftGreaterThanRight(Min, Value)) // value < min
-                    Value = Min;
-                else if (EnableMinMax && Max is not null && IsLeftGreaterThanRight(Value, Max)) // value > max
-                    Value = Max;
+                //else if (Min is not null && IsLeftGreaterThanRight(Min, Value)) // value < min
+                //    Value = Min;
+                //else if (Max is not null && IsLeftGreaterThanRight(Value, Max)) // value > max
+                //    Value = Max;
                 else
                     Value = value;
 
@@ -251,15 +244,6 @@ namespace Vengage.WebAwesome.Components
 
             step = Step.HasValue ? $"{Step.Value}" : "any";
 
-            try
-            {
-                cultureInfo = new CultureInfo(Locale);
-            }
-            catch (CultureNotFoundException)
-            {
-                cultureInfo = new CultureInfo("en-US");
-            }
-
             await base.OnInitializedAsync();
         }
         #endregion
@@ -272,10 +256,10 @@ namespace Vengage.WebAwesome.Components
 
             if (newValue is null || !TryParseValue(newValue, out var value))
                 Value = default!;
-            else if (EnableMinMax && Min is not null && IsLeftGreaterThanRight(Min, value)) // value < min
-                Value = Min;
-            else if (EnableMinMax && Max is not null && IsLeftGreaterThanRight(value, Max)) // value > max
-                Value = Max;
+            //else if (Min is not null && IsLeftGreaterThanRight(Min, value)) // value < min
+            //    Value = Min;
+            //else if (Max is not null && IsLeftGreaterThanRight(value, Max)) // value > max
+            //    Value = Max;
             else
                 Value = value;
 
@@ -307,10 +291,10 @@ namespace Vengage.WebAwesome.Components
         {
             if (newValue is null || !TryParseValue(newValue, out var value))
                 Value = default!;
-            else if (EnableMinMax && Min is not null && IsLeftGreaterThanRight(Min, value)) // value < min
-                Value = Min;
-            else if (EnableMinMax && Max is not null && IsLeftGreaterThanRight(value, Max)) // value > max
-                Value = Max;
+            //else if (Min is not null && IsLeftGreaterThanRight(Min, value)) // value < min
+            //    Value = Min;
+            //else if (Max is not null && IsLeftGreaterThanRight(value, Max)) // value > max
+            //    Value = Max;
             else
                 Value = value;
 

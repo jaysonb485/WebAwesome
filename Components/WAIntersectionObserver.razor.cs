@@ -54,8 +54,6 @@ namespace Vengage.WebAwesome.Components
         public EventCallback OnLeaving { get; set; }
         #endregion
 
-
-
         #region Lifecycle
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
