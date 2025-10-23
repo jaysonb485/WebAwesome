@@ -42,3 +42,4 @@ An input component that accepts date only, date time, or time selection.
 	InputType="DateTimeInputType.Date" 
 	Hint="It can be any date, past, now or future" />
 ```
+![WAInputDateTime](https://github.com/user-attachments/assets/e044aaf8-1927-42e3-8fc1-15419ddbab26)

@@ -63,3 +63,5 @@ A numeric input component that allows users to enter and manipulate numerical va
                    Max="5"
                    Min="3" />
 ```
+
+![WAInputNumber](https://github.com/user-attachments/assets/7e22e905-35f8-4a82-b811-0903b14c6986)

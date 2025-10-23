@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vengage.WebAwesome.Components
+namespace Vengage.WebAwesome.Extended
 {
     public partial class WANavTreeItem : WAComponentBase
     {

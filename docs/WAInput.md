@@ -57,3 +57,5 @@ Inputs collect data from the user.
 	PasswordToggle="true"
 	StartIconName="lock" />
 ```
+
+![WAInput](https://github.com/user-attachments/assets/8bb3c022-a348-4f1f-8998-75a92703d3fe)
