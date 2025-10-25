@@ -17,11 +17,11 @@ namespace Vengage.WebAwesome.Components
         /// The current rating.
         /// </summary>
         [Parameter]
-        public int Value { get; set; } = 0;
+        public decimal Value { get; set; } = 0;
 
         [Parameter]
-        public EventCallback<int> ValueChanged { get; set; }
-        [Parameter] public Expression<Func<int>> ValueExpression { get; set; } = default!;
+        public EventCallback<decimal> ValueChanged { get; set; }
+        [Parameter] public Expression<Func<decimal>> ValueExpression { get; set; } = default!;
         [CascadingParameter] private EditContext EditContext { get; set; } = default!;
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Vengage.WebAwesome.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("interceptChangeEvent", Id, objRef);
+                await JSRuntime.InvokeVoidAsync("window.vengage.rating.initialize", Id, objRef);
             }
         }
 
@@ -122,7 +122,7 @@ namespace Vengage.WebAwesome.Components
 
         #region Event Handlers
         [JSInvokable("OnValueChanged")]
-        public void OnSelectionChanged(int value)
+        public void OnSelectionChanged(decimal value)
         {
             Console.WriteLine($"onchange {value}");
             ValueChanged.InvokeAsync(value);

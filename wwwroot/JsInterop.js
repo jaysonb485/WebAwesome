@@ -28,14 +28,6 @@ window.vengage = {
                     dotnetHelper.invokeMethodAsync('HandleDialogClosed', event.target.id);
                 };
             });
-
-            element.addEventListener('wa-hide', event => {
-                console.log(event);
-                //if (event.detail.source !== closeButton) {
-                //    event.preventDefault();
-                //}
-            });
-
         },
         change: (elementId, newState) => {
             let dialog = document.getElementById(elementId);
@@ -153,6 +145,16 @@ window.vengage = {
                 element.hide();
         }
     },
+    rating: {
+        initialize: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            element.onchange = function (event) {
+                dotnetHelper.invokeMethodAsync('OnValueChanged', element.value);
+            };
+        }
+    },
     select: {
         setValue: (elementId, value) => {
             let element = document.getElementById(elementId);
@@ -168,10 +170,6 @@ window.vengage = {
             element.addEventListener('wa-clear', function (event) {
                 dotnetHelper.invokeMethodAsync('HandleInputClear');
             });
-
-            //element.addEventListener('change', function (event) {
-            //    dotnetHelper.invokeMethodAsync('HandleInputChange', element.value);
-            //});
         }
     },
     slider: {

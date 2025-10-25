@@ -34,7 +34,7 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public RadioGroupSize Size { get; set; } = RadioGroupSize.Inherit;
         /// <summary>
-        /// The input's hint text.
+        /// The radio groups's hint.
         /// </summary>
         [Parameter]
         public string? Hint { get; set; }

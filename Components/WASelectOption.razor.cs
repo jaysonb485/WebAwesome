@@ -13,7 +13,7 @@ namespace Vengage.WebAwesome.Components
         /// <summary>
         /// The option's value. When selected, the containing form control will receive this value. The value must be unique from other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing multiple values.
         /// </summary>
-        [Parameter]
+        [Parameter,EditorRequired]
         public string? Value { get; set; }
 
         /// <summary>
@@ -26,18 +26,6 @@ namespace Vengage.WebAwesome.Components
         /// </summary>
         [Parameter]
         public bool Disabled { get; set; } = false;
-
-        /// <summary>
-        /// The option's hint text.
-        /// </summary>
-        [Parameter]
-        public string? Hint { get; set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        [Parameter]
-        public bool Selected { get; set; } = false;
 
         /// <summary>
         /// The name of the icon to draw in the start slot. Available names depend on the icon library being used.

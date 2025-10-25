@@ -64,3 +64,6 @@ Threshold = 1 requires the box to be entirely in view before OnIntersecting trig
 
 }
 ```
+
+
+![WAIntersectionObserver](https://github.com/user-attachments/assets/cde99c73-600a-4331-91b5-767d2612a52d)

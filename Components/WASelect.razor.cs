@@ -22,7 +22,7 @@ namespace Vengage.WebAwesome.Components
 
         [CascadingParameter] private EditContext EditContext { get; set; } = default!;
         /// <summary>
-        /// A custom label for assistive devices.
+        /// The select's label. 
         /// </summary>
         [Parameter]
         public string? Label { get; set; }
@@ -33,7 +33,7 @@ namespace Vengage.WebAwesome.Components
         public SelectSize Size { get; set; } = SelectSize.Inherit;
 
         /// <summary>
-        /// The input's hint text.
+        /// The select's hint.
         /// </summary>
         [Parameter]
         public string? Hint { get; set; }
@@ -50,7 +50,7 @@ namespace Vengage.WebAwesome.Components
         public bool Clearable { get; set; } = false;
 
         /// <summary>
-        /// Ensures a child radio is checked before allowing the containing form to submit.
+        /// The select's required attribute.
         /// </summary>
         [Parameter]
         public bool Required { get; set; } = false;
@@ -66,7 +66,7 @@ namespace Vengage.WebAwesome.Components
         public bool Disabled { get; set; } = false;
 
         /// <summary>
-        /// Draws a pill-style input with rounded edges.
+        /// Draws a pill-style select with rounded edges.
         /// </summary>
         [Parameter]
         public bool Pill { get; set; } = false;

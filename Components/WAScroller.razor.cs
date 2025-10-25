@@ -22,10 +22,10 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public bool ShowScrollbar { get; set; } = true;
         /// <summary>
-        /// Set the orientation of the line. Defaults to horizontal.
+        /// The scroller's orientation.
         /// </summary>
         [Parameter]
-        public ScrollerOrientation Orientation { get; set; } = ScrollerOrientation.Vertical;
+        public ScrollerOrientation Orientation { get; set; } = ScrollerOrientation.Horizontal;
 
         #endregion
 

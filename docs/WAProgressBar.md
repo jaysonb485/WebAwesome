@@ -32,3 +32,5 @@ Progress bars are used to show the status of an ongoing operation.
 ```HTML+Razor
 <WAProgressBar Indeterminate="true" TrackHeight="1.5lh" TrackColor="darkgray" IndicatorColor="var(--wa-color-success-fill-loud)" />
 ```
+
+![WAProgressBar](https://github.com/user-attachments/assets/0340e690-078b-4bda-beea-84241dad7548)
