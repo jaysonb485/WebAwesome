@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Vengage.WebAwesome
+namespace WebAwesomeBlazor
 {
     public static class ValueProviderResult
     {

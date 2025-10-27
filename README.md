@@ -11,9 +11,9 @@ Nuget coming soon.
 # Usage
 Add the following to your `_Imports.razor` file:
 ```csharp
-@using Vengage.WebAwesome
-@using Vengage.WebAwesome.Components
-@using Vengage.WebAwesome.Extended
+@using WebAwesomeBlazor
+@using WebAwesomeBlazor.Components
+@using WebAwesomeBlazor.Extended
 ```
 
 Add the following to your App.razor or wwwroot/index.html file:

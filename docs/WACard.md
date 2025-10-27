@@ -1,5 +1,5 @@
 # WACard
-## Vengage.WebAwesome.Components.WACard
+## WebAwesomeBlazor.Components.WACard
 
 ```HTML+Razor
 <WACard>

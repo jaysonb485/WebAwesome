@@ -1,5 +1,5 @@
 # WACopyButton
-## Vengage.WebAwesome.Components.WACopyButton
+## WebAwesomeBlazor.Components.WACopyButton
 
 ```HTML+Razor
 <WACopyButton Value="Text to copy" />

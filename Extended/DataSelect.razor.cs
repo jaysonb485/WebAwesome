@@ -7,9 +7,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Vengage.WebAwesome.Components;
+using WebAwesomeBlazor.Components;
 
-namespace Vengage.WebAwesome.Extended
+namespace WebAwesomeBlazor.Extended
 {
     public partial class DataSelect<TValue> : WAComponentBase
     {

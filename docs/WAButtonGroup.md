@@ -1,5 +1,5 @@
 # WAButtonGroup
-## Vengage.WebAwesome.Components.WAButtonGroup
+## WebAwesomeBlazor.Components.WAButtonGroup
 
 ```HTML+Razor
     <WAButtonGroup Label="Action buttons">

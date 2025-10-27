@@ -1,5 +1,5 @@
 ﻿# WATag
-## Vengage.WebAwesome.Components.WATag
+## WebAwesomeBlazor.Components.WATag
 
 ```HTML+Razor
 <WATag Text="Label" />

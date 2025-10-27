@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vengage.WebAwesome
+namespace WebAwesomeBlazor
 {
     public abstract class WALayoutComponentBase : LayoutComponentBase, IDisposable, IAsyncDisposable
     {

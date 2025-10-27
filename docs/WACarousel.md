@@ -1,5 +1,5 @@
 # WACarousel
-## Vengage.WebAwesome.Components.WACarousel
+## WebAwesomeBlazor.Components.WACarousel
 
 ```HTML+Razor
 <WACarousel>

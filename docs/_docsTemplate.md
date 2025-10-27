@@ -1,5 +1,5 @@
 ﻿# Component Name
-## Vengage.WebAwesome.Components.componentname
+## WebAwesomeBlazor.Components.componentname
 
 ```HTML+Razor
 <WAComponoentName prop1="value1" prop2="value2" />

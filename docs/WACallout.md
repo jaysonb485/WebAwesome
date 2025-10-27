@@ -1,5 +1,5 @@
 # WACallout
-## Vengage.WebAwesome.Components.WACallout
+## WebAwesomeBlazor.Components.WACallout
 
 ```HTML+Razor
 <WACallout>@ChildContent</WACallout>

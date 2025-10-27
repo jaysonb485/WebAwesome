@@ -1,5 +1,5 @@
 ﻿# WANavTree
-## Vengage.WebAwesome.Components.WANavTree
+## WebAwesomeBlazor.Components.WANavTree
 
 ```HTML+Razor
 <WAComponoentName prop1="value1" prop2="value2" />

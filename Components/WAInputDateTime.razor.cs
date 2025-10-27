@@ -8,9 +8,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using static Vengage.WebAwesome.Components.WAInput;
+using static WebAwesomeBlazor.Components.WAInput;
 
-namespace Vengage.WebAwesome.Components
+namespace WebAwesomeBlazor.Components
 {
     public partial class WAInputDateTime<TValue> : WAComponentBase
     {

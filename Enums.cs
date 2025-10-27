@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vengage.WebAwesome
+namespace WebAwesomeBlazor
 {
     #region Button Enums
     public enum ButtonVariant

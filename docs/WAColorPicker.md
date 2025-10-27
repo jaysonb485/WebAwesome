@@ -1,5 +1,5 @@
 # WAColorPicker
-## Vengage.WebAwesome.Components.WAColorPicker
+## WebAwesomeBlazor.Components.WAColorPicker
 
 ```HTML+Razor
 <WAComponoentName prop1="value1" prop2="value2" />

@@ -1,5 +1,5 @@
 ﻿# WAZoomableFrame
-## Vengage.WebAwesome.Components.WAZoomableFrame
+## WebAwesomeBlazor.Components.WAZoomableFrame
 
 ```HTML+Razor
 <WAZoomableFrame prop1="value1" prop2="value2" />

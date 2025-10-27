@@ -1,5 +1,5 @@
 ﻿# WAInputDateTime
-## Vengage.WebAwesome.Components.WAInputDateTime
+## WebAwesomeBlazor.Components.WAInputDateTime
 
 ```HTML+Razor
 <WAInputDateTime TValue="DateOnly" @bind-Value="inputDate" InputType="DateTimeInputType.Date" />

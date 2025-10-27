@@ -1,5 +1,5 @@
 # WADialog
-## Vengage.WebAwesome.Components.WADialog
+## WebAwesomeBlazor.Components.WADialog
 
 ```HTML+Razor
     <WADialog Title="">

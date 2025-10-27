@@ -1,5 +1,5 @@
 ﻿# WASelect
-## Vengage.WebAwesome.Components.WASelect
+## WebAwesomeBlazor.Components.WASelect
 
 ```HTML+Razor
 <WASelect Value="">

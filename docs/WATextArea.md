@@ -1,5 +1,5 @@
 ﻿# WATextArea
-## Vengage.WebAwesome.Components.WATextArea
+## WebAwesomeBlazor.Components.WATextArea
 
 ```HTML+Razor
 <WATextArea />

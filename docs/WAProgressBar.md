@@ -1,5 +1,5 @@
 ﻿# WAProgressBar
-## Vengage.WebAwesome.Components.WAProgressBar
+## WebAwesomeBlazor.Components.WAProgressBar
 
 ```HTML+Razor
 <WAProgressBar @bind-Value="progressValue" />

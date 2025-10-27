@@ -1,5 +1,5 @@
 # WACheckbox
-## Vengage.WebAwesome.Components.WACheckbox
+## WebAwesomeBlazor.Components.WACheckbox
 
 ```HTML+Razor
 <WACheckbox Label="Tick me" />

@@ -1,5 +1,5 @@
 ﻿# WAAvatar
-## Vengage.WebAwesome.Components.WAAvatar
+## WebAwesomeBlazor.Components.WAAvatar
 
 ```HTML+Razor
 <WAAvatar />

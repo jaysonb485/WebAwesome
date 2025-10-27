@@ -1,5 +1,5 @@
 ﻿# WAAnimation
-## Vengage.WebAwesome.Components.WAAnimation
+## WebAwesomeBlazor.Components.WAAnimation
 
 ```html
 <WAAnimation>

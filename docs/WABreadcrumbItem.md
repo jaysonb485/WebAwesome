@@ -1,5 +1,5 @@
 # WABreadcrumbItem
-## Vengage.WebAwesome.Components.WABreadcrumbItem
+## WebAwesomeBlazor.Components.WABreadcrumbItem
 
 ```HTML+Razor
 <WABreadcrumb>

@@ -1,5 +1,5 @@
 ﻿# WARelativeTime
-## Vengage.WebAwesome.Components.WARelativeTime
+## WebAwesomeBlazor.Components.WARelativeTime
 
 ```HTML+Razor
 <WARelativeTime DateTimeValue="" />

@@ -1,5 +1,5 @@
 ﻿# WASkeleton
-## Vengage.WebAwesome.Components.WASkeleton
+## WebAwesomeBlazor.Components.WASkeleton
 
 ```HTML+Razor
 <WASkeleton />

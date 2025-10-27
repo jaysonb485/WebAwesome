@@ -1,4 +1,4 @@
-﻿namespace Vengage.WebAwesome
+﻿namespace WebAwesomeBlazor
 {
     public class Icon
     {

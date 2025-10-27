@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vengage.WebAwesome.Components
+namespace WebAwesomeBlazor.Components
 {
     public partial class WATextArea : WAComponentBase
     {

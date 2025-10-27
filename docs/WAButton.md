@@ -1,5 +1,5 @@
 # WAButton
-## Vengage.WebAwesome.Components.WAButton
+## WebAwesomeBlazor.Components.WAButton
 
 ```HTML+Razor
 <WAButton>Click me</WAButton>

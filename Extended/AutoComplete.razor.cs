@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vengage.WebAwesome.Extended
+namespace WebAwesomeBlazor.Extended
 {
     public partial class AutoComplete<TValue, TItem> : WAComponentBase
     {

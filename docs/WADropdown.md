@@ -1,5 +1,5 @@
 # WADropdown
-## Vengage.WebAwesome.Components.WADropdown
+## WebAwesomeBlazor.Components.WADropdown
 
 ```HTML+Razor
 <WADropdown>

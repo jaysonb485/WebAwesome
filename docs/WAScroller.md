@@ -1,5 +1,5 @@
 ﻿# WAScroller
-## Vengage.WebAwesome.Components.WAScroller
+## WebAwesomeBlazor.Components.WAScroller
 
 ```HTML+Razor
 <WAScroller>

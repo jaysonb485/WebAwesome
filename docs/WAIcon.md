@@ -1,5 +1,5 @@
 # WAIcon
-## Vengage.WebAwesome.Components.WAIcon
+## WebAwesomeBlazor.Components.WAIcon
 
 ```HTML+Razor
 <WAIcon Icon="" />

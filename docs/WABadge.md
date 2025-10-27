@@ -1,5 +1,5 @@
 ﻿# WABadge
-## Vengage.WebAwesome.Components.WABadge
+## WebAwesomeBlazor.Components.WABadge
 
 ```html+Razor
 <WABadge Text="Badge" />

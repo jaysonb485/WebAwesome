@@ -1,5 +1,5 @@
 ﻿# WAProgressRing
-## Vengage.WebAwesome.Components.WAProgressRing
+## WebAwesomeBlazor.Components.WAProgressRing
 
 ```HTML+Razor
 <WAProgressRing Value="" />

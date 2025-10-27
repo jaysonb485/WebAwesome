@@ -6,7 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	  <IsPackable>true</IsPackable>
 	  <AssemblyVersion>0.1</AssemblyVersion>
-	  <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+	  <!--<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>-->
+  <RootNamespace>WebAwesomeBlazor</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

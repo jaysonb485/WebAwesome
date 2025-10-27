@@ -1,5 +1,5 @@
 ﻿# WASplitPanel
-## Vengage.WebAwesome.Components.WASplitPanel
+## WebAwesomeBlazor.Components.WASplitPanel
 
 ```HTML+Razor
 <WASplitPanel>

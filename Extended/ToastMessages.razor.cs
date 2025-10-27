@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vengage.WebAwesome.Extended
+namespace WebAwesomeBlazor.Extended
 {
     public partial class ToastMessages : WAComponentBase
     {

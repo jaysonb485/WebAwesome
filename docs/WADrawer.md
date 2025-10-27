@@ -1,5 +1,5 @@
 # WADrawer
-## Vengage.WebAwesome.Components.WADrawer.md
+## WebAwesomeBlazor.Components.WADrawer.md
 
 ```HTML+Razor
 <WADrawer Title="">

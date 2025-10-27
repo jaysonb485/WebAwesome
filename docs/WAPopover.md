@@ -1,5 +1,5 @@
 ﻿# WAPopover
-## Vengage.WebAwesome.Components.WAPopover
+## WebAwesomeBlazor.Components.WAPopover
 
 ```HTML+Razor
 <WAPopover TargetId="">

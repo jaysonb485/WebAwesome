@@ -1,5 +1,5 @@
 ﻿# WALayoutContent
-## Vengage.WebAwesome.Components.WALayoutContent
+## WebAwesomeBlazor.Components.WALayoutContent
 
 ```HTML+Razor
 <WAPage>

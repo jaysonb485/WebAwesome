@@ -1,5 +1,5 @@
 ﻿# WARating
-## Vengage.WebAwesome.Components.WARating
+## WebAwesomeBlazor.Components.WARating
 
 ```HTML+Razor
 <WARating Value="" />

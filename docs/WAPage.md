@@ -1,5 +1,5 @@
 ﻿# WAPage
-## Vengage.WebAwesome.Components.WAPage
+## WebAwesomeBlazor.Components.WAPage
 
 ```HTML+Razor
 <WAPage>

@@ -1,5 +1,5 @@
 ﻿# WATabGroup
-## Vengage.WebAwesome.Components.WATabGroup
+## WebAwesomeBlazor.Components.WATabGroup
 
 ```HTML+Razor
 <WATabGroup>

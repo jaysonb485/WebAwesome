@@ -1,5 +1,5 @@
 ﻿# WASpinner
-## Vengage.WebAwesome.Components.WASpinner
+## WebAwesomeBlazor.Components.WASpinner
 
 ```HTML+Razor
 <WASpinner />

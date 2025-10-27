@@ -1,5 +1,5 @@
 # WADetails
-## Vengage.WebAwesome.Components.WADetails
+## WebAwesomeBlazor.Components.WADetails
 
 ```HTML+Razor
 <WADetails Title="More information">

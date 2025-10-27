@@ -1,5 +1,5 @@
 ﻿# WATooltip
-## Vengage.WebAwesome.Components.WATooltip
+## WebAwesomeBlazor.Components.WATooltip
 
 ```HTML+Razor
 <WATooltip TargetId="HoverButton">Tooltip text</WATooltip>

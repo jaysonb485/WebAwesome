@@ -1,5 +1,5 @@
 ﻿# WAInputNumber
-## Vengage.WebAwesome.Components.WAInputNumber
+## WebAwesomeBlazor.Components.WAInputNumber
 
 ```HTML+Razor
 <WAInputNumber @bind-Value="inputNumber" TValue="int" />

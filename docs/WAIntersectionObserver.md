@@ -1,5 +1,5 @@
 ﻿# WAIntersectionObserver
-## Vengage.WebAwesome.Components.WAIntersectionObserver
+## WebAwesomeBlazor.Components.WAIntersectionObserver
 
 ```HTML+Razor
 <WAIntersectionObserver>

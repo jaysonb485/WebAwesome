@@ -1,5 +1,5 @@
 # WADivider
-## Vengage.WebAwesome.Components.WADivider
+## WebAwesomeBlazor.Components.WADivider
 
 ```HTML+Razor
 <WADivider />

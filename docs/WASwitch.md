@@ -1,5 +1,5 @@
 ﻿# WASwitch
-## Vengage.WebAwesome.Components.WASwitch
+## WebAwesomeBlazor.Components.WASwitch
 
 ```HTML+Razor
 <WASwitch Label="Switch" />

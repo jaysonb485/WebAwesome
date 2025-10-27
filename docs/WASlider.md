@@ -1,5 +1,5 @@
 ﻿# WASlider
-## Vengage.WebAwesome.Components.WASlider
+## WebAwesomeBlazor.Components.WASlider
 
 ```HTML+Razor
 <WASlider Value=""/>

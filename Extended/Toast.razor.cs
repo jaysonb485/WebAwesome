@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Vengage.WebAwesome.Extended.ToastMessages;
+using static WebAwesomeBlazor.Extended.ToastMessages;
 
-namespace Vengage.WebAwesome.Extended
+namespace WebAwesomeBlazor.Extended
 {
     public partial class Toast : WAComponentBase
     {

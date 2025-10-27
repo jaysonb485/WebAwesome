@@ -1,5 +1,5 @@
 ﻿# WARadioOption
-## Vengage.WebAwesome.Components.WARadioOption
+## WebAwesomeBlazor.Components.WARadioOption
 
 ```HTML+Razor
 <WARadioGroup>
