@@ -41,10 +41,10 @@ namespace Vengage.WebAwesome.Components
         public string? IndicatorColor { get; set; }
 
         /// <summary>
-        /// The time it takes for the spinner to complete one animation cycle.
+        /// The time it takes for the spinner to complete one animation cycle. Default is two seconds.
         /// </summary>
         [Parameter]
-        public string? Speed { get; set; }
+        public string? Speed { get; set; } = "2s";
         #endregion
 
         #region Computed  Properties

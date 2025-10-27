@@ -623,8 +623,7 @@ namespace Vengage.WebAwesome
         Accent,
         Filled,
         FilledOutlined,
-        Outlined,
-        Plain
+        Outlined
     }
 
 

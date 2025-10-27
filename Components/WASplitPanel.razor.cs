@@ -25,7 +25,7 @@ namespace Vengage.WebAwesome.Components
         /// The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the container's initial size.
         /// </summary>
         [Parameter]
-        public int? PositionPercent { get; set; }
+        public int? PositionPercent { get; set; } = 50;
 
         /// <summary>
         /// The current position of the divider from the primary panel's edge in pixels.
@@ -34,7 +34,7 @@ namespace Vengage.WebAwesome.Components
         public int? PositionPixels { get; set; }
 
         /// <summary>
-        /// Draws the split panel in a vertical orientation with the start and end panels stacked. You must set a height when using vertical.
+        /// Sets the split panel's orientation.
         /// </summary>
         [Parameter]
         public SplitPanelOrientation Orientation { get; set; } = SplitPanelOrientation.Horizontal;
@@ -135,7 +135,9 @@ namespace Vengage.WebAwesome.Components
         );
         #endregion
 
-
+        #region Events
+        //TODO: Add wa-reposition event listener
+        #endregion
 
     }
 

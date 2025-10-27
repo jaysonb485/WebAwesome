@@ -30,6 +30,9 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public TabGroupTabPlacement TabPlacement { get; set; } = TabGroupTabPlacement.Top;
 
+        /// <summary>
+        /// Triggered when the active tab has changed.
+        /// </summary>
         [Parameter]
         public EventCallback<string> ActiveTabChanged { get; set; } = default!;
         #endregion

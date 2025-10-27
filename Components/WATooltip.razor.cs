@@ -34,19 +34,19 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public TooltipPlacement Placement { get; set; } = TooltipPlacement.Top;
         /// <summary>
-        /// Disables the dropdown so the panel will not open.
+        /// Disables the tooltip so it won't show when triggered.
         /// </summary>
         [Parameter]
         public bool Disabled { get; set; } = false;
 
         /// <summary>
-        /// The distance in pixels from which to offset the panel away from its trigger.
+        /// The distance in pixels from which to offset the tooltip away from its target.
         /// </summary>
         [Parameter]
-        public int Distance { get; set; } = 0;
+        public int Distance { get; set; } = 8;
 
         /// <summary>
-        /// The distance in pixels from which to offset the panel along its trigger.
+        /// The distance in pixels from which to offset the tooltip along its target. (Skidding)
         /// </summary>
         [Parameter]
         public int Offset { get; set; } = 0;
@@ -67,7 +67,7 @@ namespace Vengage.WebAwesome.Components
         /// Removes the arrow from the tooltip.
         /// </summary>
         [Parameter]
-        public bool? WithoutArrow { get; set; }
+        public bool WithoutArrow { get; set; } = false;
 
         /// <summary>
         /// Indicates whether or not the tooltip is open. 

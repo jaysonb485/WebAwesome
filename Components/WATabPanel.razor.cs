@@ -26,6 +26,8 @@ namespace Vengage.WebAwesome.Components
         /// </summary>
         //[Parameter]
         //public bool Closeable { get; set; } = false;
+        
+        //TODO: Allow closeable tabs
 
         /// <summary>
         /// The name of the tab panel this tab is associated with.

@@ -22,7 +22,7 @@ namespace Vengage.WebAwesome.Components
         /// The tag's theme variant. Defaults to neutral if not within another element with a variant.
         /// </summary>
         [Parameter]
-        public TagVariant Variant { get; set; } = TagVariant.Neutral;
+        public TagVariant? Variant { get; set; }
 
         /// <summary>
         /// The tag's visual appearance. Valid options for tag are: Accent, AccentOutlined, Filled, FilledOutlined, Outlined.
@@ -47,7 +47,7 @@ namespace Vengage.WebAwesome.Components
         [Parameter]
         public TagSize Size { get; set; } = TagSize.Inherit;
         [Parameter]
-        public EventCallback OnRemoveClick { get; set; }
+        public EventCallback TagRemoved { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -134,7 +134,7 @@ namespace Vengage.WebAwesome.Components
         [JSInvokable]
         public async Task HandleTagRemove(string eventType, EventArgs eventArgs)
         {
-            await OnRemoveClick.InvokeAsync();
+            await TagRemoved.InvokeAsync();
         }
 
         #endregion

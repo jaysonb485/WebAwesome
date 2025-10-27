@@ -90,7 +90,7 @@ namespace Vengage.WebAwesome.Components
         public bool HideZoomControls { get; set; } = false;
 
         /// <summary>
-        /// Disables interaction when present.
+        /// Disables interaction.
         /// </summary>
         [Parameter]
         public bool DisableInteraction { get; set; } = false;

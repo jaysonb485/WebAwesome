@@ -50,12 +50,6 @@ namespace Vengage.WebAwesome.Components
         public bool IsRange { get; set; } = false;
 
         /// <summary>
-        /// The default value of the form control. Primarily used for resetting the form control.
-        /// </summary>
-        [Parameter]
-        public int? DefaultValue { get; set; }
-
-        /// <summary>
         /// The interval at which the slider will increase and decrease.
         /// </summary>
         [Parameter]
@@ -79,7 +73,9 @@ namespace Vengage.WebAwesome.Components
         /// </summary>
         [Parameter]
         public int? IndicatorOffset { get; set; }
-
+        /// <summary>
+        /// The slider's size
+        /// </summary>
         [Parameter]
         public SliderSize Size { get; set; } = SliderSize.Medium;
         /// <summary>
@@ -160,6 +156,17 @@ namespace Vengage.WebAwesome.Components
             }
         }
 
+        protected override async Task OnParametersSetAsync()
+        {
+            if (!previousValue!.Equals(Value ?? null))
+            {
+                previousValue = Value ?? null;
+
+                // Run your JS update logic here
+                await JSRuntime.InvokeVoidAsync("window.vengage.slider.setValue", Id, Value);
+            }
+        }
+
         protected override async ValueTask DisposeAsyncCore(bool disposing)
         {
             if (disposing)
@@ -189,7 +196,8 @@ namespace Vengage.WebAwesome.Components
 
             AdditionalAttributes ??= new Dictionary<string, object>();
 
-            fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+            if (ValueExpression != null)
+                fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 
             await base.OnInitializedAsync();
         }
@@ -209,18 +217,9 @@ namespace Vengage.WebAwesome.Components
         #region State
         private DotNetObjectReference<WASlider> objRef = default!;
         private FieldIdentifier fieldIdentifier = default!;
+        private int? previousValue = null;
         #endregion
 
-
-
-
-        #region Private Methods
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
 
     }
 
