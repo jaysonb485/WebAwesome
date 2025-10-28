@@ -31,6 +31,9 @@ namespace WebAwesomeBlazor.Components
 
         [Parameter] public Expression<Func<TValue>> ValueExpression { get; set; } = default!;
 
+        /// <summary>
+        /// The input's visual appearance.
+        /// </summary>
         [Parameter]
         public InputAppearance Appearance { get; set; } = InputAppearance.Outlined;
 
@@ -135,6 +138,7 @@ namespace WebAwesomeBlazor.Components
                 {
                     InputAppearance.Filled => "filled",
                     InputAppearance.Outlined => "outlined",
+                    InputAppearance.FilledOutlined => "filled-outlined",
                     _ => "outlined"
                     //Only filled and outlined are valid for inputs
                 };
