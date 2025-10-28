@@ -4,9 +4,8 @@
 Currently supports Web Awesome 3.0.0.
 
 # Installation
-Add as a project dependency, or build from source.
-
-Nuget coming soon.
+Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
+```dotnet add package WebAwesomeBlazor```
 
 # Usage
 Register your [Web Awesome](https://webawesome.com) account.
