@@ -5,7 +5,9 @@ Currently supports Web Awesome 3.0.0.
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
-```dotnet add package WebAwesomeBlazor```
+```
+dotnet add package WebAwesomeBlazor
+```
 
 # Usage
 Register your [Web Awesome](https://webawesome.com) account.
@@ -29,7 +31,6 @@ Add the following to your `_Imports.razor` file:
 ```HTML+Razor
 @using WebAwesomeBlazor
 @using WebAwesomeBlazor.Components
-@using WebAwesomeBlazor.Extended
 ```
 
 Then you can use the components in your Blazor pages, for example:
@@ -109,7 +110,6 @@ New components built on top of the Web Awesome library for additional functional
 - ConfirmDialog
 - DataSelect
 - ThemeManager
-- Toast
 
 
 # Credits
