@@ -120,7 +120,7 @@ namespace WebAwesomeBlazor.Components
                     ButtonAppearance.Accent => "accent",
                     ButtonAppearance.Filled => "filled",
                     ButtonAppearance.Outlined => "outlined",
-                    ButtonAppearance.OutlinedFilled => "outlined filled",
+                    ButtonAppearance.FilledOutlined => "filled-outlined",
                     ButtonAppearance.Plain => "plain",
                     _ => "accent"
                 };

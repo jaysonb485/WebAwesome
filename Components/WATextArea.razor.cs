@@ -111,6 +111,7 @@ namespace WebAwesomeBlazor.Components
                 {
                     TextAreaAppearance.Filled => "filled",
                     TextAreaAppearance.Outlined => "outlined",
+                    TextAreaAppearance.FilledOutlined => "filled-outlined",
                     _ => "outlined"
                     //Only filled and outlined are valid for inputs
                 };

@@ -114,7 +114,7 @@ namespace WebAwesomeBlazor.Components
                 {
                     ButtonAppearance.Accent => "accent",
                     ButtonAppearance.Filled => "filled",
-                    ButtonAppearance.OutlinedFilled => "filled outlined",
+                    ButtonAppearance.FilledOutlined => "filled-outlined",
                     ButtonAppearance.Outlined => "outlined",
                     ButtonAppearance.Plain => "plain",
                     _ => "accent"

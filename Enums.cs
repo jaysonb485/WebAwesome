@@ -22,7 +22,7 @@ namespace WebAwesomeBlazor
         Accent,
         Filled,
         Outlined,
-        OutlinedFilled,
+        FilledOutlined,
         Plain
     }
 
@@ -236,7 +236,7 @@ namespace WebAwesomeBlazor
     {
         Accent,
         Filled,
-        OutlinedFilled,
+        FilledOutlined,
         Outlined,
         Plain
     }
@@ -428,6 +428,7 @@ namespace WebAwesomeBlazor
     {
         Filled,
         Outlined,
+        FilledOutlined
     }
     #endregion
     #region Input Date Time  Enums
@@ -565,6 +566,7 @@ namespace WebAwesomeBlazor
     {
         Filled,
         Outlined,
+        FilledOutlined
     }
 
     public enum SelectSize
@@ -691,6 +693,7 @@ namespace WebAwesomeBlazor
     {
         Filled,
         Outlined,
+        FilledOutlined,
     }
 
 

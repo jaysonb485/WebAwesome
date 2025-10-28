@@ -99,7 +99,7 @@ namespace WebAwesomeBlazor.Components
                 {
                     CardAppearance.Accent => "accent",
                     CardAppearance.Filled => "filled",
-                    CardAppearance.FilledOutlined => "filled outlined",
+                    CardAppearance.FilledOutlined => "filled-outlined",
                     CardAppearance.Outlined => "outlined",
                     CardAppearance.Plain => "plain",
                     _ => "outlined"

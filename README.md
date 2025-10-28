@@ -1,27 +1,35 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.0.0-beta 6.
+Currently supports Web Awesome 3.0.0.
 
 # Installation
-Add as a project dependency, or build from source.
-
-Nuget coming soon.
+Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
+```dotnet add package WebAwesomeBlazor```
 
 # Usage
+Register your [Web Awesome](https://webawesome.com) account.
+Create your project and obtain your unique project code.
+
+Add the project code to your App.razor or wwwroot/index.html file in the `<HEAD>` section along with the extra utility files for this package:
+```HTML
+    <script src="https://kit.webawesome.com/---YOUR KIT CODE---.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
+    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
+```
+
+Alternatively, if hosting the Web Awesome yourself, reference the relevant files and add:
+```HTML
+    -- YOUR WEB AWESOME FILES HERE --
+    <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
+    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
+```
+
 Add the following to your `_Imports.razor` file:
 ```HTML+Razor
 @using WebAwesomeBlazor
 @using WebAwesomeBlazor.Components
 @using WebAwesomeBlazor.Extended
-```
-
-Add the following to your App.razor or wwwroot/index.html file:
-```HTML
-    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/styles/webawesome.css" />
-    <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/webawesome.loader.js"></script>
-    <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
-    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
 ```
 
 Then you can use the components in your Blazor pages, for example:

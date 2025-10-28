@@ -145,6 +145,7 @@ namespace WebAwesomeBlazor.Components
                 {
                     InputAppearance.Filled => "filled",
                     InputAppearance.Outlined => "outlined",
+                    InputAppearance.FilledOutlined => "filled-outlined",
                     _ => "outlined"
                     //Only filled and outlined are valid for inputs
                 };
