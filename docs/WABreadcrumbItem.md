@@ -9,10 +9,10 @@
 ```
 
 ### Description
-Breadcrumb Items are used inside breadcrumbs to represent different links.
+Breadcrumb Items are used inside [WABreadcrumb](/docs/WABreadcrumb.md) to represent different links.
 
 [WebAwesome docs](https://webawesome.com/docs/components/breadcrumb-item/)
-[WABreadcrumb](/docs/WABreadcrumb.md)
+
 
 ### Properties
 | Property | Type   | Default | Description                              |

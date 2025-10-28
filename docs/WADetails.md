@@ -12,7 +12,7 @@
 ### Description
 Details show a brief summary and expand to show additional content.
 
-[WebAwesome docs](https://webawesome.com/docs/component)
+[WebAwesome docs](https://webawesome.com/docs/components/details/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
@@ -23,9 +23,9 @@ Details show a brief summary and expand to show additional content.
 | DetailsTitle  | RenderFragment  |   | The details' summary. Alternatively, you can use the Title property.  |
 | DetailsBody  | RenderFragment  |   |  The details' main content. |
 | IsOpen  | bool  | false  | Indicates whether or not the details is open.  |
-| ExpandIcon  | Icon  |   | The name of the icon to draw for the expand indicator.  |
+| ExpandIcon  | [Icon](/docs/IconClass.md)  |   | The name of the icon to draw for the expand indicator.  |
 | ExpandIconName  | string  |   |  The name of the icon to draw for the expand indicator. Available names depend on the icon library being used. |
-| CollapseIcon  | Icon |   |  The name of the icon to draw on for the collapse indicator. |
+| CollapseIcon  | [Icon](/docs/IconClass.md) |   |  The name of the icon to draw on for the collapse indicator. |
 | CollapseIconName | string |   | The name of the icon to draw on for the collapse indicator. Available names depend on the icon library being used.  |
 | GroupName  | string  |   | Groups related details elements. When one opens, others with the same name will close.  |
 | IconPlacement  | DetailsIconPlacement  | DetailsIconPlacement.End  | The location of the expand/collapse icon. |

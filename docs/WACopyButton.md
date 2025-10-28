@@ -19,9 +19,9 @@ Copies text data to the clipboard when the user clicks the trigger.
 | HoverLabel | string | "Copy" | A custom label to show in the tooltip. |
 | SuccessLabel | string | "Copied" | A custom label to show in the tooltip after copying. |
 | ErrorLabel | string | "Not supported" | A custom label to show in the tooltip when a copy error occurs. |
-| Icon | Icon | Icons.Copy | The icon to show in the default copy state. Defaults to FontAwesome copy icon. |
-| SuccessIcon | Icon | Icons.Check | The icon to show when the content is copied. Defaults to FontAwesome check icon. |
-| ErrorIcon | Icon | Icons.XMark | The icon to show when a copy error occurs. Defaults to FontAwesome xmark icon. |
+| Icon | [Icon](/docs/IconClass.md) | Icons.Copy | The icon to show in the default copy state. Defaults to FontAwesome copy icon. |
+| SuccessIcon | [Icon](/docs/IconClass.md) | Icons.Check | The icon to show when the content is copied. Defaults to FontAwesome check icon. |
+| ErrorIcon | [Icon](/docs/IconClass.md) | Icons.XMark | The icon to show when a copy error occurs. Defaults to FontAwesome xmark icon. |
 | IconName | string |  | The icon to show in the default copy state. |
 | SuccessIconName | string | | The icon to show when the content is copied. |
 | ErrorIconName | string |   | The icon to show when a copy error occurs  |

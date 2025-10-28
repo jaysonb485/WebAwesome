@@ -29,7 +29,7 @@ Represents an individual item within a dropdown menu, supporting standard items,
 | Checked | bool | false | Draws the item in a checked state. |
 | OnClick | EventCallback<MouseEventArgs?> |  | Triggered when the dropdown item is clicked |
 | SubmenuOpen | bool | false | Whether the submenu is currently open. |
-| Icon | Icon |  | An optional icon to display before the label. |
+| Icon | [Icon](/docs/IconClass.md) |  | An optional icon to display before the label. |
 | IconName | string |  | An optional icon to display before the label. |
 
 ### Methods

@@ -14,7 +14,7 @@ namespace WebAwesomeBlazor.Components
     {
         #region Parameters
         [Parameter]
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }

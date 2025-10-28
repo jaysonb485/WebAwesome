@@ -26,13 +26,13 @@ Selects allow you to choose items from a menu of [WASelectOption](/docs/WASelect
 | Disabled | bool | false | Disables the select control. |
 | Pill | bool | false | Draws a pill-style select with rounded edges. |
 | StartIconName | string |  | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| StartIcon | Icon |  | The icon to draw in the start slot. |
+| StartIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the start slot. |
 | EndIconName | string |  | The name of the icon to draw in the end slot. Available names depend on the icon library being used. |
-| EndIcon | Icon |  | The icon to draw in the end slot. |
+| EndIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. |
 | ClearIconName | string |  | The name of the icon to draw in the clear slot. Available names depend on the icon library being used. |
-| ClearIcon | Icon |  | The icon to draw in the clear slot. |
+| ClearIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the clear slot. |
 | ExpandIconName | string |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. Available names depend on the icon library being used. |
-| ExpandIcon | Icon |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. |
+| ExpandIcon | [Icon](/docs/IconClass.md) |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. |
 | ShowDuration | string | `100ms` | The duration of the show animation. |
 | HideDuration | string | `100ms` | The duration of the hide animation. |
 

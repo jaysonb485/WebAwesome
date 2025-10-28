@@ -202,7 +202,7 @@ namespace WebAwesomeBlazor.Extended
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if(firstRender)
-                await JSRuntime.InvokeVoidAsync("window.vengage.select.initialize", Id, objRef, GetOptionKeyString(Value));
+                await JSRuntime.InvokeVoidAsync("window.vengage.select.initialize", Id, objRef, GetOptionKeyString(Value ?? default!));
         }
 
         
@@ -226,7 +226,7 @@ namespace WebAwesomeBlazor.Extended
             return null;
         }
 
-        private string GetOptionKeyString(TValue option)
+        private string? GetOptionKeyString(TValue option)
         {
             var key = OptionKey?.Invoke(option);
             return key?.ToString() ?? string.Empty;

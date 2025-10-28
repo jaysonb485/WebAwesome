@@ -13,9 +13,9 @@
 ```
 
 ### Description
-A brief description of what the Component Name does and its purpose within the Vengage WebAwesome library.
+Split panels display two adjacent panels, allowing the user to reposition them.
 
-[WebAwesome docs](https://webawesome.com/docs/component)
+[WebAwesome docs](https://webawesome.com/docs/components/split-panel/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
@@ -30,7 +30,7 @@ A brief description of what the Component Name does and its purpose within the V
 | SnapPoints | string |  | One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g. "100px 50%". |
 | SnapThreshold | int | `12` | How close the divider must be to a snap point until snapping occurs. |
 | DividerIconName | string |  | The name of the icon to draw for the Divider. Available names depend on the icon library being used. |
-| DividerIcon | [Icon](/docs/IconClass) |  | The icon to draw for the Divider. |
+| DividerIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the Divider. |
 | PrimaryMinWidth | string |  | If set, defines the minimum allowed width of the primary panel in CSS units. |
 | Height | string |  | Height of the container in CSS units. |
 | Width | string |  | Width of the container in CSS units. |

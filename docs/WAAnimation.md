@@ -10,7 +10,7 @@
 ### Description
 To animate an element, wrap it in `<WAAnimation>` and set an animation `Name`. The animation will start automatically if `AutoPlay` is `true` or can be manually triggered using `StartAnimation`. 
 
-[WebAwesome docs](https://webawesome.com/docs/animation)
+[WebAwesome docs](https://webawesome.com/docs/components/animation/)
 
 ### Properties
 | Property | Type   | Default | Description                              |

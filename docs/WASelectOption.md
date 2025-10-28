@@ -21,9 +21,9 @@ This component must be used as a child of [WASelect](/docs/WASelect).
 | Label | string |  | The option's label. Alternatively, the label will be the ChildContent |
 | Disabled | bool | false | Disables the option |
 | StartIconName | string |  | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| StartIcon | Icon |  | The icon to draw in the start slot. |
+| StartIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the start slot. |
 | EndIconName | string |  | The name of the icon to draw in the end slot. Available names depend on the icon library being used. |
-| EndIcon | Icon |  | The icon to draw in the end slot. |
+| EndIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. |
 
 ### Examples
 

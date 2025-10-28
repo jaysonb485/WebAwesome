@@ -3,11 +3,11 @@
     public class Icon
     {
         /// <summary>
-        /// The name of the icon to draw.Available names depend on the icon library being used.
+        /// The name of the icon to draw. Available names depend on the icon library being used.
         /// </summary>
         public string Name { get; set; } = string.Empty;
         ///<summary>
-        ///The family of icons to choose from.For Font Awesome Free, valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, sharp-duotone, and brands. A valid kit code must be present to show pro icons via CDN.You can set<html data-fa-kit-code = "..." > to provide one.
+        /// The family of icons to choose from.For Font Awesome Free, valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, sharp-duotone, and brands. A valid kit code must be present to show pro icons via CDN.You can set<html data-fa-kit-code = "..." > to provide one.
         ///</summary>
         public string? Family { get; set; } = string.Empty;
 
@@ -29,7 +29,7 @@
         /// </summary>
         public string? SourceUrl { get; set; } = string.Empty;
         /// <summary>
-        ///         An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and ignored by assistive devices.
+        /// An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and ignored by assistive devices.
         /// </summary>
         public string? Label { get; set; } = string.Empty;
 

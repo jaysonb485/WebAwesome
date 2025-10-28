@@ -8,12 +8,12 @@
 ### Description
 Avatars are used to represent a person or object.
 
-[WebAwesome docs](https://webawesome.com/docs/avatar)
+[WebAwesome docs](https://webawesome.com/docs/components/avatar/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Icon    | [Icon](/docs/IconClass) |  | The default icon to use when no image or initials are present. Alternatively, use the IconName parameter to specify an icon by name.                     |
+| Icon    | [Icon](/docs/IconClass.md) |  | The default icon to use when no image or initials are present. Alternatively, use the IconName parameter to specify an icon by name.                     |
 | IconName    | string |        | The name of the default icon to use when no image or initials are present. Available names depend on the icon library being used.                     |
 | ImageSource    | string |    | The image source URL to use for the avatar.                     |
 | LazyLoading | bool | false | Indicates how the browser should load the image. |

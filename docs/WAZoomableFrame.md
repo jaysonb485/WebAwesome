@@ -14,9 +14,9 @@ Zoomable frames render iframe content with zoom and interaction controls.
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
 | ZoomInIconName | string |  | The name of the icon to draw for the ZoomIn icon. Available names depend on the icon library being used. |
-| ZoomInIcon | [Icon](/docs/IconClass) |  | The icon to draw for the ZoomIn icon. |
+| ZoomInIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the ZoomIn icon. |
 | ZoomOutIconName | string |  | The name of the icon to draw for the ZoomOut icon. Available names depend on the icon library being used. |
-| ZoomOutIcon | [Icon](/docs/IconClass) |  | The icon to draw for the ZoomOut icon. |
+| ZoomOutIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the ZoomOut icon. |
 | SourceUrl | string |  | The URL of the content to display. If both `SourceUrl` and `SourceHtml` are provided, `SourceHtml` takes precendence. |
 | SourceHtml | string |  | Inline HTML to display. |
 | AllowFulLScreen | bool | false | Allows fullscreen mode. |

@@ -8,7 +8,7 @@
 ### Description
 Badges are used to draw attention and display statuses or counts.
 
-[WebAwesome docs](https://webawesome.com/docs/badge/)
+[WebAwesome docs](https://webawesome.com/docs/components/badge/)
 
 ### Properties
 | Property | Type   | Default | Description                              |

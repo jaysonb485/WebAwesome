@@ -5,8 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <IsPackable>true</IsPackable>
-	  <AssemblyVersion>0.1</AssemblyVersion>
-	  <!--<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>-->
+	  <AssemblyVersion>1.0</AssemblyVersion>
   <RootNamespace>WebAwesomeBlazor</RootNamespace>
   </PropertyGroup>
 

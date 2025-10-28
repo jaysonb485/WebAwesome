@@ -11,16 +11,16 @@
 ### Description
 Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.
 
-Breadcrumbs are usually placed before a page's main content with the current page shown last to indicate the user's position in the navigation.
+Breadcrumbs are usually placed before a page's main content with the current page shown last to indicate the user's position in the navigation. See [WABreadcrumbItem](/docs/WABreadcrumbItem.md).
 
-[WebAwesome docs](https://webawesome.com/docs/breadcrumb)
-[WABreadcrumbItem](/docs/WABreadcrumbItem.md)
+[WebAwesome docs](https://webawesome.com/docs/components/breadcrumb/)
+
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
 | Label    | string |  | The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by screen readers and other assistive devices to provide more context for users.                     |
-| Icon    | [Icon](/docs/IconClass) |        | The separator to use between breadcrumb items.                     |
+| Icon    | [Icon](/docs/IconClass.md) |        | The separator to use between breadcrumb items.                     |
 | IconName    | string |    | The separator to use between breadcrumb items. Available names depend on the icon library being used.                     |
 
 ### Examples

@@ -217,7 +217,7 @@ namespace WebAwesomeBlazor.Components
             objRef ??= DotNetObjectReference.Create(this);
 
 
-            if (IsLeftGreaterThanRight(Min, Max))
+            if (Min is not null && Max is not null && IsLeftGreaterThanRight(Min, Max))
                 throw new InvalidOperationException("The Min parameter value is greater than the Max parameter value.");
 
             if (!(typeof(TValue) == typeof(sbyte)
@@ -307,8 +307,6 @@ namespace WebAwesomeBlazor.Components
         private FieldIdentifier fieldIdentifier = default!;
         private DotNetObjectReference<WAInputNumber<TValue>> objRef = default!;
         private string step = default!;
-
-        private CultureInfo cultureInfo = default!;
         private TValue previousValue = default!;
 
         #endregion
