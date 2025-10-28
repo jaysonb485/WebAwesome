@@ -378,6 +378,28 @@ namespace WebAwesomeBlazor
         Default
     }
     #endregion
+    #region FormatBytes Enums
+    public enum FormatBytesUnit
+    {
+        Byte,
+        Bit
+    }
+
+    public enum FormatBytesDisplay
+    {
+        Long,
+        Short,
+        Narrow
+    }
+    #endregion
+    #region Include
+    public enum IncludeMode
+    {
+        CORS,
+        NoCORS,
+        SameOrigin
+    }
+    #endregion
     #region Input Enums
     public enum InputType
     {
@@ -470,6 +492,15 @@ namespace WebAwesomeBlazor
         LeftEnd,
         End,
         Start
+    }
+    #endregion
+    #region QRCode Enums
+    public enum QRCodeErrorCorrection
+    {
+        L,
+        M,
+        Q,
+        H
     }
     #endregion
     #region Radio Group Enums
@@ -699,5 +730,20 @@ namespace WebAwesomeBlazor
         Start
     }
     #endregion
+    #region Tree Enums
+    public enum TreeSelection
+    {
+        Single,
+        Multiple,
+        Leaf
+    }
+    public enum TreeIndentStyle
+    {
+        Solid,
+        Dashed, 
+        Dotted
+    }
+    #endregion
+
 
 }

@@ -1,13 +1,6 @@
 // This is a JavaScript module that is loaded on demand. It can export any number of
 // functions, and may import other JavaScript modules if required.
 
-//export function showPrompt(message) {
-//  return prompt(message, 'Type anything here');
-//}
-
-//export function executeDotNetMethod(objRef, methodName) {
-//    return objRef.invokeMethodAsync(methodName);
-//}
 
 window.vengage = {
     colorPicker: {
@@ -17,6 +10,15 @@ window.vengage = {
             return element.getFormattedValue(colorFormat);
         }
     },
+    comparison: {
+        initialize: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+            element.addEventListener('change', function (event) {
+                dotnetHelper.invokeMethodAsync('HandleDividerChange', element.position);
+            });
+        }
+    },
     dialog: {
         initialize: (elementId, dotnetHelper) => {
             let element = document.getElementById(elementId);
@@ -24,7 +26,6 @@ window.vengage = {
 
             element.addEventListener('wa-after-hide', function (event) {
                 if (event.target.id == elementId) {
-                    console.log(event);
                     dotnetHelper.invokeMethodAsync('HandleDialogClosed', event.target.id);
                 };
             });
@@ -34,6 +35,21 @@ window.vengage = {
             if (dialog != null)
                 dialog.open = newState;
         }
+    },
+    include: {
+        initialize: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            element.addEventListener('wa-load', function (event) {
+                dotnetHelper.invokeMethodAsync('HandleIncludeLoaded');
+            });
+
+            element.addEventListener('wa-include-error', function (event) {
+                console.log('error' + event.detail.status);
+                dotnetHelper.invokeMethodAsync('HandleIncludeError', event.detail.status);
+            });
+        },
     },
     input: {
         setValue: (elementId, newValue) => {
@@ -84,7 +100,6 @@ window.vengage = {
             let element = document.getElementById(elementId);
             if (!element) return;
             element.addEventListener('wa-selection-change', function (event) {
-                console.log(event);
                 dotnetHelper.invokeMethodAsync('HandleNavTreeSelect', event.detail.item);
             });
         }
@@ -118,8 +133,7 @@ window.vengage = {
         view: (elementId) => {
             let element = document.getElementById(elementId);
             if (element)
-                console.log(element);
-            return element.view;
+                return element.view;
         }
     },
     popover: {
@@ -153,6 +167,15 @@ window.vengage = {
             element.onchange = function (event) {
                 dotnetHelper.invokeMethodAsync('OnValueChanged', element.value);
             };
+        }
+    },
+    resizeObserver: {
+        initialize: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+            element.addEventListener('wa-resize', function (event) {
+                dotnetHelper.invokeMethodAsync('HandleResize', event.detail.entries[0].contentRect.height, event.detail.entries[0].contentRect.width);
+            });
         }
     },
     select: {
@@ -225,5 +248,15 @@ window.vengage = {
             document.documentElement.classList.toggle('wa-dark', darkMode);
         }
     },
+    tree: {
+        initialize: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+            element.addEventListener('wa-selection-change', function (event) {
+                dotnetHelper.invokeMethodAsync('HandleSelectionChanged', event.detail.selection.map(obj => obj.attributes.getNamedItem('value').value));
+            });
+
+        }
+    }
 
 }

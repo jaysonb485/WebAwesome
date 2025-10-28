@@ -10,14 +10,14 @@ Nuget coming soon.
 
 # Usage
 Add the following to your `_Imports.razor` file:
-```csharp
+```HTML+Razor
 @using WebAwesomeBlazor
 @using WebAwesomeBlazor.Components
 @using WebAwesomeBlazor.Extended
 ```
 
 Add the following to your App.razor or wwwroot/index.html file:
-```csharp
+```HTML
     <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/styles/webawesome.css" />
     <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/webawesome.loader.js"></script>
     <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
@@ -25,7 +25,7 @@ Add the following to your App.razor or wwwroot/index.html file:
 ```
 
 Then you can use the components in your Blazor pages, for example:
-```csharp
+```HTML+Razor
 <WAButton OnClick="ButtonClicked" Appearance="ButtonAppearance.Outlined" Variant="ButtonVariant.Brand">Change value</WAButton>
 ```
 # Using Icons
@@ -45,7 +45,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WACallout](/docs/WACallout.md)
 - [WACard](/docs/WACard.md)
 - [WACarousel](/docs/WACarousel.md)
-- WAComparison (coming soon)
+- [WAComparison](/docs/WAComparison.md)
 - [WACheckbox](/docs/WACheckbox.md)
 - [WAColorPicker](/docs/WAColorPicker.md)
 - [WACopyButton](/docs/WACopyButton.md)
@@ -55,27 +55,24 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WADrawer](/docs/WADrawer.md)
 - [WADropdown](/docs/WADropdown.md)
   - [WADropdownItem](/docs/WADropdownItem.md)
-- WAFormatBytes (coming soon)
-- WAFormatDate (coming soon)
-- WAFormatNumber (coming soon)
+- [WAFormatBytes](/docs/WAFormatBytes.md)
 - [WAIcon](/docs/WAIcon.md)
-- WAInclude (coming soon)
+- [WAInclude](/docs/WAInclude.md)
 - [WAInput](/docs/WAInput.md)
 - [WAInputDateTime](/docs/WAInputDateTime.md)
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
-- WAMutationObserver (coming soon)
 - [WAPage](/docs/WAPage.md)
   - [WALayoutContent](/docs/WALayoutContent.md)
 - [WAPopover](/docs/WAPopover.md)
 - [WAProgressBar](/docs/WAProgressBar.md)
 - [WAProgressRing](/docs/WAProgressRing.md)
-- WAQRCode (coming soon)
+- [WAQRCode](/docs/WAQRCode.md)
 - [WARadioGroup](/docs/WARadioGroup.md)
   - [WARadioOption](/docs/WARadioOption.md)
 - [WARating](/docs/WARating.md)
 - [WARelativeTime](/docs/WARelativeTime.md)
-- WAResizeObserver (coming soon)
+- [WAResizeObserver](/docs/WAResizeObserver.md)
 - [WAScroller](/docs/WAScroller.md)
 - [WASelect](/docs/WASelect.md)
   - [WASelectOption](/docs/WASelectOption.md)
@@ -88,9 +85,14 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WATag](/docs/WATag.md)
 - [WATextArea](/docs/WATextArea.md)
 - [WATooltip](/docs/WATooltip.md)
-- WATree (coming soon)
-  - WATreeItem (coming soon)
+- [WATree](/docs/WATree.md)
+  - [WATreeItem](/docs/WATreeItem.md)
 - [WAZoomableFrame](/docs/WAZoomableFrame.md)
+
+Some functions have not been included as there are suitable .NET functions available:
+- [FormatNumber](https://webawesome.com/docs/components/format-number/)
+- [FormatDate](https://webawesome.com/docs/components/format-date/) 
+- [MutationObserver](https://webawesome.com/docs/components/mutation-observer/)
 
 # Extended components (Coming soon)
 New components built on top of the Web Awesome library for additional functionality:
