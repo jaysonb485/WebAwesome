@@ -32,8 +32,8 @@ A numeric input component that allows users to enter and manipulate numerical va
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
 | Step | double |  | Specifies the granularity that the value must adhere to. |
-| Max | TValue |  | The input's maximum value |
-| Min | TValue |  | The input's minimum value |
+| Max | double |  | The input's maximum value |
+| Min | double |  | The input's minimum value |
 
 
 ### Methods
