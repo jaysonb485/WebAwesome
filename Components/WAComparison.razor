@@ -1,0 +1,16 @@
+﻿@inherits WAComponentBase
+<wa-comparison @ref="@Element"
+                 id="@Id"
+                 @attributes="@AdditionalAttributes"
+                 style="@StyleNames"
+                 class="@ClassNames"
+                 slot="@Slot"
+                 position="@DividerPosition" >
+    <span slot="before">@BeforeContent</span>
+    <span slot="after">@AfterContent</span>
+    @if (HandleIcon != null || !String.IsNullOrWhiteSpace(HandleIconName))
+    {
+        <WAIcon Icon="@HandleIcon" IconName="@HandleIconName" Slot="handle"></WAIcon>
+    }
+</wa-comparison>
+

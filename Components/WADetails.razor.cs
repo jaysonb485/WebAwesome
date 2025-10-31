@@ -91,7 +91,7 @@ namespace WebAwesomeBlazor.Components
                 return Appearance switch
                 {
                     DetailsAppearance.Filled => "filled",
-                    DetailsAppearance.FilledOutlined => "filled outlined",
+                    DetailsAppearance.FilledOutlined => "filled-outlined",
                     DetailsAppearance.Outlined => "outlined",
                     DetailsAppearance.Plain => "plain",
                     _ => "outlined"

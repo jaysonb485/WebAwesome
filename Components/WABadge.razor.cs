@@ -76,7 +76,7 @@ namespace WebAwesomeBlazor.Components
                     BadgeAppearance.Accent => "accent",
                     BadgeAppearance.AccentOutlined => "accent outlined",
                     BadgeAppearance.Filled => "filled",
-                    BadgeAppearance.FilledOutlined => "filled outlined",
+                    BadgeAppearance.FilledOutlined => "filled-outlined",
                     BadgeAppearance.Outlined => "outlined",
                     _ => "accent"
                     //Plain is not valid for badge

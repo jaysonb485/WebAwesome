@@ -22,7 +22,7 @@ namespace WebAwesomeBlazor
         Accent,
         Filled,
         Outlined,
-        OutlinedFilled,
+        FilledOutlined,
         Plain
     }
 
@@ -236,7 +236,7 @@ namespace WebAwesomeBlazor
     {
         Accent,
         Filled,
-        OutlinedFilled,
+        FilledOutlined,
         Outlined,
         Plain
     }
@@ -378,6 +378,28 @@ namespace WebAwesomeBlazor
         Default
     }
     #endregion
+    #region FormatBytes Enums
+    public enum FormatBytesUnit
+    {
+        Byte,
+        Bit
+    }
+
+    public enum FormatBytesDisplay
+    {
+        Long,
+        Short,
+        Narrow
+    }
+    #endregion
+    #region Include
+    public enum IncludeMode
+    {
+        CORS,
+        NoCORS,
+        SameOrigin
+    }
+    #endregion
     #region Input Enums
     public enum InputType
     {
@@ -406,6 +428,7 @@ namespace WebAwesomeBlazor
     {
         Filled,
         Outlined,
+        FilledOutlined
     }
     #endregion
     #region Input Date Time  Enums
@@ -472,6 +495,15 @@ namespace WebAwesomeBlazor
         Start
     }
     #endregion
+    #region QRCode Enums
+    public enum QRCodeErrorCorrection
+    {
+        L,
+        M,
+        Q,
+        H
+    }
+    #endregion
     #region Radio Group Enums
     public enum RadioGroupSize
     {
@@ -534,6 +566,7 @@ namespace WebAwesomeBlazor
     {
         Filled,
         Outlined,
+        FilledOutlined
     }
 
     public enum SelectSize
@@ -660,6 +693,7 @@ namespace WebAwesomeBlazor
     {
         Filled,
         Outlined,
+        FilledOutlined,
     }
 
 
@@ -699,5 +733,20 @@ namespace WebAwesomeBlazor
         Start
     }
     #endregion
+    #region Tree Enums
+    public enum TreeSelection
+    {
+        Single,
+        Multiple,
+        Leaf
+    }
+    public enum TreeIndentStyle
+    {
+        Solid,
+        Dashed, 
+        Dotted
+    }
+    #endregion
+
 
 }

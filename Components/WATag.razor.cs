@@ -74,7 +74,7 @@ namespace WebAwesomeBlazor.Components
                 {
                     TagAppearance.Accent => "accent",
                     TagAppearance.Filled => "filled",
-                    TagAppearance.FilledOutlined => "filled outlined",
+                    TagAppearance.FilledOutlined => "filled-outlined",
                     TagAppearance.Outlined => "outlined",
                     _ => "filled outlined"
                 };

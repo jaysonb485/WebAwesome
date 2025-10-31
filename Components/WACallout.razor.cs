@@ -29,7 +29,7 @@ namespace WebAwesomeBlazor.Components
         /// The callout's visual appearance.
         /// </summary>
         [Parameter]
-        public CalloutAppearance Appearance { get; set; } = CalloutAppearance.OutlinedFilled;
+        public CalloutAppearance Appearance { get; set; } = CalloutAppearance.FilledOutlined;
 
         /// <summary>
         /// The callout's size.
@@ -66,10 +66,10 @@ namespace WebAwesomeBlazor.Components
                 {
                     CalloutAppearance.Accent => "accent",
                     CalloutAppearance.Filled => "filled",
-                    CalloutAppearance.OutlinedFilled => "outlined filled",
+                    CalloutAppearance.FilledOutlined => "filled-outlined",
                     CalloutAppearance.Outlined => "outlined",
                     CalloutAppearance.Plain => "plain",
-                    _ => "outlined filled"
+                    _ => "filled-outlined"
                 };
             }
         }
