@@ -105,6 +105,11 @@ Some functions have not been included as there are suitable .NET functions avail
 
 # Extended components (Coming soon)
 New components built on top of the Web Awesome library for additional functionality:
+# Extended components 
+Additional components built on top of the Web Awesome library for additional functionality:
+- [DataSelect](/docs/Extended/DataSelect.md)
+
+## Coming soon:
 - NavTree
 - AutoComplete
 - ConfirmDialog
