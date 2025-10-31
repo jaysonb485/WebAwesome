@@ -124,14 +124,14 @@ namespace WebAwesomeBlazor.Components
         /// Max ignored if EnableMinMax="false".
         /// </summary>
         [Parameter]
-        public TValue? Max { get; set; } = default!;
+        public double? Max { get; set; }
 
         /// <summary>
         /// The input's minimum value.
         /// Min ignored if EnableMinMax="false".
         /// </summary>
         [Parameter]
-        public TValue? Min { get; set; } = default!;
+        public double? Min { get; set; }
 
         #endregion
 
@@ -220,7 +220,7 @@ namespace WebAwesomeBlazor.Components
             objRef ??= DotNetObjectReference.Create(this);
 
 
-            if (Min is not null && Max is not null && IsLeftGreaterThanRight(Min, Max))
+            if (Min is not null && Max is not null && (Min > Max))
                 throw new InvalidOperationException("The Min parameter value is greater than the Max parameter value.");
 
             if (!(typeof(TValue) == typeof(sbyte)
