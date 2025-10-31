@@ -14,6 +14,9 @@ namespace WebAwesomeBlazor.Extended
     public partial class DataSelect<TValue> : WAComponentBase
     {
         #region Parameters
+        /// <summary>
+        /// The select's value
+        /// </summary>
         [Parameter]
         public TValue? Value { get; set; }
 
@@ -139,6 +142,7 @@ namespace WebAwesomeBlazor.Extended
         /// </summary>
         [Parameter]
         public string? HideDuration { get; set; }
+
         #endregion
 
         #region Computed  Properties
@@ -196,18 +200,27 @@ namespace WebAwesomeBlazor.Extended
                 }
 
             }
+            if (EditContext != null)
+            {
+                _messageStore = new ValidationMessageStore(EditContext);
+                EditContext.OnValidationRequested += HandleValidationRequested;
+                EditContext.OnFieldChanged += HandleFieldChanged;
+            }
+
+
             base.OnInitialized();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if(firstRender)
+            if (firstRender)
                 await JSRuntime.InvokeVoidAsync("window.vengage.select.initialize", Id, objRef, GetOptionKeyString(Value ?? default!));
         }
 
-        
+
         protected override async Task OnParametersSetAsync()
         {
+
             if (previousValue is null || !previousValue!.Equals(Value ?? default!))
             {
                 previousValue = Value ?? default!;
@@ -215,6 +228,33 @@ namespace WebAwesomeBlazor.Extended
                 // Run your JS update logic here
                 await JSRuntime.InvokeVoidAsync("window.vengage.select.setValue", Id, GetOptionKeyString(Value ?? default!));
             }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                    // if (IsRenderComplete)
+                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                }
+                catch (JSDisconnectedException)
+                {
+                    // do nothing
+                }
+
+                objRef?.Dispose();
+                if (EditContext != null)
+                {
+                    EditContext.OnValidationRequested -= HandleValidationRequested;
+                    EditContext.OnFieldChanged -= HandleFieldChanged;
+                }
+
+
+            }
+
+            await base.DisposeAsyncCore(disposing);
         }
         #endregion
 
@@ -237,21 +277,53 @@ namespace WebAwesomeBlazor.Extended
         {
             var selectedKey = e.Value?.ToString();
 
-            await SetValueFromString(selectedKey!);
+            await SetValueFromString(selectedKey);
 
 
         }
 
+
+        private void HandleValidationRequested(object? sender, ValidationRequestedEventArgs args)
+        {
+            _messageStore?.Clear();
+
+            if (Required && EqualityComparer<TValue>.Default.Equals(Value, default))
+            {
+                _messageStore?.Add(fieldIdentifier, "Selection is required.");
+            }
+        }
+
+        private void HandleFieldChanged(object? sender, FieldChangedEventArgs args)
+        {
+            if (args.FieldIdentifier.Equals(fieldIdentifier))
+            {
+                _messageStore?.Clear(fieldIdentifier);
+            }
+        }
+
+
+
         private async Task SetValueFromString(string? newValue)
         {
-            var selectedOption = SelectOptions!.FirstOrDefault(opt =>
+            if (string.IsNullOrEmpty(newValue))
+            {
+                Value = default!;
+            }
+            else
+            {
+
+                var selectedOption = SelectOptions!.FirstOrDefault(opt =>
                 OptionKey?.Invoke(opt)?.ToString() == newValue);
 
-            Value = selectedOption ?? default!;
-
+                Value = selectedOption ?? default!;
+            }
             await ValueChanged.InvokeAsync(Value);
-            EditContext?.NotifyFieldChanged(fieldIdentifier);
+            
+            if(EditContext  != null) 
+                EditContext?.NotifyFieldChanged(fieldIdentifier);
+            
             StateHasChanged();
+
         }
         #endregion
 
@@ -269,6 +341,8 @@ namespace WebAwesomeBlazor.Extended
         private DotNetObjectReference<DataSelect<TValue>> objRef = default!;
         private FieldIdentifier fieldIdentifier = default!;
         private TValue previousValue = default!;
+        private ValidationMessageStore? _messageStore;
+
         #endregion
 
 
