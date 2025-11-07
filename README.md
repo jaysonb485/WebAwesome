@@ -108,13 +108,12 @@ New components built on top of the Web Awesome library for additional functional
 # Extended components 
 Additional components built on top of the Web Awesome library for additional functionality:
 - [DataSelect](/docs/Extended/DataSelect.md)
+- [AutoCompleteInput](/docs/Extended/AutoComplete.md)
+- [DarkModeToggle](/docs/Extended/DarkModeToggle.md)
 
 ## Coming soon:
 - NavTree
-- AutoComplete
 - ConfirmDialog
-- DataSelect
-- ThemeManager
 
 
 # Credits
