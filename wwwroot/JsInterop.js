@@ -230,20 +230,6 @@ window.vengage = {
         }
     },
     themeManager: {
-        initialize: (themeName, palette, brandColor) => {
-            document.documentElement.classList.add('wa-theme-' + themeName);
-            document.documentElement.classList.add('wa-palette-' + palette);
-            document.documentElement.classList.add('wa-brand-' + brandColor);
-            document.body.classList.add('initialized');
-        },
-        setStyleSheet: (url) => {
-
-            link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = url;
-            document.head.appendChild(link);
-
-        },
         setDarkMode: (darkMode) => {
             document.documentElement.classList.toggle('wa-dark', darkMode);
         }
