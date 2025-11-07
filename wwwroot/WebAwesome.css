@@ -68,7 +68,5 @@
     text-align: start;
     user-select: none;
     overflow: auto;
-    max-width: var(--auto-size-available-width) !important;
-    max-height: var(--auto-size-available-height) !important;
 }
 

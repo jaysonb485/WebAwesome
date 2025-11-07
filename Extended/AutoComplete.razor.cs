@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Extended
 {
-    public partial class AutoComplete<TValue, TItem> : WAComponentBase
+    public partial class AutoComplete<TValue> : WAComponentBase
     {
         #region Parameters
         [Parameter]
-        public string? SearchText { get; set; }
-
-        [Parameter]
-        public Func<string, Task<List<TItem>>>? SearchFunction { get; set; }
+        public Func<string, Task<List<TValue>>>? SearchFunction { get; set; }
 
         [Parameter]
         public TValue? Value { get; set; }
@@ -30,7 +27,7 @@ namespace WebAwesomeBlazor.Extended
         public int MinimumSearchLength { get; set; } = 3;
 
         [Parameter]
-        public Func<string, Task<TItem>> AddNewItemFunction { get; set; } = default!;
+        public Func<string, Task<TValue>> AddNewItemFunction { get; set; } = default!;
 
         [Parameter]
         public string? LoadingText { get; set; } = "Loading...";
@@ -49,6 +46,11 @@ namespace WebAwesomeBlazor.Extended
 
         [Parameter]
         public bool AllowNewItems { get; set; } = false;
+
+        [Parameter]
+        public string? Placeholder { get; set; }
+        [Parameter]
+        public string? Hint { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -58,15 +60,17 @@ namespace WebAwesomeBlazor.Extended
         #region Lifecycle
         protected override async Task OnParametersSetAsync()
         {
-         if (!Initialised)
+            await base.OnParametersSetAsync();
+
+            if (!Initialised)
             {
                 if (Value != null)
                 {
-                    SearchText = @GetPropertyName((TItem)(object)Value);
+                    SearchText = @GetPropertyName((TValue)(object)Value);
                 }
                 Initialised = true;
             }
-            await base.OnParametersSetAsync();
+    
         }
         #endregion
 
@@ -77,6 +81,9 @@ namespace WebAwesomeBlazor.Extended
             SearchText = e.Value?.ToString();
             if (SearchText == string.Empty)
             {
+                ShowPopup = false;
+                Items.Clear();
+
                 if (ValueChanged.HasDelegate)
                 {
                     await ValueChanged.InvokeAsync((TValue?)(object?)null);
@@ -104,7 +111,7 @@ namespace WebAwesomeBlazor.Extended
 
         }
 
-        private async Task OnItemSelected(TItem item)
+        private async Task OnItemSelected(TValue item)
         {
 
             if (ValueChanged.HasDelegate)
@@ -133,23 +140,22 @@ namespace WebAwesomeBlazor.Extended
         #endregion
 
         #region State
-        private List<TItem> Items { get; set; } = [];
+        private List<TValue> Items { get; set; } = [];
         private bool ShowPopup { get; set; } = false;
         private bool SearchInProgress { get; set; } = false;
-
         private Components.WAInput SearchInputBox = default!;
-
         private bool Initialised { get; set; } = false;
+        private string? SearchText { get; set; }
         #endregion
 
         #region Private Methods
-        private string? GetPropertyName(TItem item)
+        private string? GetPropertyName(TValue item)
         {
             if (item == null)
                 return string.Empty;
 
             // Handle string and primitive types directly
-            var itemType = typeof(TItem);
+            var itemType = typeof(TValue);
             if (itemType == typeof(string) || itemType.IsPrimitive || itemType.IsValueType)
             {
                 return item.ToString();
@@ -169,13 +175,13 @@ namespace WebAwesomeBlazor.Extended
 
         }
 
-        private string? GetPropertyValue(TItem item)
+        private string? GetPropertyValue(TValue item)
         {
             if (item == null)
                 return string.Empty;
 
             // Handle string and primitive types directly
-            var itemType = typeof(TItem);
+            var itemType = typeof(TValue);
             if (itemType == typeof(string) || itemType.IsPrimitive || itemType.IsValueType)
             {
                 return item.ToString();

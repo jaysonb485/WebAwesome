@@ -2,14 +2,14 @@
 @using Microsoft.JSInterop
 @inherits WAComponentBase
 @typeparam TValue
-@typeparam TItem
 
-
-<wa-popup active="@ShowPopup" placement="bottom-start" @ref="@Element" style="@StyleNames" class="@ClassNames" id="@Id" @attributes="@AdditionalAttributes">
-    <span slot="anchor">
-        <WAInput @ref="SearchInputBox" @bind-Value="SearchText" Placeholder="Search..." Clearable="true" @oninput="OnSearchChanged" autocomplete="off" Label="@Label" />
+<wa-popup active="@ShowPopup" sync="width" placement="bottom-start" @ref="@Element" id="@Id" @attributes="@AdditionalAttributes">
+    <span slot="anchor" class="@ClassNames" style="@StyleNames">
+        <WAInput @ref="SearchInputBox" @bind-Value="SearchText" 
+        Placeholder="@Placeholder" Clearable="true" @oninput="OnSearchChanged" autocomplete="off" Label="@Label"
+        Hint="@Hint"/>
     </span>
-    <div id="menu" part="menu" role="menu" class="autocomplete-dropdown">
+    <div id="menu" part="menu" role="menu" class="autocomplete-dropdown" style="width: 100%">
         @if (Items is not null && Items.Any())
         {
             foreach (var item in Items)
