@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Extended
 {
-    public partial class AutoComplete<TValue> : WAComponentBase
+    public partial class AutoCompleteInput<TValue> : WAComponentBase
     {
         #region Parameters
         [Parameter]

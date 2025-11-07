@@ -1,12 +1,12 @@
-﻿# AutoComplete<TValue>
-## WebAwesomeBlazor.Extended.AutoComplete
+﻿# AutoCompleteInput<TValue>
+## WebAwesomeBlazor.Extended.AutoCompleteInput
 
 ```HTML+Razor
-<AutComplete TValue="string" Value="" SearchFunction="" AddNewItemFunction="" /> 
+<AutoCompleteInput TValue="string" Value="" SearchFunction="" AddNewItemFunction="" /> 
 ```
 
 ### Description
-Autocomplete combines a text input with a dropdown list of suggestions that appear as the user types. It allows users to quickly find and select from a list of options, improving the user experience in forms and search fields.
+AutoCompleteInput combines a text input with a dropdown list of suggestions that appear as the user types. It allows users to quickly find and select from a list of options, improving the user experience in forms and search fields.
 Define the search function to look up and present options to the user and optionally the add new item function to customize the behavior of the component.
 
 ### Properties
@@ -29,7 +29,7 @@ Define the search function to look up and present options to the user and option
 
 #### Basic Usage
 ```HTML+Razor
-<AutoComplete TValue="Fruit"
+<AutoCompleteInput TValue="Fruit"
             Label="Select a fruit"
             @bind-Value="selectedFruit"
             MinimumSearchLength="3"
