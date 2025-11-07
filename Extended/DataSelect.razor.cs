@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using WebAwesomeBlazor.Components;
 
 namespace WebAwesomeBlazor.Extended
-{
+{ 
     public partial class DataSelect<TValue> : WAComponentBase
     {
         #region Parameters
