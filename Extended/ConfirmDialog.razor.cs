@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Extended
-{
+{ 
     public partial class ConfirmDialog : WAComponentBase
     {
         #region Parameters
