@@ -1,0 +1,11 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+@code {
+
+    public async Task SetDarkMode(bool DarkMode)
+    {
+        await JSRuntime.InvokeVoidAsync("window.vengage.themeManager.setDarkMode", DarkMode);
+    }
+
+}
