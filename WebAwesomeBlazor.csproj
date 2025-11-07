@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <IsPackable>true</IsPackable>
-	  <AssemblyVersion>1.0.2</AssemblyVersion>
+	  <AssemblyVersion>1.0.3</AssemblyVersion>
   <RootNamespace>WebAwesomeBlazor</RootNamespace>
   <Title>Web Awesome Blazor</Title>
   <PackageProjectUrl></PackageProjectUrl>
