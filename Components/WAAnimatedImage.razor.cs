@@ -64,6 +64,9 @@ namespace WebAwesomeBlazor.Components
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// 
+        /// </summary>
         public void TogglePlay()
         {
             IsPlaying = !IsPlaying;
