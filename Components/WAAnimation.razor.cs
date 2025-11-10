@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,22 +57,24 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public int? Iterations { get; set; }
 
+        /// <summary>
+        /// Triggered when the animation is cancelled
+        /// </summary>
+        [Parameter]
+        public EventCallback AnimationCancelled { get; set; }
+        /// <summary>
+        /// Triggered when the animation is finished
+        /// </summary>
+        [Parameter]
+        public EventCallback AnimationFinished { get; set; }
+        /// <summary>
+        /// Triggered when the animation has started
+        /// </summary>
+        [Parameter]
+        public EventCallback AnimationStarted { get; set; }
 
         #endregion
 
-        #region Lifecycle   
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-            if (firstRender)
-                if (AutoStart)
-                {
-                    Play = true;
-                    StateHasChanged();
-                }
-        }
-
-        #endregion
 
         #region State
         private bool Play { get; set; } = false;
@@ -110,6 +113,81 @@ namespace WebAwesomeBlazor.Components
 
         #endregion
 
+        #region Lifecycle
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.animation.initialize", Id, objRef);
+                if (AutoStart)
+                {
+                    Play = true;
+                    StateHasChanged();
+                }
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                    // if (IsRenderComplete)
+                    // await JSRuntime.InvokeVoidAsync("window.vengage.dialog.dispose", Id);
+                }
+                catch (JSDisconnectedException)
+                {
+                    // do nothing
+                }
+
+                objRef?.Dispose();
+
+                // if (ModalService is not null && IsServiceModal)
+                //     ModalService.OnShow -= OnShowAsync;
+            }
+
+            await base.DisposeAsyncCore(disposing);
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+
+            // if (ModalService is not null && IsServiceModal)
+            //     ModalService.OnShow += OnShowAsync;
+
+
+
+            await base.OnInitializedAsync();
+        }
+
+        #endregion
+
+        #region Event Handlers
+        [JSInvokable]
+        public async Task HandleAnimationCancel()
+        {
+            if (AnimationCancelled.HasDelegate)
+                await AnimationCancelled.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleAnimationFinish()
+        {
+            if (AnimationFinished.HasDelegate)
+                await AnimationFinished.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleAnimationStart()
+        {
+            if (AnimationStarted.HasDelegate)
+                await AnimationStarted.InvokeAsync();
+        }
+        # endregion
+
         #region Public Methods
 
         /// <summary>
@@ -129,6 +207,27 @@ namespace WebAwesomeBlazor.Components
             Play = false;
             StateHasChanged();
         }
+
+        /// <summary>
+        /// Clears all keyframe effects caused by this animation and aborts its playback.
+        /// </summary>
+        public async Task CancelAnimation()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.animation.cancel", Id);
+        }
+        /// <summary>
+        /// Sets the playback time to the end of the animation corresponding to the current playback direction.
+        /// Cannot finish Animation with an infinite target effect end.
+        /// </summary>
+        public async Task FinishAnimation()
+        {
+            if(Iterations != null)
+                await JSRuntime.InvokeVoidAsync("window.vengage.animation.finish", Id);
+        }
+        #endregion
+
+        #region State
+        private DotNetObjectReference<WAAnimation> objRef = default!;
         #endregion
 
     }

@@ -28,6 +28,19 @@ Zoomable frames render iframe content with zoom and interaction controls.
 | HideZoomControls | bool | false | Removes the zoom controls. |
 | DisableInteraction | bool | false | Disables interaction. |
 
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| Loaded   | Emitted when the internal iframe when it finishes loading. |
+| LoadError | Emitted from the internal iframe when it fails to load. |
+
+### Methods
+| Method      | Parameters       | Description                              |
+|-------------|------------------|------------------------------------------|
+| ZoomIn  |   | Zooms in to the next available zoom level.      |
+| ZoomOut |  | Zooms out to the previous available zoom level. |
+
+
 ### Examples
 
 #### External URL, 25% zoom

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,24 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool MouseDraggingEnabled { get; set; } = false;
+
+        /// <summary>
+        /// The aspect ratio of each slide. Default is 16/9
+        /// </summary>
+        [Parameter]
+        public string? AspectRatio { get; set; }
+        /// <summary>
+        /// The amount of padding to apply to the scroll area, allowing adjacent slides to become partially visible as a scroll hint.
+        /// </summary>
+        [Parameter]
+        public string? ScrollHint { get; set; }
+        /// <summary>
+        /// The space between each slide. Default var(--wa-space-m)
+        /// </summary>
+        [Parameter]
+        public string? SlideGap { get; set; }
+        [Parameter]
+        public EventCallback<int> SlideChanged { get; set; }
         #endregion
 
         #region Computed Properties
@@ -74,6 +93,87 @@ namespace WebAwesomeBlazor.Components
                 return (Orientation == CarouselOrientation.Horizontal) ? "horizontal" : "vertical";
             }
         }
+
+        protected override string? StyleNames => BuildStyleNames(Style,
+            ($"--aspect-ratio: {AspectRatio}", !String.IsNullOrEmpty(AspectRatio)),
+            ($"--scroll-hint: {ScrollHint}", !String.IsNullOrEmpty(ScrollHint)),
+            ($"--slide-gap: {SlideGap}", !String.IsNullOrEmpty(SlideGap))
+        );
+        #endregion
+        #region Lifecycle
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.carousel.initialize", Id, objRef);
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                }
+                catch (JSDisconnectedException)
+                {
+                    // do nothing
+                }
+
+                objRef?.Dispose();
+
+            }
+
+            await base.DisposeAsyncCore(disposing);
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+
+            await base.OnInitializedAsync();
+        }
+        #endregion
+
+        #region Public Methods
+        [JSInvokable]
+        public async Task HandleSlideChange(int currentIndex)
+        {
+            if (SlideChanged.HasDelegate)
+            {
+                await SlideChanged.InvokeAsync(currentIndex);
+            }
+        }
+
+        /// <summary>
+        /// Scrolls the carousel to the slide specified by index.
+        /// </summary>
+        /// <param name="index">The index to scroll to</param>
+        public async Task GoToSlideAsync(int index)
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.carousel.goToSlide", Id, index);
+        }
+
+        /// <summary>
+        /// Move the carousel forward by SlidesPerMove slides.
+        /// </summary>
+        public async Task NextSlideAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.carousel.nextSlide", Id);
+        }
+        /// <summary>
+        /// Move the carousel backward by SlidesPerMove slides.
+        /// </summary>
+        /// <returns></returns>
+        public async Task PreviousSlideAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.carousel.previousSlide", Id);
+        }
+
+        #endregion
+        #region State
+        private DotNetObjectReference<WACarousel> objRef = default!;
         #endregion
 
     }

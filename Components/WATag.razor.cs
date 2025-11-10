@@ -46,8 +46,16 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public TagSize Size { get; set; } = TagSize.Inherit;
+        /// <summary>
+        /// Emitted when the tag is removed.
+        /// </summary>
         [Parameter]
         public EventCallback TagRemoved { get; set; }
+        /// <summary>
+        /// Emitted when the remove button is clicked. Set Cancel = true to prevent the tag from being removed.
+        /// </summary>
+        [Parameter]
+        public EventCallback<TagRemovingEventArgs> TagRemoving { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -96,6 +104,9 @@ namespace WebAwesomeBlazor.Components
             }
         }
 
+        protected override string? ClassNames => BuildClassNames(Class, 
+            ("wa-tag-removeable", Removable));
+
         #endregion
 
         #region Lifecycle
@@ -113,15 +124,6 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                try
-                {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
-                }
-                catch (JSDisconnectedException)
-                {
-                    // do nothing
-                }
 
                 objRef?.Dispose();
             }
@@ -131,17 +133,47 @@ namespace WebAwesomeBlazor.Components
         #endregion
 
         #region Event Handlers
+        /// <summary>
+        /// Captures when the remove button is pressed
+        /// </summary>
         [JSInvokable]
-        public async Task HandleTagRemove(string eventType, EventArgs eventArgs)
+        public async Task HandleTagRemove()
+        {
+            var args = new TagRemovingEventArgs();
+            await TagRemoving.InvokeAsync(args);
+
+            if(!args.Cancel)
+            {
+                await this.RemoveAsync();
+            }
+        }
+
+        /// <summary>
+        /// Captures when the tag has been removed
+        /// </summary>
+        [JSInvokable]
+        public async Task HandleTagRemoved()
         {
             await TagRemoved.InvokeAsync();
         }
 
         #endregion
 
+        #region Public Methods
+        /// <summary>
+        /// Remove (hide the tag).
+        /// </summary>
+        public async Task RemoveAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.tag.removeTag", Id, objRef);
+        }
+        #endregion
+
         #region State
         private DotNetObjectReference<WATag> objRef = default!;
         #endregion
+
+
 
     }
 

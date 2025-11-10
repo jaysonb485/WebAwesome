@@ -26,6 +26,18 @@ Carousels display an arbitrary number of content slides along a horizontal or ve
 | SlidesPerMove | int | 1 | Specifies the number of slides the carousel will advance when scrolling, useful when specifying a slides-per-page greater than one. It can't be higher than slides-per-page. |
 | Orientation | CarouselOrientation | CarouselOrientation.Horizontal | Specifies the orientation in which the carousel will lay out. |
 | MouseDraggingEnabled | bool | false | When true, it is possible to scroll through the slides by dragging them with the mouse. |
+| AspectRatio | string | `16/9` | The aspect ratio of each slide. Default is 16/9 |
+| ScrollHint | string |  | The amount of padding to apply to the scroll area, allowing adjacent slides to become partially visible as a scroll hint. |
+| SlideGap | string | `var(--wa-space-m)` | The space between each slide. |
+| SlideChanged | EventCallback<int> |  | Triggered when the active slide has changed. Provides the index of the new slide. |
+
+
+### Methods
+| Method      | Parameters       | Description                              |
+|-------------|------------------|------------------------------------------|
+| GoToSlideAsync  | index: int   | Scrolls the carousel to the slide specified by index.      |
+| NextSlideAsync |  | Move the carousel forward by SlidesPerMove slides.|
+| PreviousSlideAsync |  | Move the carousel backward by SlidesPerMove slides. |
 
 ### Examples
 

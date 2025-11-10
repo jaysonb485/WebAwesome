@@ -57,6 +57,21 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public RatingSize Size { get; set; } = RatingSize.Inherit;
+        /// <summary>
+        /// The inactive color for symbols.
+        /// </summary>
+        [Parameter]
+        public string? SymbolColor { get; set; }
+        /// <summary>
+        /// The active color for symbols.
+        /// </summary>
+        [Parameter]
+        public string? SymbolColorActive { get; set; }
+        /// <summary>
+        /// The spacing to use around symbols.
+        /// </summary>
+        [Parameter]
+        public string? SymbolSpacing { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -74,6 +89,13 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+        protected override string? StyleNames => BuildStyleNames(Style, 
+            ($"--symbol-color:{SymbolColor}", !String.IsNullOrEmpty(SymbolColor)),
+            ($"--symbol-color-active:{SymbolColorActive}", !String.IsNullOrEmpty(SymbolColorActive)),
+            ($"--symbol-spacing:{SymbolSpacing}", !String.IsNullOrEmpty(SymbolSpacing))
+            );
+
         #endregion
 
         #region Lifecycle
@@ -89,20 +111,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                try
-                {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
-                }
-                catch (JSDisconnectedException)
-                {
-                    // do nothing
-                }
-
                 objRef?.Dispose();
-
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
 
             await base.DisposeAsyncCore(disposing);
@@ -113,9 +122,18 @@ namespace WebAwesomeBlazor.Components
             objRef ??= DotNetObjectReference.Create(this);
 
             AdditionalAttributes ??= new Dictionary<string, object>();
+            if (ValueExpression != null)
+            {
+                try
+                {
+                    fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.Error.WriteLine($"Invalid ValueExpression: {ex.Message}");
+                }
 
-            fieldIdentifier = FieldIdentifier.Create(ValueExpression);
-
+            }
             await base.OnInitializedAsync();
         }
         #endregion

@@ -31,6 +31,7 @@ A brief description of what the Component Name does and its purpose within the V
 | Offset | int | 0 | The distance in pixels from which to offset the panel along its trigger. |
 | OpenOnHover | bool | false | Opens and closes the menu when the user hovers over the trigger button. |
 | Open | bool | false | Opens or closes the dropdown. |
+| ItemSelected | EventCallback<string> |  | Emitted when a dropdown item is selected. Provides the dropdown value. |
 
 ### Examples
 

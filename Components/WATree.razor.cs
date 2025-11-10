@@ -139,15 +139,6 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                try
-                {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
-                }
-                catch (JSDisconnectedException)
-                {
-                    // do nothing
-                }
 
                 objRef?.Dispose();
 

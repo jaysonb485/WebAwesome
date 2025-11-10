@@ -19,7 +19,10 @@ Tab groups organize content into a container that shows one section at a time. S
 |----------|--------|---------|------------------------------------------|
 | ShowScrollControls | bool | true | Enables the scroll arrows that appear when tabs overflow. Defaults to true. |
 | ActiveTab | string |  | Sets the active tab. Set to the `name` of the tab to make active. |
-| TabPlacement | TabGroupTabPlacement | TabGroupTabPlacement.Top |  |
+| TabPlacement | TabGroupTabPlacement | TabGroupTabPlacement.Top | The placement of the tabs. |
+| IndicatorColor | string | | The color of the active tab indicator. |
+| TrackColor | string |  | The color of the indicator's track (the line that separates tabs from panels). |
+| TrackWidth | string |  | The width of the indicator's track (the line that separates tabs from panels). |
 
 
 ### Events
