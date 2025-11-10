@@ -3,6 +3,9 @@
 
 Currently supports Web Awesome 3.0.0.
 
+# Changelog
+[Version 1.0.4](/docs/CHANGELOG.md)
+
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
 ```
@@ -43,7 +46,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 
 
 # Web Awesome components
-- WAAnimatedImage (coming soon)
+- [WAAnimatedImage](/docs/WAAnimatedImage.md))
 - [WAAnimation](/docs/WAAnimation.md)
 - [WAAvatar](/docs/WAAvatar.md)
 - [WABadge](/docs/WABadge.md)
@@ -103,8 +106,6 @@ Some functions have not been included as there are suitable .NET functions avail
 - [FormatDate](https://webawesome.com/docs/components/format-date/) 
 - [MutationObserver](https://webawesome.com/docs/components/mutation-observer/)
 
-# Extended components (Coming soon)
-New components built on top of the Web Awesome library for additional functionality:
 # Extended components 
 Additional components built on top of the Web Awesome library for additional functionality:
 - [DataSelect](/docs/Extended/DataSelect.md)
