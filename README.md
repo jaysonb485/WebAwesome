@@ -4,7 +4,7 @@
 Currently supports Web Awesome 3.0.0.
 
 # Changelog
-[Version 1.0.4](/docs/CHANGELOG.md)
+[Version 1.0.5](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -34,6 +34,7 @@ Add the following to your `_Imports.razor` file:
 ```HTML+Razor
 @using WebAwesomeBlazor
 @using WebAwesomeBlazor.Components
+@using WebAwesomeBlazor.Extended
 ```
 
 Then you can use the components in your Blazor pages, for example:
