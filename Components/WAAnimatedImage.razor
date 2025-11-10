@@ -1,0 +1,26 @@
+﻿@inherits WAComponentBase
+
+<wa-animated-image @ref="@Element"
+                   id="@Id"
+                   @attributes="@AdditionalAttributes"
+                   style="@StyleNames"
+                   class="@ClassNames"
+                   slot="@Slot"
+                   src="@AnimationUrl"
+                   alt="@AltText"
+                   play="@IsPlaying">
+    @if (PlayIcon != null || !String.IsNullOrWhiteSpace(PlayIconName))
+    {
+        <WAIcon Icon="@PlayIcon" IconName="@PlayIconName" Slot="play-icon"></WAIcon>
+    }
+
+    @if (PauseIcon != null || !String.IsNullOrWhiteSpace(PauseIconName))
+    {
+        <WAIcon Icon="@PauseIcon" IconName="@PauseIconName" Slot="pause-icon"></WAIcon>
+    }
+    @ChildContent
+</wa-animated-image>
+
+@code {
+
+}
