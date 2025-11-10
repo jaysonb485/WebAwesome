@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,16 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public RadioAppearance Appearance { get; set; } = RadioAppearance.Default;
+        /// <summary>
+        /// The color of the checked icon.
+        /// </summary>
+        [Parameter]
+        public string? CheckedIconColor { get; set; }
+        /// <summary>
+        /// The size of the checked icon relative to the radio.
+        /// </summary>
+        [Parameter]
+        public double? CheckedIconScale { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -66,6 +77,11 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+        protected override string? StyleNames => BuildStyleNames(Style,
+    ($"--checked-icon-color: {CheckedIconColor}", !String.IsNullOrEmpty(CheckedIconColor)),
+    ($"--checked-icon-scale:  {CheckedIconScale}", CheckedIconScale.HasValue)
+    );
         #endregion
 
 

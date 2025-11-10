@@ -26,7 +26,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         //[Parameter]
         //public bool Closeable { get; set; } = false;
-        
+
         //TODO: Allow closeable tabs
 
         /// <summary>
@@ -40,6 +40,31 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool Disabled { get; set; } = false;
+        /// <summary>
+        /// The tab panel's padding.
+        /// </summary>
+        [Parameter]
+        public string? PanelPadding { get; set; }
+        /// <summary>
+        /// CSS Panel attributes to apply to the tab panel.
+        /// </summary>
+        [Parameter]
+        public string? PanelStyle { get; set; }
+        /// <summary>
+        /// CSS Class attrributes to apply to the tab panel.
+        /// </summary>
+        [Parameter]
+        public string? PanelClass { get; set; }
+        #endregion
+        #region Computed Properties
+
+        #endregion
+
+        #region State
+        private string? PanelStyleNames => BuildStyleNames(PanelStyle,
+         ($"--padding: {PanelPadding}", !String.IsNullOrEmpty(PanelPadding))
+        );
+        private string? PanelClassNames => BuildClassNames(PanelClass);
         #endregion
 
     }

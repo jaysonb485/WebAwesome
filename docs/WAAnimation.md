@@ -23,12 +23,17 @@ To animate an element, wrap it in `<WAAnimation>` and set an animation `Name`. T
 | Easing	| string | `linear` | The easing function to use for the animation. This can be a Web Awesome easing function or a custom easing function such as cubic-bezier(0, 1, .76, 1.14).|
 | EndDelay    | int | `0`   | The number of milliseconds to delay after the active period of an animation sequence.                    |
 | Iterations    | int | `null`   | The number of iterations to run before the animation completes. Defaults to `null`, which loops. |
+| AnimationCancelled | EventCallback |  | Triggered when the animation is cancelled |
+| AnimationFinished | EventCallback |  | Triggered when the animation is finished |
+| AnimationStarted | EventCallback |  | Triggered when the animation has started |
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | StartAnimation  |   | Starts the animation |
-| StopAnimation | | Stops the animation |
+| StopAnimation |  | Stops the animation |
+| FinishAnimation |  | Sets the playback time to the end of the animation corresponding to the current playback direction. Cannot finish Animation with an infinite target effect end. |
+| CancelAnimation |  | Clears all keyframe effects caused by this animation and aborts its playback. |
 
 
 ### Examples

@@ -23,7 +23,13 @@ Tags are used as labels to organize things or to indicate a selection.
 ### Events
 | Event Name  | Description                              |
 |-------------|------------------------------------------|
-| TagRemoved | Triggered when the tag's remove button is clicked and the tag is removed. |
+| TagRemoving<TagRemovingEventArgs> | When Removable, triggered when the tag's remove button is clicked, before the tag is removed. To cancel removal set `TagRemovingEventArgs.Cancel = true`. See example below. |
+| TagRemoved | Triggered when the tag is removed. |
+
+### Methods
+| Method      | Parameters       | Description                              |
+|-------------|------------------|------------------------------------------|
+| RemoveAsync  |   | Removes the tag. Opacity is set to 0 and Display is `none`.      |
 
 ### Examples
 
@@ -35,7 +41,26 @@ Tags are used as labels to organize things or to indicate a selection.
 
 #### Display properties and removable
 ```HTML+Razor
-<WATag Text="Label" Size="TagSize.Large" Variant="TagVariant.Success" Appearance="TagAppearance.Accent" Removable="true" RemoveClicked="TagRemoved" />
+<WATag @ref="tag" Text="Label" Size="TagSize.Large" Variant="TagVariant.Success" Appearance="TagAppearance.Accent" Removable="true" TagRemoved="TagRemoved" TagRemoving="TagRemoving" />
+
+@code 
+{
+	WATag tag;
+	void TagRemoved()
+	{
+	
+	}
+
+	async Task TagRemoving(TagRemovingEventArgs e)
+	{
+		// Add logic here to determine if the tag should be removed.
+		// Tag to be removed:
+		e.Cancel = true;
+
+		// Manually remove the tag:
+		await tag.RemoveAsync();
+	}
+}
 ```
 
 ![WATag](https://github.com/user-attachments/assets/bd4da2d9-f73f-4631-bbb0-b3f8de39466b)

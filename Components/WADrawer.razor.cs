@@ -100,20 +100,9 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                try
-                {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
-                }
-                catch (JSDisconnectedException)
-                {
-                    // do nothing
-                }
-
+                
                 objRef?.Dispose();
 
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
 
             await base.DisposeAsyncCore(disposing);
@@ -129,7 +118,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.dialog.initialize", Id, objRef);
+                await JSRuntime.InvokeVoidAsync("window.vengage.drawer.initialize", Id, objRef);
             }
         }
         #endregion
@@ -148,7 +137,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, false);
+            await JSRuntime.InvokeVoidAsync("window.vengage.drawer.change", Id, false);
         }
 
         /// <summary>
@@ -157,7 +146,7 @@ namespace WebAwesomeBlazor.Components
         public async Task ShowAsync()
         {
             
-            await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, true);
+            await JSRuntime.InvokeVoidAsync("window.vengage.drawer.change", Id, true);
             IsVisible = true;
             await InvokeAsync(StateHasChanged);
 

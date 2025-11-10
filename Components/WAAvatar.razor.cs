@@ -51,6 +51,12 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public AvatarShape Shape { get; set; } = AvatarShape.Circle;
 
+        /// <summary>
+        /// The size of the avatar in CSS units.
+        /// </summary>
+        [Parameter]
+        public string? Size { get; set; }
+
         #endregion
 
         #region Computed Properties
@@ -98,7 +104,11 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+        protected override string? StyleNames => BuildStyleNames(Style,
+            ($"--size: {Size}", !String.IsNullOrEmpty(Size))
+        );
         #endregion
 
-     }
+    }
 }

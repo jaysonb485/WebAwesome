@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,6 +100,16 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public CopyButtonTooltipPlacement TooltipPlacement { get; set; } = CopyButtonTooltipPlacement.Top;
+        /// <summary>
+        /// Emitted when the data has been copied.
+        /// </summary>
+        [Parameter]
+        public EventCallback Copied { get; set; }
+        /// <summary>
+        /// Emitted when the data could not be copied.
+        /// </summary>
+        [Parameter]
+        public EventCallback CopyFailed { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -136,6 +147,56 @@ namespace WebAwesomeBlazor.Components
         }
         #endregion
 
+        #region Lifecycle
+        protected override void OnInitialized()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+
+            AdditionalAttributes ??= new Dictionary<string, object>();
+
+            base.OnInitialized();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.copybutton.initialize", Id, objRef);
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+
+                objRef?.Dispose();
+
+            }
+
+            await base.DisposeAsyncCore(disposing);
+        }
+
+        #endregion
+
+        #region State
+        private DotNetObjectReference<WACopyButton> objRef = default!;
+        #endregion
+
+        #region Public Methods
+        [JSInvokable]
+        public async Task HandleCopy()
+        {
+            if(Copied.HasDelegate)
+                await Copied.InvokeAsync();
+        }
+        [JSInvokable]
+        public async Task HandleCopyError()
+        {
+            if(CopyFailed.HasDelegate)
+                await CopyFailed.InvokeAsync();
+        }
+        #endregion
 
     }
 }

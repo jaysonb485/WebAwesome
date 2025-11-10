@@ -18,6 +18,8 @@ Scrollers create an accessible container while providing visual cues that help u
 | ShowShadow | bool | true | Shows the shadows.  |
 | ShowScrollbar | bool | true | Shows the visible scrollbar. |
 | Orientation | ScrollerOrientation | ScrollerOrientation.Horizontal | The scroller's orientation. |
+| ShadowColor | string | `var(--wa-color-surface-default)` | The base color of the shadow. |
+| ShadowSize | string | `2rem` | The size of the shadow. |
 
 ### Examples
 
