@@ -35,6 +35,21 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public EventCallback<string> ActiveTabChanged { get; set; } = default!;
+        /// <summary>
+        /// The color of the active tab indicator.
+        /// </summary>
+        [Parameter]
+        public string? IndicatorColor { get; set; }
+        /// <summary>
+        /// The color of the indicator's track (the line that separates tabs from panels).
+        /// </summary>
+        [Parameter]
+        public string? TrackColor { get; set; }
+        /// <summary>
+        /// The width of the indicator's track (the line that separates tabs from panels).
+        /// </summary>
+        [Parameter]
+        public string? TrackWidth { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -52,6 +67,12 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+        protected override string? StyleNames => BuildStyleNames(Style,
+     ($"--indicator-color: {IndicatorColor}", !String.IsNullOrEmpty(IndicatorColor)),
+     ($"--track-color: {TrackColor}", !String.IsNullOrEmpty(TrackColor)),
+     ($"--track-width: {TrackWidth}", !String.IsNullOrEmpty(TrackWidth))
+    );
         #endregion
 
         #region Event Handlers

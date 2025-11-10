@@ -88,20 +88,9 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                try
-                {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.vengage.dialog.dispose", Id);
-                }
-                catch (JSDisconnectedException)
-                {
-                    // do nothing
-                }
-
+                
                 objRef?.Dispose();
 
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
 
             await base.DisposeAsyncCore(disposing);
@@ -110,10 +99,6 @@ namespace WebAwesomeBlazor.Components
         protected override async Task OnInitializedAsync()
         {
             objRef ??= DotNetObjectReference.Create(this);
-
-            // if (ModalService is not null && IsServiceModal)
-            //     ModalService.OnShow += OnShowAsync;
-
 
 
             await base.OnInitializedAsync();

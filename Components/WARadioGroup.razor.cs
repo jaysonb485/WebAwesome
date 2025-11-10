@@ -85,9 +85,18 @@ namespace WebAwesomeBlazor.Components
         protected override void OnInitialized()
         {
             AdditionalAttributes ??= new Dictionary<string, object>();
+            if (ValueExpression != null)
+            {
+                try
+                {
+                    fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.Error.WriteLine($"Invalid ValueExpression: {ex.Message}");
+                }
 
-            fieldIdentifier = FieldIdentifier.Create(ValueExpression);
-
+            }
             base.OnInitialized();
         }
         #endregion

@@ -28,7 +28,8 @@ Copies text data to the clipboard when the user clicks the trigger.
 | Disabled | bool  | false  | Disables the copy button.  |
 | FeedbackDuration  | int  | 1000 | The length of time to show feedback before restoring the default trigger.  |
 | TooltipPlacement  | CopyButtonTooltipPlacement  |  CopyButtonTooltipPlacement.Top | The preferred placement of the tooltip.  |
-
+| Copied | EventCallback |  | Emitted when the data has been copied.  |
+| CopyFailed | EventCallback |  | Emitted when the copy operation fails. |
 
 ### Examples
 

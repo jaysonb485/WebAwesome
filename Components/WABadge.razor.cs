@@ -46,9 +46,6 @@ namespace WebAwesomeBlazor.Components
         public BadgeVariant Variant { get; set; } = BadgeVariant.Brand;
 
 
-
-
-
         #endregion
 
         #region Computed  Properties

@@ -22,7 +22,8 @@ Radio option allow the user to select a single option from a [WARadioGroup](/doc
 | Disabled | bool | false | Disables the option |
 | Size | RadioSize | RadioSize.Inherit | The options's size. When used inside a radio group, the size will be determined by the radio group's size so this attribute can typically be omitted. |
 | Appearance | RadioAppearance | RadioAppearance.Default | The appearance of the option. |
-
+| CheckedIconColor | string |  | The color of the checked icon. Accepts any valid CSS color value. |
+| CheckedIconScale | double |  | The size of the checked icon relative to the radio. Default is 1. |
 
 ### Examples
 

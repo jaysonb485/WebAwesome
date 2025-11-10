@@ -23,6 +23,9 @@ Tab panels are used inside [WATabGroup](/docs/WATabGroup) to display tabbed cont
 | Label | string |  | Label to display on the tab. Use this to display simple text label. Otherwise, use `TabContent` |
 | Name | string |  | Required. The name of the tab panel. |
 | Disabled | bool | false |  Disables the tab and prevents selection. |
+| PanelPadding | string |  | The tab panel's padding. |
+| PanelStyle | string |  | CSS style to apply to the tab panel. Use `Style` to apply styles to the tab. |
+| PanelClass | string |  | CSS class to apply to the tab panel. Use `Class` to apply classes to the tab. |
 
 
 ### Examples

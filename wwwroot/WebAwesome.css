@@ -70,3 +70,6 @@
     overflow: auto;
 }
 
+.wa-tag-removeable {
+    transition: opacity var(--wa-transition-normal);
+}

@@ -6,7 +6,7 @@
         class="@ClassNames"
         slot="@Slot"
         panel="@Name"
-        Disabled="@Disabled">
+        disabled="@Disabled">
     @TabContent
     @Label
 </wa-tab>
@@ -17,8 +17,8 @@
     </wa-button>
 } *@
 <wa-tab-panel name="@Name"
-              style="@StyleNames"
-              class="@ClassNames">
+              style="@PanelStyleNames"
+              class="@PanelClassNames">
     @PanelContent
     @ChildContent
 </wa-tab-panel>
