@@ -19,6 +19,7 @@ Avatars are used to represent a person or object.
 | LazyLoading | bool | false | Indicates how the browser should load the image. |
 | Name    | string |        | Set the name to use as initials if an image is not provided. <br/> The initials will use first letter of first name and last name (if provided). <br /> he name also provides a label to use to describe the avatar to assistive devices.                  |
 | Shape	| AvatarShape | AvatarShape.Circle | The shape of the avatar (Circle, Square, Rounded)                  |
+| Size | string |  | The size of the avatar in CSS units |
 
 ### Examples
 

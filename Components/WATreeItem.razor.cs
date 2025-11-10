@@ -49,32 +49,6 @@ namespace WebAwesomeBlazor.Components
             );
         #endregion
 
-        #region Lifecycle
-
-        #endregion
-
-        #region Event Handlers
-
-        #endregion
-
-        #region State
-
-        #endregion
-
-
-
-
-        #region Private Methods
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Enums
-
-        #endregion
     }
 
 

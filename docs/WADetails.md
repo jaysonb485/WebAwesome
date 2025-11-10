@@ -30,6 +30,13 @@ Details show a brief summary and expand to show additional content.
 | GroupName  | string  |   | Groups related details elements. When one opens, others with the same name will close.  |
 | IconPlacement  | DetailsIconPlacement  | DetailsIconPlacement.End  | The location of the expand/collapse icon. |
 
+### Methods
+| Method | Parameters | Description                              |
+|----------| ------ | ------------------------------------------|
+| ShowAsync | | Shows the details.  |
+| HideAsync | | Hides the details.  |
+
+
 ### Examples
 
 #### Basic Usage

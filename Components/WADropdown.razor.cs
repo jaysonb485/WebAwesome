@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +81,8 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool Open { get; set; } = false;
+        [Parameter]
+        public EventCallback<string> ItemSelected { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -141,5 +144,50 @@ namespace WebAwesomeBlazor.Components
         }
         #endregion
 
+
+        #region Lifecycle
+        protected override void OnInitialized()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+
+            AdditionalAttributes ??= new Dictionary<string, object>();
+
+            base.OnInitialized();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.dropdown.initialize", Id, objRef);
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+
+                objRef?.Dispose();
+
+            }
+
+            await base.DisposeAsyncCore(disposing);
+        }
+
+        #endregion
+
+        #region State
+        private DotNetObjectReference<WADropdown> objRef = default!;
+        #endregion
+
+        #region Event handlers
+        [JSInvokable]
+        public async Task HandleItemSelected(string itemValue)
+        {
+            if(ItemSelected.HasDelegate)
+                await ItemSelected.InvokeAsync(itemValue);
+        }
+        #endregion
     }
 }

@@ -87,6 +87,13 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public CardOrientation Orientation { get; set; } = CardOrientation.Vertical;
 
+        /// <summary>
+        /// The amount of space around and between sections of the card. Expects a single value.
+        /// Default is var(--wa-space-l).
+        /// </summary>
+        [Parameter]
+        public string? Spacing { get; set; }
+
 
         #endregion
 
@@ -121,6 +128,9 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+        protected override string? StyleNames => BuildStyleNames(Style,
+            ($"--spacing: {Spacing}", !String.IsNullOrEmpty(Spacing))
+        );
         #endregion
 
 

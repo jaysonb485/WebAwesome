@@ -45,6 +45,21 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public string? Hint { get; set; }
+        /// <summary>
+        /// The height of the switch control in CSS units.
+        /// </summary>
+        [Parameter]
+        public string? SwitchHeight { get; set; }
+        /// <summary>
+        /// The width of the switch control in CSS units.
+        /// </summary>
+        [Parameter]
+        public string? SwitchWidth { get; set; }
+        /// <summary>
+        /// The size of the thumb (the inner toggle) in CSS units.
+        /// </summary>
+        [Parameter]
+        public string? ThumbSize { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -62,15 +77,31 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+        protected override string? StyleNames => BuildStyleNames(Style,
+             ($"--width: {SwitchWidth}", !String.IsNullOrEmpty(SwitchWidth)),
+             ($"--height: {SwitchHeight}", !String.IsNullOrEmpty(SwitchHeight)),
+             ($"--thumb-size: {ThumbSize}", !String.IsNullOrEmpty(ThumbSize))
+            );
+
         #endregion
 
         #region Lifecycle
         protected override void OnInitialized()
         {
             AdditionalAttributes ??= new Dictionary<string, object>();
+            if (ValueExpression != null)
+            {
+                try
+                {
+                    fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.Error.WriteLine($"Invalid ValueExpression: {ex.Message}");
+                }
 
-            fieldIdentifier = FieldIdentifier.Create(ValueExpression);
-
+            }
             base.OnInitialized();
         }
         #endregion
@@ -86,9 +117,6 @@ namespace WebAwesomeBlazor.Components
         #region State
         private FieldIdentifier fieldIdentifier = default!;
         #endregion
-
-
-
 
         #region Private Methods
 

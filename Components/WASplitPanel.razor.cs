@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace WebAwesomeBlazor.Components
         /// The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the container's initial size.
         /// </summary>
         [Parameter]
-        public int? PositionPercent { get; set; } = 50;
+        public double? PositionPercent { get; set; } = 50;
 
         /// <summary>
         /// The current position of the divider from the primary panel's edge in pixels.
@@ -98,6 +99,8 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public string? PrimaryMaxWidth { get; set; }
+        [Parameter]
+        public EventCallback<double> PositionChanged { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -135,10 +138,54 @@ namespace WebAwesomeBlazor.Components
         );
         #endregion
 
-        #region Events
-        //TODO: Add wa-reposition event listener
+
+        #region Lifecycle
+        protected override void OnInitialized()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+
+            AdditionalAttributes ??= new Dictionary<string, object>();
+
+            base.OnInitialized();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.splitPanel.initialize", Id, objRef);
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                objRef?.Dispose();
+
+
+            }
+
+            await base.DisposeAsyncCore(disposing);
+        }
+
         #endregion
 
+        #region State
+        private DotNetObjectReference<WASplitPanel> objRef = default!;
+        #endregion
+
+        #region Private Methods
+        [JSInvokable]
+        public async Task HandleDividerChange(double newPosition)
+        {
+            PositionPercent = newPosition;
+
+            if (PositionChanged.HasDelegate)
+                await PositionChanged.InvokeAsync(newPosition);
+        }
+
+        #endregion
     }
 
 

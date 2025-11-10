@@ -39,6 +39,7 @@ Cards can be used to group related subjects in a container.
 | ImageSource | string | | An optional image to render at the start of the card. |
 | ImageAltText | string | | Alt text for the optional image. |
 | Orientation | CardOrientation | CardOrientation.Vertical | Renders the card's orientation. |
+| Spacing | string | `var(--wa-space-l)` | The amount of space around and between sections of the card. Expects a single value. |
 
 #### Basic Usage
 ```HTML+Razor

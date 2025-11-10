@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,9 +95,84 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool DisableInteraction { get; set; } = false;
+        /// <summary>
+        /// Emitted when the internal iframe when it finishes loading.
+        /// </summary>
+        [Parameter]
+        public EventCallback Loaded { get; set; }
+        /// <summary>
+        /// Emitted from the internal iframe when it fails to load.
+        /// </summary>
+        [Parameter]
+        public EventCallback<string> LoadError { get; set; }
+        #endregion
+        #region Lifecycle
+        protected override void OnInitialized()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+
+            AdditionalAttributes ??= [];
+
+            base.OnInitialized();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.initialize", Id, objRef);
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                objRef?.Dispose();
+            }
+
+            await base.DisposeAsyncCore(disposing);
+        }
+
+        #endregion
+
+        #region State
+        private DotNetObjectReference<WAZoomableFrame> objRef = default!;
+        #endregion
+
+        #region Private Methods
+        [JSInvokable]
+        public async Task HandleZoomableLoaded()
+        {
+            if (Loaded.HasDelegate)
+                await Loaded.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleZoomableError(int HttpErrorCode)
+        {
+            if (LoadError.HasDelegate)
+                await LoadError.InvokeAsync(HttpErrorCode.ToString());
+        }
         #endregion
 
 
+        #region Public Methods
+        /// <summary>
+        /// Zooms in to the next available zoom level.
+        /// </summary>
+        public async Task ZoomInAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.zoomIn", Id);
+        }
+        /// <summary>
+        /// Zooms out to the previous available zoom level.
+        /// </summary>
+        public async Task ZoomOutAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.zoomOut", Id);
+        }
+        #endregion
     }
 
 

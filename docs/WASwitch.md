@@ -18,6 +18,9 @@ Switches allow the user to toggle an option on or off.
 | Size | SwitchSize | SwitchSize.Inherit | The switch's size. |
 | Disabled | bool | false | Disables the switch. |
 | Hint | string |  | The switch's hint. If you need to display HTML, use the hint slot instead. |
+| SwitchWidth | string |  | The width of the switch in CSS units. |
+| SwitchHeight | string |  | The height of the switch in CSS units.  |
+| ThumbSize | string |  | The size of the thumb (inner toggle) in CSS units. |
 
 ### Examples
 

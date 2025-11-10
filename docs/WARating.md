@@ -20,6 +20,9 @@ Ratings give users a way to quickly view and provide feedback.
 | ReadOnly | bool | false | Makes the rating readonly. |
 | Disabled | bool | false | Disables the rating. |
 | Size | RatingSize | RatingSize.Inherit | The component's size. |
+| SymbolColor | string |  | The inactive color for symbols. |
+| SymbolColorActive | string |  | The active color for symbols. |
+| SymbolSpacing | string |  | The spacing to use around symbols. |
 
 ### Examples
 

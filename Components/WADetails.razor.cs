@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -110,6 +111,73 @@ namespace WebAwesomeBlazor.Components
                     _ => "end"
                 };
             }
+        }
+        #endregion
+
+
+        #region Lifecycle
+        protected override void OnInitialized()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+
+            AdditionalAttributes ??= new Dictionary<string, object>();
+
+            base.OnInitialized();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.details.initialize", Id, objRef);
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+
+                objRef?.Dispose();
+
+            }
+
+            await base.DisposeAsyncCore(disposing);
+        }
+
+        #endregion
+
+        #region State
+        private DotNetObjectReference<WADetails> objRef = default!;
+        #endregion
+
+        #region Public Methods
+        /// <summary>
+        /// Shows the details.
+        /// </summary>
+        public async Task ShowAsync()
+        {
+
+                await JSRuntime.InvokeVoidAsync("window.vengage.details.show", Id);
+        }
+        /// <summary>
+        /// Hides the details.
+        /// </summary>
+        public async Task HideAsync()
+        {
+                await JSRuntime.InvokeVoidAsync("window.vengage.details.hide", Id);
+        }
+
+        [JSInvokable]
+        public void HandleDetailsShow()
+        {
+            IsOpen = true;
+        }
+
+        [JSInvokable]
+        public void HandleDetailsHide()
+        {
+            IsOpen = false;
         }
         #endregion
 
