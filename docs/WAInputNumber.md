@@ -31,7 +31,7 @@ A numeric input component that allows users to enter and manipulate numerical va
 | EndIconName    | string  |       |The name of the icon to draw in the end slot. Available names depend on the icon library being used.  |
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| Step | double |  | Specifies the granularity that the value must adhere to. |
+| Step | decimal |  | Specifies the granularity that the value must adhere to. |
 | Max | double |  | The input's maximum value |
 | Min | double |  | The input's minimum value |
 

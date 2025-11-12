@@ -117,7 +117,7 @@ namespace WebAwesomeBlazor.Components
         /// Default value is null.
         /// </remarks>
         [Parameter]
-        public double? Step { get; set; }
+        public decimal? Step { get; set; }
 
         /// <summary>
         /// The input's maximum value
