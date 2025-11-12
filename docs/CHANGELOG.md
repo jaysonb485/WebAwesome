@@ -1,4 +1,9 @@
 ﻿# Changelog
+## Version 1.0.4.1 - 2025-11-12
+- WAInputNumber:
+  * Step property was not passing through to the resulting input box
+  * Changed step property to `decimal` to allow greater precision definition
+
 ## Version 1.0.4 - 2025-11-10
 
 - WAAnimation: 
