@@ -1,4 +1,11 @@
 ﻿# Changelog
+
+## Version 1.0.5 - 2025-11-18
+- [ConfirmDialog](/docs/Extended/ConfirmDialog.md):
+  * New component, ConfirmDialog extends WADialog to provide a simple yes/no prompt to users with feedback to the application.
+- WADialog:
+  * Small change behind the scenes to accomodate ConfirmDialog.
+
 ## Version 1.0.4.1 - 2025-11-12
 - WAInputNumber:
   * Step property was not passing through to the resulting input box
