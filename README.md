@@ -4,7 +4,7 @@
 Currently supports Web Awesome 3.0.0.
 
 # Changelog
-[Version 1.0.4.1](/docs/CHANGELOG.md)
+[Version 1.0.5](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -16,7 +16,7 @@ dotnet add package WebAwesomeBlazor
 Register your [Web Awesome](https://webawesome.com) account.
 Create your project and obtain your unique project code.
 
-Add the project code to your App.razor or wwwroot/index.html file in the `<HEAD>` section along with the extra utility files for this package:
+Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<HEAD>` section along with the extra utility files for this package:
 ```HTML
     <script src="https://kit.webawesome.com/---YOUR KIT CODE---.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
@@ -34,6 +34,12 @@ Add the following to your `_Imports.razor` file:
 ```HTML+Razor
 @using WebAwesomeBlazor
 @using WebAwesomeBlazor.Components
+@using WebAwesomeBlazor.Extended
+```
+
+If you plan to use `ConfirmDialog`, add the following to your `Program.cs`:
+```CSharp
+builder.Services.AddWebAwesome();
 ```
 
 Then you can use the components in your Blazor pages, for example:
@@ -46,7 +52,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 
 
 # Web Awesome components
-- [WAAnimatedImage](/docs/WAAnimatedImage.md))
+- [WAAnimatedImage](/docs/WAAnimatedImage.md)
 - [WAAnimation](/docs/WAAnimation.md)
 - [WAAvatar](/docs/WAAvatar.md)
 - [WABadge](/docs/WABadge.md)
@@ -111,10 +117,10 @@ Additional components built on top of the Web Awesome library for additional fun
 - [DataSelect](/docs/Extended/DataSelect.md)
 - [AutoCompleteInput](/docs/Extended/AutoComplete.md)
 - [DarkModeToggle](/docs/Extended/DarkModeToggle.md)
+- [ConfirmDialog](/docs/Extended/ConfirmDialog.md)
 
 ## Coming soon:
 - NavTree
-- ConfirmDialog
 
 
 # Credits

@@ -1,0 +1,58 @@
+﻿    <WADialog @ref="dialog" Title="@_title" DialogClosed="DialogClosed" >
+        <HeaderActions></HeaderActions>
+        <DialogBody>
+            <p>@_message</p>
+        </DialogBody>
+        <DialogFooter>
+            <div class="wa-cluster">
+                <WAButton OnClick="() => Confirm(false)" Variant="ButtonVariant.Neutral">@_declineText</WAButton>
+                <WAButton OnClick="() => Confirm(true)" Variant="ButtonVariant.Brand">@_confirmText</WAButton>
+            </div>
+        </DialogFooter>
+    </WADialog>
+
+
+@code {
+    [Inject] private IConfirmDialog _confirmDialog { get; set; } = default!;
+    private string _title = "";
+    private string _message = "";
+    private string _confirmText = "Yes";
+    private string _declineText = "No";
+    private bool _visible = false;
+    private WADialog dialog = default!;
+
+    protected override void OnInitialized()
+    {
+        if (_confirmDialog is ConfirmDialogService svc)
+        {
+            svc.OnShow += ShowDialog;
+        }
+    }
+
+    private void ShowDialog(string title, string message, string? confirmText, string? declineText)
+    {
+        _title = title;
+        _message = message;
+        _visible = true;
+        Task.Run(() => InvokeAsync(StateHasChanged));
+        dialog.Show();
+    }
+
+    private void Confirm(bool result)
+    {
+        _visible = false;
+        dialog.Hide();
+        if (_confirmDialog is ConfirmDialogService svc)
+        {
+            svc.SetResult(result);
+        }
+    }
+
+    private void DialogClosed(string elementId)
+    {
+        Console.WriteLine($"Dialog closed via {elementId}");
+        if(_visible) Confirm(false);
+    }
+
+
+}
