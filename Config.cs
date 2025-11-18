@@ -11,6 +11,7 @@ namespace WebAwesomeBlazor
     {
         public static IServiceCollection AddWebAwesome(this IServiceCollection services)
         {
+            services.AddSingleton<Extended.IConfirmDialog, Extended.ConfirmDialogService>();
             return services;
         }
 
