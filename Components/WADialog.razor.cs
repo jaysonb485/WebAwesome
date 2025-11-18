@@ -127,7 +127,7 @@ namespace WebAwesomeBlazor.Components
         public void Show()
         {
             IsVisible = true;
-            StateHasChanged();
+            Task.Run(() => InvokeAsync(StateHasChanged));
 
         }
         #endregion
