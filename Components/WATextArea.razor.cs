@@ -257,6 +257,8 @@ namespace WebAwesomeBlazor.Components
             await ValueChanged.InvokeAsync(value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
+
+        public void SetValue(string value) => _ = SetValueAsync(value);
         #endregion
 
     }

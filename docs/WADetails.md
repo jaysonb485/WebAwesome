@@ -33,7 +33,9 @@ Details show a brief summary and expand to show additional content.
 ### Methods
 | Method | Parameters | Description                              |
 |----------| ------ | ------------------------------------------|
+| Show | | Shows the details.  |
 | ShowAsync | | Shows the details.  |
+| Hide | | Hides the details.  |
 | HideAsync | | Hides the details.  |
 
 

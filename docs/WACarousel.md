@@ -35,8 +35,11 @@ Carousels display an arbitrary number of content slides along a horizontal or ve
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
+| GoToSlide  | index: int   | Scrolls the carousel to the slide specified by index.      |
 | GoToSlideAsync  | index: int   | Scrolls the carousel to the slide specified by index.      |
+| NextSlide |  | Move the carousel forward by SlidesPerMove slides.|
 | NextSlideAsync |  | Move the carousel forward by SlidesPerMove slides.|
+| PreviousSlide |  | Move the carousel backward by SlidesPerMove slides. |
 | PreviousSlideAsync |  | Move the carousel backward by SlidesPerMove slides. |
 
 ### Examples

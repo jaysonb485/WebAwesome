@@ -155,6 +155,8 @@ namespace WebAwesomeBlazor.Components
             await JSRuntime.InvokeVoidAsync("window.vengage.carousel.goToSlide", Id, index);
         }
 
+        public void GoToSlide(int index) => _ = GoToSlideAsync((int)index);
+
         /// <summary>
         /// Move the carousel forward by SlidesPerMove slides.
         /// </summary>
@@ -162,6 +164,8 @@ namespace WebAwesomeBlazor.Components
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.carousel.nextSlide", Id);
         }
+
+        public void NextSlide() => _ = NextSlideAsync();
         /// <summary>
         /// Move the carousel backward by SlidesPerMove slides.
         /// </summary>
@@ -170,6 +174,8 @@ namespace WebAwesomeBlazor.Components
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.carousel.previousSlide", Id);
         }
+
+        public void PreviousSlide() => _ = PreviousSlideAsync();
 
         #endregion
         #region State

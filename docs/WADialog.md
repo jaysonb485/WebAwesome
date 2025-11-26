@@ -29,7 +29,9 @@ Dialogs (modals) appear above the page and require the user's immediate attentio
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | Show  | | Shows the dialog.      |
+| ShowAsync  | | Shows the dialog.      |
 | Hide |  |  Hides the dialog. |
+| HideAsync |  |  Hides the dialog. |
 
 ### Examples
 
@@ -44,7 +46,7 @@ Dialogs (modals) appear above the page and require the user's immediate attentio
         </DialogFooter>        
     </WADialog>
 
-     <WAButton OnClick="@(() => infoDialog.Show())">Open Dialog</WAButton>
+     <WAButton OnClick="@(() => infoDialog.ShowAsync())">Open Dialog</WAButton>
   
 @code {
     WADialog infoDialog { get; set; } = default!;

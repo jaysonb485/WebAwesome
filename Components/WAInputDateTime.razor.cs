@@ -381,7 +381,14 @@ namespace WebAwesomeBlazor.Components
         }
         #endregion
 
-     
+        #region Public Methods
+        public async Task SetFocusAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", Id);
+        }
+
+        public void SetFocus() => _ = SetFocusAsync();
+        #endregion
     }
 
 

@@ -26,9 +26,12 @@ Popovers display contextual content and interactive elements in a floating panel
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
+| ShowPopover  |   | Shows the popover      |
 | ShowPopoverAsync  |   | Shows the popover      |
-| HidesPopoverAsync  |   | Hides the popover      |
-| TogglesPopoverAsync  |   | Toggles the popover      |
+| HidePopover  |   | Hides the popover      |
+| HidePopoverAsync  |   | Hides the popover      |
+| TogglePopover  |   | Toggles the popover      |
+| TogglePopoverAsync  |   | Toggles the popover      |
 
 ### Examples
 

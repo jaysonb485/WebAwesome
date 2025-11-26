@@ -193,37 +193,47 @@ namespace WebAwesomeBlazor.Components
         /// <summary>
         /// Starts the animation
         /// </summary>
-        public void StartAnimation()
+        public async Task StartAnimationAsync()
         {
             Play = true;
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
+
+        public void StartAnimation() => _ = StartAnimationAsync();
 
         /// <summary>
         /// Stops the animation
         /// </summary>
-        public void StopAnimation()
+        public async Task StopAnimationAsync()
         {
             Play = false;
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
+
+        public void StopAnimation() => _ = StopAnimationAsync();
 
         /// <summary>
         /// Clears all keyframe effects caused by this animation and aborts its playback.
         /// </summary>
-        public async Task CancelAnimation()
+        public async Task CancelAnimationAsync()
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.animation.cancel", Id);
         }
+
+        public void CancelAnimation() => _ = CancelAnimationAsync();
+
         /// <summary>
         /// Sets the playback time to the end of the animation corresponding to the current playback direction.
         /// Cannot finish Animation with an infinite target effect end.
         /// </summary>
-        public async Task FinishAnimation()
+        public async Task FinishAnimationAsync()
         {
             if(Iterations != null)
                 await JSRuntime.InvokeVoidAsync("window.vengage.animation.finish", Id);
         }
+
+        public void FinishAnimation() => _ = FinishAnimationAsync();
+
         #endregion
 
         #region State
