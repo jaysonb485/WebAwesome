@@ -123,6 +123,7 @@ namespace WebAwesomeBlazor.Components
         public async Task HideAsync()
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, false);
+            IsVisible = false;
         }
 
         /// <summary>
