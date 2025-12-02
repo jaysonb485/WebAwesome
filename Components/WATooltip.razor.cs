@@ -129,18 +129,22 @@ namespace WebAwesomeBlazor.Components
         #endregion
 
         #region Public Methods
-        public void Show()
+        
+        public async Task ShowAsync()
         {
             Open = true;
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
+        public void Show() => _ = ShowAsync();
 
-        public void Hide()
+
+        public async Task HideAsync()
         {
             Open = false;
             StateHasChanged();
         }
 
+        public void Hide() => _ = HideAsync();
         #endregion
 
 

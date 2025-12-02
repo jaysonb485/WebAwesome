@@ -37,6 +37,10 @@ Inputs collect data from the user.
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | SetValue  | value: string   | Sets the value of the input |
+| SetValueAsync  | value: string   | Sets the value of the input |
+| SetFocus |  | Sets focus to the input element. |
+| SetFocusAsync |  | Sets focus to the input element. |
+
 
 ### Examples
 

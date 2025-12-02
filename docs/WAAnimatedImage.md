@@ -26,8 +26,11 @@ A component for displaying animated GIFs and WEBPs that play and pause on intera
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | TogglePlay  |  | Plays or pauses the animation       |
+| TogglePlayAsync  |  | Plays or pauses the animation       |
 | Play |  | Plays the animation |
+| PlayAsync |  | Plays the animation |
 | Pause |  | Pauses the animation |
+| PauseAsync |  | Pauses the animation |
 
 ### Examples
 

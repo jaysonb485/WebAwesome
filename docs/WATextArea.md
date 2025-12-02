@@ -31,7 +31,10 @@ Textareas collect data from the user and allow multiple lines of text.
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
+| SetValue  | value: string   | Set the value of the text area      |
 | SetValueAsync  | value: string   | Set the value of the text area      |
+| SetFocus |  | Sets focus to the text area. |
+| SetFocusAsync |  | Sets focus to the  text area. |
 
 ### Examples
 

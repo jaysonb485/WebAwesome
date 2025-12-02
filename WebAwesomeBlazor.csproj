@@ -9,7 +9,7 @@
   <RootNamespace>WebAwesomeBlazor</RootNamespace>
   <Title>Web Awesome Blazor</Title>
   <PackageProjectUrl></PackageProjectUrl>
-  <PackageReadmeFile>README.md</PackageReadmeFile>
+  <PackageReadmeFile>docs\READMENuget.md</PackageReadmeFile>
   <RepositoryUrl>https://github.com/jaysonb485/WebAwesome</RepositoryUrl>
   <RepositoryType>git</RepositoryType>
   <PackageTags>blazor;components;ui;web;c#</PackageTags>

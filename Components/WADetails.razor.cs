@@ -157,9 +157,10 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ShowAsync()
         {
-
                 await JSRuntime.InvokeVoidAsync("window.vengage.details.show", Id);
         }
+
+        public void Show() => _ = ShowAsync();
         /// <summary>
         /// Hides the details.
         /// </summary>
@@ -167,6 +168,8 @@ namespace WebAwesomeBlazor.Components
         {
                 await JSRuntime.InvokeVoidAsync("window.vengage.details.hide", Id);
         }
+
+        public void Hide() => _ = HideAsync();  
 
         [JSInvokable]
         public void HandleDetailsShow()

@@ -29,6 +29,7 @@ Tags are used as labels to organize things or to indicate a selection.
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
+| Remove  |   | Removes the tag. Opacity is set to 0 and Display is `none`.      |
 | RemoveAsync  |   | Removes the tag. Opacity is set to 0 and Display is `none`.      |
 
 ### Examples

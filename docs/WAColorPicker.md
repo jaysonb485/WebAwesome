@@ -27,7 +27,7 @@ Color pickers allow the user to select a color.
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| GetFormattedValueAsync  | colorFormat: PickerColorExtendedFormat   | Description of what methodName does      |
+| GetFormattedValueAsync  | colorFormat: PickerColorExtendedFormat   | Returns the value as a string in the specified format.      |
 
 ### Examples
 

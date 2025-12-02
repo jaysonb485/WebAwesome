@@ -165,6 +165,8 @@ namespace WebAwesomeBlazor.Components
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.zoomIn", Id);
         }
+
+        public void ZoomIn() => _ = ZoomInAsync();
         /// <summary>
         /// Zooms out to the previous available zoom level.
         /// </summary>
@@ -172,6 +174,7 @@ namespace WebAwesomeBlazor.Components
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.zoomOut", Id);
         }
+        public void ZoomOut() => _ = ZoomOutAsync();
         #endregion
     }
 

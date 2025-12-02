@@ -145,6 +145,8 @@ namespace WebAwesomeBlazor.Components
             await JSRuntime.InvokeVoidAsync("window.vengage.popover.show", Id);
         }
 
+        public void ShowPopover() => _ = ShowPopoverAsync();
+
         /// <summary>
         /// Hides the popover
         /// </summary>
@@ -153,6 +155,8 @@ namespace WebAwesomeBlazor.Components
             Open = false;
             await JSRuntime.InvokeVoidAsync("window.vengage.popover.hide", Id);
         }
+
+        public void HidePopover() => _ = HidePopoverAsync();
 
         /// <summary>
         /// Toggles the popover
@@ -169,6 +173,9 @@ namespace WebAwesomeBlazor.Components
 
 
         }
+
+        public void TogglePopover() => _ = TogglePopoverAsync();
+
         #endregion
 
 

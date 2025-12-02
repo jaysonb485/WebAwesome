@@ -88,7 +88,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                
+
                 objRef?.Dispose();
 
             }
@@ -137,7 +137,7 @@ namespace WebAwesomeBlazor.Components
         public async Task ShowAsync()
         {
             IsVisible = true;
-            await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, true);
+            await InvokeAsync(StateHasChanged);
         }
         #endregion
 
