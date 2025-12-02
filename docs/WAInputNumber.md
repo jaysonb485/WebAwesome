@@ -40,6 +40,8 @@ A numeric input component that allows users to enter and manipulate numerical va
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | SetValue  | value: string   | Sets the value of the input |
+| SetValueAsync  | value: string   | Sets the value of the input |
+| SetFocus |  | Sets focus to the input element. |
 | SetFocusAsync |  | Sets focus to the input element. |
 
 ### Examples

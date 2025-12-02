@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,7 +122,7 @@ namespace WebAwesomeBlazor.Extended
 
             ShowPopup = false;
             //SearchText = @GetPropertyName(item);
-            await SearchInputBox.SetValue(@GetPropertyName(item) ?? string.Empty);
+            await SearchInputBox.SetValueAsync(@GetPropertyName(item) ?? string.Empty);
             Items.Clear();
         }
 
@@ -200,6 +201,15 @@ namespace WebAwesomeBlazor.Extended
             return value?.ToString();
 
         }
+        #endregion
+
+        #region Public Methods
+        public async Task SetFocusAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", SearchInputBox.Id);
+        }
+
+        public void SetFocus() => _ = SetFocusAsync();
         #endregion
 
     }

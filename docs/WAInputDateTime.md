@@ -32,6 +32,12 @@ An input component that accepts date only, date time, or time selection.
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
 
+### Methods
+| Method      | Parameters       | Description                              |
+|-------------|------------------|------------------------------------------|
+| SetFocus |  | Sets focus to the input element. |
+| SetFocusAsync |  | Sets focus to the input element. |
+
 ### Examples
 
 #### Basic Usage

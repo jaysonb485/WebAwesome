@@ -13,6 +13,7 @@ A simple helper component to toggle between light and dark mode themes.
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | SetDarkMode  | DarkMode: bool   | Sets the theme to dark mode if true, light mode if false. |
+| SetDarkModeAsync  | DarkMode: bool   | Sets the theme to dark mode if true, light mode if false. |
 
 ### Examples
 

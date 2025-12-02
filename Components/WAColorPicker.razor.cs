@@ -131,7 +131,7 @@ namespace WebAwesomeBlazor.Components
 
         #region Public Methods
         /// <summary>
-        /// Returns the current value as a string in the specified format.
+        /// Returns the value as a string in the specified format.
         /// </summary>
         /// <param name="colorFormat">The format to convert to</param>
         /// <returns></returns>

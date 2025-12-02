@@ -28,7 +28,9 @@ Drawers slide in from a container to expose additional options and information.
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
+| Show |    | Shows the drawer.      |
 | ShowAsync |    | Shows the drawer.      |
+| Hide |  | Hides the drawer. |
 | HideAsync |  | Hides the drawer. |
 
 ### Examples

@@ -37,8 +37,11 @@ Pages offer an easy way to scaffold entire page layouts using minimal markup.
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | ShowNavigation  |    |Shows the mobile navigation drawer      |
+| ShowNavigationAsync  |    |Shows the mobile navigation drawer      |
 | HideNavigation  |    |Hides the mobile navigation drawer      |
+| HideNavigationAsync  |    |Hides the mobile navigation drawer      |
 | ToggleNavigation  |    |Toggles the mobile navigation drawer      |
+| ToggleNavigationAsync  |    |Toggles the mobile navigation drawer      |
 
 ### Events
 | Event Name  | Description                              |

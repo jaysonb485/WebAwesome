@@ -252,16 +252,26 @@ namespace WebAwesomeBlazor.Components
 
             //await ValueChanged.InvokeAsync((string?)e.Value ?? string.Empty);
             //EditContext?.NotifyFieldChanged(fieldIdentifier);
-            await SetValue((string)(e.Value ?? string.Empty));
+            await SetValueAsync((string)(e.Value ?? string.Empty));
         }
         #endregion
         #region Public Methods
-        public async Task SetValue(string value)
+        public async Task SetValueAsync(string value)
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, value);
             await ValueChanged.InvokeAsync(value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
+
+        public void SetValue(string value) => _ = SetValueAsync(value);
+
+        public async Task SetFocusAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", Id);
+        }
+
+        public void SetFocus() => _ = SetFocusAsync();
+
         #endregion
 
     }

@@ -140,17 +140,21 @@ namespace WebAwesomeBlazor.Components
             await JSRuntime.InvokeVoidAsync("window.vengage.drawer.change", Id, false);
         }
 
+        public void Hide() => _ = HideAsync();
+
         /// <summary>
         /// Shows the drawer.
         /// </summary>
         public async Task ShowAsync()
         {
-            
-            await JSRuntime.InvokeVoidAsync("window.vengage.drawer.change", Id, true);
             IsVisible = true;
-            await InvokeAsync(StateHasChanged);
+            await JSRuntime.InvokeVoidAsync("window.vengage.drawer.change", Id, true);
 
         }
+
+        public void Show() => _ = ShowAsync();
+
+
         #endregion
 
     }

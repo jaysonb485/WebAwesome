@@ -31,9 +31,13 @@ To animate an element, wrap it in `<WAAnimation>` and set an animation `Name`. T
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | StartAnimation  |   | Starts the animation |
+| StartAnimationAsync  |   | Starts the animation |
 | StopAnimation |  | Stops the animation |
+| StopAnimationAsync |  | Stops the animation |
 | FinishAnimation |  | Sets the playback time to the end of the animation corresponding to the current playback direction. Cannot finish Animation with an infinite target effect end. |
+| FinishAnimationAsync |  | Sets the playback time to the end of the animation corresponding to the current playback direction. Cannot finish Animation with an infinite target effect end. |
 | CancelAnimation |  | Clears all keyframe effects caused by this animation and aborts its playback. |
+| CancelAnimationAsync |  | Clears all keyframe effects caused by this animation and aborts its playback. |
 
 
 ### Examples

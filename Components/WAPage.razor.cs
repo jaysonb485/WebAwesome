@@ -210,27 +210,33 @@ namespace WebAwesomeBlazor.Components
         /// <summary>
         /// Shows the mobile navigation drawer
         /// </summary>
-        public async Task ShowNavigation()
+        public async Task ShowNavigationAsync()
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.page.shownav", Id);
         }
 
+        public void ShowNavigation() => _ = ShowNavigationAsync();
+
         /// <summary>
         /// Hides the mobile navigation drawer
         /// </summary>
-        public async Task HideNavigation()
+        public async Task HideNavigationAsync()
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.page.hidenav", Id);
         }
+
+        public void HideNavigation() => _ = HideNavigationAsync();
 
 
         /// <summary>
         /// Toggles the mobile navigation drawer
         /// </summary>
-        public async Task ToggleNavigation()
+        public async Task ToggleNavigationAsync()
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.page.togglenav", Id);
         }
+
+        public void ToggleNavigation() => _ = ToggleNavigationAsync();
         #endregion
 
      }
