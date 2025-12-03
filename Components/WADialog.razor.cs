@@ -137,7 +137,7 @@ namespace WebAwesomeBlazor.Components
         public async Task ShowAsync()
         {
             IsVisible = true;
-            await InvokeAsync(StateHasChanged);
+            await InvokeAsync(StateHasChanged);          
         }
         #endregion
 

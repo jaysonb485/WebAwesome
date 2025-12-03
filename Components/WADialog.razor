@@ -10,7 +10,8 @@
            label="@Title"
            without-header="@WithoutHeader"
            without-footer="@WithoutFooter"
-           light-dismiss="@LightDismiss">
+           light-dismiss="@LightDismiss"
+           open="@IsVisible">
     @if (IsVisible)
     {
         @if (HeaderActions != null)
@@ -21,7 +22,9 @@
         @DialogBody
         @if (!WithoutFooter)
         {
-            <span slot="footer">@DialogFooter</span>
+            <span slot="footer">
+                @DialogFooter</span>
+            
         }
     }
 </wa-dialog>
