@@ -88,7 +88,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                
+
                 objRef?.Dispose();
 
             }
@@ -116,19 +116,28 @@ namespace WebAwesomeBlazor.Components
         /// <summary>
         /// Hides the dialog.
         /// </summary>
-        public void Hide()
+        public void Hide() => _ = HideAsync();
+        /// <summary>
+        /// Hides the dialog.
+        /// </summary>
+        public async Task HideAsync()
         {
-            Task.Run(() => JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, false));
+            await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, false);
+            IsVisible = false;
         }
 
         /// <summary>
         /// Shows the dialog.
         /// </summary>
-        public void Show()
+        public void Show() => _ = ShowAsync();
+
+        /// <summary>
+        /// Shows the dialog.
+        /// </summary>
+        public async Task ShowAsync()
         {
             IsVisible = true;
-            Task.Run(() => InvokeAsync(StateHasChanged));
-
+            await InvokeAsync(StateHasChanged);          
         }
         #endregion
 

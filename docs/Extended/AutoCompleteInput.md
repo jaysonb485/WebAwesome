@@ -25,6 +25,12 @@ Define the search function to look up and present options to the user and option
 | ItemValueProperty | string  |  | The name of the property on TItem to use as the value |
 | AllowNewItems | bool  | false | Whether to allow users to add new items that are not in the search results |
 
+### Methods
+| Method      | Parameters       | Description                              |
+|-------------|------------------|------------------------------------------|
+| SetFocus |  | Sets focus to the input element. |
+| SetFocusAsync |  | Sets focus to the input element. |
+
 ### Examples
 
 #### Basic Usage

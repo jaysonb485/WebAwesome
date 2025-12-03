@@ -17,13 +17,6 @@ Includes give you the power to embed external HTML files into the page
 | Mode | IncludeMode | IncludeMode.CORS | The fetch mode to use (CORS, NoCORS, SameOrigin). |
 | AllowScripts | bool | false | Allows included scripts to be executed. Be sure you trust the content you are including as it will be executed as code and can result in XSS |
 
-
-### Methods
-| Method      | Parameters       | Description                              |
-|-------------|------------------|------------------------------------------|
-| methodName  | param1: string   | Description of what methodName does      |
-| anotherMethod | param1: number, param2: boolean | Description of what anotherMethod does |
-
 ### Events
 | Event Name  | Description                              |
 |-------------|------------------------------------------|

@@ -65,25 +65,31 @@ namespace WebAwesomeBlazor.Components
 
         #region Public Methods
         /// <summary>
-        /// 
-        /// </summary>
-        public void TogglePlay()
+        /// Starts or stops the animation
+        /// </summary>     
+        public async Task TogglePlayAsync()
         {
             IsPlaying = !IsPlaying;
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
-        public void Play()
+        public void TogglePlay() => _ = TogglePlayAsync();
+
+        public async Task PlayAsync()
         {
             IsPlaying = true;
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
-        public void Pause()
+        public void Play() => _ = PlayAsync();
+
+        public async Task PauseAsync()
         {
             IsPlaying = false;
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
+
+        public void Pause() => _ = PauseAsync();
         #endregion
 
     }

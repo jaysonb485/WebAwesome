@@ -164,11 +164,7 @@ namespace WebAwesomeBlazor.Components
         /// Turn off or on the loading indicator.
         /// </summary>
         /// <param name="LoadingState">Set to true to show the loading indicator.</param>
-        public void SetLoading(bool LoadingState)
-        {
-            Loading = LoadingState;
-            StateHasChanged();
-        }
+        public void SetLoading(bool LoadingState) => _ = SetLoadingAsync(LoadingState);
 
         /// <summary>
         /// Turn off or on the loading indicator.

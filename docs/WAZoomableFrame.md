@@ -38,7 +38,9 @@ Zoomable frames render iframe content with zoom and interaction controls.
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | ZoomIn  |   | Zooms in to the next available zoom level.      |
+| ZoomInAsync  |   | Zooms in to the next available zoom level.      |
 | ZoomOut |  | Zooms out to the previous available zoom level. |
+| ZoomOutAsync |  | Zooms out to the previous available zoom level. |
 
 
 ### Examples

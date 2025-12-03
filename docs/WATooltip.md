@@ -33,7 +33,9 @@ Tooltips display additional information based on a specific action.
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | Show  |   | Shows the tool tip      |
+| ShowAsync  |   | Shows the tool tip      |
 | Hide |  | Hides the tool tip |
+| HideAsync |  | Hides the tool tip |
 
 ### Examples
 

@@ -3,9 +3,11 @@
 
 @code {
 
-    public async Task SetDarkMode(bool DarkMode)
+    public async Task SetDarkModeAsync(bool DarkMode)
     {
         await JSRuntime.InvokeVoidAsync("window.vengage.themeManager.setDarkMode", DarkMode);
     }
+
+    public void SetDarkMode(bool DarkMode) => _ = SetDarkModeAsync(DarkMode);
 
 }

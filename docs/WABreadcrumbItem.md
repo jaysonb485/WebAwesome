@@ -23,7 +23,7 @@ Breadcrumb Items are used inside [WABreadcrumb](/docs/WABreadcrumb.md) to repres
 | SeparatorIconName | string | | The name of the icon to draw in the separator slot. Available names depend on the icon library being used.  This will only change the separator for this item.  If you want to change it for all items in the group, set the separator on <WABreadcrumb> instead. |
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| OncClick | EventCallBack<MouseEventArgs?> | | Triggered when the breadcrumb item is clicked. |
+| OnClick | EventCallBack<MouseEventArgs?> | | Triggered when the breadcrumb item is clicked. |
 
 ### Examples
 

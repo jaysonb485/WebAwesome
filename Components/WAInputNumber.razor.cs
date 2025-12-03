@@ -269,7 +269,7 @@ namespace WebAwesomeBlazor.Components
             if (oldValue!.Equals(Value))
                 await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, Value);
 
-            await SetValue(Value);
+            await SetValueAsync(Value);
         }
         protected override async Task OnParametersSetAsync()
         {
@@ -527,17 +527,21 @@ namespace WebAwesomeBlazor.Components
         #endregion
 
         #region Public Methods
-        public async Task SetValue(TValue value)
+        public async Task SetValueAsync(TValue value)
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, value);
             await ValueChanged.InvokeAsync(value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
 
+        public void SetValue(TValue value) => _ = SetValueAsync(value);
+
         public async Task SetFocusAsync()
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", Id);
         }
+
+        public void SetFocus() => _ = SetFocusAsync();
         #endregion
 
     }

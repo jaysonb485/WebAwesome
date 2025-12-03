@@ -167,6 +167,8 @@ namespace WebAwesomeBlazor.Components
         {
             await JSRuntime.InvokeVoidAsync("window.vengage.tag.removeTag", Id, objRef);
         }
+
+        public void Remove() => _ = RemoveAsync();
         #endregion
 
         #region State
