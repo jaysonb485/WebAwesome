@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebAwesomeBlazor
+﻿namespace WebAwesomeBlazor
 {
     #region Button Enums
     public enum ButtonVariant
@@ -312,6 +306,35 @@ namespace WebAwesomeBlazor
         Inherit
     }
 
+    #endregion
+    #region Combobox Enums
+
+    public enum ComboboxAppearance
+    {
+        Filled,
+        Outlined,
+        FilledOutlined
+    }
+
+    public enum ComboboxAutocomplete
+    {
+        List,
+        None
+    }
+
+    public enum ComboboxPlacement
+    {
+        Top,
+        Bottom
+    }
+
+    public enum ComboboxSize
+    {
+        Small,
+        Medium,
+        Large,
+        Inherit
+    }
     #endregion
     #region Copy button Enums
     public enum CopyButtonTooltipPlacement
@@ -743,7 +766,7 @@ namespace WebAwesomeBlazor
     public enum TreeIndentStyle
     {
         Solid,
-        Dashed, 
+        Dashed,
         Dotted
     }
     #endregion
