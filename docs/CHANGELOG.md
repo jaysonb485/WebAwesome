@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-## Version 1.1.0 - 
+## Version 1.1.0 - 2025-12-19
 - [WAComboxbox](/docs/WACombobox.md):
   * New component, Combobox allows users to select from a list of options or enter custom values.
 
