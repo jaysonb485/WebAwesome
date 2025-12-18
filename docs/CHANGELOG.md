@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## Version 1.1.0 - 
+- [WAComboxbox](/docs/WACombobox.md):
+  * New component, Combobox allows users to select from a list of options or enter custom values.
+
+## Version 1.0.6 - 2025-12-03
+- Behind-the-scenes enhancements for [WADialog](/docs/WADialog.md)
+
 ## Version 1.0.5 - 2025-11-18
 - [ConfirmDialog](/docs/Extended/ConfirmDialog.md):
   * New component, ConfirmDialog extends WADialog to provide a simple yes/no prompt to users with feedback to the application.

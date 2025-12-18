@@ -4,7 +4,7 @@
 Currently supports Web Awesome 3.0.0.
 
 # Changelog
-[Version 1.0.5](/docs/CHANGELOG.md)
+[Version 1.1.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -66,6 +66,8 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAComparison](/docs/WAComparison.md)
 - [WACheckbox](/docs/WACheckbox.md)
 - [WAColorPicker](/docs/WAColorPicker.md)
+- [WACombobox](/docs/WACombobox.md)
+  - [WAComboboxOption](/docs/WAComboboxOption.md)
 - [WACopyButton](/docs/WACopyButton.md)
 - [WADetails](/docs/WADetails.md)
 - [WADialog](/docs/WADialog.md)
