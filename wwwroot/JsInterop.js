@@ -59,6 +59,38 @@ window.vengage = {
             return element.getFormattedValue(colorFormat);
         }
     },
+    combobox: {
+        setValue: (elementId, value) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+            element.value = value;
+        },
+        initialize: (elementId, dotnetHelper, setValue) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            element.value = setValue;
+
+            element.addEventListener('wa-clear', function (event) {
+                dotnetHelper.invokeMethodAsync('HandleInputClear');
+            });
+        },
+        getInputValue: (elementId) => {
+            let element = document.getElementById(elementId);
+            if (element)
+                return element.inputValue;
+        },
+        hide: (elementId) => {
+            let element = document.getElementById(elementId);
+            if (element)
+                element.hide();
+        },
+        show: (elementId) => {
+            let element = document.getElementById(elementId);
+            if (element)
+                element.show();
+        }
+    },
     comparison: {
         initialize: (elementId, dotnetHelper) => {
             let element = document.getElementById(elementId);
