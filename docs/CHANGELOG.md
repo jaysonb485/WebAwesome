@@ -1,6 +1,8 @@
 ﻿# Changelog
 
-## Version 1.1.1 -
+## Version 1.1.1 - 2026-01-27
+- [AutoCompleteInput](/docs/Extended/AutoCompleteInput.md):
+  * New parameter `DebounceDelay` to control the delay before the search function is called after user input.
 
 ## Version 1.1.0 - 2025-12-19
 - [WAComboxbox](/docs/WACombobox.md):
