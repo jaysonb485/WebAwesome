@@ -15,7 +15,7 @@ Selects allow you to choose items from a menu of [WASelectOption](/docs/WASelect
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | string |  | The select's value. Only available where multiselect = true |
+| Value | string |  | The select's value. Only available where multiselect = false |
 | Values | string[] | | The select's values. Only available where multiselect = true |
 | Label | string |  | The select's label.  |
 | Size | SelectSize | SelectSize.Inherit | The select's size. |

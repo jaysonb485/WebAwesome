@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-## Version 1.1.1 -
+## Version 1.1.1 - 2026-01-27
 - [WASelect](/docs/WASelect.md):
 - [WAComboxbox](/docs/WACombobox.md):
   * Enabled multi-select mode to allow users to select multiple options from the dropdown.

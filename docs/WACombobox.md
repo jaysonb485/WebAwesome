@@ -18,7 +18,7 @@ Selects allow you to choose items from a menu of [WAComboboxOption](/docs/WAComb
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | string |  | The combobox's value.  |
+| Value | string |  | The combobox's value. Only available where multiselect = false |
 | Values | string[] | | The select's values. Only available where multiselect = true |
 | Label | string |  | The combobox's label.  |
 | Size | ComboboxSize | ComboboxSize.Medium | The combobox's size. |
