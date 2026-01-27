@@ -18,7 +18,8 @@ Selects allow you to choose items from a menu of [WAComboboxOption](/docs/WAComb
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | string |  | The combobox's value.  |
+| Value | string |  | The combobox's value. Only available where multiselect = false |
+| Values | string[] | | The select's values. Only available where multiselect = true |
 | Label | string |  | The combobox's label.  |
 | Size | ComboboxSize | ComboboxSize.Medium | The combobox's size. |
 | Hint | string |  | The combobox's hint. |
@@ -41,6 +42,8 @@ Selects allow you to choose items from a menu of [WAComboboxOption](/docs/WAComb
 | Placement | ComboboxPlacement | ComboboxPlacement.Bottom | The preferred placement of the combobox's menu. Note that the actual placement may vary as needed to keep the listbox inside of the viewport. |
 | Autocomplete | ComboboxAutocomplete | ComboboxAutocomplete.List | The autocomplete behavior of the combobox. <br /> ``List``: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the combobox. The character string the user has typed will become the value of the combobox unless the user selects a value in the popup. <br /> ``None``: The combobox is editable, and when the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the combobox. |
 | AllowCustomValue | bool | false | When true, allows the user to enter a value that doesn't match any of the options. Only applies to single-select comboboxes. When false, the combobox will only accept values that match an option. |
+| Multiselect | bool | false | Allows more than one option to be selected. |
+| MaxOptionsVisible | int | 3 | The maximum number of selected options to show when Multiselect is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the limit. |
 
 ### Methods
  Method      | Parameters       | Description                              |
