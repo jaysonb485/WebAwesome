@@ -21,7 +21,9 @@
            disabled="@Disabled"
            placement="@PlacementString"
            autocomplete="@AutocompleteString"
-           allowCustomValue="@AllowCustomValue">
+           allowCustomValue="@AllowCustomValue"
+           multiple="@Multiselect"
+           maxOptionsVisible="@MaxOptionsVisible">
     @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
     {
         <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start" />

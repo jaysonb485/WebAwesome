@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Extended
 {
@@ -52,6 +47,8 @@ namespace WebAwesomeBlazor.Extended
         public string? Placeholder { get; set; }
         [Parameter]
         public string? Hint { get; set; }
+        [Parameter]
+        public int DebounceDelay { get; set; } = 300;
         #endregion
 
         #region Computed  Properties
@@ -71,7 +68,7 @@ namespace WebAwesomeBlazor.Extended
                 }
                 Initialised = true;
             }
-    
+
         }
         #endregion
 
@@ -80,35 +77,53 @@ namespace WebAwesomeBlazor.Extended
         {
 
             SearchText = e.Value?.ToString();
-            if (SearchText == string.Empty)
+            if (string.IsNullOrWhiteSpace(SearchText))
+
             {
                 ShowPopup = false;
+                SearchInProgress = false;
                 Items.Clear();
 
                 if (ValueChanged.HasDelegate)
                 {
                     await ValueChanged.InvokeAsync((TValue?)(object?)null);
-                    SearchInProgress = false;
                     return;
                 }
             }
 
-            if (SearchText != null && SearchText.Length >= MinimumSearchLength && SearchFunction != null)
+            // Cancel any previous debounce
+            _debounceCts?.Cancel();
+            _debounceCts = new CancellationTokenSource();
+            var token = _debounceCts.Token;
+
+            try
             {
                 SearchInProgress = true;
-                ShowPopup = true;
-                await Task.Delay(300); // Debounce delay
+                // Debounce delay
+                await Task.Delay(DebounceDelay, token);
 
-                Items = await SearchFunction.Invoke(SearchText);
+                // Only search if still valid
+                if (SearchText!.Length >= MinimumSearchLength && SearchFunction != null)
+                {
+                    ShowPopup = true;
 
+                    Items = await SearchFunction.Invoke(SearchText);
+                }
+                else
+                {
+                    ShowPopup = false;
+                    Items.Clear();
+                }
             }
-            else
+            catch (TaskCanceledException)
             {
-                ShowPopup = false;
-                Items.Clear();
+                // Expected when user types again before debounce finishes
+            }
+            finally
+            {
+                SearchInProgress = false;
             }
 
-            SearchInProgress = false;
 
         }
 
@@ -147,6 +162,7 @@ namespace WebAwesomeBlazor.Extended
         private Components.WAInput SearchInputBox = default!;
         private bool Initialised { get; set; } = false;
         private string? SearchText { get; set; }
+        private CancellationTokenSource? _debounceCts;
         #endregion
 
         #region Private Methods

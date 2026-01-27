@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## Version 1.1.1 - 2026-01-27
+- [WASelect](/docs/WASelect.md):
+- [WAComboxbox](/docs/WACombobox.md):
+  * Enabled multi-select mode to allow users to select multiple options from the dropdown.
+	
+- [AutoCompleteInput](/docs/Extended/AutoCompleteInput.md):
+  * New parameter `DebounceDelay` to control the delay before the search function is called after user input.
+
 ## Version 1.1.0 - 2025-12-19
 - [WAComboxbox](/docs/WACombobox.md):
   * New component, Combobox allows users to select from a list of options or enter custom values.
