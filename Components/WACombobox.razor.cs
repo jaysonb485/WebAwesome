@@ -10,22 +10,19 @@ namespace WebAwesomeBlazor.Components
 
         #region Parameters
         [Parameter]
-        public string? Value { get; set; }
+        public string Value { get; set; } = default!;
 
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
         [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
 
+        [Parameter]
+        public string[] Values { get; set; } = default!;
 
-        /// <summary>
-        /// inputValue property does not current reflect. Use getInputValue method instead
-        /// </summary>
-        //[Parameter]
-        //public string? TextInputValue { get; set; }
+        [Parameter]
+        public EventCallback<string[]> ValuesChanged { get; set; }
+        [Parameter] public Expression<Func<string[]>> ValuesExpression { get; set; } = default!;
 
-        //[Parameter]
-        //public EventCallback<string> TextInputValueChanged { get; set; }
-        //[Parameter] public Expression<Func<string>> TextInputValueExpression { get; set; } = default!;
 
         [CascadingParameter] private EditContext EditContext { get; set; } = default!;
         /// <summary>
@@ -154,6 +151,18 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool AllowCustomValue { get; set; } = false;
+
+        /// <summary>
+        /// Allows more than one option to be selected.
+        /// </summary>
+        [Parameter]
+        public bool Multiselect { get; set; } = false;
+
+        /// <summary>
+        /// The maximum number of selected options to show when Multiselect is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the limit.
+        /// </summary>
+        [Parameter]
+        public int MaxOptionsVisible { get; set; } = 3;
         #endregion
 
         #region Computed  Properties
@@ -226,7 +235,7 @@ namespace WebAwesomeBlazor.Components
 
             AdditionalAttributes ??= new Dictionary<string, object>();
 
-            if (ValueExpression != null)
+            if (!Multiselect && ValueExpression != null)
             {
                 try
                 {
@@ -239,31 +248,91 @@ namespace WebAwesomeBlazor.Components
 
             }
 
+            if (Multiselect && ValuesExpression != null)
+            {
+                try
+                {
+                    fieldIdentifier = FieldIdentifier.Create(ValuesExpression);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.Error.WriteLine($"Invalid ValuesExpression: {ex.Message}");
+                }
+
+            }
+
             base.OnInitialized();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender && Value is not null)
-                await JSRuntime.InvokeVoidAsync("window.vengage.combobox.initialize", Id, objRef, Value);
+            if (!firstRender) return;
+
+            object? initValue;
+
+            if (Multiselect)
+                initValue = Values;
+            else
+                initValue = Value;
+
+            if (initValue is not null)
+            {
+                await JSRuntime.InvokeVoidAsync(
+                    "window.vengage.combobox.initialize",
+                    Id,
+                    objRef,
+                    initValue
+                );
+            }
         }
+
         protected override async Task OnParametersSetAsync()
         {
-            if (previousValue is null || !previousValue!.Equals(Value ?? default!))
-            {
-                previousValue = Value ?? default!;
+            object? newValue = Multiselect ? Values : Value;
+            object? previous = Multiselect ? previousValues : previousValue;
 
-                // Run your JS update logic here
-                await JSRuntime.InvokeVoidAsync("window.vengage.combobox.setValue", Id, Value ?? default!);
+            // For arrays, use SequenceEqual instead of Equals
+            bool hasChanged = false;
+
+            if (Multiselect)
+            {
+                if (newValue is string[] arrNew && previous is string[] arrPrev)
+                    hasChanged = !arrNew.SequenceEqual(arrPrev);
+                else
+                    hasChanged = !Equals(previous, newValue);
+
+                previousValues = (string[])newValue;
+            }
+            else
+            {
+                hasChanged = !Equals(previous, newValue);
+                previousValue = (string)newValue;
+            }
+
+            if (hasChanged && newValue is not null)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.combobox.setValue", Id, newValue);
             }
         }
         #endregion
 
         #region Event Handlers
+
         private async Task OnValueChanged(ChangeEventArgs e)
         {
-            var value = e.Value != null ? e.Value!.ConvertTo<string>() : string.Empty;
-            await ValueChanged.InvokeAsync(value);
+
+            if (Multiselect)
+            {
+                var value = e.Value != null ? e.Value!.ConvertTo<string[]>() : [];
+                await ValuesChanged.InvokeAsync(value);
+            }
+            else
+            {
+                var value = e.Value != null ? e.Value!.ConvertTo<string>() : string.Empty;
+                await ValueChanged.InvokeAsync(value);
+            }
+
+
             try
             {
                 EditContext?.NotifyFieldChanged(fieldIdentifier);
@@ -278,7 +347,14 @@ namespace WebAwesomeBlazor.Components
         [JSInvokable]
         public async Task HandleInputClear()
         {
-            await ValueChanged.InvokeAsync(default!);
+            if (Multiselect)
+            {
+                await ValuesChanged.InvokeAsync(default!);
+            }
+            else
+            {
+                await ValueChanged.InvokeAsync(string.Empty);
+            }
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
 
@@ -290,6 +366,7 @@ namespace WebAwesomeBlazor.Components
         private FieldIdentifier fieldIdentifier = default!;
         private DotNetObjectReference<WACombobox> objRef = default!;
         private string previousValue = default!;
+        private string[] previousValues = default!;
         #endregion
 
         #region Public Methods

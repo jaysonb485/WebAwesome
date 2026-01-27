@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Extended
 {
@@ -52,6 +47,7 @@ namespace WebAwesomeBlazor.Extended
         public string? Placeholder { get; set; }
         [Parameter]
         public string? Hint { get; set; }
+
         #endregion
 
         #region Computed  Properties
@@ -71,7 +67,7 @@ namespace WebAwesomeBlazor.Extended
                 }
                 Initialised = true;
             }
-    
+
         }
         #endregion
 

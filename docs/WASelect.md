@@ -15,7 +15,8 @@ Selects allow you to choose items from a menu of [WASelectOption](/docs/WASelect
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | string |  | The select's value.  |
+| Value | string |  | The select's value. Only available where multiselect = true |
+| Values | string[] | | The select's values. Only available where multiselect = true |
 | Label | string |  | The select's label.  |
 | Size | SelectSize | SelectSize.Inherit | The select's size. |
 | Hint | string |  | The select's hint. |
@@ -35,6 +36,8 @@ Selects allow you to choose items from a menu of [WASelectOption](/docs/WASelect
 | ExpandIcon | [Icon](/docs/IconClass.md) |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. |
 | ShowDuration | string | `100ms` | The duration of the show animation. |
 | HideDuration | string | `100ms` | The duration of the hide animation. |
+| Multiselect | bool | false | Allows more than one option to be selected. |
+| MaxOptionsVisible | int | 3 | The maximum number of selected options to show when Multiselect is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the limit. |
 
 ### Examples
 
