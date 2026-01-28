@@ -226,6 +226,18 @@ namespace WebAwesomeBlazor.Extended
         }
 
         public void SetFocus() => _ = SetFocusAsync();
+
+
+        public async Task SetValueAsync(TValue value)
+        {
+            var text = @GetPropertyName((TValue)(object)value!);
+
+            await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", SearchInputBox.Id, text);
+            await ValueChanged.InvokeAsync(value);
+            await InvokeAsync(StateHasChanged);
+        }
+
+        public void SetValue(TValue value) => _ = SetValueAsync(value);
         #endregion
 
     }
