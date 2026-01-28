@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Version 1.1.2 - 2026-01-29
+- [AutoCompleteInput](/docs/Extended/AutoCompleteInput.md):
+  * New method - SetValue to programmatically set the input value.
+
 ## Version 1.1.1 - 2026-01-27
 - [WASelect](/docs/WASelect.md):
 - [WAComboxbox](/docs/WACombobox.md):
