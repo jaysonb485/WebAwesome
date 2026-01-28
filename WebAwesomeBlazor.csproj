@@ -5,11 +5,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <IsPackable>true</IsPackable>
-	  <AssemblyVersion>1.1.1</AssemblyVersion>
+	  <AssemblyVersion>1.1.2</AssemblyVersion>
   <RootNamespace>WebAwesomeBlazor</RootNamespace>
   <Title>Web Awesome Blazor</Title>
-  <PackageProjectUrl></PackageProjectUrl>
+  <PackageProjectUrl>https://github.com/jaysonb485/WebAwesome/</PackageProjectUrl>
   <PackageReadmeFile>docs\READMENuget.md</PackageReadmeFile>
+	  <PackageIcon>icon.png</PackageIcon>
+	  <PackageDescription>Blazor components for the Web Awesome UI framework.</PackageDescription>
   <RepositoryUrl>https://github.com/jaysonb485/WebAwesome</RepositoryUrl>
   <RepositoryType>git</RepositoryType>
   <PackageTags>blazor;components;ui;web;c#</PackageTags>

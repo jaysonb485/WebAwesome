@@ -31,6 +31,8 @@ Define the search function to look up and present options to the user and option
 |-------------|------------------|------------------------------------------|
 | SetFocus |  | Sets focus to the input element. |
 | SetFocusAsync |  | Sets focus to the input element. |
+| SetValue  | value: TValue   | Sets the value of the input |
+| SetValueAsync  | value: TValue | Sets the value of the input |
 
 ### Examples
 
