@@ -180,6 +180,36 @@ window.vengage = {
             });
         }
     },
+    fileInput: {
+        getFiles: (elementId) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            return Array.from(element.files).map((f, index) => ({
+                index: index,
+                name: f.name,
+                size: f.size,
+                type: f.type,
+                lastModified: f.lastModified
+            }));
+        },
+        openReadStream: async function (elementId, index, chunkSize) {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            const file = element.files[index];
+            const stream = file.stream();
+            const reader = stream.getReader();
+
+            return {
+                async read() {
+                    const { done, value } = await reader.read();
+                    if (done) return null;
+                    return value;
+                }
+            };
+        }
+    },
     include: {
         initialize: (elementId, dotnetHelper) => {
             let element = document.getElementById(elementId);
@@ -247,6 +277,22 @@ window.vengage = {
                 dotnetHelper.invokeMethodAsync('HandleNavTreeSelect', event.detail.item);
             });
         }
+    },
+    numberInput: {
+        stepUp: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            element.stepUp();
+            dotnetHelper.invokeMethodAsync('HandleInputChange', element.value);
+        },
+        stepDown: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            element.stepDown();
+            dotnetHelper.invokeMethodAsync('HandleInputChange', element.value);
+        },
     },
     page: {
         initialize: (elementId, dotnetHelper, resizeObserverId) => {

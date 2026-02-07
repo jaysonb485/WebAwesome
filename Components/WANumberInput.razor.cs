@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace WebAwesomeBlazor.Components
 {
-    public partial class WAInputNumber<TValue> : WAComponentBase
+    public partial class WANumberInput<TValue> : WAComponentBase
     {
         #region Parameters
         [CascadingParameter] private EditContext EditContext { get; set; } = default!;
@@ -18,23 +18,23 @@ namespace WebAwesomeBlazor.Components
         [Parameter] public Expression<Func<TValue>> ValueExpression { get; set; } = default!;
 
         /// <summary>
-        /// The input's visual appearance.
+        /// The number input's visual appearance.
         /// </summary>
         [Parameter]
-        public InputAppearance Appearance { get; set; } = InputAppearance.Outlined;
+        public NumberInputAppearance Appearance { get; set; } = NumberInputAppearance.Outlined;
         /// <summary>
-        /// The input's size.
+        /// The number input's size.
         /// </summary>
         [Parameter]
-        public InputSize Size { get; set; } = InputSize.Inherit;
+        public NumberInputSize Size { get; set; } = NumberInputSize.Medium;
         /// <summary>
-        /// Draws a pill-style input with rounded edges.
+        /// Draws a pill-style number input with rounded edges.
         /// </summary>
         [Parameter]
         public bool Pill { get; set; } = false;
 
         /// <summary>
-        /// The input's label
+        /// The number input's label
         /// </summary>
         [Parameter]
         public string? Label { get; set; }
@@ -51,11 +51,6 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public string? Placeholder { get; set; }
 
-        /// <summary>
-        /// Adds a clear button (with-clear) when the input is not empty.
-        /// </summary>
-        [Parameter]
-        public bool Clearable { get; set; } = false;
 
         /// <summary>
         /// Makes the input readonly.
@@ -76,6 +71,18 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public bool Required { get; set; } = false;
 
+        /// <summary>
+        /// Indicates that the input should receive focus on page load.
+        /// </summary>
+        [Parameter]
+        public bool Autofocus { get; set; } = false;
+
+        /// <summary>
+        /// Specifies what permission the browser has to provide assistance in filling out form field values. Refer to this page on MDN for available values.
+        /// <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete"/>
+        /// </summary>
+        [Parameter]
+        public string? Autocomplete { get; set; }
 
         /// <summary>
         /// An icon placed at the start of the input control.
@@ -98,13 +105,33 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public Icon? EndIcon { get; set; }
 
+        /// <summary>
+        /// An icon placed at the Increment of the input control.
+        /// </summary>
+        [Parameter]
+        public string? IncrementIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the Increment of the input control.
+        /// </summary>
+        [Parameter]
+        public Icon? IncrementIcon { get; set; }
 
         /// <summary>
-        /// Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false.
+        /// An icon placed at the Decrement of the input control.
         /// </summary>
-
         [Parameter]
-        public bool WithoutSpinButtons { get; set; } = false;
+        public string? DecrementIconName { get; set; }
+        /// <summary>
+        /// An icon placed at the Decrement of the input control.
+        /// </summary>
+        [Parameter]
+        public Icon? DecrementIcon { get; set; }
+
+        /// <summary>
+        /// Hides the increment/decrement stepper buttons.
+        /// </summary>
+        [Parameter]
+        public bool WithoutSteppers { get; set; } = false;
         /// <summary>
         /// Specifies the granularity that the value must adhere to
         /// </summary>
@@ -128,18 +155,9 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public double? Min { get; set; }
 
-        /// <summary>
-        /// Indicates that the input should receive focus on page load.
-        /// </summary>
         [Parameter]
-        public bool Autofocus { get; set; } = false;
+        public NumberInputEnterKeyHint? EnterKeyHint { get; set; }
 
-        /// <summary>
-        /// Specifies what permission the browser has to provide assistance in filling out form field values. Refer to this page on MDN for available values.
-        /// <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete"/>
-        /// </summary>
-        [Parameter]
-        public string? Autocomplete { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -149,9 +167,9 @@ namespace WebAwesomeBlazor.Components
             {
                 return Appearance switch
                 {
-                    InputAppearance.Filled => "filled",
-                    InputAppearance.Outlined => "outlined",
-                    InputAppearance.FilledOutlined => "filled-outlined",
+                    NumberInputAppearance.Filled => "filled",
+                    NumberInputAppearance.Outlined => "outlined",
+                    NumberInputAppearance.FilledOutlined => "filled-outlined",
                     _ => "outlined"
                 };
             }
@@ -162,11 +180,40 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    InputSize.Small => "small",
-                    InputSize.Medium => "medium",
-                    InputSize.Large => "large",
-                    InputSize.Inherit => "inherit",
-                    _ => "inherit"
+                    NumberInputSize.Small => "small",
+                    NumberInputSize.Medium => "medium",
+                    NumberInputSize.Large => "large",
+                    _ => "medium"
+                };
+            }
+        }
+
+        string EnterKeyHintString
+        {
+            get
+            {
+                return EnterKeyHint switch
+                {
+                    NumberInputEnterKeyHint.Enter => "enter",
+                    NumberInputEnterKeyHint.Done => "done",
+                    NumberInputEnterKeyHint.Go => "go",
+                    NumberInputEnterKeyHint.Next => "next",
+                    NumberInputEnterKeyHint.Previous => "previous",
+                    NumberInputEnterKeyHint.Search => "search",
+                    NumberInputEnterKeyHint.Send => "send",
+                    _ => string.Empty
+                };
+            }
+        }
+
+        string InputModeString
+        {
+            get
+            {
+                return typeof(TValue) switch
+                {
+                    Type t when t == typeof(float) || t == typeof(float?) || t == typeof(double) || t == typeof(double?) || t == typeof(decimal) || t == typeof(decimal?) => "decimal",
+                    _ => "numeric"
                 };
             }
         }
@@ -259,7 +306,7 @@ namespace WebAwesomeBlazor.Components
         #endregion
 
         #region Event Handlers
-        private async Task OnValueChanged(ChangeEventArgs e)
+        public async Task OnValueChanged(ChangeEventArgs e)
         {
             var oldValue = Value;
             var newValue = e.Value; // object
@@ -301,10 +348,6 @@ namespace WebAwesomeBlazor.Components
         {
             if (newValue is null || !TryParseValue(newValue, out var value))
                 Value = default!;
-            //else if (Min is not null && IsLeftGreaterThanRight(Min, value)) // value < min
-            //    Value = Min;
-            //else if (Max is not null && IsLeftGreaterThanRight(value, Max)) // value > max
-            //    Value = Max;
             else
                 Value = value;
 
@@ -315,7 +358,7 @@ namespace WebAwesomeBlazor.Components
 
         #region State
         private FieldIdentifier fieldIdentifier = default!;
-        private DotNetObjectReference<WAInputNumber<TValue>> objRef = default!;
+        private DotNetObjectReference<WANumberInput<TValue>> objRef = default!;
         private string step = default!;
         private TValue previousValue = default!;
 
@@ -549,6 +592,20 @@ namespace WebAwesomeBlazor.Components
         }
 
         public void SetFocus() => _ = SetFocusAsync();
+
+        public async Task StepUpAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.numberInput.stepUp", Id, objRef);
+        }
+
+        public void StepUp() => _ = StepUpAsync();
+
+        public async Task StepDownAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.numberInput.stepDown", Id, objRef);
+        }
+
+        public void StepDown() => _ = StepDownAsync();
         #endregion
 
     }

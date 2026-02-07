@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.1.0. 
+Currently supports Web Awesome 3.2.1. 
 
 # Changelog
-[Version 1.1.2](/docs/CHANGELOG.md)
+[Version 1.2.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -75,6 +75,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WADrawer](/docs/WADrawer.md)
 - [WADropdown](/docs/WADropdown.md)
   - [WADropdownItem](/docs/WADropdownItem.md)
+- [WAFileInput](/docs/WAFileInput.md)
 - [WAFormatBytes](/docs/WAFormatBytes.md)
 - [WAIcon](/docs/WAIcon.md)
 - [WAInclude](/docs/WAInclude.md)
@@ -98,6 +99,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WASelectOption](/docs/WASelectOption.md)
 - [WASkeleton](/docs/WASkeleton.md)
 - [WASlider](/docs/WASlider.md)
+- [WASparkline](/docs/WASparkline.md)
 - [WASplitPanel](/docs/WASplitPanel.md)
 - [WASwitch](/docs/WASwitch.md)
 - [WATabGroup](/docs/WATabGroup.md)
