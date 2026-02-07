@@ -401,6 +401,15 @@
         Default
     }
     #endregion
+    #region FileInput Enums
+    public enum FileInputSize
+    {
+        Small,
+        Medium,
+        Large,
+        Inherit
+    }
+    #endregion
     #region FormatBytes Enums
     public enum FormatBytesUnit
     {
@@ -413,6 +422,27 @@
         Long,
         Short,
         Narrow
+    }
+    #endregion
+    #region Icon Enums
+    public enum IconAnimation
+    {
+        None,
+        Beat,
+        Fade,
+        BeatFade,
+        Bounce,
+        Flip,
+        Shake,
+        Spin
+    }
+
+    public enum IconFlip
+    {
+        None,
+        Horizontal,
+        Vertical,
+        Both
     }
     #endregion
     #region Include
@@ -489,6 +519,33 @@
         Single,
         Multiple,
         Leaf
+    }
+    #endregion
+    #region NumberInput Enums
+
+    public enum NumberInputSize
+    {
+        Small,
+        Medium,
+        Large
+    }
+
+    public enum NumberInputAppearance
+    {
+        Filled,
+        Outlined,
+        FilledOutlined
+    }
+
+    public enum NumberInputEnterKeyHint
+    {
+        Enter,
+        Done,
+        Go,
+        Next,
+        Previous,
+        Search,
+        Send
     }
     #endregion
     #region Page Enums
@@ -630,6 +687,26 @@
         Bottom
     }
 
+    #endregion
+    #region Sparkline Enums
+    public enum SparklineAppearance
+    {
+        Solid,
+        Gradient,
+        Line
+    }
+    public enum SparklineCurve
+    {
+        Linear,
+        Natural,
+        Step
+    }
+    public enum SparklineTrend
+    {
+        Positive,
+        Negative,
+        Neutral
+    }
     #endregion
     #region Split Panel Enums
     public enum SplitPanelOrientation

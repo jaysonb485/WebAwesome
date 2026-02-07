@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -22,7 +17,7 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public string Value { get; set; } = default!;
         [Parameter]
-        public EventCallback<string> ValueChanged { get; set; } 
+        public EventCallback<string> ValueChanged { get; set; }
 
         [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
         /// <summary>
@@ -114,6 +109,19 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool WithoutSpinButtons { get; set; } = false;
+
+        /// <summary>
+        /// Indicates that the input should receive focus on page load.
+        /// </summary>
+        [Parameter]
+        public bool Autofocus { get; set; } = false;
+
+        /// <summary>
+        /// Specifies what permission the browser has to provide assistance in filling out form field values. Refer to this page on MDN for available values.
+        /// <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete"/>
+        /// </summary>
+        [Parameter]
+        public string? Autocomplete { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -195,7 +203,7 @@ namespace WebAwesomeBlazor.Components
         {
             objRef ??= DotNetObjectReference.Create(this);
             AdditionalAttributes ??= new Dictionary<string, object>();
-    
+
             if (ValueExpression != null)
                 fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 
@@ -240,7 +248,7 @@ namespace WebAwesomeBlazor.Components
         #region State
         private DotNetObjectReference<WAInput> objRef = default!;
         private FieldIdentifier fieldIdentifier = default!;
-           private string previousValue = string.Empty;
+        private string previousValue = string.Empty;
         #endregion
 
         #region Private Methods

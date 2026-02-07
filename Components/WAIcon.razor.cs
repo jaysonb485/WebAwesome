@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -118,6 +113,27 @@ namespace WebAwesomeBlazor.Components
                 AdditionalAttributesWithIcon["swap-opacity"] = Icon.SwapOpacity;
                 AdditionalAttributesWithIcon["src"] = Icon.SourceUrl ?? string.Empty;
                 AdditionalAttributesWithIcon["library"] = Icon.Library ?? "default";
+                AdditionalAttributesWithIcon["animation"] = Icon.Animation switch
+                {
+                    IconAnimation.None => string.Empty,
+                    IconAnimation.Beat => "beat",
+                    IconAnimation.Fade => "fade",
+                    IconAnimation.BeatFade => "beat-fade",
+                    IconAnimation.Bounce => "bounce",
+                    IconAnimation.Flip => "flip",
+                    IconAnimation.Shake => "shake",
+                    IconAnimation.Spin => "spin",
+                    _ => string.Empty
+                };
+                AdditionalAttributesWithIcon["flip"] = Icon.Flip switch
+                {
+                    IconFlip.None => string.Empty,
+                    IconFlip.Horizontal => "x",
+                    IconFlip.Vertical => "y",
+                    IconFlip.Both => "both",
+                    _ => string.Empty
+                };
+                AdditionalAttributesWithIcon["rotate"] = Icon.Rotate ?? 0;
 
                 return AdditionalAttributesWithIcon;
             }
