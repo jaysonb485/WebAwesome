@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+
+
+@inherits WAComponentBase
+
+<wa-file-input @ref="@Element"
+               id="@Id"
+               @attributes="@AdditionalAttributes"
+               style="@StyleNames"
+               class="@ClassNames"
+               accept="@Accept"
+               hint="@Hint"
+               label="@Label"
+               multiple="@AllowMultiple"
+               required="@Required"
+               size="@SizeString"
+               disabled="@Disabled"
+               slot="@Slot"
+               @onchange="OnFilesChanged">
+    @if (Dropzone != null)
+        @if (Dropzone != null)
+        {
+            @Dropzone
+        }
+    @ChildContent
+</wa-file-input>
+
