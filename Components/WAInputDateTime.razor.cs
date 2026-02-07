@@ -1,14 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using static WebAwesomeBlazor.Components.WAInput;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -113,6 +107,18 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public Icon? EndIcon { get; set; }
 
+        /// <summary>
+        /// Indicates that the input should receive focus on page load.
+        /// </summary>
+        [Parameter]
+        public bool Autofocus { get; set; } = false;
+
+        /// <summary>
+        /// Specifies what permission the browser has to provide assistance in filling out form field values. Refer to this page on MDN for available values.
+        /// <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete"/>
+        /// </summary>
+        [Parameter]
+        public string? Autocomplete { get; set; }
         #endregion
 
         #region Computed  Properties

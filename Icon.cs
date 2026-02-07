@@ -38,8 +38,20 @@
         /// </summary>
         public string Library { get; set; } = "default";
 
+        /// <summary>
+        /// Sets the animation for the icon
+        /// </summary>
+        public IconAnimation Animation { get; set; } = IconAnimation.None;
 
+        /// <summary>
+        /// Sets the flip direction of the icon along the horizontal (x), vertical (y), or 'both' axes.
+        /// </summary>
+        public IconFlip Flip { get; set; } = IconFlip.None;
 
+        /// <summary>
+        /// Sets the rotation degree of the icon
+        /// </summary>
+        public int? Rotate { get; set; } = 0;
     }
 
     public static class Icons

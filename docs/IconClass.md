@@ -16,6 +16,9 @@ Where an Icon can be used, the component will also provide an alternative IconNa
 | SourceUrl | string |  | An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and can result in XSS attacks. |
 | Label | string |  | An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and ignored by assistive devices. |
 | Library | string | `default` | The name of a registered custom icon library. |
+| Animation | IconAnimation | | An optional animation to apply to the icon. |
+| Flip | IconFlip | | An optional flip transformation to apply to the icon. |
+| Rotate | int | 0 | An optional rotation in degrees to apply to the icon. |
 
 #### Pre-defined Icons
 Some Icons are pre-defined for ease of access:

@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -84,7 +79,7 @@ namespace WebAwesomeBlazor.Components
                     TagAppearance.Filled => "filled",
                     TagAppearance.FilledOutlined => "filled-outlined",
                     TagAppearance.Outlined => "outlined",
-                    _ => "filled outlined"
+                    _ => "filled-outlined"
                 };
             }
         }
@@ -104,7 +99,7 @@ namespace WebAwesomeBlazor.Components
             }
         }
 
-        protected override string? ClassNames => BuildClassNames(Class, 
+        protected override string? ClassNames => BuildClassNames(Class,
             ("wa-tag-removeable", Removable));
 
         #endregion
@@ -142,7 +137,7 @@ namespace WebAwesomeBlazor.Components
             var args = new TagRemovingEventArgs();
             await TagRemoving.InvokeAsync(args);
 
-            if(!args.Cancel)
+            if (!args.Cancel)
             {
                 await this.RemoveAsync();
             }

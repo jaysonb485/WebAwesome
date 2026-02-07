@@ -1,5 +1,20 @@
 ﻿# Changelog
 
+## Version 1.2.0 - 2026-02-07
+- Upgraded to [WebAwesome 3.2.1](https://webawesome.com/docs/resources/changelog#wa_321)
+- Added new components:
+  * (Pro) [WASparkline](/docs/WASparkline.md): Sparklines display inline data trends as compact, visual charts.
+  * (Pro) [WAFileInput](/docs/WAFileInput.md): A file input component that allows users to select files for upload, with support for multiple file selection and drag-and-drop.
+  * [WANumberInput](/docs/WANumberInput.md): An input component specifically for numeric values, with support for min/max values, step increments, and formatting options. This is a separate implementation to the [WAInputNumber](/docs/WAInputNumber.md) component.
+- [Icon](/docs/WAIcon.md):
+  * New parameter `Rotate` to specify the rotation of the icon in degrees.
+  * New parameter `Flip` to specify the flip orientation of the icon (horizontal, vertical, both).
+  * New parameter `Animation` to specify a built-in animation for the icon (e.g. beat, fade). 
+- Fix for [WATag](/docs/WATag.md): default fallback appearance was missing a hyphen.
+- Added parameters to input components [WAInput](/docs/WAInput.md), [WAInputDateTime](/docs/WAInputDateTime.md), [WAInputNumber](/docs/WAInputNumber.md):
+  * `Autofocus` to automatically focus the input when it is rendered.
+  * `Autocomplete` to specify what permission the browser has to provide assistance in filling out form field values.
+
 ## Version 1.1.2 - 2026-01-29
 - [AutoCompleteInput](/docs/Extended/AutoCompleteInput.md):
   * New method - SetValue to programmatically set the input value.
