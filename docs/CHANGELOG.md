@@ -1,12 +1,15 @@
 ﻿# Changelog
 
+## Version 1.2.1
+- Added new parameter 'Tooltip' to [WAIcon](/docs/WAIcon.md) to allow for easy addition of tooltips to icons.
+
 ## Version 1.2.0 - 2026-02-07
 - Upgraded to [WebAwesome 3.2.1](https://webawesome.com/docs/resources/changelog#wa_321)
 - Added new components:
   * (Pro) [WASparkline](/docs/WASparkline.md): Sparklines display inline data trends as compact, visual charts.
   * (Pro) [WAFileInput](/docs/WAFileInput.md): A file input component that allows users to select files for upload, with support for multiple file selection and drag-and-drop.
   * [WANumberInput](/docs/WANumberInput.md): An input component specifically for numeric values, with support for min/max values, step increments, and formatting options. This is a separate implementation to the [WAInputNumber](/docs/WAInputNumber.md) component.
-- [Icon](/docs/WAIcon.md):
+- [Icon](/docs/IconClass.md):
   * New parameter `Rotate` to specify the rotation of the icon in degrees.
   * New parameter `Flip` to specify the flip orientation of the icon (horizontal, vertical, both).
   * New parameter `Animation` to specify a built-in animation for the icon (e.g. beat, fade). 

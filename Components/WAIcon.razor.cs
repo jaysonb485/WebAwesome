@@ -80,6 +80,12 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public string? SecondaryOpacity { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Sets the tooltip text for the icon. This will be displayed when the user hovers over the icon.
+        /// </summary>
+        [Parameter]
+        public string? Tooltip { get; set; } = string.Empty;
+
         #endregion
 
         #region Computed  Properties
