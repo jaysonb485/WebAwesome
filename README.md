@@ -4,7 +4,7 @@
 Currently supports Web Awesome 3.2.1. 
 
 # Changelog
-[Version 1.2.0](/docs/CHANGELOG.md)
+[Version 1.2.1](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -83,6 +83,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAInputDateTime](/docs/WAInputDateTime.md)
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
+- [WANumberInput](/docs/WANumberInput.md)
 - [WAPage](/docs/WAPage.md)
   - [WALayoutContent](/docs/WALayoutContent.md)
 - [WAPopover](/docs/WAPopover.md)
