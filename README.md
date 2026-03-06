@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.2.1. 
+Currently supports Web Awesome 3.3.1. 
 
 # Changelog
-[Version 1.2.1](/docs/CHANGELOG.md)
+[Version 1.3.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -66,7 +66,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAComparison](/docs/WAComparison.md)
 - [WACheckbox](/docs/WACheckbox.md)
 - [WAColorPicker](/docs/WAColorPicker.md)
-- [WACombobox](/docs/WACombobox.md)
+- (Pro) [WACombobox](/docs/WACombobox.md)
   - [WAComboboxOption](/docs/WAComboboxOption.md)
 - [WACopyButton](/docs/WACopyButton.md)
 - [WADetails](/docs/WADetails.md)
@@ -75,7 +75,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WADrawer](/docs/WADrawer.md)
 - [WADropdown](/docs/WADropdown.md)
   - [WADropdownItem](/docs/WADropdownItem.md)
-- [WAFileInput](/docs/WAFileInput.md)
+- (Pro) [WAFileInput](/docs/WAFileInput.md)
 - [WAFormatBytes](/docs/WAFormatBytes.md)
 - [WAIcon](/docs/WAIcon.md)
 - [WAInclude](/docs/WAInclude.md)
@@ -84,8 +84,8 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
 - [WANumberInput](/docs/WANumberInput.md)
-- [WAPage](/docs/WAPage.md)
-  - [WALayoutContent](/docs/WALayoutContent.md)
+- (Pro) [WAPage](/docs/WAPage.md)
+  - (Pro) [WALayoutContent](/docs/WALayoutContent.md)
 - [WAPopover](/docs/WAPopover.md)
 - [WAProgressBar](/docs/WAProgressBar.md)
 - [WAProgressRing](/docs/WAProgressRing.md)
@@ -100,7 +100,6 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WASelectOption](/docs/WASelectOption.md)
 - [WASkeleton](/docs/WASkeleton.md)
 - [WASlider](/docs/WASlider.md)
-- [WASparkline](/docs/WASparkline.md)
 - [WASplitPanel](/docs/WASplitPanel.md)
 - [WASwitch](/docs/WASwitch.md)
 - [WATabGroup](/docs/WATabGroup.md)
@@ -112,7 +111,18 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WATreeItem](/docs/WATreeItem.md)
 - [WAZoomableFrame](/docs/WAZoomableFrame.md)
 
-Some functions have not been included as there are suitable .NET functions available:
+## Data visualisation
+- (Pro) [WABarChart](/docs/WABarChart.md)
+- (Pro) [WABubbleChart](/docs/WABubbleChart.md)
+- (Pro) [WADoughnutChart](/docs/WADoughnutChart.md)
+- (Pro) [WALineChart](/docs/WALineChart.md)
+- (Pro) [WAPieChart](/docs/WAPieChart.md)
+- (Pro) [WAPolarAreaChart](/docs/WAPolarAreaChart.md)
+- (Pro) [WARadarChart](/docs/WARadarChart.md)
+- (Pro) [WAScaatterChart](/docs/WAScatterChart.md)
+- (Pro) [WASparkline](/docs/WASparkline.md)
+
+Some Web Awesome components have not been included as there are suitable .NET functions available:
 - [FormatNumber](https://webawesome.com/docs/components/format-number/)
 - [FormatDate](https://webawesome.com/docs/components/format-date/) 
 - [MutationObserver](https://webawesome.com/docs/components/mutation-observer/)

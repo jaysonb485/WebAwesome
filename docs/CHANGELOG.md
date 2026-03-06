@@ -1,5 +1,18 @@
 ﻿# Changelog
 
+## Version 1.3.0
+- Upgraded to [WebAwesome 3.3.1](https://webawesome.com/docs/resources/changelog#wa_331)
+- Added new components:
+	* (Pro) [WABarChart](/docs/WABarChart.md): Bar charts compare quantities across categories using rectangular bars.
+	* (Pro) [WABubbleChart](/docs/WABubbleChart.md): Bubble charts add a third dimension to scatter plots by varying the size of each data point. 
+	* (Pro) [WADoughnutChart](/docs/WADoughnutChart.md): Doughnut charts show proportional data as slices of a ring with a hollow center.
+	* (Pro) [WALineChart](/docs/WALineChart.md): Line charts show trends over time by connecting data points with line segments.
+	* (Pro) [WAPieChart](/docs/WAPieChart.md): Pie charts show the proportional composition of a whole as slices of a circle. 
+	* (Pro) [WAPolarAreaChart](/docs/WAPolarAreaChart.md): Polar area charts compare values using segments that radiate from a center point with varying radius.
+	* (Pro) [WARadarChart](/docs/WARadarChart.md): Radar charts compare multiple variables at once by plotting data on a radial grid.
+	* (Pro) [WAScaatterChart](/docs/WAScatterChart.md): Scatter charts reveal relationships between two variables by plotting data points on a grid. 
+
+
 ## Version 1.2.1
 - Added new parameter 'Tooltip' to [WAIcon](/docs/WAIcon.md) to allow for easy addition of tooltips to icons.
 

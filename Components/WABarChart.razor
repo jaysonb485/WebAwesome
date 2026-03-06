@@ -1,0 +1,25 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-bar-chart @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            style="@StyleNames"
+            class="@ClassNames"
+            slot="@Slot"
+            label="@ChartOptions.Label"
+              without-legend="@(!ChartOptions.ShowLegend)"
+              without-animation="@(!ChartOptions.Animate)"
+              without-tooltip="@(!ChartOptions.ShowTooltips)"
+              xLabel="@ChartOptions.XLabel"
+              yLabel="@ChartOptions.YLabel"
+            orientation="@(ChartOptions.Horizontal ? "horizontal" : "vertical")"
+            stacked="@ChartOptions.Stacked"
+            legend-position="@ChartOptions.LegendPositionString"
+            grid="@ChartOptions.GridLinesString"
+            min="@ChartOptions.Min"
+            max="@ChartOptions.Max"
+            description="@ChartOptions.Description">
+    @ChildContent
+</wa-bar-chart>
