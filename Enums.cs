@@ -267,6 +267,25 @@
         Vertical
     }
     #endregion
+    #region Chart Enums
+    public enum ChartLegendPosition
+    {
+        Top,
+        Bottom,
+        Left,
+        Right,
+        Start,
+        End
+    }
+
+    public enum ChartGridLines
+    {
+        Both,
+        HorizontalOnly,
+        VerticalOnly,
+        None
+    }
+    #endregion
     #region Checkbox Enums
     public enum CheckboxSize
     {
