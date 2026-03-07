@@ -1,7 +1,7 @@
 ﻿# Changelog
 
 ## Version 1.3.0
-- Upgraded to [WebAwesome 3.3.1](https://webawesome.com/docs/resources/changelog#wa_331)
+- Upgraded to [WebAwesome 3.3.1](https://webawesome.com/docs/resources/changelog#wa_331) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
 - Added new components:
 	* (Pro) [WABarChart](/docs/WABarChart.md): Bar charts compare quantities across categories using rectangular bars.
 	* (Pro) [WABubbleChart](/docs/WABubbleChart.md): Bubble charts add a third dimension to scatter plots by varying the size of each data point. 

@@ -14,7 +14,7 @@ dotnet add package WebAwesomeBlazor
 
 # Usage
 Register your [Web Awesome](https://webawesome.com) account.
-Create your project and obtain your unique project code.
+Create your project and obtain your unique project code. To use the latest compatible features, make sure the project version is set to the support Web Awesome version.
 
 Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<HEAD>` section along with the extra utility files for this package:
 ```HTML
@@ -23,7 +23,7 @@ Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<H
     <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
 ```
 
-Alternatively, if hosting the Web Awesome yourself, reference the relevant files and add:
+Alternatively, if hosting the Web Awesome library yourself, reference the relevant files and add:
 ```HTML
     -- YOUR WEB AWESOME FILES HERE --
     <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
