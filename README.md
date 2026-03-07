@@ -37,7 +37,7 @@ Add the following to your `_Imports.razor` file:
 @using WebAwesomeBlazor.Extended
 ```
 
-If you plan to use `ConfirmDialog`, add the following to your `Program.cs`:
+If you plan to use `ConfirmDialog` or `WAToast`, add the following to your `Program.cs`:
 ```CSharp
 builder.Services.AddWebAwesome();
 ```
@@ -106,6 +106,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WATabPanel](/docs/WATabPanel.md)
 - [WATag](/docs/WATag.md)
 - [WATextArea](/docs/WATextArea.md)
+- (Pro) [WAToast](/docs/WAToast.md)
 - [WATooltip](/docs/WATooltip.md)
 - [WATree](/docs/WATree.md)
   - [WATreeItem](/docs/WATreeItem.md)

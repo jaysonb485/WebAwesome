@@ -36,7 +36,21 @@
     }
     #endregion
     #region Toast Enums
-
+    public enum ToastPlacement
+    {
+        TopStart,
+        TopEnd,
+        TopCenter,
+        BottomStart,
+        BottomEnd,
+        BottomCenter,
+    }
+    public enum ToastMessageSize
+    {
+        Small,
+        Medium,
+        Large
+    }
     public enum ToastMessageVariant
     {
         Brand,

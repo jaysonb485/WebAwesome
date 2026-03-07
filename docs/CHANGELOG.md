@@ -11,6 +11,7 @@
 	* (Pro) [WAPolarAreaChart](/docs/WAPolarAreaChart.md): Polar area charts compare values using segments that radiate from a center point with varying radius.
 	* (Pro) [WARadarChart](/docs/WARadarChart.md): Radar charts compare multiple variables at once by plotting data on a radial grid.
 	* (Pro) [WAScaatterChart](/docs/WAScatterChart.md): Scatter charts reveal relationships between two variables by plotting data points on a grid. 
+	* (Pro) [WAToast](/docs/WAToast.md): Toasts display brief, non-blocking notifications that appear temporarily above the page content.
 
 
 ## Version 1.2.1

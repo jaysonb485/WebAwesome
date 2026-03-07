@@ -1,0 +1,76 @@
+﻿@using Microsoft.JSInterop
+
+@inject ToastService toastService
+@inject IJSRuntime JSRuntime
+
+@if(ToastMessage is not null){
+<wa-toast-item 
+    variant="@ToastMessage.VariantString" 
+    duration="@ToastMessage.Duration" 
+    id="@ToastMessage.Id" 
+    size="@ToastMessage.SizeString">
+    @if (ToastMessage.Icon != null || !String.IsNullOrWhiteSpace(ToastMessage.IconName))
+    {
+        <WAIcon Icon="@ToastMessage.Icon" IconName="@ToastMessage.IconName" Slot="icon" />
+    }
+    @if(ToastMessage.HTMLContent is not null)
+    {
+        @ToastMessage.HTMLContent
+    } else
+    {
+        @ToastMessage.Message
+    }
+</wa-toast-item>
+}
+
+@code
+{
+    #region Parameters
+    [Parameter]
+    public ToastMessage ToastMessage { get; set; } = default!;
+    #endregion
+
+    #region Computed  Properties
+    string VariantString
+    {
+        get
+        {
+            return ToastMessage.Variant switch
+            {
+                ToastMessageVariant.Brand => "brand",
+                ToastMessageVariant.Success => "success",
+                ToastMessageVariant.Neutral => "neutral",
+                ToastMessageVariant.Warning => "warning",
+                ToastMessageVariant.Danger => "danger",
+                _ => "brand"
+            };
+        }
+    }
+    #endregion
+
+    #region Lifecycle
+    private DotNetObjectReference<ToastItem> dotnetRef { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        dotnetRef ??= DotNetObjectReference.Create(this);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.toast.initItem", ToastMessage.Id, dotnetRef);
+        }
+    }
+    #endregion
+
+    #region Public Methods
+
+    [JSInvokable]
+    public async Task HideToast(string toastId)
+    {
+        await toastService.HideToastAsync(toastId);
+    }
+    #endregion
+}
