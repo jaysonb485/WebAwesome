@@ -22,7 +22,7 @@ Buttons represent actions that are available to the user.
 | OnClick | EventCallback<MouseEventArgs?> | | Triggered when the button is clicked |
 | Pill | bool | false | Draws a pill-style button with rounded edges. |
 | Size | ButtonSize | ButtonSize.Medium | The button's size (Small, medium, large). |
-| StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
+| StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Alternatively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
 | Text    | string |  | The button's label. Alternatively, use ChildContent to populate the button's content.                   |
 | Type | ButtonType | ButtonType.Button | The type of button (Button, Submit, Reset). When the type is submit, the button will submit the surrounding form. |

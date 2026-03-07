@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.2.1. 
+Currently supports Web Awesome 3.3.1. 
 
 # Changelog
-[Version 1.2.1](/docs/CHANGELOG.md)
+[Version 1.3.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -14,7 +14,7 @@ dotnet add package WebAwesomeBlazor
 
 # Usage
 Register your [Web Awesome](https://webawesome.com) account.
-Create your project and obtain your unique project code.
+Create your project and obtain your unique project code. To use the latest compatible features, make sure the project version is set to the support Web Awesome version.
 
 Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<HEAD>` section along with the extra utility files for this package:
 ```HTML
@@ -23,7 +23,7 @@ Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<H
     <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
 ```
 
-Alternatively, if hosting the Web Awesome yourself, reference the relevant files and add:
+Alternatively, if hosting the Web Awesome library yourself, reference the relevant files and add:
 ```HTML
     -- YOUR WEB AWESOME FILES HERE --
     <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
@@ -37,7 +37,7 @@ Add the following to your `_Imports.razor` file:
 @using WebAwesomeBlazor.Extended
 ```
 
-If you plan to use `ConfirmDialog`, add the following to your `Program.cs`:
+If you plan to use `ConfirmDialog` or `WAToast`, add the following to your `Program.cs`:
 ```CSharp
 builder.Services.AddWebAwesome();
 ```
@@ -66,7 +66,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAComparison](/docs/WAComparison.md)
 - [WACheckbox](/docs/WACheckbox.md)
 - [WAColorPicker](/docs/WAColorPicker.md)
-- [WACombobox](/docs/WACombobox.md)
+- (Pro) [WACombobox](/docs/WACombobox.md)
   - [WAComboboxOption](/docs/WAComboboxOption.md)
 - [WACopyButton](/docs/WACopyButton.md)
 - [WADetails](/docs/WADetails.md)
@@ -75,7 +75,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WADrawer](/docs/WADrawer.md)
 - [WADropdown](/docs/WADropdown.md)
   - [WADropdownItem](/docs/WADropdownItem.md)
-- [WAFileInput](/docs/WAFileInput.md)
+- (Pro) [WAFileInput](/docs/WAFileInput.md)
 - [WAFormatBytes](/docs/WAFormatBytes.md)
 - [WAIcon](/docs/WAIcon.md)
 - [WAInclude](/docs/WAInclude.md)
@@ -84,8 +84,8 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
 - [WANumberInput](/docs/WANumberInput.md)
-- [WAPage](/docs/WAPage.md)
-  - [WALayoutContent](/docs/WALayoutContent.md)
+- (Pro) [WAPage](/docs/WAPage.md)
+  - (Pro) [WALayoutContent](/docs/WALayoutContent.md)
 - [WAPopover](/docs/WAPopover.md)
 - [WAProgressBar](/docs/WAProgressBar.md)
 - [WAProgressRing](/docs/WAProgressRing.md)
@@ -100,19 +100,30 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WASelectOption](/docs/WASelectOption.md)
 - [WASkeleton](/docs/WASkeleton.md)
 - [WASlider](/docs/WASlider.md)
-- [WASparkline](/docs/WASparkline.md)
 - [WASplitPanel](/docs/WASplitPanel.md)
 - [WASwitch](/docs/WASwitch.md)
 - [WATabGroup](/docs/WATabGroup.md)
   - [WATabPanel](/docs/WATabPanel.md)
 - [WATag](/docs/WATag.md)
 - [WATextArea](/docs/WATextArea.md)
+- (Pro) [WAToast](/docs/WAToast.md)
 - [WATooltip](/docs/WATooltip.md)
 - [WATree](/docs/WATree.md)
   - [WATreeItem](/docs/WATreeItem.md)
 - [WAZoomableFrame](/docs/WAZoomableFrame.md)
 
-Some functions have not been included as there are suitable .NET functions available:
+## Data visualisation
+- (Pro) [WABarChart](/docs/WABarChart.md)
+- (Pro) [WABubbleChart](/docs/WABubbleChart.md)
+- (Pro) [WADoughnutChart](/docs/WADoughnutChart.md)
+- (Pro) [WALineChart](/docs/WALineChart.md)
+- (Pro) [WAPieChart](/docs/WAPieChart.md)
+- (Pro) [WAPolarAreaChart](/docs/WAPolarAreaChart.md)
+- (Pro) [WARadarChart](/docs/WARadarChart.md)
+- (Pro) [WAScaatterChart](/docs/WAScatterChart.md)
+- (Pro) [WASparkline](/docs/WASparkline.md)
+
+Some Web Awesome components have not been included as there are suitable .NET functions available:
 - [FormatNumber](https://webawesome.com/docs/components/format-number/)
 - [FormatDate](https://webawesome.com/docs/components/format-date/) 
 - [MutationObserver](https://webawesome.com/docs/components/mutation-observer/)

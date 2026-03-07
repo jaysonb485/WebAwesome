@@ -28,6 +28,22 @@ window.vengage = {
             element.finish();
         }
     },
+    chart: {
+        render: (elementId, categoryLabels, data, options = null) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            element.config = {
+                data: {
+                    labels: categoryLabels,
+                    datasets: data,
+                }
+            };
+            if (options != null) {
+                element.config.options = options
+            };
+        }
+    },
     carousel: {
         initialize: (elementId, dotnetHelper) => {
             let element = document.getElementById(elementId);
@@ -440,6 +456,33 @@ window.vengage = {
     themeManager: {
         setDarkMode: (darkMode) => {
             document.documentElement.classList.toggle('wa-dark', darkMode);
+        }
+    },
+    toast: {
+        create: (elementId, toastMessage, toastOptions) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            console.log(toastOptions);
+            element.create(toastMessage, toastOptions);
+        },
+        prepend: (elementId, toastItemId) => {
+
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            let toastItem = document.getElementById(toastItemId);
+            if (!toastItem) return;
+
+            element.prepend(toastItem);
+        },
+        initItem: (elementId, dotnetHelper) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+            element.addEventListener('wa-hide', function (event) {
+                event.preventDefault();
+                dotnetHelper.invokeMethodAsync('HideToast', elementId);
+            });
         }
     },
     tree: {
