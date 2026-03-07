@@ -1,0 +1,23 @@
+﻿@inherits WAComponentBase
+
+@inject ToastService ToastService
+
+<wa-toast @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            style="@StyleNames"
+            class="@ClassNames"
+            slot="@Slot"
+            placement="@PlacementString">
+    @ChildContent
+
+</wa-toast>
+<span style="display:none;">
+    @if (Toasts is not null && Toasts.Count > 0)
+{
+        foreach (DynamicToast dynamicToast in Toasts)
+    {
+        <DynamicComponent Type="dynamicToast.ToastType" Parameters="dynamicToast.Parameters" @key="dynamicToast.Id" />
+    }
+}
+</span>
