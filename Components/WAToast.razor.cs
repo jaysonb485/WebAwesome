@@ -77,8 +77,11 @@ namespace WebAwesomeBlazor.Components
         #region Event Handlers
         private async Task OnToastHide(string toastId)
         {
-            Toasts?.RemoveAll(d => d.Id == toastId);
-            StateHasChanged();
+            await InvokeAsync(() =>
+            {
+                Toasts?.RemoveAll(d => d.Id == toastId);
+                StateHasChanged();
+            });
         }
 
         private async Task OnCreate(ToastMessage toastMessage)
@@ -87,13 +90,15 @@ namespace WebAwesomeBlazor.Components
                 return;
 
             Toasts ??= [];
+            await InvokeAsync(() =>
+            {
+                var toastParameters = new Dictionary<string, object>() { { "ToastMessage", toastMessage } };
 
-            var toastParameters = new Dictionary<string, object>() { { "ToastMessage", toastMessage } };
+                Toasts.Add(new DynamicToast() { Id = toastMessage.Id, ToastType = typeof(ToastItem), Parameters = toastParameters });
 
-            Toasts.Add(new DynamicToast() { Id = toastMessage.Id, ToastType = typeof(ToastItem), Parameters = toastParameters });
+                StateHasChanged();
+            });
 
-            StateHasChanged();
-            await Task.Delay(1);
             await JSRuntime.InvokeVoidAsync("window.vengage.toast.prepend", Id, toastMessage.Id);
         }
 

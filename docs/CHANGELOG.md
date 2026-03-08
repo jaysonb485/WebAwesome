@@ -1,6 +1,9 @@
 ﻿# Changelog
 
-## Version 1.3.0
+## Version 1.3.0.1
+- Fix: WAToast would not display if the calling function is not on the dispatcher thread.
+
+## Version 1.3.0 - 2026-03-08
 - Upgraded to [WebAwesome 3.3.1](https://webawesome.com/docs/resources/changelog#wa_331) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
 - Added new components:
 	* (Pro) [WABarChart](/docs/WABarChart.md): Bar charts compare quantities across categories using rectangular bars.
