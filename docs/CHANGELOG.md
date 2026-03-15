@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+
+## Verion 1.3.0.2
+- Fix: DatSelect - Error when OptionKey is invalid.
+
 ## Version 1.3.0.1
 - Fix: WAToast would not display if the calling function is not on the dispatcher thread.
 
