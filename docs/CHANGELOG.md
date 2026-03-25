@@ -1,12 +1,36 @@
 ﻿# Changelog
 
+
+## Verion 1.3.0.2
+- Fix: DatSelect - Error when OptionKey is invalid.
+
+## Version 1.3.0.1
+- Fix: WAToast would not display if the calling function is not on the dispatcher thread.
+
+## Version 1.3.0 - 2026-03-08
+- Upgraded to [WebAwesome 3.3.1](https://webawesome.com/docs/resources/changelog#wa_331) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
+- Added new components:
+	* (Pro) [WABarChart](/docs/WABarChart.md): Bar charts compare quantities across categories using rectangular bars.
+	* (Pro) [WABubbleChart](/docs/WABubbleChart.md): Bubble charts add a third dimension to scatter plots by varying the size of each data point. 
+	* (Pro) [WADoughnutChart](/docs/WADoughnutChart.md): Doughnut charts show proportional data as slices of a ring with a hollow center.
+	* (Pro) [WALineChart](/docs/WALineChart.md): Line charts show trends over time by connecting data points with line segments.
+	* (Pro) [WAPieChart](/docs/WAPieChart.md): Pie charts show the proportional composition of a whole as slices of a circle. 
+	* (Pro) [WAPolarAreaChart](/docs/WAPolarAreaChart.md): Polar area charts compare values using segments that radiate from a center point with varying radius.
+	* (Pro) [WARadarChart](/docs/WARadarChart.md): Radar charts compare multiple variables at once by plotting data on a radial grid.
+	* (Pro) [WAScaatterChart](/docs/WAScatterChart.md): Scatter charts reveal relationships between two variables by plotting data points on a grid. 
+	* (Pro) [WAToast](/docs/WAToast.md): Toasts display brief, non-blocking notifications that appear temporarily above the page content.
+
+
+## Version 1.2.1
+- Added new parameter 'Tooltip' to [WAIcon](/docs/WAIcon.md) to allow for easy addition of tooltips to icons.
+
 ## Version 1.2.0 - 2026-02-07
 - Upgraded to [WebAwesome 3.2.1](https://webawesome.com/docs/resources/changelog#wa_321)
 - Added new components:
   * (Pro) [WASparkline](/docs/WASparkline.md): Sparklines display inline data trends as compact, visual charts.
   * (Pro) [WAFileInput](/docs/WAFileInput.md): A file input component that allows users to select files for upload, with support for multiple file selection and drag-and-drop.
   * [WANumberInput](/docs/WANumberInput.md): An input component specifically for numeric values, with support for min/max values, step increments, and formatting options. This is a separate implementation to the [WAInputNumber](/docs/WAInputNumber.md) component.
-- [Icon](/docs/WAIcon.md):
+- [Icon](/docs/IconClass.md):
   * New parameter `Rotate` to specify the rotation of the icon in degrees.
   * New parameter `Flip` to specify the flip orientation of the icon (horizontal, vertical, both).
   * New parameter `Animation` to specify a built-in animation for the icon (e.g. beat, fade). 

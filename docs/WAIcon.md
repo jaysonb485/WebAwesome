@@ -26,6 +26,7 @@ Icons are symbols that can be used to represent various options within an applic
 | SecondaryColor | string |  | For duotone icons, sets the icon's string color. |
 | PrimaryOpacity | string |  | For duotone icons, sets the icon's primary opacity. |
 | SecondaryOpacity | string |  | For duotone icons, sets the icon's primary opacity. |
+| Tooltip | string |  | If set, displays a tooltip with the provided text when the user hovers over the icon. Default parameters for WATooltip are used. |
 
 ### Examples
 

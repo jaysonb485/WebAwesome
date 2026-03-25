@@ -36,7 +36,21 @@
     }
     #endregion
     #region Toast Enums
-
+    public enum ToastPlacement
+    {
+        TopStart,
+        TopEnd,
+        TopCenter,
+        BottomStart,
+        BottomEnd,
+        BottomCenter,
+    }
+    public enum ToastMessageSize
+    {
+        Small,
+        Medium,
+        Large
+    }
     public enum ToastMessageVariant
     {
         Brand,
@@ -265,6 +279,25 @@
     {
         Horizontal,
         Vertical
+    }
+    #endregion
+    #region Chart Enums
+    public enum ChartLegendPosition
+    {
+        Top,
+        Bottom,
+        Left,
+        Right,
+        Start,
+        End
+    }
+
+    public enum ChartGridLines
+    {
+        Both,
+        HorizontalOnly,
+        VerticalOnly,
+        None
     }
     #endregion
     #region Checkbox Enums

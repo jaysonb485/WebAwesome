@@ -1,16 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using WebAwesomeBlazor.Components;
 
 namespace WebAwesomeBlazor.Extended
-{ 
+{
     public partial class DataSelect<TValue> : WAComponentBase
     {
         #region Parameters
@@ -268,6 +262,8 @@ namespace WebAwesomeBlazor.Extended
 
         private string? GetOptionKeyString(TValue option)
         {
+            if (option is null) return string.Empty;
+
             var key = OptionKey?.Invoke(option);
             return key?.ToString() ?? string.Empty;
         }
@@ -318,10 +314,10 @@ namespace WebAwesomeBlazor.Extended
                 Value = selectedOption ?? default!;
             }
             await ValueChanged.InvokeAsync(Value);
-            
-            if(EditContext  != null) 
+
+            if (EditContext != null)
                 EditContext?.NotifyFieldChanged(fieldIdentifier);
-            
+
             StateHasChanged();
 
         }

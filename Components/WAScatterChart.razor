@@ -1,0 +1,19 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-scatter-chart @ref="@Element"
+            id="@Id"
+            @attributes="@AdditionalAttributes"
+            style="@StyleNames"
+            class="@ClassNames"
+            slot="@Slot"
+            label="@ChartOptions.Label"
+              without-legend="@(!ChartOptions.ShowLegend)"
+              without-animation="@(!ChartOptions.Animate)"
+              without-tooltip="@(!ChartOptions.ShowTooltips)"
+            legend-position="@ChartOptions.LegendPositionString"
+            grid="@ChartOptions.GridLinesString"
+            description="@ChartOptions.Description">
+    @ChildContent
+</wa-scatter-chart>
