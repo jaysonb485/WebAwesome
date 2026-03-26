@@ -1,7 +1,21 @@
 ﻿# Changelog
 
+## Version 1.4.0
+- Upgraded to [WebAwesome 3.4.0](https://webawesome.com/docs/resources/changelog#wa_340) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
+- [WAColorPicker](/docs/WAColorPicker.md): Added new method `SetSwatchesAsync` to set color swatches with accessible labels to display as presets.
+- [WACombobox](/docs/WACombobox.md) and [WAInput](/docs/WAInput.md):
+	* New parameter `AutoCapitalize` to control whether and how text input is automatically capitalized as it is entered/edited by the user.
+	* New parameter `AutoCorrect` to indicate whether the browser's autocorrect feature is on or off. 
+	* New parameter `EnterKeyHint` used to customize the label or icon of the Enter key on virtual keyboards.
+	* New parameter `InputMode` to tell the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices.
+	* New parameter `Spellcheck` to enable spell checking on the comboxbox.
+- [WACombobox](/docs/WACombobox.md)
+    * New parameter `AllowCreate` and Event Callback `OptionCreating` to allow the user to create a new option if it doesn't exit.
+	* BREAKING - `Autocomplete` parameter has been removed by Web Awesome due to conflicts with native HTML parameter.
+- [WAZoomableFrame](/docs/WAZoomableFrame.md) 
+	* New parameter `SyncThemes` enables automatic theme syncing (light/dark mode and theme selector classes) from the host document to the iframe.
 
-## Verion 1.3.0.2
+## Version 1.3.0.2
 - Fix: DatSelect - Error when OptionKey is invalid.
 
 ## Version 1.3.0.1

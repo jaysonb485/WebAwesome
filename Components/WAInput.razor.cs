@@ -122,6 +122,36 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public string? Autocomplete { get; set; }
+
+        /// <summary>
+        /// Controls whether and how text input is automatically capitalized as it is entered/edited by the user.
+        /// </summary>
+        [Parameter]
+        public InputAutoCapitalize? AutoCapitalize { get; set; }
+
+        /// <summary>
+        /// Indicates whether the browser's autocorrect feature is on or off. 
+        /// </summary>
+        [Parameter]
+        public bool AutoCorrect { get; set; } = true;
+
+        /// <summary>
+        /// Used to customize the label or icon of the Enter key on virtual keyboards.
+        /// </summary>
+        [Parameter]
+        public InputEnterKeyHint? EnterKeyHint { get; set; } = InputEnterKeyHint.Enter;
+
+        /// <summary>
+        /// Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices.
+        /// </summary>
+        [Parameter]
+        public InputInputMode InputMode { get; set; } = InputInputMode.Text;
+
+        /// <summary>
+        /// Enables spell checking on the input.
+        /// </summary>
+        [Parameter]
+        public bool Spellcheck { get; set; } = false;
         #endregion
 
         #region Computed  Properties
@@ -171,6 +201,62 @@ namespace WebAwesomeBlazor.Components
                     InputSize.Large => "large",
                     InputSize.Inherit => "inherit",
                     _ => "inherit"
+                };
+            }
+        }
+
+
+        string AutoCapitaliseString
+        {
+            get
+            {
+                return AutoCapitalize switch
+                {
+                    InputAutoCapitalize.Off => "off",
+                    InputAutoCapitalize.None => "none",
+                    InputAutoCapitalize.On => "on",
+                    InputAutoCapitalize.Sentences => "sentences",
+                    InputAutoCapitalize.Words => "words",
+                    InputAutoCapitalize.Characters => "characters",
+                    _ => ""
+                };
+            }
+        }
+
+        string EnterKeyHintString
+        {
+            get
+            {
+                return EnterKeyHint switch
+                {
+                    InputEnterKeyHint.Next => "next",
+                    InputEnterKeyHint.Done => "done",
+                    InputEnterKeyHint.Enter => "enter",
+                    InputEnterKeyHint.Go => "go",
+                    InputEnterKeyHint.Previous => "previous",
+                    InputEnterKeyHint.Search => "search",
+                    InputEnterKeyHint.Send => "send",
+                    null => "",
+                    _ => "",
+                };
+            }
+        }
+
+        string InputModeString
+        {
+            get
+            {
+                return InputMode switch
+                {
+                    InputInputMode.None => "none",
+                    InputInputMode.Text => "text",
+                    InputInputMode.Decimal => "decimal",
+                    InputInputMode.Numeric => "numeric",
+                    InputInputMode.Telephone => "tel",
+                    InputInputMode.Search => "search",
+                    InputInputMode.Email => "email",
+                    InputInputMode.Url => "url",
+                    _ => "text"
                 };
             }
         }
