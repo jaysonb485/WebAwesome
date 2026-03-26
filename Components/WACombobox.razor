@@ -20,8 +20,15 @@
            pill="@Pill"
            disabled="@Disabled"
            placement="@PlacementString"
-           autocomplete="@AutocompleteString"
-           allowCustomValue="@AllowCustomValue">
+           allowCustomValue="@AllowCustomValue"
+           multiple="@Multiselect"
+           maxOptionsVisible="@MaxOptionsVisible"
+           autocapitalize="@AutoCapitaliseString"
+           autocorrect="@(AutoCorrect ? "on" : "off")"
+           enterkeyhint="@EnterKeyHintString"
+           inputmode="@InputModeString"
+           spellcheck="@Spellcheck"
+           allow-create="@AllowCreate">
     @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
     {
         <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start" />

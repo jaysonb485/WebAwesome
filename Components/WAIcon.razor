@@ -1,4 +1,9 @@
 ﻿@inherits WAComponentBase
+
+@if (!string.IsNullOrWhiteSpace(Tooltip))
+{
+    <wa-tooltip for="@Id">@Tooltip</wa-tooltip>
+}
 <wa-icon @ref="@Element"
          id="@Id"
          @attributes="@GetAttributesWithIcon()"

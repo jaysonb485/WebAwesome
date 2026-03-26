@@ -8,7 +8,7 @@
 ### Description
 A numeric input component that allows users to enter and manipulate numerical values with ease. It supports features like min/max limits, step increments, and formatting options.
 
-[WebAwesome docs](https://webawesome.com/docs/component)
+[WebAwesome docs](https://webawesome.com/docs/components/input/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
@@ -34,6 +34,8 @@ A numeric input component that allows users to enter and manipulate numerical va
 | Step | decimal |  | Specifies the granularity that the value must adhere to. |
 | Max | double |  | The input's maximum value |
 | Min | double |  | The input's minimum value |
+| Autofocus | bool | false | Automatically focuses the input when it is rendered. |
+| Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
 
 
 ### Methods

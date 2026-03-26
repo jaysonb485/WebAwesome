@@ -18,7 +18,8 @@ Selects allow you to choose items from a menu of [WAComboboxOption](/docs/WAComb
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | string |  | The combobox's value.  |
+| Value | string |  | The combobox's value. Only available where multiselect = false |
+| Values | string[] | | The select's values. Only available where multiselect = true |
 | Label | string |  | The combobox's label.  |
 | Size | ComboboxSize | ComboboxSize.Medium | The combobox's size. |
 | Hint | string |  | The combobox's hint. |
@@ -41,6 +42,15 @@ Selects allow you to choose items from a menu of [WAComboboxOption](/docs/WAComb
 | Placement | ComboboxPlacement | ComboboxPlacement.Bottom | The preferred placement of the combobox's menu. Note that the actual placement may vary as needed to keep the listbox inside of the viewport. |
 | Autocomplete | ComboboxAutocomplete | ComboboxAutocomplete.List | The autocomplete behavior of the combobox. <br /> ``List``: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the combobox. The character string the user has typed will become the value of the combobox unless the user selects a value in the popup. <br /> ``None``: The combobox is editable, and when the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the combobox. |
 | AllowCustomValue | bool | false | When true, allows the user to enter a value that doesn't match any of the options. Only applies to single-select comboboxes. When false, the combobox will only accept values that match an option. |
+| Multiselect | bool | false | Allows more than one option to be selected. |
+| MaxOptionsVisible | int | 3 | The maximum number of selected options to show when Multiselect is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the limit. |
+| AutoCapitalize | ComboboxAutoCapitalize | `null` | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. |
+| AutoCorrect | bool | true | Indicates whether the browser's autocorrect feature is on or off. |
+| EnterKeyHint | ComboboxEnterKeyHint | `null` | Used to customize the label or icon of the Enter key on virtual keyboards. |
+| InputMode | ComboboxInputMode | ComboboxInputMode.Text | Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices. |
+| Spellcheck | bool | false | Enables spellchecking on the combobox |
+| AllowCreate | bool | false |  If the user types text that doesn't match any existing option, a "Create [value]" option appears in the listbox. Listen to the `OptionCreating` event to use the value |
+| OptionCreating | EventCallback<string> | | Triggered when a new option is created via `AllowCreate`. The option is not created automatically; handle the creation of the new item, add to the options list and select the new option. |
 
 ### Methods
  Method      | Parameters       | Description                              |
@@ -74,6 +84,34 @@ Selects allow you to choose items from a menu of [WAComboboxOption](/docs/WAComb
         <WAComboboxOption Value="Option2">Option 2</WAComboboxOption>
         <WAComboboxOption Value="Option3">Option 3</WAComboboxOption>
     </WACombobox>
+```
+
+#### Handle a new option created via AllowCreate and OptionCreating callback
+```HTML+Razor
+    <WACombobox AllowCreate="true" OptionCreating="AddNewOption" @bind-Value="selectedValue">
+        @foreach (KeyValuePair<string, string> option in options)
+        {
+            <WAComboboxOption Value="@option.Key" Label="@option.Value" />
+        }
+    </WACombobox>
+
+    @code
+    {
+        string selectedValue { get; set; } = default!;
+
+        Dictionary<string, string> options { get; set; } = new Dictionary<string, string>
+            {
+                { "UK", "London, Manchester, Birmingham" },
+                { "USA", "Chicago, New York, Washington" },
+                { "India", "Mumbai, New Delhi, Pune" }
+            };
+
+        async Task AddNewOption(string text)
+        {
+            options.Add(text, text);
+            selectedValue = text;
+        }
+    }
 ```
 
 ![WACombobox](https://github.com/user-attachments/assets/071a539e-791f-4f5d-a93e-d87d3e9334ac)

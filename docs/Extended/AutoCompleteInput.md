@@ -24,12 +24,15 @@ Define the search function to look up and present options to the user and option
 | ItemNameProperty | string  |  | The name of the property on TItem to use as the display text in the dropdown |
 | ItemValueProperty | string  |  | The name of the property on TItem to use as the value |
 | AllowNewItems | bool  | false | Whether to allow users to add new items that are not in the search results |
+| DebounceDelay | int  | 300 | The delay in milliseconds before the search function is called after the user stops typing |
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | SetFocus |  | Sets focus to the input element. |
 | SetFocusAsync |  | Sets focus to the input element. |
+| SetValue  | value: TValue   | Sets the value of the input |
+| SetValueAsync  | value: TValue | Sets the value of the input |
 
 ### Examples
 
@@ -43,7 +46,8 @@ Define the search function to look up and present options to the user and option
             ItemValueProperty="Id"
             SearchFunction="SearchFruit"
             AddNewItemFunction="NewFruitSelected"
-            AllowNewItems="true" />
+            AllowNewItems="true"
+            DebounceDelay="300" />
 
 
 @code {

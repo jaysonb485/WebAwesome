@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -22,7 +17,7 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public string Value { get; set; } = default!;
         [Parameter]
-        public EventCallback<string> ValueChanged { get; set; } 
+        public EventCallback<string> ValueChanged { get; set; }
 
         [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
         /// <summary>
@@ -114,6 +109,49 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool WithoutSpinButtons { get; set; } = false;
+
+        /// <summary>
+        /// Indicates that the input should receive focus on page load.
+        /// </summary>
+        [Parameter]
+        public bool Autofocus { get; set; } = false;
+
+        /// <summary>
+        /// Specifies what permission the browser has to provide assistance in filling out form field values. Refer to this page on MDN for available values.
+        /// <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete"/>
+        /// </summary>
+        [Parameter]
+        public string? Autocomplete { get; set; }
+
+        /// <summary>
+        /// Controls whether and how text input is automatically capitalized as it is entered/edited by the user.
+        /// </summary>
+        [Parameter]
+        public InputAutoCapitalize? AutoCapitalize { get; set; }
+
+        /// <summary>
+        /// Indicates whether the browser's autocorrect feature is on or off. 
+        /// </summary>
+        [Parameter]
+        public bool AutoCorrect { get; set; } = true;
+
+        /// <summary>
+        /// Used to customize the label or icon of the Enter key on virtual keyboards.
+        /// </summary>
+        [Parameter]
+        public InputEnterKeyHint? EnterKeyHint { get; set; } = InputEnterKeyHint.Enter;
+
+        /// <summary>
+        /// Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices.
+        /// </summary>
+        [Parameter]
+        public InputInputMode InputMode { get; set; } = InputInputMode.Text;
+
+        /// <summary>
+        /// Enables spell checking on the input.
+        /// </summary>
+        [Parameter]
+        public bool Spellcheck { get; set; } = false;
         #endregion
 
         #region Computed  Properties
@@ -166,6 +204,62 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+
+        string AutoCapitaliseString
+        {
+            get
+            {
+                return AutoCapitalize switch
+                {
+                    InputAutoCapitalize.Off => "off",
+                    InputAutoCapitalize.None => "none",
+                    InputAutoCapitalize.On => "on",
+                    InputAutoCapitalize.Sentences => "sentences",
+                    InputAutoCapitalize.Words => "words",
+                    InputAutoCapitalize.Characters => "characters",
+                    _ => ""
+                };
+            }
+        }
+
+        string EnterKeyHintString
+        {
+            get
+            {
+                return EnterKeyHint switch
+                {
+                    InputEnterKeyHint.Next => "next",
+                    InputEnterKeyHint.Done => "done",
+                    InputEnterKeyHint.Enter => "enter",
+                    InputEnterKeyHint.Go => "go",
+                    InputEnterKeyHint.Previous => "previous",
+                    InputEnterKeyHint.Search => "search",
+                    InputEnterKeyHint.Send => "send",
+                    null => "",
+                    _ => "",
+                };
+            }
+        }
+
+        string InputModeString
+        {
+            get
+            {
+                return InputMode switch
+                {
+                    InputInputMode.None => "none",
+                    InputInputMode.Text => "text",
+                    InputInputMode.Decimal => "decimal",
+                    InputInputMode.Numeric => "numeric",
+                    InputInputMode.Telephone => "tel",
+                    InputInputMode.Search => "search",
+                    InputInputMode.Email => "email",
+                    InputInputMode.Url => "url",
+                    _ => "text"
+                };
+            }
+        }
         #endregion
 
         #region Lifecycle
@@ -195,7 +289,7 @@ namespace WebAwesomeBlazor.Components
         {
             objRef ??= DotNetObjectReference.Create(this);
             AdditionalAttributes ??= new Dictionary<string, object>();
-    
+
             if (ValueExpression != null)
                 fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 
@@ -240,7 +334,7 @@ namespace WebAwesomeBlazor.Components
         #region State
         private DotNetObjectReference<WAInput> objRef = default!;
         private FieldIdentifier fieldIdentifier = default!;
-           private string previousValue = string.Empty;
+        private string previousValue = string.Empty;
         #endregion
 
         #region Private Methods

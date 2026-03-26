@@ -31,6 +31,8 @@ An input component that accepts date only, date time, or time selection.
 | EndIconName    | string  |       |The name of the icon to draw in the end slot. Available names depend on the icon library being used.  |
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
+| Autofocus | bool | false | Automatically focuses the input when it is rendered. |
+| Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
 
 ### Methods
 | Method      | Parameters       | Description                              |

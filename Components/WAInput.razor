@@ -25,7 +25,14 @@
           disabled="@Disabled"
           slot="@Slot"
           without-spin-buttons="@WithoutSpinButtons"
-          @onchange="OnValueChanged">
+          autocomplete="@Autocomplete"
+          autofocus="@Autofocus"
+          @onchange="OnValueChanged"
+          autocapitalize="@AutoCapitaliseString"
+          autocorrect="@(AutoCorrect ? "on" : "off")"
+          enterkeyhint="@EnterKeyHintString"
+          inputmode="@InputModeString"
+          spellcheck="@Spellcheck">
     @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
     {
         <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start"></WAIcon>

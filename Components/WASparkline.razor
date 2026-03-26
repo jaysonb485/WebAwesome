@@ -1,0 +1,17 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-sparkline @ref="@Element"
+        id="@Id"
+        @attributes="@AdditionalAttributes"
+        style="@StyleNames"
+        class="@ClassNames"
+        slot="@Slot"
+        data="@DataString"
+        label="@Label"
+        appearance="@AppearanceString"
+        trend="@TrendString"
+        curve="@CurveString">
+    @ChildContent
+</wa-sparkline>

@@ -36,7 +36,21 @@
     }
     #endregion
     #region Toast Enums
-
+    public enum ToastPlacement
+    {
+        TopStart,
+        TopEnd,
+        TopCenter,
+        BottomStart,
+        BottomEnd,
+        BottomCenter,
+    }
+    public enum ToastMessageSize
+    {
+        Small,
+        Medium,
+        Large
+    }
     public enum ToastMessageVariant
     {
         Brand,
@@ -267,6 +281,25 @@
         Vertical
     }
     #endregion
+    #region Chart Enums
+    public enum ChartLegendPosition
+    {
+        Top,
+        Bottom,
+        Left,
+        Right,
+        Start,
+        End
+    }
+
+    public enum ChartGridLines
+    {
+        Both,
+        HorizontalOnly,
+        VerticalOnly,
+        None
+    }
+    #endregion
     #region Checkbox Enums
     public enum CheckboxSize
     {
@@ -316,11 +349,6 @@
         FilledOutlined
     }
 
-    public enum ComboboxAutocomplete
-    {
-        List,
-        None
-    }
 
     public enum ComboboxPlacement
     {
@@ -334,6 +362,39 @@
         Medium,
         Large,
         Inherit
+    }
+
+    public enum ComboboxAutoCapitalize
+    {
+        Off,
+        None,
+        On,
+        Sentences,
+        Words,
+        Characters
+    }
+
+    public enum ComboboxEnterKeyHint
+    {
+        Enter,
+        Done,
+        Go,
+        Next,
+        Previous,
+        Search,
+        Send
+    }
+
+    public enum ComboboxInputMode
+    {
+        None,
+        Text,
+        Decimal,
+        Numeric,
+        Telephone,
+        Search,
+        Email,
+        Url
     }
     #endregion
     #region Copy button Enums
@@ -401,6 +462,15 @@
         Default
     }
     #endregion
+    #region FileInput Enums
+    public enum FileInputSize
+    {
+        Small,
+        Medium,
+        Large,
+        Inherit
+    }
+    #endregion
     #region FormatBytes Enums
     public enum FormatBytesUnit
     {
@@ -413,6 +483,27 @@
         Long,
         Short,
         Narrow
+    }
+    #endregion
+    #region Icon Enums
+    public enum IconAnimation
+    {
+        None,
+        Beat,
+        Fade,
+        BeatFade,
+        Bounce,
+        Flip,
+        Shake,
+        Spin
+    }
+
+    public enum IconFlip
+    {
+        None,
+        Horizontal,
+        Vertical,
+        Both
     }
     #endregion
     #region Include
@@ -453,6 +544,39 @@
         Outlined,
         FilledOutlined
     }
+
+    public enum InputAutoCapitalize
+    {
+        Off,
+        None,
+        On,
+        Sentences,
+        Words,
+        Characters
+    }
+
+    public enum InputEnterKeyHint
+    {
+        Enter,
+        Done,
+        Go,
+        Next,
+        Previous,
+        Search,
+        Send
+    }
+
+    public enum InputInputMode
+    {
+        None,
+        Text,
+        Decimal,
+        Numeric,
+        Telephone,
+        Search,
+        Email,
+        Url
+    }
     #endregion
     #region Input Date Time  Enums
     public enum DateTimeInputType
@@ -489,6 +613,33 @@
         Single,
         Multiple,
         Leaf
+    }
+    #endregion
+    #region NumberInput Enums
+
+    public enum NumberInputSize
+    {
+        Small,
+        Medium,
+        Large
+    }
+
+    public enum NumberInputAppearance
+    {
+        Filled,
+        Outlined,
+        FilledOutlined
+    }
+
+    public enum NumberInputEnterKeyHint
+    {
+        Enter,
+        Done,
+        Go,
+        Next,
+        Previous,
+        Search,
+        Send
     }
     #endregion
     #region Page Enums
@@ -630,6 +781,26 @@
         Bottom
     }
 
+    #endregion
+    #region Sparkline Enums
+    public enum SparklineAppearance
+    {
+        Solid,
+        Gradient,
+        Line
+    }
+    public enum SparklineCurve
+    {
+        Linear,
+        Natural,
+        Step
+    }
+    public enum SparklineTrend
+    {
+        Positive,
+        Negative,
+        Neutral
+    }
     #endregion
     #region Split Panel Enums
     public enum SplitPanelOrientation

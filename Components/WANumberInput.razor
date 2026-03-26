@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@using System.Globalization
+
+@typeparam TValue
+
+@inherits WAComponentBase
+
+<wa-number-input @ref="@Element"
+          id="@Id"
+          @attributes="@AdditionalAttributes"
+          style="@StyleNames"
+          class="@ClassNames"
+          inputmode="@InputModeString"
+          value="@Value"
+          size="@SizeString"
+          appearance="@AppearanceString"
+          pill="@Pill"
+          label="@Label"
+          hint="@Hint"
+          placeholder="@Placeholder"
+          readonly="@ReadOnly"
+          required="@Required"
+          disabled="@Disabled"
+          slot="@Slot"
+          without-steppers="@WithoutSteppers"
+          max="@Max"
+          min="@Min"
+          step="@Step"
+          autocomplete="@Autocomplete"
+          autofocus="@Autofocus"
+          enterkeyhint="@EnterKeyHintString"
+          @onchange="OnValueChanged">
+    @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
+    {
+        <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start"></WAIcon>
+    }
+    @if (EndIcon != null || !String.IsNullOrWhiteSpace(EndIconName))
+    {
+        <WAIcon Icon="@EndIcon" IconName="@EndIconName" Slot="end"></WAIcon>
+    }
+    @if (IncrementIcon != null || !String.IsNullOrWhiteSpace(IncrementIconName))
+    {
+        <WAIcon Icon="@IncrementIcon" IconName="@IncrementIconName" Slot="increment-icon"></WAIcon>
+    }
+    @if (DecrementIcon != null || !String.IsNullOrWhiteSpace(DecrementIconName))
+    {
+        <WAIcon Icon="@DecrementIcon" IconName="@DecrementIconName" Slot="decrement-icon"></WAIcon>
+    }
+    @ChildContent
+</wa-number-input>

@@ -7,7 +7,7 @@
            @attributes="@AdditionalAttributes"
            style="@StyleNames"
            class="@ClassNames"
-           value="@Value"
+           value="@SelectedValues"
            slot="@Slot"
            label="@Label"
            hint="@Hint"
@@ -19,7 +19,9 @@
            with-clear="@Clearable"
            appearance="@AppearanceString"
            pill="@Pill"
-           disabled="@Disabled">
+           disabled="@Disabled"
+           multiple="@Multiselect"
+           maxOptionsVisible="@MaxOptionsVisible">
     @if (StartIcon != null || !String.IsNullOrWhiteSpace(StartIconName))
     {
         <WAIcon Icon="@StartIcon" IconName="@StartIconName" Slot="start" />

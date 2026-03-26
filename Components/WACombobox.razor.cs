@@ -10,22 +10,19 @@ namespace WebAwesomeBlazor.Components
 
         #region Parameters
         [Parameter]
-        public string? Value { get; set; }
+        public string Value { get; set; } = default!;
 
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
         [Parameter] public Expression<Func<string>> ValueExpression { get; set; } = default!;
 
+        [Parameter]
+        public string[] Values { get; set; } = default!;
 
-        /// <summary>
-        /// inputValue property does not current reflect. Use getInputValue method instead
-        /// </summary>
-        //[Parameter]
-        //public string? TextInputValue { get; set; }
+        [Parameter]
+        public EventCallback<string[]> ValuesChanged { get; set; }
+        [Parameter] public Expression<Func<string[]>> ValuesExpression { get; set; } = default!;
 
-        //[Parameter]
-        //public EventCallback<string> TextInputValueChanged { get; set; }
-        //[Parameter] public Expression<Func<string>> TextInputValueExpression { get; set; } = default!;
 
         [CascadingParameter] private EditContext EditContext { get; set; } = default!;
         /// <summary>
@@ -142,18 +139,65 @@ namespace WebAwesomeBlazor.Components
         public ComboboxPlacement Placement { get; set; } = ComboboxPlacement.Bottom;
 
         /// <summary>
-        /// The autocomplete behavior of the combobox.
-        /// List: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the combobox. The character string the user has typed will become the value of the combobox unless the user selects a value in the popup.
-        /// None: The combobox is editable, and when the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the combobox.
-        /// </summary>
-        [Parameter]
-        public ComboboxAutocomplete Autocomplete { get; set; } = ComboboxAutocomplete.List;
-
-        /// <summary>
         /// When true, allows the user to enter a value that doesn't match any of the options. Only applies to single-select comboboxes. When false, the combobox will only accept values that match an option.
         /// </summary>
         [Parameter]
         public bool AllowCustomValue { get; set; } = false;
+
+        /// <summary>
+        /// Allows more than one option to be selected.
+        /// </summary>
+        [Parameter]
+        public bool Multiselect { get; set; } = false;
+
+        /// <summary>
+        /// The maximum number of selected options to show when Multiselect is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the limit.
+        /// </summary>
+        [Parameter]
+        public int MaxOptionsVisible { get; set; } = 3;
+
+        /// <summary>
+        /// Controls whether and how text input is automatically capitalized as it is entered/edited by the user.
+        /// </summary>
+        [Parameter]
+        public ComboboxAutoCapitalize? AutoCapitalize { get; set; }
+
+        /// <summary>
+        /// Indicates whether the browser's autocorrect feature is on or off. 
+        /// </summary>
+        [Parameter]
+        public bool AutoCorrect { get; set; } = true;
+
+        /// <summary>
+        /// Used to customize the label or icon of the Enter key on virtual keyboards.
+        /// </summary>
+        [Parameter]
+        public ComboboxEnterKeyHint? EnterKeyHint { get; set; } = ComboboxEnterKeyHint.Enter;
+
+        /// <summary>
+        /// Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices.
+        /// </summary>
+        [Parameter]
+        public ComboboxInputMode InputMode { get; set; } = ComboboxInputMode.Text;
+
+        /// <summary>
+        /// Enables spell checking on the combobox.
+        /// </summary>
+        [Parameter]
+        public bool Spellcheck { get; set; } = false;
+
+        /// <summary>
+        ///  If the user types text that doesn't match any existing option, a "Create [value]" option appears in the listbox.
+        ///  Handle the new option selection via OptionCreating
+        /// </summary>
+        [Parameter]
+        public bool AllowCreate { get; set; } = false;
+
+        /// <summary>
+        /// When AllowCreate = true, triggered when the user creates a new option. Handle the creation of the new item, add to the options list and select the new option.
+        /// </summary>
+        [Parameter]
+        public EventCallback<string> OptionCreating { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -205,15 +249,57 @@ namespace WebAwesomeBlazor.Components
             }
         }
 
-        string AutocompleteString
+        string AutoCapitaliseString
         {
             get
             {
-                return Autocomplete switch
+                return AutoCapitalize switch
                 {
-                    ComboboxAutocomplete.List => "list",
-                    ComboboxAutocomplete.None => "none",
-                    _ => "list"
+                    ComboboxAutoCapitalize.Off => "off",
+                    ComboboxAutoCapitalize.None => "none",
+                    ComboboxAutoCapitalize.On => "on",
+                    ComboboxAutoCapitalize.Sentences => "sentences",
+                    ComboboxAutoCapitalize.Words => "words",
+                    ComboboxAutoCapitalize.Characters => "characters",
+                    _ => ""
+                };
+            }
+        }
+
+        string EnterKeyHintString
+        {
+            get
+            {
+                return EnterKeyHint switch
+                {
+                    ComboboxEnterKeyHint.Next => "next",
+                    ComboboxEnterKeyHint.Done => "done",
+                    ComboboxEnterKeyHint.Enter => "enter",
+                    ComboboxEnterKeyHint.Go => "go",
+                    ComboboxEnterKeyHint.Previous => "previous",
+                    ComboboxEnterKeyHint.Search => "search",
+                    ComboboxEnterKeyHint.Send => "send",
+                    null => "",
+                    _ => "",
+                };
+            }
+        }
+
+        string InputModeString
+        {
+            get
+            {
+                return InputMode switch
+                {
+                    ComboboxInputMode.None => "none",
+                    ComboboxInputMode.Text => "text",
+                    ComboboxInputMode.Decimal => "decimal",
+                    ComboboxInputMode.Numeric => "numeric",
+                    ComboboxInputMode.Telephone => "tel",
+                    ComboboxInputMode.Search => "search",
+                    ComboboxInputMode.Email => "email",
+                    ComboboxInputMode.Url => "url",
+                    _ => "text"
                 };
             }
         }
@@ -226,7 +312,7 @@ namespace WebAwesomeBlazor.Components
 
             AdditionalAttributes ??= new Dictionary<string, object>();
 
-            if (ValueExpression != null)
+            if (!Multiselect && ValueExpression != null)
             {
                 try
                 {
@@ -239,31 +325,88 @@ namespace WebAwesomeBlazor.Components
 
             }
 
+            if (Multiselect && ValuesExpression != null)
+            {
+                try
+                {
+                    fieldIdentifier = FieldIdentifier.Create(ValuesExpression);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.Error.WriteLine($"Invalid ValuesExpression: {ex.Message}");
+                }
+
+            }
+
             base.OnInitialized();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender && Value is not null)
-                await JSRuntime.InvokeVoidAsync("window.vengage.combobox.initialize", Id, objRef, Value);
+            if (!firstRender) return;
+
+            object? initValue;
+
+            if (Multiselect)
+                initValue = Values;
+            else
+                initValue = Value;
+
+            await JSRuntime.InvokeVoidAsync(
+                "window.vengage.combobox.initialize",
+                Id,
+                objRef,
+                initValue
+            );
         }
+
         protected override async Task OnParametersSetAsync()
         {
-            if (previousValue is null || !previousValue!.Equals(Value ?? default!))
-            {
-                previousValue = Value ?? default!;
+            object? newValue = Multiselect ? Values : Value;
+            object? previous = Multiselect ? previousValues : previousValue;
 
-                // Run your JS update logic here
-                await JSRuntime.InvokeVoidAsync("window.vengage.combobox.setValue", Id, Value ?? default!);
+            // For arrays, use SequenceEqual instead of Equals
+            bool hasChanged = false;
+
+            if (Multiselect)
+            {
+                if (newValue is string[] arrNew && previous is string[] arrPrev)
+                    hasChanged = !arrNew.SequenceEqual(arrPrev);
+                else
+                    hasChanged = !Equals(previous, newValue);
+
+                previousValues = (string[])newValue;
+            }
+            else
+            {
+                hasChanged = !Equals(previous, newValue);
+                previousValue = (string)newValue;
+            }
+
+            if (hasChanged && newValue is not null)
+            {
+                await JSRuntime.InvokeVoidAsync("window.vengage.combobox.setValue", Id, newValue);
             }
         }
         #endregion
 
         #region Event Handlers
+
         private async Task OnValueChanged(ChangeEventArgs e)
         {
-            var value = e.Value != null ? e.Value!.ConvertTo<string>() : string.Empty;
-            await ValueChanged.InvokeAsync(value);
+
+            if (Multiselect)
+            {
+                var value = e.Value != null ? e.Value!.ConvertTo<string[]>() : [];
+                await ValuesChanged.InvokeAsync(value);
+            }
+            else
+            {
+                var value = e.Value != null ? e.Value!.ConvertTo<string>() : string.Empty;
+                await ValueChanged.InvokeAsync(value);
+            }
+
+
             try
             {
                 EditContext?.NotifyFieldChanged(fieldIdentifier);
@@ -278,10 +421,23 @@ namespace WebAwesomeBlazor.Components
         [JSInvokable]
         public async Task HandleInputClear()
         {
-            await ValueChanged.InvokeAsync(default!);
+            if (Multiselect)
+            {
+                await ValuesChanged.InvokeAsync(default!);
+            }
+            else
+            {
+                await ValueChanged.InvokeAsync(string.Empty);
+            }
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
 
+        [JSInvokable]
+        public async Task HandleOptionCreate(string text)
+        {
+            if (OptionCreating.HasDelegate)
+                await OptionCreating.InvokeAsync(text);
+        }
 
 
         #endregion
@@ -290,6 +446,7 @@ namespace WebAwesomeBlazor.Components
         private FieldIdentifier fieldIdentifier = default!;
         private DotNetObjectReference<WACombobox> objRef = default!;
         private string previousValue = default!;
+        private string[] previousValues = default!;
         #endregion
 
         #region Public Methods
