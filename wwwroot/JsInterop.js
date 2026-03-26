@@ -73,6 +73,11 @@ window.vengage = {
             let element = document.getElementById(elementId);
             if (!element) return;
             return element.getFormattedValue(colorFormat);
+        },
+        setSwatches: (elementId, swatches) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+            element.swatches = swatches;
         }
     },
     combobox: {
@@ -85,10 +90,16 @@ window.vengage = {
             let element = document.getElementById(elementId);
             if (!element) return;
 
-            element.value = setValue;
+            if(!setValue) element.value = setValue;
 
             element.addEventListener('wa-clear', function (event) {
                 dotnetHelper.invokeMethodAsync('HandleInputClear');
+            });
+
+            element.addEventListener('wa-create', function (event) {
+                event.preventDefault();
+
+                dotnetHelper.invokeMethodAsync('HandleOptionCreate', event.detail.inputValue);
             });
         },
         getInputValue: (elementId) => {

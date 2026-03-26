@@ -15,7 +15,8 @@
                    zoom="@Zoom"
                    zoom-levels="@ZoomLevels"
                    without-controls="@HideZoomControls"
-                   without-interaction="@DisableInteraction">
+                   without-interaction="@DisableInteraction"
+                   with-theme-sync="@SyncThemes">
     @if (ZoomInIcon != null || !String.IsNullOrWhiteSpace(ZoomInIconName))
     {
         <WAIcon IconName="@ZoomInIconName" Slot="zoom-in-icon"></WAIcon>

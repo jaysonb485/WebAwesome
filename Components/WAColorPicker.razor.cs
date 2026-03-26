@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -68,9 +63,11 @@ namespace WebAwesomeBlazor.Components
 
         /// <summary>
         /// One or more predefined color swatches to display as presets in the color picker. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names. Each color must be separated by a semicolon (;).
+        /// For accessibility, prefer SetSwatchesAsync and provide colour labels.
         /// </summary>
         [Parameter]
         public string? Swatches { get; set; }
+
         #endregion
 
         #region Computed Properties
@@ -110,7 +107,9 @@ namespace WebAwesomeBlazor.Components
         {
             AdditionalAttributes ??= new Dictionary<string, object>();
 
-            fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+
+            if (ValueExpression != null)
+                fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 
             base.OnInitialized();
         }
@@ -144,6 +143,18 @@ namespace WebAwesomeBlazor.Components
 
             return result;
         }
+
+        /// <summary>
+        /// Sets color swatches with accessible labels to display as presets in the color picker.
+        /// </summary>
+        /// <param name="swatches">The color and label swatch pairs to display as presets in the color picker.</param>
+        /// <returns></returns>
+        public async Task SetSwatchesAsync(SwatchColor[] swatches)
+        {
+            await JSRuntime.InvokeVoidAsync("window.vengage.colorPicker.setSwatches", Id, swatches);
+        }
         #endregion
+
+
     }
 }

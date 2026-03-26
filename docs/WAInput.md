@@ -34,6 +34,12 @@ Inputs collect data from the user.
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
 | Autofocus | bool | false | Automatically focuses the input when it is rendered. |
 | Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
+| AutoCapitalize | InputAutoCapitalize | `null` | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. |
+| AutoCorrect | bool | true | Indicates whether the browser's autocorrect feature is on or off. |
+| EnterKeyHint | InputEnterKeyHint | `null` | Used to customize the label or icon of the Enter key on virtual keyboards. |
+| InputMode | InputInputMode | InputInputMode.Text | Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices. |
+| Spellcheck | bool | false | Enables spellchecking on the input |
+
 
 ### Methods
 | Method      | Parameters       | Description                              |
