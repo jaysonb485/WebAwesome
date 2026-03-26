@@ -27,6 +27,7 @@ Zoomable frames render iframe content with zoom and interaction controls.
 | ZoomLevels | string |  | The zoom levels to step through when using zoom controls. This does not restrict programmatic changes to the zoom. Provide space-separated values, e.g. "25% 50% 75% 100% 125% 150% 175% 200%". |
 | HideZoomControls | bool | false | Removes the zoom controls. |
 | DisableInteraction | bool | false | Disables interaction. |
+| SyncThemes | bool | false | Enables automatic theme syncing (light/dark mode and theme selector classes) from the host document to the iframe. |
 
 ### Events
 | Event Name  | Description                              |

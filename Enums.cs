@@ -349,11 +349,6 @@
         FilledOutlined
     }
 
-    public enum ComboboxAutocomplete
-    {
-        List,
-        None
-    }
 
     public enum ComboboxPlacement
     {
@@ -367,6 +362,39 @@
         Medium,
         Large,
         Inherit
+    }
+
+    public enum ComboboxAutoCapitalize
+    {
+        Off,
+        None,
+        On,
+        Sentences,
+        Words,
+        Characters
+    }
+
+    public enum ComboboxEnterKeyHint
+    {
+        Enter,
+        Done,
+        Go,
+        Next,
+        Previous,
+        Search,
+        Send
+    }
+
+    public enum ComboboxInputMode
+    {
+        None,
+        Text,
+        Decimal,
+        Numeric,
+        Telephone,
+        Search,
+        Email,
+        Url
     }
     #endregion
     #region Copy button Enums
@@ -515,6 +543,39 @@
         Filled,
         Outlined,
         FilledOutlined
+    }
+
+    public enum InputAutoCapitalize
+    {
+        Off,
+        None,
+        On,
+        Sentences,
+        Words,
+        Characters
+    }
+
+    public enum InputEnterKeyHint
+    {
+        Enter,
+        Done,
+        Go,
+        Next,
+        Previous,
+        Search,
+        Send
+    }
+
+    public enum InputInputMode
+    {
+        None,
+        Text,
+        Decimal,
+        Numeric,
+        Telephone,
+        Search,
+        Email,
+        Url
     }
     #endregion
     #region Input Date Time  Enums

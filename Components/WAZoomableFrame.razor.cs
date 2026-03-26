@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -105,6 +100,12 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public EventCallback<string> LoadError { get; set; }
+
+        /// <summary>
+        /// Enables automatic theme syncing (light/dark mode and theme selector classes) from the host document to the iframe.
+        /// </summary>
+        [Parameter]
+        public bool SyncThemes { get; set; } = false;
         #endregion
         #region Lifecycle
         protected override void OnInitialized()

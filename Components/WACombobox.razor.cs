@@ -139,14 +139,6 @@ namespace WebAwesomeBlazor.Components
         public ComboboxPlacement Placement { get; set; } = ComboboxPlacement.Bottom;
 
         /// <summary>
-        /// The autocomplete behavior of the combobox.
-        /// List: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the combobox. The character string the user has typed will become the value of the combobox unless the user selects a value in the popup.
-        /// None: The combobox is editable, and when the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the combobox.
-        /// </summary>
-        [Parameter]
-        public ComboboxAutocomplete Autocomplete { get; set; } = ComboboxAutocomplete.List;
-
-        /// <summary>
         /// When true, allows the user to enter a value that doesn't match any of the options. Only applies to single-select comboboxes. When false, the combobox will only accept values that match an option.
         /// </summary>
         [Parameter]
@@ -163,6 +155,49 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public int MaxOptionsVisible { get; set; } = 3;
+
+        /// <summary>
+        /// Controls whether and how text input is automatically capitalized as it is entered/edited by the user.
+        /// </summary>
+        [Parameter]
+        public ComboboxAutoCapitalize? AutoCapitalize { get; set; }
+
+        /// <summary>
+        /// Indicates whether the browser's autocorrect feature is on or off. 
+        /// </summary>
+        [Parameter]
+        public bool AutoCorrect { get; set; } = true;
+
+        /// <summary>
+        /// Used to customize the label or icon of the Enter key on virtual keyboards.
+        /// </summary>
+        [Parameter]
+        public ComboboxEnterKeyHint? EnterKeyHint { get; set; } = ComboboxEnterKeyHint.Enter;
+
+        /// <summary>
+        /// Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices.
+        /// </summary>
+        [Parameter]
+        public ComboboxInputMode InputMode { get; set; } = ComboboxInputMode.Text;
+
+        /// <summary>
+        /// Enables spell checking on the combobox.
+        /// </summary>
+        [Parameter]
+        public bool Spellcheck { get; set; } = false;
+
+        /// <summary>
+        ///  If the user types text that doesn't match any existing option, a "Create [value]" option appears in the listbox.
+        ///  Handle the new option selection via OptionCreating
+        /// </summary>
+        [Parameter]
+        public bool AllowCreate { get; set; } = false;
+
+        /// <summary>
+        /// When AllowCreate = true, triggered when the user creates a new option. Handle the creation of the new item, add to the options list and select the new option.
+        /// </summary>
+        [Parameter]
+        public EventCallback<string> OptionCreating { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -214,15 +249,57 @@ namespace WebAwesomeBlazor.Components
             }
         }
 
-        string AutocompleteString
+        string AutoCapitaliseString
         {
             get
             {
-                return Autocomplete switch
+                return AutoCapitalize switch
                 {
-                    ComboboxAutocomplete.List => "list",
-                    ComboboxAutocomplete.None => "none",
-                    _ => "list"
+                    ComboboxAutoCapitalize.Off => "off",
+                    ComboboxAutoCapitalize.None => "none",
+                    ComboboxAutoCapitalize.On => "on",
+                    ComboboxAutoCapitalize.Sentences => "sentences",
+                    ComboboxAutoCapitalize.Words => "words",
+                    ComboboxAutoCapitalize.Characters => "characters",
+                    _ => ""
+                };
+            }
+        }
+
+        string EnterKeyHintString
+        {
+            get
+            {
+                return EnterKeyHint switch
+                {
+                    ComboboxEnterKeyHint.Next => "next",
+                    ComboboxEnterKeyHint.Done => "done",
+                    ComboboxEnterKeyHint.Enter => "enter",
+                    ComboboxEnterKeyHint.Go => "go",
+                    ComboboxEnterKeyHint.Previous => "previous",
+                    ComboboxEnterKeyHint.Search => "search",
+                    ComboboxEnterKeyHint.Send => "send",
+                    null => "",
+                    _ => "",
+                };
+            }
+        }
+
+        string InputModeString
+        {
+            get
+            {
+                return InputMode switch
+                {
+                    ComboboxInputMode.None => "none",
+                    ComboboxInputMode.Text => "text",
+                    ComboboxInputMode.Decimal => "decimal",
+                    ComboboxInputMode.Numeric => "numeric",
+                    ComboboxInputMode.Telephone => "tel",
+                    ComboboxInputMode.Search => "search",
+                    ComboboxInputMode.Email => "email",
+                    ComboboxInputMode.Url => "url",
+                    _ => "text"
                 };
             }
         }
@@ -275,15 +352,12 @@ namespace WebAwesomeBlazor.Components
             else
                 initValue = Value;
 
-            if (initValue is not null)
-            {
-                await JSRuntime.InvokeVoidAsync(
-                    "window.vengage.combobox.initialize",
-                    Id,
-                    objRef,
-                    initValue
-                );
-            }
+            await JSRuntime.InvokeVoidAsync(
+                "window.vengage.combobox.initialize",
+                Id,
+                objRef,
+                initValue
+            );
         }
 
         protected override async Task OnParametersSetAsync()
@@ -358,6 +432,12 @@ namespace WebAwesomeBlazor.Components
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
 
+        [JSInvokable]
+        public async Task HandleOptionCreate(string text)
+        {
+            if (OptionCreating.HasDelegate)
+                await OptionCreating.InvokeAsync(text);
+        }
 
 
         #endregion
