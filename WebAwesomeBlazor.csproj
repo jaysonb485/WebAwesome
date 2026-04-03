@@ -27,6 +27,7 @@
 		<Content Remove="WAMenuGroupLabel.razor" />
 		<Content Remove="WAMenuItem.razor" />
 		<Content Remove="WARadioButton.razor" />
+		<Content Remove="wwwroot\WebAwesome.css" />
 	</ItemGroup>
 
 
