@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.4.0. 
+Currently supports Web Awesome 3.5.0. 
 
 # Changelog
-[Version 1.4.0](/docs/CHANGELOG.md)
+[Version 1.5.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)

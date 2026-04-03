@@ -1,5 +1,7 @@
 ﻿# Changelog
 
+## Version 1.5.0
+
 ## Version 1.4.0
 - Upgraded to [Web Awesome 3.4.0](https://webawesome.com/docs/resources/changelog#wa_340) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
 - [WAColorPicker](/docs/WAColorPicker.md): Added new method `SetSwatchesAsync` to set color swatches with accessible labels to display as presets.
