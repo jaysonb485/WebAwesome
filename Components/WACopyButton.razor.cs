@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -129,7 +124,8 @@ namespace WebAwesomeBlazor.Components
         }
 
         private string FromElementIdAndAttribute
-        { get
+        {
+            get
             {
                 if (!string.IsNullOrWhiteSpace(FromElementId))
                 {
@@ -161,7 +157,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.copybutton.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -187,13 +183,13 @@ namespace WebAwesomeBlazor.Components
         [JSInvokable]
         public async Task HandleCopy()
         {
-            if(Copied.HasDelegate)
+            if (Copied.HasDelegate)
                 await Copied.InvokeAsync();
         }
         [JSInvokable]
         public async Task HandleCopyError()
         {
-            if(CopyFailed.HasDelegate)
+            if (CopyFailed.HasDelegate)
                 await CopyFailed.InvokeAsync();
         }
         #endregion

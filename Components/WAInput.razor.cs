@@ -299,7 +299,10 @@ namespace WebAwesomeBlazor.Components
         protected override async Task OnAfterRenderAsync(bool FirstRender)
         {
             if (FirstRender)
-                await JSRuntime.InvokeVoidAsync("window.vengage.input.initialize", Id, objRef, Value);
+            {
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                await InvokeVoidAsync("initialize", Id!, objRef, Value);
+            }
         }
 
         protected override async Task OnParametersSetAsync()
@@ -309,7 +312,8 @@ namespace WebAwesomeBlazor.Components
                 previousValue = Value ?? string.Empty;
 
                 // Run your JS update logic here
-                await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, Value);
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                await InvokeVoidAsync("setValue", Id!, Value!);
             }
         }
 
@@ -342,17 +346,14 @@ namespace WebAwesomeBlazor.Components
         private async Task OnValueChanged(ChangeEventArgs e)
         {
 
-            //await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, e.Value);
-
-            //await ValueChanged.InvokeAsync((string?)e.Value ?? string.Empty);
-            //EditContext?.NotifyFieldChanged(fieldIdentifier);
             await SetValueAsync((string)(e.Value ?? string.Empty));
         }
         #endregion
         #region Public Methods
         public async Task SetValueAsync(string value)
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, value);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("setValue", Id!, value);
             await ValueChanged.InvokeAsync(value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
@@ -361,7 +362,8 @@ namespace WebAwesomeBlazor.Components
 
         public async Task SetFocusAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", Id);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("setFocus", Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();

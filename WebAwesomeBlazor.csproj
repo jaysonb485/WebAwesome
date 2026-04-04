@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>true</IsPackable>
-		<AssemblyVersion>1.5.0-alpha</AssemblyVersion>
+		<AssemblyVersion>1.5.0</AssemblyVersion>
 		<RootNamespace>WebAwesomeBlazor</RootNamespace>
 		<Title>Web Awesome Blazor</Title>
 		<PackageProjectUrl>https://github.com/jaysonb485/WebAwesome/</PackageProjectUrl>
@@ -28,6 +28,14 @@
 		<Content Remove="WAMenuItem.razor" />
 		<Content Remove="WARadioButton.razor" />
 		<Content Remove="wwwroot\WebAwesome.css" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Components\WAInput.razor.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\WAChart.js" />
 	</ItemGroup>
 
 

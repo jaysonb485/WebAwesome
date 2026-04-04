@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -99,7 +98,7 @@ namespace WebAwesomeBlazor.Components
                 StateHasChanged();
             });
 
-            await JSRuntime.InvokeVoidAsync("window.vengage.toast.prepend", Id, toastMessage.Id);
+            await InvokeVoidAsync("prepend", Id!, toastMessage.Id);
         }
 
         #endregion

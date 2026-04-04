@@ -31,7 +31,7 @@ The markdown component turns raw markdown into rendered HTML using the Marked li
 
 #### Advanced Usage - Retrieve content from a file
 ```HTML+Razor
-   <WAMarkdown @ref="Markdown">
+   <WAMarkdown @ref="Markdown" />
 
    @code
    {

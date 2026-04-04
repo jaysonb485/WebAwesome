@@ -5,7 +5,9 @@
 
     public async Task SetDarkModeAsync(bool DarkMode)
     {
-        await JSRuntime.InvokeVoidAsync("window.vengage.themeManager.setDarkMode", DarkMode);
+        var path = "./_content/WebAwesomeBlazor/Extended/DarkModeToggle.razor.js";
+        var _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", path);
+        await _module.InvokeVoidAsync("setDarkMode", DarkMode);
     }
 
     public void SetDarkMode(bool DarkMode) => _ = SetDarkModeAsync(DarkMode);

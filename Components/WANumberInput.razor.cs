@@ -261,7 +261,8 @@ namespace WebAwesomeBlazor.Components
                 else
                     Value = value;
 
-                await JSRuntime.InvokeVoidAsync("window.vengage.input.initialize", Id, objRef, Value);
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                await InvokeVoidAsync("initialize", Id!, objRef, Value!);
 
                 await ValueChanged.InvokeAsync(Value);
             }
@@ -313,15 +314,15 @@ namespace WebAwesomeBlazor.Components
 
             if (newValue is null || !TryParseValue(newValue, out var value))
                 Value = default!;
-            //else if (Min is not null && IsLeftGreaterThanRight(Min, value)) // value < min
-            //    Value = Min;
-            //else if (Max is not null && IsLeftGreaterThanRight(value, Max)) // value > max
-            //    Value = Max;
+
             else
                 Value = value;
 
             if (oldValue!.Equals(Value))
-                await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, Value);
+            {
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                await InvokeVoidAsync("setValue", Id!, Value);
+            }
 
             await SetValueAsync(Value);
         }
@@ -332,7 +333,8 @@ namespace WebAwesomeBlazor.Components
                 previousValue = Value;
 
                 // Run your JS update logic here
-                await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, Value);
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                await InvokeVoidAsync("setValue", Id!, Value!);
             }
         }
 
@@ -579,7 +581,8 @@ namespace WebAwesomeBlazor.Components
         #region Public Methods
         public async Task SetValueAsync(TValue value)
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, value);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("setValue", Id!, value!);
             await ValueChanged.InvokeAsync(value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
@@ -588,21 +591,24 @@ namespace WebAwesomeBlazor.Components
 
         public async Task SetFocusAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", Id);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("setFocus", Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
 
         public async Task StepUpAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.numberInput.stepUp", Id, objRef);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("numberInputStepUp", Id!, objRef);
         }
 
         public void StepUp() => _ = StepUpAsync();
 
         public async Task StepDownAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.numberInput.stepDown", Id, objRef);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("numberInputStepDown", Id!, objRef);
         }
 
         public void StepDown() => _ = StepDownAsync();

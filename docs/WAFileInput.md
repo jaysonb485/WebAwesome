@@ -34,6 +34,7 @@ File inputs allow users to select one or more files from their device using a dr
 | SetFocus |  | Sets focus to the file input element. |
 | SetFocusAsync |  | Sets focus to the file input element. |
 | GetFilesAsync | | Get a list of files selected in the file input. Each file is represented as a JsFileInfo object, which contains metadata about the file and a method to open a read stream for the file's contents. |
+| OpenReadStreamAsync | file: jsFileInfo, chunkSize: int  | Returns a stream which can be used by a StreamReader to read the file contents. Provide the file from `GetFilesAsync()` Default chunkSize is `64 * 1024`. When reading the stream, you must use an Asynchornous read method e.g. `StreamReader.ReadToEndAsync`  |
 
 ### JsFileInfo
 | Property | Type   | Description                              |
@@ -43,9 +44,7 @@ File inputs allow users to select one or more files from their device using a dr
 | Type | string | The MIME type of the file. |
 | LastModified | DateTime | The date and time the file was last modified. |
 
-| Method      | Parameters       | Description                              |
-|-------------|------------------|------------------------------------------|
-| OpenReadStreamAsync | chunkSize: int  | Returns a stream which can be used by a StreamReader to read the file contents. Default chunkSize is `64 * 1024`. When reading the stream, you must use an Asynchornous read method e.g. `StreamReader.ReadToEndAsync`  |
+
 
 ### Examples
 
@@ -67,7 +66,7 @@ File inputs allow users to select one or more files from their device using a dr
 			foreach (var file in files)
 			{
 				Console.WriteLine($"File name: {file.Name}, size: {file.Size}, type: {file.Type}");
-				using var stream = await file.OpenReadStreamAsync();
+				using var stream = await TextFileInput.OpenReadStreamAsync(file);
 				using var reader = new StreamReader(stream);
 				var contents = await reader.ReadToEndAsync();
 				Console.WriteLine($"Contents: {contents}");
