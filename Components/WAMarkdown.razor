@@ -1,0 +1,13 @@
+﻿@inherits WAComponentBase
+<wa-markdown @ref="@Element"
+             id="@Id"
+             @attributes="@AdditionalAttributes"
+             style="@StyleNames"
+             class="@ClassNames"
+             slot="@Slot"
+             tab-size="@TabSize">
+    <script type="text/markdown">
+             @Markdown
+             @ChildContent
+    </script>
+</wa-markdown>
