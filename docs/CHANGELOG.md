@@ -5,6 +5,9 @@
 - Breaking: Project initialisation has changed. Refer to the Readme for details.
 - Removed Pro from [WAPage](/docs/WAPage.md) and [WALayoutContent](/docs/WALayoutContent.md) as they are now available to all users.
 - Added new component: [WAMarkdown](/docs/WAMarkdown.md) - The markdown component turns raw markdown into rendered HTML using the Marked library.
+- Addded new parameter to [WAColorPicker](/docs/WAColorPicker.md): `Placement` to define the preferred placement of the color picker's popup.
+- 
+
 
 ## Version 1.4.0
 - Upgraded to [Web Awesome 3.4.0](https://webawesome.com/docs/resources/changelog#wa_340) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
