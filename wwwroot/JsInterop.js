@@ -296,6 +296,16 @@ window.vengage = {
             });
         }
     },
+    markdown: {
+        updateContent: (elementId, markdown) => {
+            let element = document.getElementById(elementId);
+            if (!element) return;
+
+            const script = element.querySelector('script[type="text/markdown"]');
+            script.textContent = markdown;
+            element.renderMarkdown();
+        }
+    },
     navtree: {
         initialize: (elementId, dotnetHelper) => {
             let element = document.getElementById(elementId);

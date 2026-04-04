@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -100,6 +95,24 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public TextAreaAutoCapitalize? AutoCapitalize { get; set; }
+
+        /// <summary>
+        /// Shows a character count below the textarea. When maxlength is set, shows remaining characters instead.
+        /// </summary>
+        [Parameter]
+        public bool ShowCount { get; set; } = false;
+
+        /// <summary>
+        /// The maximum length of input that will be considered valid.
+        /// </summary>
+        [Parameter]
+        public int? MaxLength { get; set; }
+
+        /// <summary>
+        /// The minimum length of input that will be considered valid.
+        /// </summary>
+        [Parameter]
+        public int? MinLength { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -156,13 +169,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return AutoCapitalize switch
                 {
-                     TextAreaAutoCapitalize.Off => "off",
-                     TextAreaAutoCapitalize.On => "on",
-                     TextAreaAutoCapitalize.None => "none",
-                     TextAreaAutoCapitalize.Sentences => "sentences",
-                     TextAreaAutoCapitalize.Words => "words",
-                     TextAreaAutoCapitalize.Characters => "characters",
-                     _ => ""
+                    TextAreaAutoCapitalize.Off => "off",
+                    TextAreaAutoCapitalize.On => "on",
+                    TextAreaAutoCapitalize.None => "none",
+                    TextAreaAutoCapitalize.Sentences => "sentences",
+                    TextAreaAutoCapitalize.Words => "words",
+                    TextAreaAutoCapitalize.Characters => "characters",
+                    _ => ""
                 };
             }
         }

@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.4.0. 
+Currently supports Web Awesome 3.5.0. 
 
 # Changelog
-[Version 1.4.0](/docs/CHANGELOG.md)
+[Version 1.5.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -14,20 +14,18 @@ dotnet add package WebAwesomeBlazor
 
 # Usage
 Register your [Web Awesome](https://webawesome.com) account.
-Create your project and obtain your unique project code. To use the latest compatible features, make sure the project version is set to the support Web Awesome version.
-
-Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<HEAD>` section along with the extra utility files for this package:
+Create your project and obtain your unique project kit code. To use the latest compatible features, make sure the project version is set to the support Web Awesome version.
+Your project kit code will be part of the project kit code on the CDN tab. For example:
 ```HTML
-    <script src="https://kit.webawesome.com/---YOUR KIT CODE---.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
-    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
+<link
+  rel="stylesheet"
+  href="https://ka-p.webawesome.com/kit/YOUR KIT CODE IS HERE/webawesome@3.5.0/styles/themes/default.css"
+/>
 ```
 
-Alternatively, if hosting the Web Awesome library yourself, reference the relevant files and add:
-```HTML
-    -- YOUR WEB AWESOME FILES HERE --
-    <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
-    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
+Initialize the Web Awesome services in your `Program.cs` file adding in your kit code:
+```CSharp
+builder.Services.AddWebAwesome("YOUR KIT CODE", "3.5.0");
 ```
 
 Add the following to your `_Imports.razor` file:
@@ -37,12 +35,15 @@ Add the following to your `_Imports.razor` file:
 @using WebAwesomeBlazor.Extended
 ```
 
-If you plan to use `ConfirmDialog` or `WAToast`, add the following to your `Program.cs`:
-```CSharp
-builder.Services.AddWebAwesome();
+Finally, add the WebAwesome component to your Main Layout, or wherever you want to use the components:
+```HTML+Razor
+<WebAwesome />
 ```
 
-Then you can use the components in your Blazor pages, for example:
+Be careful not to load the component twice.
+
+
+You can then use the components in your Blazor pages, for example:
 ```HTML+Razor
 <WAButton OnClick="ButtonClicked" Appearance="ButtonAppearance.Outlined" Variant="ButtonVariant.Brand">Change value</WAButton>
 ```
