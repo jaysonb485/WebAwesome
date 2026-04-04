@@ -39,7 +39,7 @@ Includes give you the power to embed external HTML files into the page
 		Console.WriteLine("Page loaded");
 	}
 
-	void includeError(int errorNumber)
+	void includeError(string errorNumber)
 	{
 		Console.WriteLine($"Error loading page: {errorNumber}");
 	}

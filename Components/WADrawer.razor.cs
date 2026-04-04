@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -57,7 +52,7 @@ namespace WebAwesomeBlazor.Components
         {
             get
             {
-                return (!String.IsNullOrEmpty(Title) || (HeaderActions != null));
+                return !String.IsNullOrEmpty(Title) || (HeaderActions != null);
             }
         }
 
@@ -100,7 +95,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                
+
                 objRef?.Dispose();
 
             }
@@ -118,7 +113,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.drawer.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
         #endregion
@@ -137,7 +132,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.drawer.change", Id, false);
+            await InvokeVoidAsync("change", Id!, false);
         }
 
         public void Hide() => _ = HideAsync();
@@ -148,7 +143,7 @@ namespace WebAwesomeBlazor.Components
         public async Task ShowAsync()
         {
             IsVisible = true;
-            await JSRuntime.InvokeVoidAsync("window.vengage.drawer.change", Id, true);
+            await InvokeVoidAsync("change", Id!, true);
 
         }
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.JSInterop;
 using System.Linq.Expressions;
 
 namespace WebAwesomeBlazor.Components
@@ -166,8 +165,8 @@ namespace WebAwesomeBlazor.Components
         public async Task<string> GetFormattedValueAsync(PickerColorExtendedFormat colorFormat)
         {
             var result =
-                await JSRuntime.InvokeAsync<string>("window.vengage.colorPicker.getFormattedValue",
-                    Id, colorFormat.ToString().ToLower()
+                await InvokeAsync<string>("getFormattedValue",
+                    Id!, colorFormat.ToString().ToLower()
                 );
 
             return result;
@@ -180,7 +179,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task SetSwatchesAsync(SwatchColor[] swatches)
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.colorPicker.setSwatches", Id, swatches);
+            await InvokeVoidAsync("setSwatches", Id!, swatches);
         }
         #endregion
 

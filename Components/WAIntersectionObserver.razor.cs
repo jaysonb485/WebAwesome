@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -60,7 +55,7 @@ namespace WebAwesomeBlazor.Components
             if (firstRender)
             {
                 objRef = DotNetObjectReference.Create(this);
-                await JSRuntime.InvokeVoidAsync("window.vengage.interceptObserver.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 

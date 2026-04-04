@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -56,7 +51,7 @@ namespace WebAwesomeBlazor.Components
         {
             get
             {
-                return (String.IsNullOrEmpty(Title) && (HeaderActions == null));
+                return String.IsNullOrEmpty(Title) && (HeaderActions == null);
             }
         }
 
@@ -80,7 +75,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.dialog.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -122,7 +117,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.dialog.change", Id, false);
+            await InvokeVoidAsync("change", Id!, false);
             IsVisible = false;
         }
 
@@ -137,7 +132,7 @@ namespace WebAwesomeBlazor.Components
         public async Task ShowAsync()
         {
             IsVisible = true;
-            await InvokeAsync(StateHasChanged);          
+            await InvokeAsync(StateHasChanged);
         }
         #endregion
 

@@ -121,7 +121,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -164,7 +164,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ZoomInAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.zoomIn", Id);
+            await InvokeVoidAsync("zoomIn", Id!);
         }
 
         public void ZoomIn() => _ = ZoomInAsync();
@@ -173,7 +173,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ZoomOutAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.zoomable.zoomOut", Id);
+            await InvokeVoidAsync("zoomOut", Id!);
         }
         public void ZoomOut() => _ = ZoomOutAsync();
         #endregion

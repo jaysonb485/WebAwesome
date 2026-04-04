@@ -1,8 +1,8 @@
 ﻿# Changelog
 
 ## Version 1.5.0
+- Breaking change: [WAFileInput](/docs/WAFileInput.md) - Change to retrieving the file stream. Refer to the updated documentation for details.
 - Upgraded to [Web Awesome 3.5.0](https://webawesome.com/docs/resources/changelog#wa_350) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
-- Breaking: Project initialisation has changed. Refer to the Readme for details.
 - Removed Pro from [WAPage](/docs/WAPage.md) and [WALayoutContent](/docs/WALayoutContent.md) as they are now available to all users.
 - Added new component: [WAMarkdown](/docs/WAMarkdown.md) - The markdown component turns raw markdown into rendered HTML using the Marked library.
 - Addded new parameter to [WAColorPicker](/docs/WAColorPicker.md): `Placement` to define the preferred placement of the color picker's popup.
@@ -11,6 +11,8 @@
    * `ShowCount` to display a character count below the textarea.
    * `MaxLength` to specify the maximum number of characters allowed in the textarea.
    * `MinLength` to specify the minimum number of characters required in the textarea.
+- Refactored JS interop calls in the background
+
 
 
 ## Version 1.4.0

@@ -13,19 +13,24 @@ dotnet add package WebAwesomeBlazor
 ```
 
 # Usage
-Register your [Web Awesome](https://webawesome.com) account.
-Create your project and obtain your unique project kit code. To use the latest compatible features, make sure the project version is set to the support Web Awesome version.
-Your project kit code will be part of the project kit code on the CDN tab. For example:
+
+## 1. Add Web Awesome style and javascript code
+### Free components
+Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<head>` section along with the extra utility files for this package:
 ```HTML
-<link
-  rel="stylesheet"
-  href="https://ka-p.webawesome.com/kit/YOUR KIT CODE IS HERE/webawesome@3.5.0/styles/themes/default.css"
-/>
+<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.5.0/styles/webawesome.css">
+<script type="module" src="https://ka-f.webawesome.com/webawesome@3.5.0/webawesome.loader.js"></script>
 ```
 
-Initialize the Web Awesome services in your `Program.cs` file adding in your kit code:
+### Web Awesome Pro components
+To use the Web Awesome Pro components, you'll need to register a [Web Awesome](https://webawesome.com/) project. 
+Once registered, copy the project code from the CDN tab in your project settings page into the `<head>` tag on `App.razor` or `wwwroot/index.html` file instead of the free component code above.
+Don't forget to also follow the instructions to add any relevant CSS classes to your `<html>` tag mentioned on the CDN page.
+
+## 2. Add Web Awesome Blazor components
+Initialize the Web Awesome Blazor services in your `Program.cs` file adding in your kit code:
 ```CSharp
-builder.Services.AddWebAwesome("YOUR KIT CODE", "3.5.0");
+builder.Services.AddWebAwesome();
 ```
 
 Add the following to your `_Imports.razor` file:
@@ -34,13 +39,6 @@ Add the following to your `_Imports.razor` file:
 @using WebAwesomeBlazor.Components
 @using WebAwesomeBlazor.Extended
 ```
-
-Finally, add the WebAwesome component to your Main Layout, or wherever you want to use the components:
-```HTML+Razor
-<WebAwesome />
-```
-
-Be careful not to load the component twice.
 
 
 You can then use the components in your Blazor pages, for example:
@@ -84,6 +82,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAInputDateTime](/docs/WAInputDateTime.md)
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
+- [WAMarkdown](/docs/WAMarkdown.md)
 - [WANumberInput](/docs/WANumberInput.md)
 - (Pro) [WAPage](/docs/WAPage.md)
   - (Pro) [WALayoutContent](/docs/WALayoutContent.md)

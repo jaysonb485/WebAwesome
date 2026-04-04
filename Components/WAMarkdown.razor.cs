@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -17,6 +16,7 @@ namespace WebAwesomeBlazor.Components
 
         #endregion
 
+
         #region Public Methods
         /// <summary>
         /// Updates the markdown content of the component. This method can be used to dynamically change the displayed markdown after the component has been rendered.
@@ -27,7 +27,7 @@ namespace WebAwesomeBlazor.Components
         public async Task SetMarkdownAsync(string Markdown)
         {
             this.Markdown = Markdown;
-            await JSRuntime.InvokeVoidAsync("window.vengage.markdown.updateContent", Id, Markdown);
+            await InvokeVoidAsync("updateContent", Id!, Markdown);
         }
         #endregion
     }

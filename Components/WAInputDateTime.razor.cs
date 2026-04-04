@@ -186,8 +186,8 @@ namespace WebAwesomeBlazor.Components
                 }
 
                 formattedValue = GetFormattedValue(Value!);
-
-                await JSRuntime.InvokeVoidAsync("window.vengage.input.initialize", Id, objRef, Value);
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                await InvokeVoidAsync("initialize", Id!, objRef, Value!);
 
                 //await ValueChanged.InvokeAsync(Value);
             }
@@ -325,7 +325,10 @@ namespace WebAwesomeBlazor.Components
             formattedValue = GetFormattedValue(Value!);
 
             if (oldValue!.Equals(Value))
-                await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", Id, formattedValue);
+            {
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                await InvokeVoidAsync("setValue", Id!, formattedValue);
+            }
 
             await ValueChanged.InvokeAsync(Value);
 
@@ -390,7 +393,8 @@ namespace WebAwesomeBlazor.Components
         #region Public Methods
         public async Task SetFocusAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", Id);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("setFocus", Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
