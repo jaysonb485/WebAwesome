@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -105,7 +100,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.carousel.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -152,7 +147,7 @@ namespace WebAwesomeBlazor.Components
         /// <param name="index">The index to scroll to</param>
         public async Task GoToSlideAsync(int index)
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.carousel.goToSlide", Id, index);
+            await InvokeVoidAsync("goToSlide", Id!, index);
         }
 
         public void GoToSlide(int index) => _ = GoToSlideAsync((int)index);
@@ -162,7 +157,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task NextSlideAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.carousel.nextSlide", Id);
+            await InvokeVoidAsync("nextSlide", Id!);
         }
 
         public void NextSlide() => _ = NextSlideAsync();
@@ -172,7 +167,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task PreviousSlideAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.carousel.previousSlide", Id);
+            await InvokeVoidAsync("previousSlide", Id!);
         }
 
         public void PreviousSlide() => _ = PreviousSlideAsync();

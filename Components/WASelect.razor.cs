@@ -250,9 +250,9 @@ namespace WebAwesomeBlazor.Components
 
             if (initValue is not null)
             {
-                await JSRuntime.InvokeVoidAsync(
-                    "window.vengage.select.initialize",
-                    Id,
+                await InvokeVoidAsync(
+                    "initialize",
+                    Id!,
                     objRef,
                     initValue
                 );
@@ -283,7 +283,7 @@ namespace WebAwesomeBlazor.Components
 
             if (hasChanged && newValue is not null)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.select.setValue", Id, newValue);
+                await InvokeVoidAsync("setValue", Id!, newValue);
             }
         }
         #endregion

@@ -339,6 +339,22 @@
         Inherit
     }
 
+    public enum PickerPlacement
+    {
+        Top,
+        TopStart,
+        TopEnd,
+        Bottom,
+        BottomStart,
+        BottomEnd,
+        Right,
+        RightStart,
+        RightEnd,
+        Left,
+        LeftStart,
+        LeftEnd
+    }
+
     #endregion
     #region Combobox Enums
 

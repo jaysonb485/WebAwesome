@@ -1,0 +1,23 @@
+﻿@inject IWebAwesomeOptions Options
+
+<HeadContent>
+    <!-- Theme + color palette -->
+    <link rel="stylesheet"
+          href="@($"https://ka-p.webawesome.com/kit/{Options.KitCode}/webawesome@{Options.WebAwesomeVersionCode}/styles/themes/default.css")" />
+
+    <!-- Native styles/CSS reset -->
+    <link rel="stylesheet" href="@($"https://ka-p.webawesome.com/kit/{Options.KitCode}/webawesome@{Options.WebAwesomeVersionCode}/styles/native.css")" />
+
+    <!-- CSS utilities -->
+    <link rel="stylesheet" href="@($"https://ka-p.webawesome.com/kit/{Options.KitCode}/webawesome@{Options.WebAwesomeVersionCode}/styles/utilities.css")" />
+
+    <!-- Web Awesome autoloader -->
+    <script type="module"
+            src="@($"https://ka-p.webawesome.com/kit/{Options.KitCode}/webawesome@{Options.WebAwesomeVersionCode}/webawesome.loader.js")"></script>
+
+    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
+</HeadContent>
+
+@code {
+
+}

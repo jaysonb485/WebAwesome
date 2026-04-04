@@ -1,5 +1,4 @@
-﻿using Microsoft.JSInterop;
-using System.Data;
+﻿using System.Data;
 using System.Text.Json.Serialization;
 
 namespace WebAwesomeBlazor.Components
@@ -44,8 +43,8 @@ namespace WebAwesomeBlazor.Components
             CategoryLabels = categoryLabels;
             ChartOptions = radarChartOptions ?? new();
             await InvokeAsync(StateHasChanged);
-
-            await JSRuntime.InvokeVoidAsync("window.vengage.chart.render", Id, CategoryLabels, DataSets);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/WAChart.js");
+            await InvokeVoidAsync("render", Id!, CategoryLabels, DataSets);
         }
         #endregion
     }

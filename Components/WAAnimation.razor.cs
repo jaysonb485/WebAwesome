@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -119,7 +114,9 @@ namespace WebAwesomeBlazor.Components
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.animation.initialize", Id, objRef);
+
+                await InvokeVoidAsync("initialize", Id!, objRef);
+                //await JSRuntime.InvokeVoidAsync("window.vengage.animation.initialize", Id, objRef);
                 if (AutoStart)
                 {
                     Play = true;
@@ -217,7 +214,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task CancelAnimationAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.animation.cancel", Id);
+            await InvokeVoidAsync("cancel", Id!);
         }
 
         public void CancelAnimation() => _ = CancelAnimationAsync();
@@ -228,8 +225,8 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task FinishAnimationAsync()
         {
-            if(Iterations != null)
-                await JSRuntime.InvokeVoidAsync("window.vengage.animation.finish", Id);
+            if (Iterations != null)
+                await InvokeVoidAsync("finish", Id!);
         }
 
         public void FinishAnimation() => _ = FinishAnimationAsync();

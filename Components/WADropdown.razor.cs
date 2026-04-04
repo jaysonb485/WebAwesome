@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -159,7 +154,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.dropdown.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -185,7 +180,7 @@ namespace WebAwesomeBlazor.Components
         [JSInvokable]
         public async Task HandleItemSelected(string itemValue)
         {
-            if(ItemSelected.HasDelegate)
+            if (ItemSelected.HasDelegate)
                 await ItemSelected.InvokeAsync(itemValue);
         }
         #endregion

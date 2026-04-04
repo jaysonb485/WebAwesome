@@ -1,12 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -83,7 +76,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.comparison.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 

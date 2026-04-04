@@ -60,7 +60,10 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.toast.initItem", ToastMessage.Id, dotnetRef);
+            var path = $"./_content/WebAwesomeBlazor/ToastItem.razor.js";
+            var _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", path);
+
+            await _module.InvokeVoidAsync("initItem", ToastMessage.Id, dotnetRef);
         }
     }
     #endregion
