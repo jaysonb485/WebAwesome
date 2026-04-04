@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.4.0. 
+Currently supports Web Awesome 3.5.0. 
 
 # Changelog
-[Version 1.4.0](/docs/CHANGELOG.md)
+[Version 1.5.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -13,21 +13,24 @@ dotnet add package WebAwesomeBlazor
 ```
 
 # Usage
-Register your [Web Awesome](https://webawesome.com) account.
-Create your project and obtain your unique project code. To use the latest compatible features, make sure the project version is set to the support Web Awesome version.
 
-Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<HEAD>` section along with the extra utility files for this package:
+## 1. Add Web Awesome style and javascript code
+### Free components
+Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<head>` section along with the extra utility files for this package:
 ```HTML
-    <script src="https://kit.webawesome.com/---YOUR KIT CODE---.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
-    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
+<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.5.0/styles/webawesome.css">
+<script type="module" src="https://ka-f.webawesome.com/webawesome@3.5.0/webawesome.loader.js"></script>
 ```
 
-Alternatively, if hosting the Web Awesome library yourself, reference the relevant files and add:
-```HTML
-    -- YOUR WEB AWESOME FILES HERE --
-    <link rel="stylesheet" href="@Assets["/_content/WebAwesomeBlazor/WebAwesome.css"]" />
-    <script type="text/javascript" src="@Assets["/_content/WebAwesomeBlazor/JsInterop.js"]"></script>
+### Web Awesome Pro components
+To use the Web Awesome Pro components, you'll need to register a [Web Awesome](https://webawesome.com/) project. 
+Once registered, copy the project code from the CDN tab in your project settings page into the `<head>` tag on `App.razor` or `wwwroot/index.html` file instead of the free component code above.
+Don't forget to also follow the instructions to add any relevant CSS classes to your `<html>` tag mentioned on the CDN page.
+
+## 2. Add Web Awesome Blazor components
+Initialize the Web Awesome Blazor services in your `Program.cs` file adding in your kit code:
+```CSharp
+builder.Services.AddWebAwesome();
 ```
 
 Add the following to your `_Imports.razor` file:
@@ -37,12 +40,8 @@ Add the following to your `_Imports.razor` file:
 @using WebAwesomeBlazor.Extended
 ```
 
-If you plan to use `ConfirmDialog` or `WAToast`, add the following to your `Program.cs`:
-```CSharp
-builder.Services.AddWebAwesome();
-```
 
-Then you can use the components in your Blazor pages, for example:
+You can then use the components in your Blazor pages, for example:
 ```HTML+Razor
 <WAButton OnClick="ButtonClicked" Appearance="ButtonAppearance.Outlined" Variant="ButtonVariant.Brand">Change value</WAButton>
 ```
@@ -83,6 +82,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAInputDateTime](/docs/WAInputDateTime.md)
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
+- [WAMarkdown](/docs/WAMarkdown.md)
 - [WANumberInput](/docs/WANumberInput.md)
 - (Pro) [WAPage](/docs/WAPage.md)
   - (Pro) [WALayoutContent](/docs/WALayoutContent.md)

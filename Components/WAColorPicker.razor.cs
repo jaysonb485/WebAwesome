@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.JSInterop;
 using System.Linq.Expressions;
 
 namespace WebAwesomeBlazor.Components
@@ -68,6 +67,12 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public string? Swatches { get; set; }
 
+        /// <summary>
+        /// The preferred placement of the color picker's popup. Note that the actual placement will vary as configured to keep the panel inside of the viewport.
+        /// </summary>
+        [Parameter]
+        public PickerPlacement Placement { get; set; } = PickerPlacement.BottomStart;
+
         #endregion
 
         #region Computed Properties
@@ -97,6 +102,29 @@ namespace WebAwesomeBlazor.Components
                     PickerSize.Large => "large",
                     PickerSize.Inherit => "inherit",
                     _ => "inherit"
+                };
+            }
+        }
+
+        string PlacementString
+        {
+            get
+            {
+                return Placement switch
+                {
+                    PickerPlacement.TopStart => "top-start",
+                    PickerPlacement.Top => "top",
+                    PickerPlacement.TopEnd => "top-end",
+                    PickerPlacement.RightStart => "right-start",
+                    PickerPlacement.Right => "right",
+                    PickerPlacement.RightEnd => "right-end",
+                    PickerPlacement.BottomStart => "bottom-start",
+                    PickerPlacement.Bottom => "bottom",
+                    PickerPlacement.BottomEnd => "bottom-end",
+                    PickerPlacement.LeftStart => "left-start",
+                    PickerPlacement.Left => "left",
+                    PickerPlacement.LeftEnd => "left-end",
+                    _ => "bottom-start"
                 };
             }
         }
@@ -137,8 +165,8 @@ namespace WebAwesomeBlazor.Components
         public async Task<string> GetFormattedValueAsync(PickerColorExtendedFormat colorFormat)
         {
             var result =
-                await JSRuntime.InvokeAsync<string>("window.vengage.colorPicker.getFormattedValue",
-                    Id, colorFormat.ToString().ToLower()
+                await InvokeAsync<string>("getFormattedValue",
+                    Id!, colorFormat.ToString().ToLower()
                 );
 
             return result;
@@ -151,7 +179,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task SetSwatchesAsync(SwatchColor[] swatches)
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.colorPicker.setSwatches", Id, swatches);
+            await InvokeVoidAsync("setSwatches", Id!, swatches);
         }
         #endregion
 
