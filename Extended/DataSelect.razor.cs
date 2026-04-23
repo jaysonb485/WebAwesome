@@ -208,7 +208,10 @@ namespace WebAwesomeBlazor.Extended
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-                await JSRuntime.InvokeVoidAsync("window.vengage.select.initialize", Id, objRef, GetOptionKeyString(Value ?? default!));
+            {
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WASelect.razor.js");
+                await InvokeVoidAsync("initialize", Id!, objRef, GetOptionKeyString(Value ?? default!)!);
+            }
         }
 
 
@@ -219,8 +222,8 @@ namespace WebAwesomeBlazor.Extended
             {
                 previousValue = Value ?? default!;
 
-                // Run your JS update logic here
-                await JSRuntime.InvokeVoidAsync("window.vengage.select.setValue", Id, GetOptionKeyString(Value ?? default!));
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WASelect.razor.js");
+                await InvokeVoidAsync("setValue", Id!, GetOptionKeyString(Value ?? default!)!);
             }
         }
 

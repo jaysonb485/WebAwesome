@@ -1,5 +1,4 @@
-﻿using Microsoft.JSInterop;
-using System.Data;
+﻿using System.Data;
 using System.Text.Json.Serialization;
 
 namespace WebAwesomeBlazor.Components
@@ -53,8 +52,8 @@ namespace WebAwesomeBlazor.Components
             var doughnutOptions = new { Cutout = ChartOptions.CutoutSize };
 
             var dataSets = new[] { new { label = DataSet.Label, data = DataSet.Data } };
-
-            await JSRuntime.InvokeVoidAsync("window.vengage.chart.render", Id, CategoryLabels, dataSets, doughnutOptions);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/WAChart.js");
+            await InvokeVoidAsync("render", Id!, CategoryLabels, dataSets, doughnutOptions);
         }
         #endregion
     }

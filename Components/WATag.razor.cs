@@ -110,7 +110,7 @@ namespace WebAwesomeBlazor.Components
             if (firstRender)
             {
                 objRef = DotNetObjectReference.Create(this);
-                await JSRuntime.InvokeVoidAsync("window.vengage.tag.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -160,7 +160,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task RemoveAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.tag.removeTag", Id, objRef);
+            await InvokeVoidAsync("removeTag", Id!, objRef);
         }
 
         public void Remove() => _ = RemoveAsync();

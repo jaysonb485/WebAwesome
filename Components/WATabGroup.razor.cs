@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -80,7 +74,7 @@ namespace WebAwesomeBlazor.Components
         public async Task HandleTabShowing(string tabId)
         {
             ActiveTab = tabId;
-            if(ActiveTabChanged.HasDelegate)
+            if (ActiveTabChanged.HasDelegate)
                 await ActiveTabChanged.InvokeAsync(tabId);
         }
         #endregion
@@ -90,7 +84,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.tab.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 

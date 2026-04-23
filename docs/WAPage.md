@@ -14,9 +14,6 @@ Pages offer an easy way to scaffold entire page layouts using minimal markup.
 
 [WebAwesome docs](https://webawesome.com/docs/components/page/)
 
-> [!IMPORTANT]
-> WAPage and WALayoutContent requires access to WebAwesome Pro.
-
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|

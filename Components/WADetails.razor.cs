@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -129,7 +124,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.details.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -157,7 +152,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ShowAsync()
         {
-                await JSRuntime.InvokeVoidAsync("window.vengage.details.show", Id);
+            await InvokeVoidAsync("show", Id!);
         }
 
         public void Show() => _ = ShowAsync();
@@ -166,10 +161,10 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideAsync()
         {
-                await JSRuntime.InvokeVoidAsync("window.vengage.details.hide", Id);
+            await InvokeVoidAsync("hide", Id!);
         }
 
-        public void Hide() => _ = HideAsync();  
+        public void Hide() => _ = HideAsync();
 
         [JSInvokable]
         public void HandleDetailsShow()

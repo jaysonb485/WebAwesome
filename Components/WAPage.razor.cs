@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -130,7 +125,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.page.initialize", Id, objRef, ObserveResize ? _resizeId : null);
+                await InvokeVoidAsync("initialize", Id!, objRef, ObserveResize ? _resizeId : string.Empty);
 
                 await Task.Delay(1);
 
@@ -202,7 +197,7 @@ namespace WebAwesomeBlazor.Components
         #region Private Methods
         private async Task GetPageViewAsync()
         {
-            IsMobilePageView = await JSRuntime.InvokeAsync<string>("window.vengage.page.view", Id) == "mobile";
+            IsMobilePageView = await InvokeAsync<string>("view", Id!) == "mobile";
         }
         #endregion
 
@@ -212,7 +207,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ShowNavigationAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.page.shownav", Id);
+            await InvokeVoidAsync("shownav", Id!);
         }
 
         public void ShowNavigation() => _ = ShowNavigationAsync();
@@ -222,7 +217,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideNavigationAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.page.hidenav", Id);
+            await InvokeVoidAsync("hidenav", Id!);
         }
 
         public void HideNavigation() => _ = HideNavigationAsync();
@@ -233,13 +228,13 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ToggleNavigationAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.page.togglenav", Id);
+            await InvokeVoidAsync("togglenav", Id!);
         }
 
         public void ToggleNavigation() => _ = ToggleNavigationAsync();
         #endregion
 
-     }
-	
-	
+    }
+
+
 }

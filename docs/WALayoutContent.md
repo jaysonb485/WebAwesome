@@ -12,9 +12,6 @@
 ### Description
 A WALayoutContent is used to define a section of a [WAPage](/docs/WAPage.md)
 
-> [!IMPORTANT]
-> WAPage and WALayoutContent requires access to WebAwesome Pro.
-
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|

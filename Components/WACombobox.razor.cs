@@ -352,9 +352,9 @@ namespace WebAwesomeBlazor.Components
             else
                 initValue = Value;
 
-            await JSRuntime.InvokeVoidAsync(
-                "window.vengage.combobox.initialize",
-                Id,
+            await InvokeVoidAsync(
+                "initialize",
+                Id!,
                 objRef,
                 initValue
             );
@@ -385,7 +385,7 @@ namespace WebAwesomeBlazor.Components
 
             if (hasChanged && newValue is not null)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.combobox.setValue", Id, newValue);
+                await InvokeVoidAsync("setValue", Id!, newValue);
             }
         }
         #endregion
@@ -456,7 +456,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns>string</returns>
         public async Task<string> GetInputValueAsync()
         {
-            var value = await JSRuntime.InvokeAsync<string>("window.vengage.combobox.getInputValue", Id);
+            var value = await InvokeAsync<string>("getInputValue", Id!);
             return value;
         }
 
@@ -471,7 +471,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ShowAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.combobox.show", Id);
+            await InvokeVoidAsync("show", Id!);
         }
 
 
@@ -485,7 +485,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.combobox.hide", Id);
+            await InvokeVoidAsync("hide", Id!);
         }
         #endregion
 

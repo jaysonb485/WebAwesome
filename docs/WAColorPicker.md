@@ -2,7 +2,7 @@
 ## WebAwesomeBlazor.Components.WAColorPicker
 
 ```HTML+Razor
-<WAComponoentName prop1="value1" prop2="value2" />
+<WAColorPicker @bind-Value="pickerValue" />
 ```
 
 ### Description
@@ -23,6 +23,7 @@ Color pickers allow the user to select a color.
 | ShowOpacitySlider | bool | false | Shows the opacity slider. Enabling this will cause the formatted value to be HEXA, RGBA, or HSLA. |
 | UppercaseValues | bool | false | By default, values are lowercase. With this attribute, values will be uppercase instead. |
 | Swatches | string | | One or more predefined color swatches to display as presets in the color picker. Can include any format the color picker can parse, including HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names. Each color must be separated by a semicolon (;). <br/> For accessibility, use `SetSwatchesAsync` instead and provide labels for the swatches. |
+| Placement | PickerPlacement | PickerPlacement.BottomStart | The preferred placement of the color picker's popup. Note that the actual placement will vary as configured to keep the panel inside of the viewport. |
 
 ### Methods
 | Method      | Parameters       | Description                              |
@@ -69,3 +70,4 @@ Color pickers allow the user to select a color.
         }
     }
 }
+```

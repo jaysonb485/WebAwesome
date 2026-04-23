@@ -1,20 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor
 {
     public abstract class WALayoutComponentBase : LayoutComponentBase, IDisposable, IAsyncDisposable
     {
-    #region Fields and Constants
+        #region Fields and Constants
 
-    private bool isAsyncDisposed;
+        private bool isAsyncDisposed;
 
         private bool isDisposed;
+        private IJSObjectReference? _module;
+        private string? _moduleFileName;
 
         #endregion
 
@@ -101,7 +98,17 @@ namespace WebAwesomeBlazor
         public async ValueTask DisposeAsync()
         {
             await DisposeAsyncCore(true).ConfigureAwait(false);
-
+            if (_module is not null)
+            {
+                try
+                {
+                    await _module.DisposeAsync();
+                }
+                catch
+                {
+                    // swallow — Blazor may already be shutting down
+                }
+            }
             Dispose(false);
             GC.SuppressFinalize(this);
         }
@@ -169,6 +176,46 @@ namespace WebAwesomeBlazor
             Dispose(false);
         }
 
+        #endregion
+
+        #region Private Methods
+        protected async Task<IJSObjectReference> LoadModuleAsync(string? moduleFileName = "")
+        {
+            _moduleFileName ??= string.IsNullOrWhiteSpace(moduleFileName) ? $"./_content/WebAwesomeBlazor/Components/{GetType().Name}.razor.js" : moduleFileName;
+
+            if (_module is null)
+            {
+                _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", _moduleFileName);
+            }
+
+            return _module;
+        }
+
+        protected async Task InvokeVoidAsync(string methodName, params object[] args)
+        {
+            await LoadModuleAsync();
+            if (_module is not null)
+            {
+                await _module.InvokeVoidAsync(methodName, args);
+            }
+            else
+            {
+                throw new InvalidOperationException("Module state is invalid. Ensure JS calls are only made after render.");
+            }
+        }
+
+        protected async Task<T> InvokeAsync<T>(string methodName, params object[] args)
+        {
+            await LoadModuleAsync();
+            if (_module is not null)
+            {
+                return await _module.InvokeAsync<T>(methodName, args);
+            }
+            else
+            {
+                throw new InvalidOperationException("Module state is invalid. Ensure JS calls are only made after render.");
+            }
+        }
         #endregion
     }
 }

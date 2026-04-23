@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -79,7 +74,7 @@ namespace WebAwesomeBlazor.Components
             if (firstRender)
             {
                 objRef = DotNetObjectReference.Create(this);
-                await JSRuntime.InvokeVoidAsync("window.vengage.popover.initialize", Id, objRef);
+                await InvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -142,7 +137,7 @@ namespace WebAwesomeBlazor.Components
         public async Task ShowPopoverAsync()
         {
             Open = true;
-            await JSRuntime.InvokeVoidAsync("window.vengage.popover.show", Id);
+            await InvokeVoidAsync("show", Id!);
         }
 
         public void ShowPopover() => _ = ShowPopoverAsync();
@@ -153,7 +148,7 @@ namespace WebAwesomeBlazor.Components
         public async Task HidePopoverAsync()
         {
             Open = false;
-            await JSRuntime.InvokeVoidAsync("window.vengage.popover.hide", Id);
+            await InvokeVoidAsync("hide", Id!);
         }
 
         public void HidePopover() => _ = HidePopoverAsync();
@@ -166,10 +161,10 @@ namespace WebAwesomeBlazor.Components
             Open = !Open;
             if (Open)
             {
-                await JSRuntime.InvokeVoidAsync("window.vengage.popover.show", Id);
+                await InvokeVoidAsync("show", Id!);
                 return;
             }
-            await JSRuntime.InvokeVoidAsync("window.vengage.popover.hide", Id);
+            await InvokeVoidAsync("hide", Id!);
 
 
         }

@@ -95,12 +95,13 @@ namespace WebAwesomeBlazor.Components
                 await FilesChanged.InvokeAsync();
             }
         }
+
         #endregion
         #region Public Methods
 
         public async Task SetFocusAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", Id);
+            await InvokeVoidAsync("setFocus", Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
@@ -111,8 +112,8 @@ namespace WebAwesomeBlazor.Components
         /// <returns>Array of JsFileInfo</returns>
         public async Task<JsFileInfo[]> GetFilesAsync()
         {
-            var files = await JSRuntime.InvokeAsync<List<Dictionary<string, JsonElement>>>("window.vengage.fileInput.getFiles", Id);
-            return [.. files.Select((f, index) => new JsFileInfo(JSRuntime, Id!)
+            var files = await InvokeAsync<List<Dictionary<string, JsonElement>>>("getFiles", Id!);
+            return [.. files.Select((f, index) => new JsFileInfo(Id!)
             {
                 Index = index,
                 Name = f["name"].ToString() ?? string.Empty,
@@ -121,13 +122,30 @@ namespace WebAwesomeBlazor.Components
                 LastModified = Convert.ToInt64(f["lastModified"].ToString()),
             })];
         }
+
+        /// <summary>
+        /// Read the contents of the given file as a stream. This method returns a Stream that can be used to read the file's contents in chunks, which is more efficient for large files than reading the entire file into memory at once.
+        /// </summary>
+        /// <param name="jsFileInfo"></param>
+        /// <returns></returns>
+        public async Task<Stream> OpenReadStreamAsync(JsFileInfo jsFileInfo, int chunkSize = 64 * 1024)
+        {
+            var streamRef = await InvokeAsync<IJSObjectReference>(
+                "openReadStream",
+                Id!,
+                jsFileInfo.Index,
+                chunkSize // 64KB chunk size
+            );
+
+            return new JsFileStream(JSRuntime, streamRef, chunkSize);
+        }
         #endregion
 
     }
 
     #region FileProcessing
 
-    public class JsFileInfo(IJSRuntime jSRuntime, string ElementId)
+    public class JsFileInfo(string ElementId)
     {
         public int Index { get; set; } = default!;
         public string Name { get; set; } = default!;
@@ -135,21 +153,8 @@ namespace WebAwesomeBlazor.Components
         public string Type { get; set; } = default!;
         public long LastModified { get; set; } = default!;
 
-        private IJSRuntime _JSRuntime = jSRuntime;
-
         private string _elementId = ElementId;
 
-        public async Task<Stream> OpenReadStreamAsync(int chunkSize = 64 * 1024)
-        {
-            var streamRef = await _JSRuntime.InvokeAsync<IJSObjectReference>(
-                "window.vengage.fileInput.openReadStream",
-                _elementId,
-                Index,
-                chunkSize
-            );
-
-            return new JsFileStream(_JSRuntime, streamRef, chunkSize);
-        }
     }
 
 

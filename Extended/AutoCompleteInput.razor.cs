@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Linq.Expressions;
 
 namespace WebAwesomeBlazor.Extended
@@ -222,7 +221,8 @@ namespace WebAwesomeBlazor.Extended
         #region Public Methods
         public async Task SetFocusAsync()
         {
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setFocus", SearchInputBox.Id);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("setFocus", SearchInputBox.Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
@@ -232,7 +232,8 @@ namespace WebAwesomeBlazor.Extended
         {
             var text = @GetPropertyName((TValue)(object)value!);
 
-            await JSRuntime.InvokeVoidAsync("window.vengage.input.setValue", SearchInputBox.Id, text);
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await InvokeVoidAsync("setValue", SearchInputBox.Id!, text!);
             await ValueChanged.InvokeAsync(value);
             await InvokeAsync(StateHasChanged);
         }
