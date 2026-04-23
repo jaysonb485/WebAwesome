@@ -115,7 +115,7 @@ namespace WebAwesomeBlazor.Components
             if (firstRender)
             {
 
-                await InvokeVoidAsync("initialize", Id!, objRef);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef);
                 //await JSRuntime.InvokeVoidAsync("window.vengage.animation.initialize", Id, objRef);
                 if (AutoStart)
                 {
@@ -214,7 +214,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task CancelAnimationAsync()
         {
-            await InvokeVoidAsync("cancel", Id!);
+            await SafeInvokeVoidAsync("cancel", Id!);
         }
 
         public void CancelAnimation() => _ = CancelAnimationAsync();
@@ -226,7 +226,7 @@ namespace WebAwesomeBlazor.Components
         public async Task FinishAnimationAsync()
         {
             if (Iterations != null)
-                await InvokeVoidAsync("finish", Id!);
+                await SafeInvokeVoidAsync("finish", Id!);
         }
 
         public void FinishAnimation() => _ = FinishAnimationAsync();

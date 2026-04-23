@@ -124,7 +124,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await InvokeVoidAsync("initialize", Id!, objRef);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -152,7 +152,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ShowAsync()
         {
-            await InvokeVoidAsync("show", Id!);
+            await SafeInvokeVoidAsync("show", Id!);
         }
 
         public void Show() => _ = ShowAsync();
@@ -161,7 +161,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideAsync()
         {
-            await InvokeVoidAsync("hide", Id!);
+            await SafeInvokeVoidAsync("hide", Id!);
         }
 
         public void Hide() => _ = HideAsync();

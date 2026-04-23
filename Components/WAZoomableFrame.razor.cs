@@ -121,7 +121,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await InvokeVoidAsync("initialize", Id!, objRef);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -164,7 +164,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ZoomInAsync()
         {
-            await InvokeVoidAsync("zoomIn", Id!);
+            await SafeInvokeVoidAsync("zoomIn", Id!);
         }
 
         public void ZoomIn() => _ = ZoomInAsync();
@@ -173,7 +173,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ZoomOutAsync()
         {
-            await InvokeVoidAsync("zoomOut", Id!);
+            await SafeInvokeVoidAsync("zoomOut", Id!);
         }
         public void ZoomOut() => _ = ZoomOutAsync();
         #endregion

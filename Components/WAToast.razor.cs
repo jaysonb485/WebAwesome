@@ -98,7 +98,7 @@ namespace WebAwesomeBlazor.Components
                 StateHasChanged();
             });
 
-            await InvokeVoidAsync("prepend", Id!, toastMessage.Id);
+            await SafeInvokeVoidAsync("prepend", Id!, toastMessage.Id);
         }
 
         #endregion

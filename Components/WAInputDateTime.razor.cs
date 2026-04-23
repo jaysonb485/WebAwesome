@@ -187,7 +187,7 @@ namespace WebAwesomeBlazor.Components
 
                 formattedValue = GetFormattedValue(Value!);
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await InvokeVoidAsync("initialize", Id!, objRef, Value!);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef, Value!);
 
                 //await ValueChanged.InvokeAsync(Value);
             }
@@ -327,7 +327,7 @@ namespace WebAwesomeBlazor.Components
             if (oldValue!.Equals(Value))
             {
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await InvokeVoidAsync("setValue", Id!, formattedValue);
+                await SafeInvokeVoidAsync("setValue", Id!, formattedValue);
             }
 
             await ValueChanged.InvokeAsync(Value);
@@ -394,7 +394,7 @@ namespace WebAwesomeBlazor.Components
         public async Task SetFocusAsync()
         {
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-            await InvokeVoidAsync("setFocus", Id!);
+            await SafeInvokeVoidAsync("setFocus", Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
