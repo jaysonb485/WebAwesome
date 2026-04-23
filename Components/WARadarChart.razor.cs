@@ -44,7 +44,7 @@ namespace WebAwesomeBlazor.Components
             ChartOptions = radarChartOptions ?? new();
             await InvokeAsync(StateHasChanged);
             await LoadModuleAsync("./_content/WebAwesomeBlazor/WAChart.js");
-            await InvokeVoidAsync("render", Id!, CategoryLabels, DataSets);
+            await SafeInvokeVoidAsync("render", Id!, CategoryLabels, DataSets);
         }
         #endregion
     }

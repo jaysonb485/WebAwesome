@@ -250,7 +250,7 @@ namespace WebAwesomeBlazor.Components
 
             if (initValue is not null)
             {
-                await InvokeVoidAsync(
+                await SafeInvokeVoidAsync(
                     "initialize",
                     Id!,
                     objRef,
@@ -283,7 +283,7 @@ namespace WebAwesomeBlazor.Components
 
             if (hasChanged && newValue is not null)
             {
-                await InvokeVoidAsync("setValue", Id!, newValue);
+                await SafeInvokeVoidAsync("setValue", Id!, newValue);
             }
         }
         #endregion

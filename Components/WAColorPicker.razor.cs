@@ -165,7 +165,7 @@ namespace WebAwesomeBlazor.Components
         public async Task<string> GetFormattedValueAsync(PickerColorExtendedFormat colorFormat)
         {
             var result =
-                await InvokeAsync<string>("getFormattedValue",
+                await SafeInvokeAsync<string>("getFormattedValue",
                     Id!, colorFormat.ToString().ToLower()
                 );
 
@@ -179,7 +179,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task SetSwatchesAsync(SwatchColor[] swatches)
         {
-            await InvokeVoidAsync("setSwatches", Id!, swatches);
+            await JSRuntime.InvokeVoidAsync("window.vengage.colorPicker.setSwatches", Id, swatches);
         }
         #endregion
 

@@ -3,11 +3,11 @@
 @inherits WAComponentBase
 @typeparam TValue
 
-<wa-popup active="@ShowPopup" sync="width" placement="bottom-start" @ref="@Element" id="@Id" @attributes="@AdditionalAttributes">
+<wa-popup active="@ShowPopup" sync="width" placement="bottom-start" @ref="@Element" id="@Id" @attributes="@AdditionalAttributes" class="ac-popup">
     <span slot="anchor" class="@ClassNames" style="@StyleNames">
-        <WAInput @ref="SearchInputBox" @bind-Value="SearchText" 
-        Placeholder="@Placeholder" Clearable="true" @oninput="OnSearchChanged" autocomplete="off" Label="@Label"
-        Hint="@Hint"/>
+        <WAInput @ref="SearchInputBox" @bind-Value="SearchText"
+                 Placeholder="@Placeholder" Clearable="true" @oninput="OnSearchChanged" autocomplete="off" Label="@Label"
+                 Hint="@Hint" />
     </span>
     <div id="menu" part="menu" role="menu" class="autocomplete-dropdown" style="width: 100%">
         @if (Items is not null && Items.Any())
@@ -31,3 +31,9 @@
         }
     </div>
 </wa-popup>
+
+<style>
+    .ac-popup::part(popup) {
+        background-color: var(--wa-color-surface-raised);
+    }
+</style>

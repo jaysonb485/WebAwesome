@@ -210,7 +210,7 @@ namespace WebAwesomeBlazor.Extended
             if (firstRender)
             {
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WASelect.razor.js");
-                await InvokeVoidAsync("initialize", Id!, objRef, GetOptionKeyString(Value ?? default!)!);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef, GetOptionKeyString(Value ?? default!)!);
             }
         }
 
@@ -223,7 +223,7 @@ namespace WebAwesomeBlazor.Extended
                 previousValue = Value ?? default!;
 
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WASelect.razor.js");
-                await InvokeVoidAsync("setValue", Id!, GetOptionKeyString(Value ?? default!)!);
+                await SafeInvokeVoidAsync("setValue", Id!, GetOptionKeyString(Value ?? default!)!);
             }
         }
 

@@ -27,7 +27,7 @@ namespace WebAwesomeBlazor.Components
         public async Task SetMarkdownAsync(string Markdown)
         {
             this.Markdown = Markdown;
-            await InvokeVoidAsync("updateContent", Id!, Markdown);
+            await SafeInvokeVoidAsync("updateContent", Id!, Markdown);
         }
         #endregion
     }

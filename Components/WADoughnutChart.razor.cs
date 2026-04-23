@@ -53,7 +53,7 @@ namespace WebAwesomeBlazor.Components
 
             var dataSets = new[] { new { label = DataSet.Label, data = DataSet.Data } };
             await LoadModuleAsync("./_content/WebAwesomeBlazor/WAChart.js");
-            await InvokeVoidAsync("render", Id!, CategoryLabels, dataSets, doughnutOptions);
+            await SafeInvokeVoidAsync("render", Id!, CategoryLabels, dataSets, doughnutOptions);
         }
         #endregion
     }

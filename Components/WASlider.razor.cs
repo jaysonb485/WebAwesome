@@ -147,7 +147,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await InvokeVoidAsync("initialize", Id!, objRef);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -158,7 +158,7 @@ namespace WebAwesomeBlazor.Components
                 previousValue = Value ?? null;
 
                 // Run your JS update logic here
-                await InvokeVoidAsync("setValue", Id!, Value!);
+                await SafeInvokeVoidAsync("setValue", Id!, Value!);
             }
         }
 

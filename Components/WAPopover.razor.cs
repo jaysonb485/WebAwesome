@@ -74,7 +74,7 @@ namespace WebAwesomeBlazor.Components
             if (firstRender)
             {
                 objRef = DotNetObjectReference.Create(this);
-                await InvokeVoidAsync("initialize", Id!, objRef);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -137,7 +137,7 @@ namespace WebAwesomeBlazor.Components
         public async Task ShowPopoverAsync()
         {
             Open = true;
-            await InvokeVoidAsync("show", Id!);
+            await SafeInvokeVoidAsync("show", Id!);
         }
 
         public void ShowPopover() => _ = ShowPopoverAsync();
@@ -148,7 +148,7 @@ namespace WebAwesomeBlazor.Components
         public async Task HidePopoverAsync()
         {
             Open = false;
-            await InvokeVoidAsync("hide", Id!);
+            await SafeInvokeVoidAsync("hide", Id!);
         }
 
         public void HidePopover() => _ = HidePopoverAsync();
@@ -161,10 +161,10 @@ namespace WebAwesomeBlazor.Components
             Open = !Open;
             if (Open)
             {
-                await InvokeVoidAsync("show", Id!);
+                await SafeInvokeVoidAsync("show", Id!);
                 return;
             }
-            await InvokeVoidAsync("hide", Id!);
+            await SafeInvokeVoidAsync("hide", Id!);
 
 
         }

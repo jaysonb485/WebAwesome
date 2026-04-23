@@ -190,13 +190,26 @@ namespace WebAwesomeBlazor
             return _module;
         }
 
-        protected async Task InvokeVoidAsync(string methodName, params object[] args)
+        protected async Task SafeInvokeVoidAsync(string methodName, params object[] args)
         {
             await LoadModuleAsync();
 
             if (_module is not null)
             {
-                await _module.InvokeVoidAsync(methodName, args);
+                try
+                {
+                    await _module.InvokeVoidAsync(methodName, args);
+
+
+                }
+                catch (JSDisconnectedException)
+                {
+                    // Circuit is gone — ignore
+                }
+                catch (ObjectDisposedException)
+                {
+                    // JSRuntime disposed — ignore
+                }
             }
             else
             {
@@ -204,13 +217,27 @@ namespace WebAwesomeBlazor
             }
         }
 
-        protected async Task<T> InvokeAsync<T>(string methodName, params object[] args)
+        protected async Task<T> SafeInvokeAsync<T>(string methodName, params object[] args)
         {
             await LoadModuleAsync();
 
             if (_module is not null)
             {
-                return await _module.InvokeAsync<T>(methodName, args);
+                try
+                {
+                    return await _module.InvokeAsync<T>(methodName, args);
+                }
+                catch (JSDisconnectedException)
+                {
+                    // Circuit is gone — ignore
+                    return default!;
+                }
+                catch (ObjectDisposedException)
+                {
+                    // JSRuntime disposed — ignore
+                    return default!;
+                }
+
             }
             else
             {

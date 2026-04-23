@@ -301,7 +301,7 @@ namespace WebAwesomeBlazor.Components
             if (FirstRender)
             {
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await InvokeVoidAsync("initialize", Id!, objRef, Value);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef, Value);
             }
         }
 
@@ -313,7 +313,7 @@ namespace WebAwesomeBlazor.Components
 
                 // Run your JS update logic here
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await InvokeVoidAsync("setValue", Id!, Value!);
+                await SafeInvokeVoidAsync("setValue", Id!, Value!);
             }
         }
 
@@ -353,7 +353,7 @@ namespace WebAwesomeBlazor.Components
         public async Task SetValueAsync(string value)
         {
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-            await InvokeVoidAsync("setValue", Id!, value);
+            await SafeInvokeVoidAsync("setValue", Id!, value);
             await ValueChanged.InvokeAsync(value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
@@ -363,7 +363,7 @@ namespace WebAwesomeBlazor.Components
         public async Task SetFocusAsync()
         {
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-            await InvokeVoidAsync("setFocus", Id!);
+            await SafeInvokeVoidAsync("setFocus", Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
