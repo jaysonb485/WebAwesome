@@ -101,7 +101,7 @@ namespace WebAwesomeBlazor.Components
 
         public async Task SetFocusAsync()
         {
-            await InvokeVoidAsync("setFocus", Id!);
+            await SafeInvokeVoidAsync("setFocus", Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
@@ -112,7 +112,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns>Array of JsFileInfo</returns>
         public async Task<JsFileInfo[]> GetFilesAsync()
         {
-            var files = await InvokeAsync<List<Dictionary<string, JsonElement>>>("getFiles", Id!);
+            var files = await SafeInvokeAsync<List<Dictionary<string, JsonElement>>>("getFiles", Id!);
             return [.. files.Select((f, index) => new JsFileInfo(Id!)
             {
                 Index = index,
@@ -130,7 +130,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task<Stream> OpenReadStreamAsync(JsFileInfo jsFileInfo, int chunkSize = 64 * 1024)
         {
-            var streamRef = await InvokeAsync<IJSObjectReference>(
+            var streamRef = await SafeInvokeAsync<IJSObjectReference>(
                 "openReadStream",
                 Id!,
                 jsFileInfo.Index,
@@ -159,21 +159,14 @@ namespace WebAwesomeBlazor.Components
 
 
 
-    public class JsFileStream : Stream
+    public class JsFileStream(IJSRuntime js, IJSObjectReference streamRef, int chunkSize) : Stream
     {
-        private readonly IJSRuntime _js;
-        private readonly IJSObjectReference _streamRef;
-        private readonly int _chunkSize;
-        private byte[] _buffer;
+        private readonly IJSRuntime _js = js;
+        private readonly IJSObjectReference _streamRef = streamRef;
+        private readonly int _chunkSize = chunkSize;
+        private byte[]? _buffer;
         private int _bufferPos;
         private bool _completed;
-
-        public JsFileStream(IJSRuntime js, IJSObjectReference streamRef, int chunkSize)
-        {
-            _js = js;
-            _streamRef = streamRef;
-            _chunkSize = chunkSize;
-        }
 
         public override bool CanRead => true;
         public override bool CanSeek => false;

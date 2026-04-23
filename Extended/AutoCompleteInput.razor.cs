@@ -222,7 +222,7 @@ namespace WebAwesomeBlazor.Extended
         public async Task SetFocusAsync()
         {
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-            await InvokeVoidAsync("setFocus", SearchInputBox.Id!);
+            await SafeInvokeVoidAsync("setFocus", SearchInputBox.Id!);
         }
 
         public void SetFocus() => _ = SetFocusAsync();
@@ -233,7 +233,7 @@ namespace WebAwesomeBlazor.Extended
             var text = @GetPropertyName((TValue)(object)value!);
 
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-            await InvokeVoidAsync("setValue", SearchInputBox.Id!, text!);
+            await SafeInvokeVoidAsync("setValue", SearchInputBox.Id!, text!);
             await ValueChanged.InvokeAsync(value);
             await InvokeAsync(StateHasChanged);
         }

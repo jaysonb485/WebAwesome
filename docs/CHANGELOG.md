@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Version 1.5.1
+- Updated JS interop to support safe invocation of .NET methods from JavaScript, preventing errors when the .NET object reference has been disposed. This enhancement improves the stability of components that rely on JSInterop calls, such as [WAFileInput](/docs/WAFileInput.md), ensuring that interactions with JavaScript do not cause unexpected exceptions in Blazor applications.
+- Fix for autocomplete popup background color not set.
+
 ## Version 1.5.0
 - Breaking change: [WAFileInput](/docs/WAFileInput.md) - Change to retrieving the file stream. Refer to the updated documentation for details.
 - Upgraded to [Web Awesome 3.5.0](https://webawesome.com/docs/resources/changelog#wa_350) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).

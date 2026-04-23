@@ -100,7 +100,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await InvokeVoidAsync("initialize", Id!, objRef);
+                await SafeInvokeVoidAsync("initialize", Id!, objRef);
             }
         }
 
@@ -147,7 +147,7 @@ namespace WebAwesomeBlazor.Components
         /// <param name="index">The index to scroll to</param>
         public async Task GoToSlideAsync(int index)
         {
-            await InvokeVoidAsync("goToSlide", Id!, index);
+            await SafeInvokeVoidAsync("goToSlide", Id!, index);
         }
 
         public void GoToSlide(int index) => _ = GoToSlideAsync((int)index);
@@ -157,7 +157,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task NextSlideAsync()
         {
-            await InvokeVoidAsync("nextSlide", Id!);
+            await SafeInvokeVoidAsync("nextSlide", Id!);
         }
 
         public void NextSlide() => _ = NextSlideAsync();
@@ -167,7 +167,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task PreviousSlideAsync()
         {
-            await InvokeVoidAsync("previousSlide", Id!);
+            await SafeInvokeVoidAsync("previousSlide", Id!);
         }
 
         public void PreviousSlide() => _ = PreviousSlideAsync();

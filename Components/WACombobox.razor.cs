@@ -352,7 +352,7 @@ namespace WebAwesomeBlazor.Components
             else
                 initValue = Value;
 
-            await InvokeVoidAsync(
+            await SafeInvokeVoidAsync(
                 "initialize",
                 Id!,
                 objRef,
@@ -385,7 +385,7 @@ namespace WebAwesomeBlazor.Components
 
             if (hasChanged && newValue is not null)
             {
-                await InvokeVoidAsync("setValue", Id!, newValue);
+                await SafeInvokeVoidAsync("setValue", Id!, newValue);
             }
         }
         #endregion
@@ -456,7 +456,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns>string</returns>
         public async Task<string> GetInputValueAsync()
         {
-            var value = await InvokeAsync<string>("getInputValue", Id!);
+            var value = await SafeInvokeAsync<string>("getInputValue", Id!);
             return value;
         }
 
@@ -471,7 +471,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ShowAsync()
         {
-            await InvokeVoidAsync("show", Id!);
+            await SafeInvokeVoidAsync("show", Id!);
         }
 
 
@@ -485,7 +485,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task HideAsync()
         {
-            await InvokeVoidAsync("hide", Id!);
+            await SafeInvokeVoidAsync("hide", Id!);
         }
         #endregion
 
