@@ -243,7 +243,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task FinishAnimationAsync()
         {
-            if (Iterations != null)
+            if(Iterations != null)
                 await JSRuntime.InvokeVoidAsync("window.vengage.animation.finish", Id);
         }
 
