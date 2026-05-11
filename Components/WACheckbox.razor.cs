@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -74,11 +69,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    CheckboxSize.Small => "small",
-                    CheckboxSize.Medium => "medium",
-                    CheckboxSize.Large => "large",
+                    CheckboxSize.XSmall => "xs",
+                    CheckboxSize.Small => "s",
+                    CheckboxSize.Medium => "m",
+                    CheckboxSize.Large => "l",
+                    CheckboxSize.XLarge => "xl",
                     CheckboxSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -87,7 +84,7 @@ namespace WebAwesomeBlazor.Components
         #region Lifecycle
         protected override void OnInitialized()
         {
-            AdditionalAttributes ??= new Dictionary<string, object>();
+            AdditionalAttributes ??= [];
             if (ValueExpression != null)
                 fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 
@@ -103,7 +100,7 @@ namespace WebAwesomeBlazor.Components
         #region Private Methods
         private async Task OnChange(ChangeEventArgs e)
         {
-            await ValueChanged.InvokeAsync(((string?)e.Value == "on"));
+            await ValueChanged.InvokeAsync((string?)e.Value == "on");
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
 

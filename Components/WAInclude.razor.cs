@@ -64,9 +64,11 @@ namespace WebAwesomeBlazor.Components
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
 
@@ -76,21 +78,18 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
 
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
-
                 objRef?.Dispose();
-
 
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
-
         #endregion
 
         #region State

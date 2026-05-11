@@ -1,11 +1,23 @@
 ﻿export function initialize(elementId, dotnetHelper) {
     const element = document.getElementById(elementId);
-    if (element) {
-        element.addEventListener('wa-remove', function (event) {
-            dotnetHelper.invokeMethodAsync('HandleTagRemove');
-        });
-    }
+    if (!element) return null;
+
+    // Capture handler so it can be removed later
+    const onRemove = () => {
+        dotnetHelper.invokeMethodAsync('HandleTagRemove');
+    };
+
+    // Register listener
+    element.addEventListener('wa-remove', onRemove);
+
+    // Return cleanup object
+    return {
+        dispose: () => {
+            element.removeEventListener('wa-remove', onRemove);
+        }
+    };
 }
+
 export function removeTag(elementId, dotnetHelper) {
     const element = document.getElementById(elementId);
     if (element) {

@@ -2,7 +2,16 @@
 export function initialize(elementId, dotnetHelper) {
     const element = document.getElementById(elementId);
     if (!element) return;
-    element.addEventListener('change', function (event) {
-        dotnetHelper.invokeMethodAsync('HandleDividerChange', element.position);
-    });
+
+    const onChange = (event) => {
+        dotentHelper.invokeMethodAsync('HandleDividerChange', element.position);
+    };
+
+    element.addEventListener('change', onChange);
+
+    return {
+        dispose: () => {
+            element.removeEventListener('change', onChange);
+        }
+    };
 }

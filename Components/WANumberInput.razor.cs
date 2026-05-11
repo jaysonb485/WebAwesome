@@ -180,10 +180,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    NumberInputSize.Small => "small",
-                    NumberInputSize.Medium => "medium",
-                    NumberInputSize.Large => "large",
-                    _ => "medium"
+                    NumberInputSize.XSmall => "xs",
+                    NumberInputSize.Small => "s",
+                    NumberInputSize.Medium => "m",
+                    NumberInputSize.Large => "l",
+                    NumberInputSize.XLarge => "xl",
+                    NumberInputSize.Inherit => "inherit",
+                    _ => "m"
                 };
             }
         }
@@ -221,27 +224,26 @@ namespace WebAwesomeBlazor.Components
 
         #region Lifecycle
 
+
+
         protected override async ValueTask DisposeAsyncCore(bool disposing)
         {
             if (disposing)
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
 
                 objRef?.Dispose();
 
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -262,7 +264,7 @@ namespace WebAwesomeBlazor.Components
                     Value = value;
 
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await SafeInvokeVoidAsync("initialize", Id!, objRef, Value!);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef, Value!);
 
                 await ValueChanged.InvokeAsync(Value);
             }

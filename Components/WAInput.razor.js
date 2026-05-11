@@ -5,23 +5,39 @@
 }
 
 export function initialize(elementId, dotnetHelper, setValue) {
-    let element = document.getElementById(elementId);
-    if (!element) return;
+    const element = document.getElementById(elementId);
+    if (!element) return null;
 
-    element.value = setValue;
+    console.log('init input ' + elementId + ' with value: ' + setValue);
 
-    element.addEventListener('wa-clear', function (event) {
+    // Only set the value if explicitly provided
+    if (setValue !== undefined && setValue !== null) {
+        element.value = setValue;
+    }
+
+    // Capture handlers so they can be removed later
+    const onClear = () => {
         dotnetHelper.invokeMethodAsync('HandleInputClear');
-    });
+    };
 
-    element.addEventListener('change', function (event) {
+    const onChange = () => {
         dotnetHelper.invokeMethodAsync('HandleInputChange', element.value);
-    });
+    };
+
+    // Register listeners
+    element.addEventListener('wa-clear', onClear);
+    element.addEventListener('change', onChange);
+
+    // Return cleanup object
+    return {
+        dispose: () => {
+            element.removeEventListener('wa-clear', onClear);
+            element.removeEventListener('change', onChange);
+        }
+    };
 }
-export function dispose(elementRef) {
-    if (elementRef != null)
-        vengage?.Input?.getOrCreateInstance(elementRef)?.dispose();
-}
+
+
 export function setFocus(elementId) {
     let element = document.getElementById(elementId);
     if (!element) return;
