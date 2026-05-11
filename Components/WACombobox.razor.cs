@@ -212,11 +212,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    ComboboxSize.Small => "small",
-                    ComboboxSize.Medium => "medium",
-                    ComboboxSize.Large => "large",
+                    ComboboxSize.XSmall => "xs",
+                    ComboboxSize.Small => "s",
+                    ComboboxSize.Medium => "m",
+                    ComboboxSize.Large => "l",
+                    ComboboxSize.XLarge => "xl",
                     ComboboxSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -310,7 +312,7 @@ namespace WebAwesomeBlazor.Components
         {
             objRef ??= DotNetObjectReference.Create(this);
 
-            AdditionalAttributes ??= new Dictionary<string, object>();
+            AdditionalAttributes ??= [];
 
             if (!Multiselect && ValueExpression != null)
             {
@@ -352,7 +354,7 @@ namespace WebAwesomeBlazor.Components
             else
                 initValue = Value;
 
-            await SafeInvokeVoidAsync(
+            _instance = await SafeInvokeAsync<IJSObjectReference>(
                 "initialize",
                 Id!,
                 objRef,
@@ -387,6 +389,26 @@ namespace WebAwesomeBlazor.Components
             {
                 await SafeInvokeVoidAsync("setValue", Id!, newValue);
             }
+        }
+
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
+
+                }
+                catch (JSDisconnectedException)
+                {
+                }
+                objRef?.Dispose();
+            }
+
         }
         #endregion
 

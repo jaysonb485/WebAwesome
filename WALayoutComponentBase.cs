@@ -167,6 +167,8 @@ namespace WebAwesomeBlazor
 
         [Parameter] public string? Slot { get; set; }
 
+        public IJSObjectReference? _instance;
+
         #endregion
 
         #region Other

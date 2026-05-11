@@ -76,11 +76,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    RatingSize.Small => "small",
-                    RatingSize.Medium => "medium",
-                    RatingSize.Large => "large",
+                    RatingSize.XSmall => "xs",
+                    RatingSize.Small => "s",
+                    RatingSize.Medium => "m",
+                    RatingSize.Large => "l",
+                    RatingSize.XLarge => "xl",
                     RatingSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -96,9 +98,11 @@ namespace WebAwesomeBlazor.Components
         #region Lifecycle
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
 
@@ -106,10 +110,20 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
+                try
+                {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
+                }
+                catch (JSDisconnectedException)
+                {
+                }
+
                 objRef?.Dispose();
+
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
 
         protected override async Task OnInitializedAsync()

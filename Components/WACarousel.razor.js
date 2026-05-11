@@ -1,11 +1,24 @@
 ﻿export function initialize(elementId, dotnetHelper) {
     const element = document.getElementById(elementId);
-    if (!element) return;
+    if (!element) return null;
 
-    element.addEventListener('wa-slide-change', function (event) {
+    // Capture the handler so we can remove it later
+    const onSlideChange = (event) => {
         dotnetHelper.invokeMethodAsync('HandleSlideChange', event.detail.index);
-    });
+    };
+
+    // Register the event listener
+    element.addEventListener('wa-slide-change', onSlideChange);
+
+    // Return a cleanup object for Blazor to call
+    return {
+        dispose: () => {
+            element.removeEventListener('wa-slide-change', onSlideChange);
+        }
+    };
 }
+
+
 export function goToSlide(elementId, slideIndex) {
     const element = document.getElementById(elementId);
     if (!element) return;

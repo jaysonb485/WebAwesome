@@ -125,7 +125,8 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await InvokeVoidAsync("initialize", Id!, objRef, ObserveResize ? _resizeId : string.Empty);
+                if (ObserveResize)
+                    _instance = await InvokeAsync<IJSObjectReference?>("initialize", Id!, objRef, _resizeId);
 
                 await Task.Delay(1);
 
@@ -145,21 +146,17 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
 
                 objRef?.Dispose();
 
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
 
         protected override async Task OnInitializedAsync()

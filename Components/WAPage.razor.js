@@ -1,13 +1,26 @@
 ﻿export function initialize(elementId, dotnetHelper, resizeObserverId) {
-    const resizeelement = document.getElementById(resizeObserverId);
-    if (!resizeelement) return;
-    resizeelement.addEventListener('wa-resize', function (event) {
-        let pageelement = document.getElementById(elementId);
-        if (pageelement) {
-            dotnetHelper.invokeMethodAsync('HandleResize', pageelement.view);
+    const resizeElement = document.getElementById(resizeObserverId);
+    if (!resizeElement) return null;
+
+    // Capture handler so it can be removed later
+    const onResize = (event) => {
+        const pageElement = document.getElementById(elementId);
+        if (pageElement) {
+            dotnetHelper.invokeMethodAsync('HandleResize', pageElement.view);
         }
-    });
+    };
+
+    // Register listener
+    resizeElement.addEventListener('wa-resize', onResize);
+
+    // Return cleanup object
+    return {
+        dispose: () => {
+            resizeElement.removeEventListener('wa-resize', onResize);
+        }
+    };
 }
+
 
 export function shownav(elementId) {
     const element = document.getElementById(elementId);

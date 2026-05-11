@@ -22,9 +22,11 @@
 
     public enum ButtonSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -47,9 +49,11 @@
     }
     public enum ToastMessageSize
     {
+        XSmall,
         Small,
         Medium,
-        Large
+        Large,
+        XLarge
     }
     public enum ToastMessageVariant
     {
@@ -250,9 +254,11 @@
     }
     public enum CalloutSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -303,9 +309,11 @@
     #region Checkbox Enums
     public enum CheckboxSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
     #endregion
@@ -333,9 +341,11 @@
 
     public enum PickerSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -374,9 +384,11 @@
 
     public enum ComboboxSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -481,9 +493,11 @@
     #region FileInput Enums
     public enum FileInputSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
     #endregion
@@ -522,7 +536,7 @@
         Both
     }
     #endregion
-    #region Include
+    #region Include Enums
     public enum IncludeMode
     {
         CORS,
@@ -548,9 +562,11 @@
 
     public enum InputSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -635,9 +651,12 @@
 
     public enum NumberInputSize
     {
+        XSmall,
         Small,
         Medium,
-        Large
+        Large,
+        XLarge,
+        Inherit
     }
 
     public enum NumberInputAppearance
@@ -697,9 +716,11 @@
     #region Radio Group Enums
     public enum RadioGroupSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -713,9 +734,11 @@
 
     public enum RadioSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -729,9 +752,11 @@
     #region Rating Enums
     public enum RatingSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
     #endregion
@@ -761,9 +786,11 @@
 
     public enum SelectSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
     #endregion
@@ -779,9 +806,11 @@
 
     public enum SliderSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
 
@@ -834,9 +863,11 @@
     #region Switch Enums
     public enum SwitchSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
     #endregion
@@ -872,9 +903,11 @@
 
     public enum TagSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
     #endregion
@@ -909,9 +942,11 @@
 
     public enum TextAreaSize
     {
+        XSmall,
         Small,
         Medium,
         Large,
+        XLarge,
         Inherit
     }
     #endregion

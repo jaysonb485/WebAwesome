@@ -107,11 +107,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    SliderSize.Small => "small",
-                    SliderSize.Medium => "medium",
-                    SliderSize.Large => "large",
+                    SliderSize.XSmall => "xs",
+                    SliderSize.Small => "s",
+                    SliderSize.Medium => "m",
+                    SliderSize.Large => "l",
+                    SliderSize.XLarge => "xl",
                     SliderSize.Inherit => "inherit",
-                    _ => "medium"
+                    _ => "m"
                 };
             }
         }
@@ -145,9 +147,11 @@ namespace WebAwesomeBlazor.Components
         #region Lifecycle
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
 
@@ -168,22 +172,18 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
-
                 objRef?.Dispose();
-
 
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
-
         protected override async Task OnInitializedAsync()
         {
             objRef ??= DotNetObjectReference.Create(this);

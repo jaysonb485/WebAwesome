@@ -54,10 +54,12 @@ namespace WebAwesomeBlazor
             {
                 return Size switch
                 {
-                    ToastMessageSize.Medium => "medium",
-                    ToastMessageSize.Small => "small",
-                    ToastMessageSize.Large => "large",
-                    _ => "medium",
+                    ToastMessageSize.XSmall => "xs",
+                    ToastMessageSize.Small => "s",
+                    ToastMessageSize.Medium => "m",
+                    ToastMessageSize.Large => "l",
+                    ToastMessageSize.XLarge => "xl",
+                    _ => "m",
                 };
             }
         }

@@ -1,10 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -28,7 +22,7 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public bool Disabled { get; set; } = false;
 
-         /// <summary>
+        /// <summary>
         /// The options's size. When used inside a radio group, the size will be determined by the radio group's size so this attribute can typically be omitted.
         /// </summary>
         [Parameter]
@@ -69,11 +63,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    RadioSize.Small => "small",
-                    RadioSize.Medium => "medium",
-                    RadioSize.Large => "large",
+                    RadioSize.XSmall => "xs",
+                    RadioSize.Small => "s",
+                    RadioSize.Medium => "m",
+                    RadioSize.Large => "l",
+                    RadioSize.XLarge => "xl",
                     RadioSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }

@@ -2,21 +2,28 @@
 
 export function initialize(elementId, dotnetHelper) {
     const element = document.getElementById(elementId);
-    if (!element) return;
+    if (!element) return null;
 
-    element.addEventListener('wa-cancel', () => {
-        dotnetHelper.invokeMethodAsync('HandleAnimationCancel');
-    });
+    // Capture handlers so they can be removed later
+    const onCancel = () => dotnetHelper.invokeMethodAsync('HandleAnimationCancel');
+    const onFinish = () => dotnetHelper.invokeMethodAsync('HandleAnimationFinish');
+    const onStart = () => dotnetHelper.invokeMethodAsync('HandleAnimationStart');
 
-    element.addEventListener('wa-finish', () => {
-        dotnetHelper.invokeMethodAsync('HandleAnimationFinish');
-    });
+    // Register listeners
+    element.addEventListener('wa-cancel', onCancel);
+    element.addEventListener('wa-finish', onFinish);
+    element.addEventListener('wa-start', onStart);
 
-    element.addEventListener('wa-start', () => {
-        dotnetHelper.invokeMethodAsync('HandleAnimationStart');
-    });
+    // Return a cleanup object
+    return {
+        dispose: () => {
+            console.log("disposing waanimation");
+            element.removeEventListener('wa-cancel', onCancel);
+            element.removeEventListener('wa-finish', onFinish);
+            element.removeEventListener('wa-start', onStart);
+        }
+    };
 }
-
 export function cancel(elementId) {
     const element = document.getElementById(elementId);
     if (!element) return;

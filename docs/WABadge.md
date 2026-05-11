@@ -19,6 +19,11 @@ Badges are used to draw attention and display statuses or counts.
 | PulseColor | string |        | The color of the badge's pulse effect when using `BadgePulse.Pulse`. Provide a CSS-valid color value.                     |
 | Text    | string |        | The text to display inside the badge.                     |
 | Variant | BadgeVariant | BadgeVariant.Brand | The badge's theme variant. Defaults to brand if not within another element with a variant.  |
+| EndIcon    | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. Alternatively, use EndIconName to specify the name of the icon. |
+| EndIconName    | string  |       |The name of the icon to draw in the end slot. Available names depend on the icon library being used.  |
+| StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Alternatively, use StartIconName to specify the name of the icon. |
+| StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
+
 
 ### Examples
 

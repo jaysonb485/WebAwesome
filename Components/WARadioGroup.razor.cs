@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -64,11 +59,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    RadioGroupSize.Small => "small",
-                    RadioGroupSize.Medium => "medium",
-                    RadioGroupSize.Large => "large",
+                    RadioGroupSize.XSmall => "xs",
+                    RadioGroupSize.Small => "s",
+                    RadioGroupSize.Medium => "m",
+                    RadioGroupSize.Large => "l",
+                    RadioGroupSize.XLarge => "xl",
                     RadioGroupSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -114,7 +111,7 @@ namespace WebAwesomeBlazor.Components
         private FieldIdentifier fieldIdentifier = default!;
         #endregion
 
-     }
+    }
 
 
 }

@@ -67,7 +67,7 @@ namespace WebAwesomeBlazor.Components
         {
             objRef ??= DotNetObjectReference.Create(this);
 
-            AdditionalAttributes ??= new Dictionary<string, object>();
+            AdditionalAttributes ??= [];
 
             base.OnInitialized();
         }
@@ -76,18 +76,28 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
+
 
         protected override async ValueTask DisposeAsyncCore(bool disposing)
         {
             if (disposing)
             {
+                try
+                {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
+
+                }
+                catch (JSDisconnectedException)
+                {
+                }
                 objRef?.Dispose();
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
 
         #endregion

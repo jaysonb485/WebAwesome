@@ -24,6 +24,12 @@ Drawers slide in from a container to expose additional options and information.
 | LightDismiss | bool | true | When enabled, the drawer will be closed when the user clicks outside of it. Defaults to true. |
 | Placement |DrawerPlacement  | DrawerPlacement.End | The direction from which the drawer will open. Valid options are top, end, bottom, start. Default is end. |
 | DrawerClosed  | EventCallback<string>  |   | Triggered when the drawer is closed. Argument provides ID of the triggering component  |
+| PreferredSize | string | | The preferred size of the drawer in CSS units. This will be applied to the drawer's width or height depending on its placement. |
+| BackdropFilter | string | | A CSS filter to apply to the backdrop behind the drawer. e.g. "blur(5px)" |
+| HideDuration | string | 200ms | The animation duration when hiding the drawer. Default `200ms` |
+| ShowDuration | string | 200ms | The animation duration when showing the drawer. Default `200ms` |
+| Spacing | string | | The amount of space around and between the drawer's content. |
+
 
 ### Methods
 | Method      | Parameters       | Description                              |

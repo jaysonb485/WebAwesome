@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -134,11 +128,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    ButtonSize.Small => "small",
-                    ButtonSize.Medium => "medium",
-                    ButtonSize.Large => "large",
+                    ButtonSize.XSmall => "xs",
+                    ButtonSize.Small => "s",
+                    ButtonSize.Medium => "m",
+                    ButtonSize.Large => "l",
+                    ButtonSize.XLarge => "xl",
                     ButtonSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }

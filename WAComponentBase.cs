@@ -87,6 +87,7 @@ namespace WebAwesomeBlazor
         private bool asyncDisposed = false;
         private IJSObjectReference? _module;
         private string? _moduleFileName;
+        public IJSObjectReference? _instance;
 
         #endregion
 

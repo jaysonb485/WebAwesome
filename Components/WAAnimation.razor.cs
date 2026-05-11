@@ -67,9 +67,19 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public EventCallback AnimationStarted { get; set; }
+        /// <summary>
+        /// The offset at which to start the animation, usually between 0 (start) and 1 (end).
+        /// </summary>
+        [Parameter]
+        public Decimal? IterationStart { get; set; }
+
+        /// <summary>
+        /// Sets the animation's playback rate. The default is 1, which plays the animation at a normal speed. Setting this to 2, for example, will double the animation's speed. A negative value can be used to reverse the animation. This value can be changed without causing the animation to restart.
+        /// </summary>
+        [Parameter]
+        public Decimal? PlaybackRate { get; set; }
 
         #endregion
-
 
         #region State
         private bool Play { get; set; } = false;
@@ -105,6 +115,27 @@ namespace WebAwesomeBlazor.Components
             }
         }
 
+        string IterationStartString
+        {
+            get
+            {
+                if (IterationStart != null)
+                    return IterationStart.ToString()!;
+                else
+                    return "0";
+            }
+        }
+
+        string PlaybackRateString
+        {
+            get
+            {
+                if (PlaybackRate != null)
+                    return PlaybackRate.ToString()!;
+                else
+                    return "1";
+            }
+        }
 
         #endregion
 
@@ -115,8 +146,7 @@ namespace WebAwesomeBlazor.Components
             if (firstRender)
             {
 
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
-                //await JSRuntime.InvokeVoidAsync("window.vengage.animation.initialize", Id, objRef);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
                 if (AutoStart)
                 {
                     Play = true;
@@ -127,34 +157,22 @@ namespace WebAwesomeBlazor.Components
 
         protected override async ValueTask DisposeAsyncCore(bool disposing)
         {
-            if (disposing)
+            try
             {
-                try
-                {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.vengage.dialog.dispose", Id);
-                }
-                catch (JSDisconnectedException)
-                {
-                    // do nothing
-                }
+                if (_instance is not null)
+                    await _instance.InvokeVoidAsync("dispose");
 
-                objRef?.Dispose();
 
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
-
-            await base.DisposeAsyncCore(disposing);
+            catch (JSDisconnectedException)
+            {
+            }
+            objRef?.Dispose();
         }
 
         protected override async Task OnInitializedAsync()
         {
             objRef ??= DotNetObjectReference.Create(this);
-
-            // if (ModalService is not null && IsServiceModal)
-            //     ModalService.OnShow += OnShowAsync;
-
 
 
             await base.OnInitializedAsync();

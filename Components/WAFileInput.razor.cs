@@ -76,11 +76,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    FileInputSize.Small => "small",
-                    FileInputSize.Medium => "medium",
-                    FileInputSize.Large => "large",
+                    FileInputSize.XSmall => "xs",
+                    FileInputSize.Small => "s",
+                    FileInputSize.Medium => "m",
+                    FileInputSize.Large => "l",
+                    FileInputSize.XLarge => "xl",
                     FileInputSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }

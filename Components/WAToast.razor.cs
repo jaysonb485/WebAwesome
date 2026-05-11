@@ -37,36 +37,25 @@ namespace WebAwesomeBlazor.Components
         #region State
         private List<DynamicToast>? Toasts = default!;
 
+        private Func<ToastMessage, Task>? _createHandler;
+        private Func<string, Task>? _hideHandler;
+        private Func<ToastMessage, Task>? _dismissHandler;
         #endregion
 
         #region Lifecycle
-
-        protected override async ValueTask DisposeAsyncCore(bool disposing)
-        {
-            if (disposing)
-            {
-
-                if (ToastService is not null)
-                {
-                    ToastService.OnCreate -= async toast => { await OnCreate(toast); };
-                    ToastService.OnHideToast -= async toastId => { await OnToastHide(toastId); };
-                    ToastService.OnDismiss -= async toast => { await OnToastHide(toast.Id); };
-                }
-
-            }
-
-            await base.DisposeAsyncCore(disposing);
-        }
 
         protected override void OnInitialized()
         {
             if (ToastService is not null)
             {
-                ToastService.OnCreate += async toast => { await OnCreate(toast); };
-                ToastService.OnHideToast += async toastId => { await OnToastHide(toastId); };
-                ToastService.OnDismiss += async toast => { await OnToastHide(toast.Id); };
-            }
+                _createHandler = toast => OnCreate(toast);
+                _hideHandler = id => OnToastHide(id);
+                _dismissHandler = toast => OnToastHide(toast.Id);
 
+                ToastService.RegisterCreate(_createHandler);
+                ToastService.RegisterHide(_hideHandler);
+                ToastService.RegisterDismiss(_dismissHandler);
+            }
 
             base.OnInitialized();
         }

@@ -11,11 +11,8 @@
            loading="@Loading"
            shape="@ShapeString">
 
-    @if (Icon != null)
+    @if (Icon != null || !String.IsNullOrWhiteSpace(IconName))
     {
-        <WAIcon Icon="@Icon" Slot="icon" />
-    } else if (!String.IsNullOrWhiteSpace(IconName) && String.IsNullOrWhiteSpace(Name))
-    {
-        <wa-icon slot="icon" name="@IconName"></wa-icon>
+        <WAIcon Icon="@Icon" IconName="@IconName" Slot="icon"></WAIcon>
     }
 </wa-avatar>

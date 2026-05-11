@@ -151,11 +151,13 @@ namespace WebAwesomeBlazor.Extended
             {
                 return Size switch
                 {
-                    SelectSize.Small => "small",
-                    SelectSize.Medium => "medium",
-                    SelectSize.Large => "large",
+                    SelectSize.XSmall => "xs",
+                    SelectSize.Small => "s",
+                    SelectSize.Medium => "m",
+                    SelectSize.Large => "l",
+                    SelectSize.XLarge => "xl",
                     SelectSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -210,7 +212,8 @@ namespace WebAwesomeBlazor.Extended
             if (firstRender)
             {
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WASelect.razor.js");
-                await SafeInvokeVoidAsync("initialize", Id!, objRef, GetOptionKeyString(Value ?? default!)!);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef, GetOptionKeyString(Value ?? default!)!);
+
             }
         }
 
@@ -233,15 +236,16 @@ namespace WebAwesomeBlazor.Extended
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
 
                 objRef?.Dispose();
+
                 if (EditContext != null)
                 {
                     EditContext.OnValidationRequested -= HandleValidationRequested;
@@ -253,6 +257,8 @@ namespace WebAwesomeBlazor.Extended
 
             await base.DisposeAsyncCore(disposing);
         }
+
+
         #endregion
 
         #region Private Methods
