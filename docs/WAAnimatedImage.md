@@ -21,6 +21,8 @@ A component for displaying animated GIFs and WEBPs that play and pause on intera
 | PauseIconName | string |  | Optional pause icon to use instead of the default. Alternatively use PauseIcon |
 | ControlBoxSize | string |  | The size of the icon box in CSS size units. |
 | IconSize | string |  | The size of the play/pause icons in CSS size units. |
+| ImageLoaded | EventCallback | | Triggered when the image loads successfully. | 
+| LoadError | EventCallback |  | Triggered  when the image fails to load. |
 
 ### Methods
 | Method      | Parameters       | Description                              |

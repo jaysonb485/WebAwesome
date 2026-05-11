@@ -1,5 +1,24 @@
 ﻿# Changelog
 
+## Version 1.6.0
+- Upgraded to [Web Awesome 3.6.0](https://webawesome.com/docs/resources/changelog#wa_360) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
+- Breaking change: default size for all components that support sizing is now `medium` instead of `inherit` to align to Web Awesome behaviour.
+- Added Extra Small (`xs`) and Extra Large (`xl`) sizing to all components that support sizing.
+- Added properties to [WADialog](/docs/WADialog.md) and [WADrawer](/docs/WADrawer.md):
+	* `BackdropFilter` to allow for backdrop filter effects (e.g. blur) to be applied to the dialog or drawer backdrop
+	* `HideDuration` to specify the duration of the hide animation in milliseconds
+	* `ShowDuration` to specify the duration of the show animation in milliseconds
+	* `Spacing` to specify the The amount of space around and between the component's content.
+	* `PreferredSize` (WADrawer) to specify the preferred size of the drawer (e.g. 300px or 50%) when it is open. This will be applied to the drawer's width or height depending on its placement.
+- Added event handlers for WAAnimatedImage:
+	* `ImageLoaded` event callback that is triggered when the animated image has finished loading.
+	* `LoadError` event callback that is triggered if there is an error loading the animated image.
+- Added properties for WAAnimation:
+	* `PlaybackRate` to control the speed of the animation playback.
+	* `IterationStart` to set the offset at which to start the animation, usually between 0 (start) and 1 (end).
+- Added Start and End icons to WABadge
+- Possible memory leak fixes
+
 ## Version 1.5.1
 - Updated JS interop to support safe invocation of .NET methods from JavaScript, preventing errors when the .NET object reference has been disposed. This enhancement improves the stability of components that rely on JSInterop calls, such as [WAFileInput](/docs/WAFileInput.md), ensuring that interactions with JavaScript do not cause unexpected exceptions in Blazor applications.
 - Fix for autocomplete popup background color not set.

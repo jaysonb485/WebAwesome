@@ -100,7 +100,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
 
@@ -110,17 +110,15 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
-
                 objRef?.Dispose();
-
             }
-
-            await base.DisposeAsyncCore(disposing);
         }
 
         protected override async Task OnInitializedAsync()

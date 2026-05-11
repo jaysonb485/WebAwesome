@@ -71,10 +71,11 @@ namespace WebAwesomeBlazor.Components
         #region Lifecycle
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                objRef = DotNetObjectReference.Create(this);
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
 
@@ -84,22 +85,26 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
-
                 objRef?.Dispose();
 
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
+
+        protected override async Task OnInitializedAsync()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+            await base.OnInitializedAsync();
+        }
+
+
         #endregion
 
         #region Event Handlers

@@ -137,11 +137,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    TextAreaSize.Small => "small",
-                    TextAreaSize.Medium => "medium",
-                    TextAreaSize.Large => "large",
+                    TextAreaSize.XSmall => "xs",
+                    TextAreaSize.Small => "s",
+                    TextAreaSize.Medium => "m",
+                    TextAreaSize.Large => "l",
+                    TextAreaSize.XLarge => "xl",
                     TextAreaSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -189,20 +191,16 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
+                    objRef?.Dispose();
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
-
-                objRef?.Dispose();
-
-
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
 
         protected override void OnInitialized()
@@ -221,7 +219,7 @@ namespace WebAwesomeBlazor.Components
             if (FirstRender)
             {
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await SafeInvokeVoidAsync("initialize", Id!, objRef, Value!);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef, Value!);
             }
         }
 

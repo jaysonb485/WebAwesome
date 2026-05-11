@@ -1,19 +1,34 @@
 ﻿export function initialize(elementId, dotnetHelper, setValue) {
     const element = document.getElementById(elementId);
-    if (!element) return;
+    if (!element) return null;
 
-    if (!setValue) element.value = setValue;
+    if (setValue !== undefined && setValue !== null) {
+        element.value = setValue;
+    }
 
-    element.addEventListener('wa-clear', function (event) {
+    // Capture handlers so they can be removed later
+    const onClear = () => {
         dotnetHelper.invokeMethodAsync('HandleInputClear');
-    });
+    };
 
-    element.addEventListener('wa-create', function (event) {
+    const onCreate = (event) => {
         event.preventDefault();
-
         dotnetHelper.invokeMethodAsync('HandleOptionCreate', event.detail.inputValue);
-    });
+    };
+
+    // Register listeners
+    element.addEventListener('wa-clear', onClear);
+    element.addEventListener('wa-create', onCreate);
+
+    // Return cleanup object
+    return {
+        dispose: () => {
+            element.removeEventListener('wa-clear', onClear);
+            element.removeEventListener('wa-create', onCreate);
+        }
+    };
 }
+
 
 export function setValue(elementId, value) {
     const element = document.getElementById(elementId);

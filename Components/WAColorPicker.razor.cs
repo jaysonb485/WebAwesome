@@ -97,11 +97,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    PickerSize.Small => "small",
-                    PickerSize.Medium => "medium",
-                    PickerSize.Large => "large",
+                    PickerSize.XSmall => "xs",
+                    PickerSize.Small => "s",
+                    PickerSize.Medium => "m",
+                    PickerSize.Large => "l",
+                    PickerSize.XLarge => "xl",
                     PickerSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -179,7 +181,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task SetSwatchesAsync(SwatchColor[] swatches)
         {
-            await SafeInvokeVoidAsync("setSwatches", Id!, swatches);
+            await SafeInvokeVoidAsync("window.vengage.colorPicker.setSwatches", Id!, swatches);
         }
         #endregion
 

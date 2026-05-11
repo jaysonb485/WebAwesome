@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -50,6 +46,17 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public string? IconSize { get; set; }
+
+        /// <summary>
+        /// Triggered when the image loads successfully.
+        /// </summary>
+        [Parameter]
+        public EventCallback ImageLoaded { get; set; }
+        /// <summary>
+        /// Triggered  when the image fails to load.
+        /// </summary>
+        [Parameter]
+        public EventCallback LoadError { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -59,8 +66,47 @@ namespace WebAwesomeBlazor.Components
         );
         #endregion
 
+        #region Lifecycle
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+            if (firstRender)
+            {
+
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
+            }
+        }
+
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
+                }
+                catch (JSDisconnectedException)
+                {
+                }
+                objRef?.Dispose();
+            }
+
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+            await base.OnInitializedAsync();
+        }
+
+        #endregion
+
         #region State
         private bool IsPlaying { get; set; } = false;
+        private DotNetObjectReference<WAAnimatedImage> objRef = default!;
+
         #endregion
 
         #region Public Methods
@@ -90,6 +136,22 @@ namespace WebAwesomeBlazor.Components
         }
 
         public void Pause() => _ = PauseAsync();
+        #endregion
+
+        #region Event Handlers
+        [JSInvokable]
+        public async Task HandleLoadError()
+        {
+            if (LoadError.HasDelegate)
+                await LoadError.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleImageLoaded()
+        {
+            if (ImageLoaded.HasDelegate)
+                await ImageLoaded.InvokeAsync();
+        }
         #endregion
 
     }

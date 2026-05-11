@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -69,11 +64,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    SwitchSize.Small => "small",
-                    SwitchSize.Medium => "medium",
-                    SwitchSize.Large => "large",
+                    SwitchSize.XSmall => "xs",
+                    SwitchSize.Small => "s",
+                    SwitchSize.Medium => "m",
+                    SwitchSize.Large => "l",
+                    SwitchSize.XLarge => "xl",
                     SwitchSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -109,7 +106,7 @@ namespace WebAwesomeBlazor.Components
         #region Event Handlers
         private async Task OnValueChanged(ChangeEventArgs e)
         {
-            await ValueChanged.InvokeAsync(((string?)e.Value == "on"));
+            await ValueChanged.InvokeAsync((string?)e.Value == "on");
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
         #endregion

@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -44,6 +39,29 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public BadgeVariant Variant { get; set; } = BadgeVariant.Brand;
+
+        /// <summary>
+        /// The name of the icon to draw in the start slot. Available names depend on the icon library being used.
+        /// </summary>
+        [Parameter]
+        public string? StartIconName { get; set; }
+        /// <summary>
+        /// The icon to draw in the start slot. Alernatively, use StartIconName to specify the name of an icon in the icon library.
+        /// </summary>
+        [Parameter]
+        public Icon? StartIcon { get; set; }
+
+        /// <summary>
+        /// The name of the icon to draw in the end slot. Available names depend on the icon library being used.
+        /// </summary>
+        [Parameter]
+        public string? EndIconName { get; set; }
+
+        /// <summary>
+        /// /// The icon to draw in the end slot. Alernatively, use EndIconName to specify the name of an icon in the icon library.
+        /// </summary>
+        [Parameter]
+        public Icon? EndIcon { get; set; }
 
 
         #endregion
@@ -100,6 +118,6 @@ namespace WebAwesomeBlazor.Components
         );
         #endregion
 
-     
+
     }
 }

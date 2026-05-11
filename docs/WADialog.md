@@ -24,6 +24,11 @@ Dialogs (modals) appear above the page and require the user's immediate attentio
 | LightDismiss | bool | true  | When enabled, the drawer will be closed when the user clicks outside of it. Defaults to true.  |
 | PreferredWidth  | string  |   | The preferred width of the dialog in CSS units. Note that the dialog will shrink to accommodate smaller screens.  |
 | DialogClosed  | EventCallback<string>  |   | Triggered when the dialog is closed. Argument provides ID of the triggering component  |
+| BackdropFilter | string | | A CSS filter to apply to the backdrop behind the dialog. e.g. "blur(5px)" |
+| HideDuration | string | 200ms | The animation duration when hiding the dialog.Default `200ms` |
+| ShowDuration | string | 200ms | The animation duration when showing the dialog. Default `200ms` |
+| Spacing | string | | The amount of space around and between the dialog's content. |
+
 
 ### Methods
 | Method      | Parameters       | Description                              |

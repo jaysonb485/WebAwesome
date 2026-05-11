@@ -162,11 +162,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    InputSize.Small => "small",
-                    InputSize.Medium => "medium",
-                    InputSize.Large => "large",
+                    InputSize.XSmall => "xs",
+                    InputSize.Small => "s",
+                    InputSize.Medium => "m",
+                    InputSize.Large => "l",
+                    InputSize.XLarge => "xl",
                     InputSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -180,23 +182,18 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
 
                 objRef?.Dispose();
 
-                // if (ModalService is not null && IsServiceModal)
-                //     ModalService.OnShow -= OnShowAsync;
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -215,7 +212,7 @@ namespace WebAwesomeBlazor.Components
                     Value = value;
 
                 await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await SafeInvokeVoidAsync("initialize", Id!, objRef, Value!);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef, Value!);
 
                 await ValueChanged.InvokeAsync(Value);
             }

@@ -135,20 +135,13 @@ namespace WebAwesomeBlazor.Components
 
 
         #region Lifecycle
-        protected override void OnInitialized()
-        {
-            objRef ??= DotNetObjectReference.Create(this);
-
-            AdditionalAttributes ??= new Dictionary<string, object>();
-
-            base.OnInitialized();
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
 
@@ -156,12 +149,26 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
-                objRef?.Dispose();
+                try
+                {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
 
+                }
+                catch (JSDisconnectedException)
+                {
+                }
+
+                objRef?.Dispose();
 
             }
 
-            await base.DisposeAsyncCore(disposing);
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            objRef ??= DotNetObjectReference.Create(this);
+            await base.OnInitializedAsync();
         }
 
         #endregion

@@ -161,11 +161,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    SelectSize.Small => "small",
-                    SelectSize.Medium => "medium",
-                    SelectSize.Large => "large",
+                    SelectSize.XSmall => "xs",
+                    SelectSize.Small => "s",
+                    SelectSize.Medium => "m",
+                    SelectSize.Large => "l",
+                    SelectSize.XLarge => "xl",
                     SelectSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -250,7 +252,7 @@ namespace WebAwesomeBlazor.Components
 
             if (initValue is not null)
             {
-                await SafeInvokeVoidAsync(
+                _instance = await SafeInvokeAsync<IJSObjectReference>(
                     "initialize",
                     Id!,
                     objRef,
@@ -286,6 +288,26 @@ namespace WebAwesomeBlazor.Components
                 await SafeInvokeVoidAsync("setValue", Id!, newValue);
             }
         }
+        protected override async ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
+
+                }
+                catch (JSDisconnectedException)
+                {
+                }
+
+                objRef?.Dispose();
+
+            }
+
+        }
+
         #endregion
 
         #region Event Handlers

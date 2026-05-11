@@ -1,16 +1,30 @@
 ﻿export function initialize(elementId, dotnetHelper) {
-    let element = document.getElementById(elementId);
-    if (!element) return;
+    const element = document.getElementById(elementId);
+    if (!element) return null;
 
-    element.addEventListener('load', function (event) {
+    // Capture handlers so they can be removed later
+    const onLoad = () => {
         dotnetHelper.invokeMethodAsync('HandleZoomableLoaded');
-    });
+    };
 
-    element.addEventListener('error', function (event) {
-        console.log('error' + event.detail);
-        dotnetHelper.invokeMethodAsync('HandleZoomableError', event.detail.status);
-    });
+    const onError = (event) => {
+        console.log('error', event.detail);
+        dotnetHelper.invokeMethodAsync('HandleZoomableError', event.detail?.status);
+    };
+
+    // Register listeners
+    element.addEventListener('load', onLoad);
+    element.addEventListener('error', onError);
+
+    // Return cleanup object
+    return {
+        dispose: () => {
+            element.removeEventListener('load', onLoad);
+            element.removeEventListener('error', onError);
+        }
+    };
 }
+
 export function zoomIn(elementId) {
     let element = document.getElementById(elementId);
     if (!element) return;

@@ -44,6 +44,36 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public EventCallback<string> DrawerClosed { get; set; } = default!;
 
+        /// <summary>
+        /// The preferred size of the drawer in CSS units. This will be applied to the drawer's width or height depending on its placement.
+        /// </summary>
+        [Parameter]
+        public string? PreferredSize { get; set; }
+
+        /// <summary>
+        /// A CSS filter to apply to the backdrop behind the drawer. e.g. "blur(5px)". 
+        /// </summary>
+        [Parameter]
+        public string? BackdropFilter { get; set; }
+
+        /// <summary>
+        /// The animation duration when hiding the drawer.Default `200ms`
+        /// </summary>
+        [Parameter]
+        public string? HideDuration { get; set; }
+
+        /// <summary>
+        /// The animation duration when showing the drawer. Default `200ms`
+        /// </summary>
+        [Parameter]
+        public string? ShowDuration { get; set; }
+
+        /// <summary>
+        /// The amount of space around and between the dialog's content.
+        /// </summary>
+        [Parameter]
+        public string? Spacing { get; set; }
+
         #endregion
 
         #region Computed  Properties
@@ -76,6 +106,14 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+        protected override string? StyleNames => BuildStyleNames(Style,
+            ($"--size:{PreferredSize}", !String.IsNullOrEmpty(PreferredSize)),
+            ($"--spacing:{Spacing}", !String.IsNullOrEmpty(Spacing)),
+            ($"--show-duration:{ShowDuration}", !String.IsNullOrEmpty(ShowDuration)),
+            ($"--hide-duration:{HideDuration}", !String.IsNullOrEmpty(HideDuration)),
+            ($"--backdrop-filter:{BackdropFilter}", !String.IsNullOrEmpty(BackdropFilter)));
+
         #endregion
 
 
@@ -95,14 +133,20 @@ namespace WebAwesomeBlazor.Components
         {
             if (disposing)
             {
+                try
+                {
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
 
+                }
+                catch (JSDisconnectedException)
+                {
+                }
                 objRef?.Dispose();
 
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
-
         protected override async Task OnInitializedAsync()
         {
             objRef ??= DotNetObjectReference.Create(this);
@@ -113,7 +157,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (firstRender)
             {
-                await SafeInvokeVoidAsync("initialize", Id!, objRef);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef);
             }
         }
         #endregion

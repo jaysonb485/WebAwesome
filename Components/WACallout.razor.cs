@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -80,11 +75,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    CalloutSize.Small => "small",
-                    CalloutSize.Medium => "medium",
-                    CalloutSize.Large => "large",
+                    CalloutSize.XSmall => "xs",
+                    CalloutSize.Small => "s",
+                    CalloutSize.Medium => "m",
+                    CalloutSize.Large => "l",
+                    CalloutSize.XLarge => "xl",
                     CalloutSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }

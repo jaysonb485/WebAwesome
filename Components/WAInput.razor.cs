@@ -196,11 +196,13 @@ namespace WebAwesomeBlazor.Components
             {
                 return Size switch
                 {
-                    InputSize.Small => "small",
-                    InputSize.Medium => "medium",
-                    InputSize.Large => "large",
+                    InputSize.XSmall => "xs",
+                    InputSize.Small => "s",
+                    InputSize.Medium => "m",
+                    InputSize.Large => "l",
+                    InputSize.XLarge => "xl",
                     InputSize.Inherit => "inherit",
-                    _ => "inherit"
+                    _ => "m"
                 };
             }
         }
@@ -269,20 +271,17 @@ namespace WebAwesomeBlazor.Components
             {
                 try
                 {
-                    // if (IsRenderComplete)
-                    // await JSRuntime.InvokeVoidAsync("window.blazorBootstrap.modal.dispose", Id);
+                    if (_instance is not null)
+                        await _instance.InvokeVoidAsync("dispose");
                 }
                 catch (JSDisconnectedException)
                 {
-                    // do nothing
                 }
 
                 objRef?.Dispose();
 
-
             }
 
-            await base.DisposeAsyncCore(disposing);
         }
 
         protected override void OnInitialized()
@@ -300,8 +299,9 @@ namespace WebAwesomeBlazor.Components
         {
             if (FirstRender)
             {
-                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-                await SafeInvokeVoidAsync("initialize", Id!, objRef, Value);
+                //await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef, Value);
+
             }
         }
 
@@ -312,7 +312,7 @@ namespace WebAwesomeBlazor.Components
                 previousValue = Value ?? string.Empty;
 
                 // Run your JS update logic here
-                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+                //await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
                 await SafeInvokeVoidAsync("setValue", Id!, Value!);
             }
         }
