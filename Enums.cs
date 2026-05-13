@@ -433,6 +433,12 @@
         Right,
         Left,
     }
+    public enum CopyButtonTooltipMode
+    {
+        Full,
+        Copy,
+        None
+    }
     #endregion
     #region Details Enums
     public enum DetailsAppearance
@@ -992,6 +998,20 @@
         Dotted
     }
     #endregion
+    #region Video Enums
+    public enum VideoControls
+    {
+        None,
+        Standard,
+        Full
+    }
 
+    public enum VideoPreload
+    {
+        None,
+        Metadata,
+        Auto
+    }
+    #endregion
 
 }

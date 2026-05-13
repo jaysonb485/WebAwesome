@@ -6,7 +6,7 @@ namespace WebAwesomeBlazor
     {
         public static IServiceCollection AddWebAwesome(this IServiceCollection services)
         {
-            services.AddScoped<Extended.IConfirmDialog, Extended.ConfirmDialogService>();
+            services.AddScoped<Extended.ConfirmDialogService>();
             services.AddScoped<ToastService>();
             return services;
         }

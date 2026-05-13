@@ -13,7 +13,8 @@
 
 
 @code {
-    [Inject] private IConfirmDialog _confirmDialog { get; set; } = default!;
+    [Inject] private ConfirmDialogService _confirmDialog { get; set; } = default!;
+    private IDisposable? _subscription;
     private string _title = "";
     private string _message = "";
     private string _confirmText = "Yes";
@@ -21,20 +22,19 @@
     private bool _visible = false;
     private WADialog dialog = default!;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        if (_confirmDialog is ConfirmDialogService svc)
-        {
-            svc.OnShow += ShowDialog;
-        }
+        _subscription = _confirmDialog.RegisterHandler(ShowDialog);
     }
 
-    private void ShowDialog(string title, string message, string? confirmText, string? declineText)
+    private async Task ShowDialog(DialogRequest request)
     {
-        _title = title;
-        _message = message;
+        _title = request.Title;
+        _message = request.Message;
+        _confirmText = request.ConfirmText ?? "Yes";
+        _declineText = request.DeclineText ?? "No";
         _visible = true;
-        Task.Run(() => InvokeAsync(StateHasChanged));
+        await InvokeAsync(StateHasChanged);
         dialog.Show();
     }
 
@@ -52,6 +52,11 @@
     {
         Console.WriteLine($"Dialog closed via {elementId}");
         if(_visible) Confirm(false);
+    }
+
+    public void Dispose()
+    {
+        _subscription?.Dispose();
     }
 
 
