@@ -40,6 +40,7 @@ namespace WebAwesomeBlazor.Components
         private Func<ToastMessage, Task>? _createHandler;
         private Func<string, Task>? _hideHandler;
         private Func<ToastMessage, Task>? _dismissHandler;
+        private string? _pendingPrependId;
         #endregion
 
         #region Lifecycle
@@ -58,6 +59,26 @@ namespace WebAwesomeBlazor.Components
             }
 
             base.OnInitialized();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (_pendingPrependId != null)
+            {
+                var idToMove = _pendingPrependId;
+                _pendingPrependId = null; // Clear it so it doesn't run again on next render
+
+                await SafeInvokeVoidAsync("prepend", Id!, idToMove);
+            }
+        }
+
+        protected override ValueTask DisposeAsyncCore(bool disposing)
+        {
+            if (disposing)
+            {
+
+            }
+            return base.DisposeAsyncCore(disposing);
         }
 
         #endregion
@@ -84,10 +105,12 @@ namespace WebAwesomeBlazor.Components
 
                 Toasts.Add(new DynamicToast() { Id = toastMessage.Id, ToastType = typeof(ToastItem), Parameters = toastParameters });
 
+                // Store the ID we need to move
+                _pendingPrependId = toastMessage.Id;
+
                 StateHasChanged();
             });
 
-            await SafeInvokeVoidAsync("prepend", Id!, toastMessage.Id);
         }
 
         #endregion

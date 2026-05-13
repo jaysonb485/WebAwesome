@@ -1,5 +1,14 @@
 ﻿# Changelog
 
+## Version 1.7.0
+- Upgraded to [Web Awesome 3.7.0](https://webawesome.com/docs/resources/changelog#wa_370) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- Added new components:
+	* (Pro) [WAVideo](/docs/WAVideo.md): A video component that provides an easy way to embed and control video playback in Blazor applications, with support for various video formats and customizable controls.
+	* (Pro) [WAVideoPlaylist](/docs/WAVideoPlaylist.md): A video playlist component that allows users to create and manage a list of videos for sequential playback, with support for custom styling and event handling.
+- Support for custom buttons in [WACopyButton](/docs/WACopyButton.md) to allow for more flexible UI design.
+- Support for tooltip mode in [WACopyButton](/docs/WACopyButton.md) to control when feedback is shown in the tooltip on hover and click.
+- More memory leak fixes and optimizations for JS interop calls across multiple components, improving overall performance and stability of the library.
+
 ## Version 1.6.0
 - Upgraded to [Web Awesome 3.6.0](https://webawesome.com/docs/resources/changelog#wa_360) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams).
 - Breaking change: default size for all components that support sizing is now `medium` instead of `inherit` to align to Web Awesome behaviour.

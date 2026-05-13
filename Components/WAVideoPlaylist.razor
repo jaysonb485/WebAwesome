@@ -1,0 +1,14 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-video-playlist @ref="@Element"
+                   id="@Id"
+                   @attributes="@AdditionalAttributes"
+                   style="@StyleNames"
+                   class="@ClassNames"
+                   slot="@Slot"
+                   controls="@ControlsString">
+    @Videos
+    @ChildContent
+</wa-video-playlist>
