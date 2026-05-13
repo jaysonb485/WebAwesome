@@ -1,0 +1,62 @@
+﻿
+@inherits WAComponentBase
+
+
+<wa-video @ref="@Element"
+        id="@Id"
+        @attributes="@AdditionalAttributes"
+        style="@StyleNames"
+        class="@ClassNames"
+        slot="@Slot"
+        autoplay="@Autoplay"
+        autoplay-muted="@AutoplayMuted"
+        autoplay-on-visible="@AutoplayOnVisible"
+        controls="@ControlsString"
+        poster="@PosterImageUrl"
+        preload="@PreloadString"
+        src="@VideoUrl"
+        thumbnails="@ThumbnailsUrl"
+        title="@Title"
+        volume="@Volume">
+    @ChildContent
+    @if (ExitFullscreenIcon != null || !String.IsNullOrWhiteSpace(ExitFullscreenIconName))
+    {
+        <WAIcon Icon="@ExitFullscreenIcon" IconName="@ExitFullscreenIconName" Slot="exit-fullscreen-icon" />
+    }
+    @if (FullscreenIcon != null || !String.IsNullOrWhiteSpace(FullscreenIconName))
+    {
+        <WAIcon Icon="@FullscreenIcon" IconName="@FullscreenIconName" Slot="fullscreen-icon" />
+    }
+    @if (MuteIcon != null || !String.IsNullOrWhiteSpace(MuteIconName))
+    {
+        <WAIcon Icon="@MuteIcon" IconName="@MuteIconName" Slot="mute-icon" />
+    }
+    @if (PauseIcon != null || !String.IsNullOrWhiteSpace(PauseIconName))
+    {
+        <WAIcon Icon="@PauseIcon" IconName="@PauseIconName" Slot="pause-icon" />
+    }
+    @if (PlayIcon != null || !String.IsNullOrWhiteSpace(PlayIconName))
+    {
+        <WAIcon Icon="@PlayIcon" IconName="@PlayIconName" Slot="play-icon" />
+    }
+    @if (PosterIcon != null || !String.IsNullOrWhiteSpace(PosterIconName))
+    {
+        <WAIcon Icon="@PosterIcon" IconName="@PosterIconName" Slot="poster-icon" />
+    }
+    @if (VolumeIcon != null || !String.IsNullOrWhiteSpace(VolumeIconName))
+    {
+        <WAIcon Icon="@VolumeIcon" IconName="@VolumeIconName" Slot="volume-icon" />
+    }
+    @if (ControlsAfterPlay is not null)
+    {
+        <span slot="controls-after-play">
+            @ControlsAfterPlay
+        </span>
+    }
+    @if (ControlsStart is not null)
+    {
+        <span slot="controls-start">
+            @ControlsStart
+        </span>
+    }
+</wa-video>

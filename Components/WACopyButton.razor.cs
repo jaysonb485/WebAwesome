@@ -105,6 +105,12 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public EventCallback CopyFailed { get; set; }
+
+        /// <summary>
+        /// Controls the built-in tooltip. 
+        /// </summary>
+        [Parameter]
+        public CopyButtonTooltipMode TooltipMode { get; set; } = CopyButtonTooltipMode.Full;
         #endregion
 
         #region Computed  Properties
@@ -119,6 +125,20 @@ namespace WebAwesomeBlazor.Components
                     CopyButtonTooltipPlacement.Right => "right",
                     CopyButtonTooltipPlacement.Bottom => "bottom",
                     _ => "top"
+                };
+            }
+        }
+
+        private string TooltipModeString
+        {
+            get
+            {
+                return TooltipMode switch
+                {
+                    CopyButtonTooltipMode.Full => "full",
+                    CopyButtonTooltipMode.Copy => "copy",
+                    CopyButtonTooltipMode.None => "none",
+                    _ => "full"
                 };
             }
         }

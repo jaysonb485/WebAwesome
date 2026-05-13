@@ -8,7 +8,7 @@
 ### Description
 Copies text data to the clipboard when the user clicks the trigger.
 
-[WebAwesome docs](https://webawesome.com/docs/components/copy-button/)
+[Web Awesome docs](https://webawesome.com/docs/components/copy-button/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
@@ -28,8 +28,10 @@ Copies text data to the clipboard when the user clicks the trigger.
 | Disabled | bool  | false  | Disables the copy button.  |
 | FeedbackDuration  | int  | 1000 | The length of time to show feedback before restoring the default trigger.  |
 | TooltipPlacement  | CopyButtonTooltipPlacement  |  CopyButtonTooltipPlacement.Top | The preferred placement of the tooltip.  |
+| TooltipMode | CopyButtonTooltipMode  | CopyButtonTooltipMode.Full | The trigger mode for showing the tooltip. <br/> `Full`: Shows the tooltip on hover and focus, and is reused to display copy feedback. <br/> `Copy`: he tooltip stays silent on hover and focus, and only appears briefly to confirm a successful or failed copy. <br/> `None`: no tooltip is shown in any state. |
 | Copied | EventCallback |  | Emitted when the data has been copied.  |
 | CopyFailed | EventCallback |  | Emitted when the copy operation fails. |
+| ChildContent | RenderFragment |  | By default, a copy icon button is rendered so this is optional. If desired, you can slot in a custom element such as [WAButton](/docs/WAButton.md) |
 
 ### Examples
 
@@ -38,11 +40,19 @@ Copies text data to the clipboard when the user clicks the trigger.
 <WACopyButton Value="Text to copy" />
 ```
 
-#### Copy from text value ofanother element.
+#### Copy from text value of another element.
 ```HTML+Razor
 <div class="wa-cluster wa-gap-0">
     <WAInput Id="TextToCopyInputBox" />
     <WACopyButton FromElementId="TextToCopyInputBox" FromElementAttribute="value" HoverLabel="Copy from the text box" />
 </div>
 ```
+
+#### Custom trigger element
+```HTML+Razor
+<WACopyButton Value="Text to copy">
+    <WAButton>Copy Text</WAButton>
+</WACopyButton>
+```
+
 <img width="337" height="128" alt="image" src="https://github.com/user-attachments/assets/1c4b645e-ffc1-4a97-af82-6f4bd29d2a48" />
