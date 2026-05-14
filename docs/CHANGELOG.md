@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Version 1.7.1
+- Fix for WAConfirmDialog: Parameter case was incorrectly lower.
+- Breaking: Docs not noted breaking change for ConfirmDialog - use ConfirmDialogService instead of IConfirmDialog.
+
 ## Version 1.7.0
 - Upgraded to [Web Awesome 3.7.0](https://webawesome.com/docs/resources/changelog#wa_370) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - Added new components:

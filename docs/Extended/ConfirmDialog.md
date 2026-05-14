@@ -17,7 +17,7 @@ In your `MainLayout.razor` or the page where you want to use the ConfirmDialog, 
 
 On any page or component where you want to trigger the confirm dialog, inject the `ConfirmDialogService` and use it to show the dialog:
 ```HTML+Razor
-@inject IConfirmDialog confirmDialogService
+@inject ConfirmDialogService confirmDialogService
 ```
 
 Then, you can call the `ShowAsync` method to display the dialog:
