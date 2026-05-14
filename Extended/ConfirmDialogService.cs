@@ -14,14 +14,14 @@
         }
 
         public Task<bool> ShowAsync(
-            string title,
-            string message,
-            string? confirmText = "Yes",
-            string? declineText = "No")
+            string Title,
+            string Message,
+            string? ConfirmText = "Yes",
+            string? DeclineText = "No")
         {
             _tcs = new TaskCompletionSource<bool>();
 
-            var request = new DialogRequest(title, message, confirmText, declineText);
+            var request = new DialogRequest(Title, Message, ConfirmText, DeclineText);
 
             // Fire all live handlers
             foreach (var weak in _handlers.ToList())
