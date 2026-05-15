@@ -1,5 +1,8 @@
 ﻿# Changelog
 
+## Version 1.7.1.1 
+- Reverted changes to ConfirmDialog parameters - It wasn't working 100% in production so will rework and re-release in a future update.
+
 ## Version 1.7.1
 - Fix for WAConfirmDialog: Parameter case was incorrectly lower.
 - Breaking: Docs not noted breaking change for ConfirmDialog - use ConfirmDialogService instead of IConfirmDialog.
