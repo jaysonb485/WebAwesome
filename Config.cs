@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using WebAwesomeBlazor.Extended;
 
 namespace WebAwesomeBlazor
 {
@@ -6,7 +7,7 @@ namespace WebAwesomeBlazor
     {
         public static IServiceCollection AddWebAwesome(this IServiceCollection services)
         {
-            services.AddScoped<Extended.ConfirmDialogService>();
+            services.AddScoped<IConfirmDialog, ConfirmDialogService>();
             services.AddScoped<ToastService>();
             return services;
         }

@@ -1,20 +1,19 @@
-﻿    <WADialog @ref="dialog" Title="@_title" DialogClosed="DialogClosed" >
-        <HeaderActions></HeaderActions>
-        <DialogBody>
-            <p>@_message</p>
-        </DialogBody>
-        <DialogFooter>
-            <div class="wa-cluster">
-                <WAButton OnClick="() => Confirm(false)" Variant="ButtonVariant.Neutral">@_declineText</WAButton>
-                <WAButton OnClick="() => Confirm(true)" Variant="ButtonVariant.Brand">@_confirmText</WAButton>
-            </div>
-        </DialogFooter>
-    </WADialog>
+﻿<WADialog @ref="dialog" Title="@_title" DialogClosed="DialogClosed">
+    <HeaderActions></HeaderActions>
+    <DialogBody>
+        <p>@_message</p>
+    </DialogBody>
+    <DialogFooter>
+        <div class="wa-cluster">
+            <WAButton OnClick="() => Confirm(false)" Variant="ButtonVariant.Neutral">@_declineText</WAButton>
+            <WAButton OnClick="() => Confirm(true)" Variant="ButtonVariant.Brand">@_confirmText</WAButton>
+        </div>
+    </DialogFooter>
+</WADialog>
 
 
 @code {
-    [Inject] private ConfirmDialogService _confirmDialog { get; set; } = default!;
-    private IDisposable? _subscription;
+    [Inject] private IConfirmDialog _confirmDialog { get; set; } = default!;
     private string _title = "";
     private string _message = "";
     private string _confirmText = "Yes";
@@ -22,19 +21,20 @@
     private bool _visible = false;
     private WADialog dialog = default!;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        _subscription = _confirmDialog.RegisterHandler(ShowDialog);
+        if (_confirmDialog is ConfirmDialogService svc)
+        {
+            svc.OnShow += ShowDialog;
+        }
     }
 
-    private async Task ShowDialog(DialogRequest request)
+    private void ShowDialog(string title, string message, string? confirmText, string? declineText)
     {
-        _title = request.Title;
-        _message = request.Message;
-        _confirmText = request.ConfirmText ?? "Yes";
-        _declineText = request.DeclineText ?? "No";
+        _title = title;
+        _message = message;
         _visible = true;
-        await InvokeAsync(StateHasChanged);
+        Task.Run(() => InvokeAsync(StateHasChanged));
         dialog.Show();
     }
 
@@ -51,12 +51,7 @@
     private void DialogClosed(string elementId)
     {
         Console.WriteLine($"Dialog closed via {elementId}");
-        if(_visible) Confirm(false);
-    }
-
-    public void Dispose()
-    {
-        _subscription?.Dispose();
+        if (_visible) Confirm(false);
     }
 
 
