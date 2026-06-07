@@ -1,0 +1,39 @@
+﻿.inline-label-hover {
+    text-decoration: 2px underline dotted var(--wa-color-border-loud);
+    text-underline-offset: var(--wa-space-xs);
+    cursor: pointer;
+}
+
+.inline-hidden {
+    display: none !important;
+}
+
+.inline-label {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+    height: var(--wa-form-control-height);
+    color: var(--wa-form-control-value-color);
+    font-size: var(--wa-form-control-value-font-size);
+    font-family: inherit;
+    font-weight: var(--wa-form-control-value-font-weight);
+    line-height: var(--wa-form-control-value-line-height);
+    vertical-align: middle;
+    width: 100%;
+    border-radius: var(--wa-form-control-border-radius);
+    border-style: var(--wa-form-control-border-style);
+    border-width: var(--wa-form-control-border-width);
+    border-color: transparent;
+    padding: 0 var(--wa-form-control-padding-inline);
+    outline: var(--wa-focus-ring-style) var(--wa-focus-ring-width) transparent;
+}
+
+.inline-button {
+    cursor: pointer;
+    color: var(--wa-color-text-quiet);
+}
+
+.inline-button:hover {
+    color: var(--wa-color-success);
+}

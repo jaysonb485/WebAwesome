@@ -1,0 +1,63 @@
+﻿@inherits WAComponentBase
+<HeadContent>
+    <link rel="stylesheet" href="_content/WebAwesomeBlazor/WebAwesomeBlazor.bundle.scp.css" />
+</HeadContent>
+
+
+
+<span class="inline-editor">
+    <span class="@LabelClassNames" @onmouseover="OnLabelHover" @onmouseout="OnLabelHoverExit" @onclick="OnLabelClick">
+        @if (!string.IsNullOrWhiteSpace(Label))
+        {
+            <label>@Label</label>
+        }
+        @Value
+    </span>
+    <span class="@EditorClassNames">
+        <span class="wa-flank:end wa-gap-xs">
+        @switch (EditorType)
+        {
+            case InlineEditorType.Text:
+
+                    <WAInput @ref="WAInput" @bind-Value="Value" @onfocusout="OnInputBlur">
+
+                </WAInput>
+                    <WAButton Appearance="ButtonAppearance.Plain" Variant="ButtonVariant.Success" Class="inline-button" @onclick="OnSaveInput">
+                        <WAIcon IconName="check" />
+                    </WAButton>
+
+                break;
+            case InlineEditorType.TextArea:
+                    <WATextArea @ref="WATextArea" @bind-Value="Value" @onfocusout="OnInputBlur">
+                        <span slot="end" class="inline-button" @onclick="OnSaveInput">
+                            <WAIcon IconName="check" />
+                        </span>
+                    </WATextArea>
+                    <WAButton Appearance="ButtonAppearance.Plain" Variant="ButtonVariant.Success" Class="wa-align-self-end inline-button" @onclick="OnSaveInput">
+                        <WAIcon IconName="check" />
+                    </WAButton>
+
+                break;
+            case InlineEditorType.Select:
+                <WASelect @ref="WASelect" @bind-Value="Value" Blur="OnInputBlur">
+                    @if (SelectOptions is not null)
+                    {
+                        @foreach (var option in SelectOptions)
+                        {
+                            <WASelectOption Value="@option">@option</WASelectOption>
+                        }
+                    }
+                </WASelect>
+                    <WAButton Appearance="ButtonAppearance.Plain" Variant="ButtonVariant.Success" Class="wa-align-self-end inline-button" @onclick="OnSaveInput">
+                        <WAIcon IconName="check" />
+                    </WAButton>
+                break;
+            case InlineEditorType.Custom:
+                @EditorContent
+                break;
+            }
+        </span>
+    </span>
+</span>
+
+    

@@ -147,6 +147,9 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public int MaxOptionsVisible { get; set; } = 3;
+
+        [Parameter]
+        public EventCallback Blur { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -352,6 +355,13 @@ namespace WebAwesomeBlazor.Components
             EditContext?.NotifyFieldChanged(fieldIdentifier);
         }
 
+        [JSInvokable]
+        public async Task HandleInputBlur()
+        {
+            if (Blur.HasDelegate)
+                await Blur.InvokeAsync();
+        }
+
 
 
         #endregion
@@ -363,7 +373,14 @@ namespace WebAwesomeBlazor.Components
         private string[]? previousValues = default!;
         #endregion
 
+        #region Public Methods
+        public async Task SetFocusAsync()
+        {
+            await SafeInvokeVoidAsync("setFocus", Id!);
+        }
 
+        public void SetFocus() => _ = SetFocusAsync();
+        #endregion
     }
 
 

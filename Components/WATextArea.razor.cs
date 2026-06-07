@@ -270,6 +270,14 @@ namespace WebAwesomeBlazor.Components
         }
 
         public void SetValue(string value) => _ = SetValueAsync(value);
+
+        public async Task SetFocusAsync()
+        {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await SafeInvokeVoidAsync("setFocus", Id!);
+        }
+
+        public void SetFocus() => _ = SetFocusAsync();
         #endregion
 
     }
