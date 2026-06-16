@@ -66,6 +66,40 @@
         Default
     }
     #endregion
+    #region Accordion Enums
+    public enum AccordionMode
+    {
+        Multiple,
+        Single,
+        SingleCollapsible
+    }
+
+    public enum AccordionHeadingLevel
+    {
+        H1,
+        H2,
+        H3,
+        H4,
+        H5,
+        H6,
+        None
+    }
+
+    public enum AccordionAppearance
+    {
+        Filled,
+        Outlined,
+        FilledOutlined,
+        Plain
+    }
+
+    public enum AccordionIconPlacement
+    {
+        Start,
+        End
+    }
+
+    #endregion
     #region Animation Enums
     public enum AnimationName
     {
@@ -440,6 +474,42 @@
         None
     }
     #endregion
+    #region DatePicker Enums
+    public enum DatePickerDayOfTheWeek
+    {
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday
+    }
+
+    public enum DatePickerSelectionMode
+    {
+        Single,
+        Range
+    }
+
+    #endregion
+    #region DateInput Enums
+    public enum DateInputPlacement
+    {
+        Top,
+        TopStart,
+        TopEnd,
+        Bottom,
+        BottomStart,
+        BottomEnd,
+        Right,
+        RightStart,
+        RightEnd,
+        Left,
+        LeftStart,
+        LeftEnd
+    }
+    #endregion
     #region Details Enums
     public enum DetailsAppearance
     {
@@ -505,6 +575,12 @@
         Large,
         XLarge,
         Inherit
+    }
+
+    public enum FileInputCapture
+    {
+        User,
+        Environment
     }
     #endregion
     #region FormatBytes Enums

@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.6.0. 
+Currently supports Web Awesome 3.8.0. 
 
 # Changelog
-[Version 1.6.0](/docs/CHANGELOG.md)
+[Version 1.8.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -51,6 +51,8 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 
 
 # Web Awesome components
+- [WAAccordion](/docs/WAAccordion.md)
+  - [WAAccordionItem](/docs/WAAccordionItem.md)
 - [WAAnimatedImage](/docs/WAAnimatedImage.md)
 - [WAAnimation](/docs/WAAnimation.md)
 - [WAAvatar](/docs/WAAvatar.md)
@@ -62,11 +64,11 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WACallout](/docs/WACallout.md)
 - [WACard](/docs/WACard.md)
 - [WACarousel](/docs/WACarousel.md)
-- [WAComparison](/docs/WAComparison.md)
 - [WACheckbox](/docs/WACheckbox.md)
 - [WAColorPicker](/docs/WAColorPicker.md)
 - (Pro) [WACombobox](/docs/WACombobox.md)
   - [WAComboboxOption](/docs/WAComboboxOption.md)
+- [WAComparison](/docs/WAComparison.md)
 - [WACopyButton](/docs/WACopyButton.md)
 - [WADetails](/docs/WADetails.md)
 - [WADialog](/docs/WADialog.md)
@@ -84,8 +86,8 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
 - [WAMarkdown](/docs/WAMarkdown.md)
 - [WANumberInput](/docs/WANumberInput.md)
-- (Pro) [WAPage](/docs/WAPage.md)
-  - (Pro) [WALayoutContent](/docs/WALayoutContent.md)
+- [WAPage](/docs/WAPage.md)
+  - [WALayoutContent](/docs/WALayoutContent.md)
 - [WAPopover](/docs/WAPopover.md)
 - [WAProgressBar](/docs/WAProgressBar.md)
 - [WAProgressRing](/docs/WAProgressRing.md)
@@ -100,6 +102,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WASelectOption](/docs/WASelectOption.md)
 - [WASkeleton](/docs/WASkeleton.md)
 - [WASlider](/docs/WASlider.md)
+- [WASpinner](/docs/WASpinner.md)
 - [WASplitPanel](/docs/WASplitPanel.md)
 - [WASwitch](/docs/WASwitch.md)
 - [WATabGroup](/docs/WATabGroup.md)
@@ -110,6 +113,8 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WATooltip](/docs/WATooltip.md)
 - [WATree](/docs/WATree.md)
   - [WATreeItem](/docs/WATreeItem.md)
+- (Pro) [WAVideo](/docs/WAVideo.md)
+  - [WAVideoPlaylist](/docs/WAVideoPlaylist.md)
 - [WAZoomableFrame](/docs/WAZoomableFrame.md)
 
 ## Data visualisation
@@ -120,7 +125,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - (Pro) [WAPieChart](/docs/WAPieChart.md)
 - (Pro) [WAPolarAreaChart](/docs/WAPolarAreaChart.md)
 - (Pro) [WARadarChart](/docs/WARadarChart.md)
-- (Pro) [WAScaatterChart](/docs/WAScatterChart.md)
+- (Pro) [WAScatterChart](/docs/WAScatterChart.md)
 - (Pro) [WASparkline](/docs/WASparkline.md)
 
 Some Web Awesome components have not been included as there are suitable .NET functions available:

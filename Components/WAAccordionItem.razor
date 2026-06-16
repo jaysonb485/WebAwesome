@@ -1,0 +1,16 @@
+﻿@inherits WAComponentBase
+<wa-accordion-item @ref="@Element"
+              id="@Id"
+              @attributes="@AdditionalAttributes"
+              style="@StyleNames"
+              class="@ClassNames"
+              slot="@Slot"
+              expanded="@Expanded"
+              label="@Label"
+              disabled="@Disabled">
+    @if (Icon != null || !String.IsNullOrWhiteSpace(IconName))
+    {
+        <WAIcon Icon="@Icon" IconName="@IconName" Slot="icon"></WAIcon>
+    }
+    @ChildContent
+</wa-accordion-item>

@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@using System.Globalization
+
+@inherits WAComponentBase
+
+<wa-date-input @ref="@Element"
+               id="@Id"
+               @attributes="@AdditionalAttributes"
+               style="@StyleNames"
+               class="@ClassNames"
+               slot="@Slot"
+               value="@formattedValue"
+               size="@SizeString"
+               appearance="@AppearanceString"
+               pill="@Pill"
+               label="@Label"
+               hint="@Hint"
+               with-clear="@Clearable"
+               readonly="@ReadOnly"
+               required="@Required"
+               disabled="@Disabled"
+               autocomplete="@Autocomplete"
+               autofocus="@Autofocus"
+               distance="@PopupDistance"
+               disabled-dates="@DisabledDatesString"
+               disabled-days-of-week="@DisabledDaysOfTheWeekString"
+               disable-future="@DisableFutureDates"
+               disable-past="@DisablePastDates"
+               first-day-of-week="@FirstDayOfTheWeekString"
+               max="@MaximumDate?.ToString("yyyy-MM-dd")"
+               min="@MinimumDate?.ToString("yyyy-MM-dd")"
+               max-range="@MaximumRange"
+               min-range="@MinimumRange"
+               mode="@SelectionModeString"
+               months="@(ShowTwoMonths ? "2" : "1")"
+               page-by="@(PageByMonths ? "months" : "single")"
+               placement="@PopupPlacementString"
+               today="@Today?.ToString("yyyy-MM-dd")"
+               with-outside-days="@ShowOutsideDays"
+               with-week-numbers=@ShowWeekNumbers">
+    @if (PreviousIcon != null || !String.IsNullOrWhiteSpace(PreviousIconName))
+    {
+        <WAIcon Icon="@PreviousIcon" IconName="@PreviousIconName" Slot="previous-icon"></WAIcon>
+    }
+    @if (NextIcon != null || !String.IsNullOrWhiteSpace(NextIconName))
+    {
+        <WAIcon Icon="@NextIcon" IconName="@NextIconName" Slot="next-icon"></WAIcon>
+    }
+    @if (FooterContent is not null)
+    {
+        <span slot="footer">
+            @FooterContent
+        </span>
+    }
+    @ChildContent
+</wa-date-input>

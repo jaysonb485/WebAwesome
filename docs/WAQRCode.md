@@ -20,6 +20,8 @@ Generates a QR code and renders it using the Canvas API.
 | BackgroundColor | string |  | The background color. This can be any valid CSS color or transparent. It cannot be a CSS custom property. |
 | Radius | double | 0 | The edge radius of each module. Must be between 0 and 0.5. |
 | ErrorCorrection | QRCodeErrorCorrection | QRCodeErrorCorrection.H | The level of error correction to use. |
+| ImageUrl | string |  | The URL of an image to be placed in the center of the QR code. |
+| ImageCoverage | decimal | 0.5 | The percentage of the QR code that the image should cover. Must be between 0 and 1. Default is 0.5 (50%). |
 
 ### Examples
 
