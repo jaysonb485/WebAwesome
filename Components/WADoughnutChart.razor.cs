@@ -17,7 +17,7 @@ namespace WebAwesomeBlazor.Components
         #region Computed  Properties
 
         protected override string? StyleNames => BuildStyleNames(Style,
-               [.. DataSet.FillColor
+               [.. (DataSet.FillColor ?? Enumerable.Empty<string>())
                 .Select((ds, i) => new[]
                 {
                     ((string?)$"--fill-color-{i + 1}: {ds}", !string.IsNullOrWhiteSpace(ds)),
@@ -29,7 +29,7 @@ namespace WebAwesomeBlazor.Components
                         ((string?)$"--grid-color: {ChartOptions.GridColor}", !string.IsNullOrWhiteSpace(ChartOptions.GridColor))
                     ])
                 .Concat(
-                [.. DataSet.BorderColor
+                [.. (DataSet.BorderColor ?? Enumerable.Empty<string>())
                     .Select((ds, i) => new []
                     {
                         ((string?)$"--border-color-{i + 1}: {ds}", !string.IsNullOrWhiteSpace(ds))
