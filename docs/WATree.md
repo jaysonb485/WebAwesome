@@ -15,7 +15,7 @@ Trees allow you to display a hierarchical list of selectable [WATreeItem](/docs/
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| SelectionMode | TreeSelection | TreeSelection.Single | The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple displays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected. |
+| SelectionMode | TreeSelection | TreeSelection.Single | The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple displays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected. Leaf-multiple allows multiple leaf nodes to be selected while parent nodes only expand and collapse. |
 | IndentSize | string |  | The size of the indentation for nested items. |
 | IndentGuideColor | string |  | The color of the indentation line. |
 | IndentGuideOffset | string |  | The amount of vertical spacing to leave between the top and bottom of the indentation line's starting position. |
@@ -36,7 +36,7 @@ Trees allow you to display a hierarchical list of selectable [WATreeItem](/docs/
 
 #### Basic Usage
 ```HTML+Razor
-<WATree SelectionChanged="treeSelectionChanged" Selection="TreeSelection.Multiple" >
+<WATree SelectionChanged="treeSelectionChanged" SelectionMode="TreeSelection.Multiple" >
     <WATreeItem Value="item1">Item 1</WATreeItem>
         <WATreeItem Value="item2">Item 2
             <WATreeItem Value="item2a">Item 2A</WATreeItem>

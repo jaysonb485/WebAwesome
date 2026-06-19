@@ -351,6 +351,23 @@
         Inherit
     }
     #endregion
+    #region Checkbox Group Enums
+    public enum CheckboxGroupSize
+    {
+        XSmall,
+        Small,
+        Medium,
+        Large,
+        XLarge,
+        Inherit
+    }
+
+    public enum CheckboxGroupOrientation
+    {
+        Horizontal,
+        Vertical
+    }
+    #endregion
     #region Colour Picker Enums
     public enum PickerColorFormat
     {
@@ -1096,7 +1113,8 @@
     {
         Single,
         Multiple,
-        Leaf
+        Leaf,
+        LeafMultiple
     }
     public enum TreeIndentStyle
     {
