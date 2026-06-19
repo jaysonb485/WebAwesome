@@ -1,0 +1,14 @@
+﻿<span slot="@($"day-{Date.ToString("yyyy-MM-dd")}")" title="@Title">
+    @ChildContent
+</span>
+
+@code {
+    [Parameter, EditorRequired]
+    public DateOnly Date { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

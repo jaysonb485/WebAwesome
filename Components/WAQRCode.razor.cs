@@ -1,12 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.JSInterop;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -54,6 +46,20 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public QRCodeErrorCorrection ErrorCorrection { get; set; } = QRCodeErrorCorrection.H;
+
+        /// <summary>
+        /// Add a logo or image to the center of the QR code. Error correction will be set to H.
+        /// </summary>
+        [Parameter]
+        public string? ImageUrl { get; set; }
+
+        /// <summary>
+        /// Control how much of the QR code the image is allowed to cover, from 0 to 1. The default is 0.5
+        /// The higher the image-coverage value, the harder it will be for QR readers to scan. For example, 1.0 usually makes the QR code unreadable.
+        /// </summary>
+        [Parameter]
+        public decimal? ImageCoverage { get; set; } = 0.5m;
+
         #endregion
 
         #region Computed  Properties

@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@using System.Globalization
+
+@typeparam TValue
+@inherits WAComponentBase
+
+<wa-date-picker @ref="@Element"
+               id="@Id"
+               @attributes="@AdditionalAttributes"
+               style="@StyleNames"
+               class="@ClassNames"
+               slot="@Slot"
+               value="@formattedValue"
+               size="@SizeString"
+               readonly="@ReadOnly"
+               required="@Required"
+               disabled="@Disabled"
+               disabled-dates="@DisabledDatesString"
+               disabled-days-of-week="@DisabledDaysOfTheWeekString"
+               disable-future="@DisableFutureDates"
+               disable-past="@DisablePastDates"
+               first-day-of-week="@FirstDayOfTheWeekString"
+               max="@MaximumDate?.ToString("yyyy-MM-dd")"
+               min="@MinimumDate?.ToString("yyyy-MM-dd")"
+               max-range="@MaximumRange"
+               min-range="@MinimumRange"
+               mode="@SelectionModeString"
+               months="@(ShowTwoMonths ? "2" : "1")"
+               page-by="@(PageByMonths ? "months" : "single")"
+               today="@Today?.ToString("yyyy-MM-dd")"
+               with-outside-days="@ShowOutsideDays"
+               with-week-numbers=@ShowWeekNumbers"
+                weekday-format="@WeekdayFormatString"
+               @onchange="OnValueChanged">
+    @if (PreviousIcon != null || !String.IsNullOrWhiteSpace(PreviousIconName))
+    {
+        <WAIcon Icon="@PreviousIcon" IconName="@PreviousIconName" Slot="previous-icon"></WAIcon>
+    }
+    @if (NextIcon != null || !String.IsNullOrWhiteSpace(NextIconName))
+    {
+        <WAIcon Icon="@NextIcon" IconName="@NextIconName" Slot="next-icon"></WAIcon>
+    }
+    @if (FooterContent is not null)
+    {
+        <span slot="footer">
+            @FooterContent
+        </span>
+    }
+    @if (HeaderContent is not null)
+    {
+        <span slot="header">
+            @HeaderContent
+        </span>
+    }
+
+    @CustomDayContent
+    @ChildContent
+</wa-date-picker>

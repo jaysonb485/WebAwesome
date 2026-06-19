@@ -27,6 +27,7 @@ File inputs allow users to select one or more files from their device using a dr
 | Accept | string |  | A comma-separated list of acceptable file types. Must be a list of [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file#unique_file_type_specifiers). |
 | AllowMultiple | bool | false | Allows more than one file to be selected. |
 | DropZone | RenderFragment |  | Custom content to display in the drop zone. If not provided, a default drop zone will be rendered. |
+| Capture | FileInputCapture |  | On mobile devices, specifies which camera or microphone to use for capturing media. Use user for the front-facing camera/microphone or environment for the rear-facing one. This attribute is only used when accept includes an image, video, or audio type and may be ignored on devices that lack the corresponding hardware. |
 
 ### Methods
 | Method      | Parameters       | Description                              |
@@ -43,7 +44,6 @@ File inputs allow users to select one or more files from their device using a dr
 | Size | long | The size of the file in bytes. |
 | Type | string | The MIME type of the file. |
 | LastModified | DateTime | The date and time the file was last modified. |
-
 
 
 ### Examples

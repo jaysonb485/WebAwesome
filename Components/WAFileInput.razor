@@ -18,12 +18,14 @@
                size="@SizeString"
                disabled="@Disabled"
                slot="@Slot"
-               @onchange="OnFilesChanged">
-    @if (Dropzone != null)
-        @if (Dropzone != null)
-        {
+               @onchange="OnFilesChanged"
+               capture="@CaptureString">
+    @if (Dropzone is not null)
+    {
+        <span slot="dropzone">
             @Dropzone
-        }
+        </span>
+    }
     @ChildContent
 </wa-file-input>
 

@@ -65,6 +65,12 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public RenderFragment? Dropzone { get; set; }
 
+        /// <summary>
+        /// On mobile devices, specifies which camera or microphone to use for capturing media. Use user for the front-facing camera/microphone or environment for the rear-facing one. This attribute is only used when accept includes an image, video, or audio type and may be ignored on devices that lack the corresponding hardware.
+        /// </summary>
+        [Parameter]
+        public FileInputCapture? Capture { get; set; }
+
         #endregion
 
         #region Computed  Properties
@@ -83,6 +89,19 @@ namespace WebAwesomeBlazor.Components
                     FileInputSize.XLarge => "xl",
                     FileInputSize.Inherit => "inherit",
                     _ => "m"
+                };
+            }
+        }
+
+        string CaptureString
+        {
+            get
+            {
+                return Capture switch
+                {
+                    FileInputCapture.User => "user",
+                    FileInputCapture.Environment => "environment",
+                    _ => string.Empty
                 };
             }
         }
