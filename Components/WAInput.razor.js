@@ -58,3 +58,27 @@ export function numberInputStepDown(elementId, dotnetHelper) {
     element.stepDown();
     dotnetHelper.invokeMethodAsync('HandleInputChange', element.value);
 }
+
+export function pickerGoToDate(elementId, date) {
+    let element = document.getElementById(elementId);
+    if (!element) return;
+    element.goToDate(date);
+}
+
+export function pickerGoToToday(elementId) {
+    let element = document.getElementById(elementId);
+    if (!element) return;
+    element.goToToday();
+}
+
+export function datetimeInputShowPicker(elementId) {
+    let element = document.getElementById(elementId);
+    if (!element) return;
+    element.show();
+}
+
+export function datetimeInputHidePicker(elementId) {
+    let element = document.getElementById(elementId);
+    if (!element) return;
+    element.hide();
+}

@@ -1,15 +1,21 @@
-﻿# WADateInput
-## WebAwesomeBlazor.Components.WADateInput
+﻿# WADatePicker
+## WebAwesomeBlazor.Components.WADatePicker
+## WebAwesomeBlazor.Components.WADatePickerDay
 
 ```HTML+Razor
-<WADateInput @bind-Value="myDate" />
-<WADateInput @bind-ValueRange="myDateRange" />
+<WADatePicker @bind-Value="myDate" />
+<WADatePicker @bind-ValueRange="myDateRange" SelectionMode="DatePickerSelectionMode.Range" />
+<WADatePicker @bind-Value="myDate">
+    <CustomDayContent>
+        <WADatePickerDay Date="@(new DateOnly(2026,06,30))" Title="End of financial year">💸</WADatePickerDay>
+    </CustomDayContent>
+</WADatePicker>
 ```
 
 ### Description
-Date inputs let users enter a date through a segmented field or select one visually from a popup calendar. They support locale-aware segment order, min and max constraints, and form validation.
+Date pickers display a month grid for selecting a single date or a date range inline. Use them when dates need to remain visible, such as in scheduling interfaces or embedded inside another form control.
 
-[Web Awesome docs](https://webawesome.com/docs/components/date-input)
+[Web Awesome docs](https://webawesome.com/docs/components/date-picker)
 
 > [!IMPORTANT]
 > WebAwesome charts require access to WebAwesome Pro.
@@ -22,10 +28,6 @@ Date inputs let users enter a date through a segmented field or select one visua
 | ValueChanged | EventCallback\<TValue> |  | Triggered when the input's value has changed |
 | ValueRange | DateRange\<TValue> |  | The current value range of the input. When set, the input will allow selection of a date range instead of a single date. |
 | ValueRangeChanged | EventCallback<DateRange\<TValue>> |  | Triggered when the input's value range has changed |
-| Appearance | InputAppearance | InputAppearance.Outlined | The input's visual appearance. |
-| Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
-| Autofocus | bool | false | Automatically focuses the input when it is rendered. |
-| Clearable | bool | false | Adds a clear button when the input is not empty. |
 | CustomDayContent | RenderFragment |  | Customise the content of day cells in the date picker. Use type `<WADatePickerDay>` |
 | Disabled | bool | false | Maked the input disabled. |
 | DisabledDates | DateOnly[]? |  | An array of dates that should be disabled for selection. |
@@ -34,16 +36,13 @@ Date inputs let users enter a date through a segmented field or select one visua
 | DisablePastDates | bool | false | Disables selection of past dates. |
 | FirstDayOfWeek | DatePickerDayOfTheWeek | | The first day of the week to use in the calendar. The default uses the current locale's week info. |
 | FooterContent | RenderFragment? |  | Custom content to show in the popup calendar's footer. |
-| Hint | string |  | The input's hint text. |
-| Label | string |  | The input's label |
+| HeaderContent | RenderFragment | | Replaces the entire header row including title and navigation buttons. Advanced use only. |
+| Locale | string | | BCP-47 locale override. When empty, the inherited lang attribute is used. |
 | MaximumDate | DateOnly? |  | The maximum date that can be selected. |
 | MaximumRange | int? | 0 | The maximum number of days that can be selected when ValueRange is set. 0 disables the check.|
 | MinimumDate | DateOnly? |  | The minimum date that can be selected. |
 | MinimumRange | int? | 0 | The minimum number of days that can be selected when ValueRange is set. 0 disables the check. |
 | PageByMonths | bool | true | Whether previous and next page by the visible range or on month at a time. The default is true (page by month). |
-| Pill | bool | False | Draws a pill-style input with rounded edges. |
-| PopupDistance | int | 0 | The distance in pixels between the input and the popup calendar. |
-| PopupPlacement | DateInputPlacement | DateInputPlacement.BottomStart | The placement of the popup calendar relative to the input. |
 | ReadOnly | bool | false | Makes the input readonly. |
 | Required | bool | false | Makes the input a required field. |
 | SelectionMode | DatePickerSelectionMode | DatePickerSelectionMode.Single | The selection mode of the input. Valid values are Single or Range. |
@@ -55,21 +54,21 @@ Date inputs let users enter a date through a segmented field or select one visua
 | PreviousIconName    | string  |       |An icon used for the previous paging slot.. Available names depend on the icon library being used.  |
 | NextIcon | [Icon](/docs/IconClass.md) || An icon used for the next paging slot.. Altneratively, use StartIconName to specify the name of the icon. |
 | NextIconName | string | | An icon used for the next paging slot.. Available names depend on the icon library being used. |
-| WeekdayFormat | DatePickerWeekdayFormat | DatePickerWeekdayFormat.Short | Weekday header format in the popup calendar. Values are narrow, short, long. |
+| WeekdayFormat | DatePickerWeekdayFormat | DatePickerWeekdayFormat.Short | Weekday header format. Values are narrow, short, long. |
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
 | SetFocus |  | Sets focus to the input element. |
 | SetFocusAsync |  | Sets focus to the input element. |
-| ShowPickerAsync | | Shows the date picker | 
-| HidePickerAsync | | Hides the date picker |
+| GoToDateAsync | | Scrolls the view to show the given date and sets the focused day |
+| GoToTodayAsync | | Equivalent to GoToDateAsync(Today) |
 
 ### Examples
 
 #### Basic Usage - Single date selection
 ```HTML+Razor
-<WADateInput Label="Select a date" @bind-Value="myDate" />
+<WADatePicker Label="Select a date" @bind-Value="myDate" />
 
 Selected date: @myDate
 
@@ -80,7 +79,7 @@ Selected date: @myDate
 
 #### Basic Usage - Date range selection
 ```HTML+Razor
-<WADateInput Label="Select a date range" @bind-ValueRange="myDateRange" />
+<WADatePicker Label="Select a date range" @bind-ValueRange="myDateRange" />
 
 Selected date range: @(myDateRange is not null ? $"{myDateRange.Start} to {myDateRange.End}" : "not set")
 
@@ -90,7 +89,7 @@ Selected date range: @(myDateRange is not null ? $"{myDateRange.Start} to {myDat
 ```
 #### Customise day content and paging icons
 ```HTML+Razor
-<WADateInput Label="Select a date range" NextIconName="hand-point-right" PreviousIconName="hand-point-left">
+<WADatePicker Label="Select a date range" NextIconName="hand-point-right" PreviousIconName="hand-point-left">
     <CustomDayContent>
         <WADatePickerDay Date="@(new DateOnly(2026,06,30))" Title="End of financial year">💸</WADatePickerDay>
     </CustomDayContent>

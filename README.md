@@ -70,6 +70,8 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WAComboboxOption](/docs/WAComboboxOption.md)
 - [WAComparison](/docs/WAComparison.md)
 - [WACopyButton](/docs/WACopyButton.md)
+- (Pro) [WADateInput](/docs/WADateInput.md)
+- (Pro) [WADatePicker](/docs/WADatePicker.md)
 - [WADetails](/docs/WADetails.md)
 - [WADialog](/docs/WADialog.md)
 - [WADivider](/docs/WADivider.md)
@@ -84,6 +86,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAInputDateTime](/docs/WAInputDateTime.md)
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
+- [WAKnownDate](/docs/WAKnownDate.md)
 - [WAMarkdown](/docs/WAMarkdown.md)
 - [WANumberInput](/docs/WANumberInput.md)
 - [WAPage](/docs/WAPage.md)
@@ -109,6 +112,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WATabPanel](/docs/WATabPanel.md)
 - [WATag](/docs/WATag.md)
 - [WATextArea](/docs/WATextArea.md)
+- [WATimeInput](/docs/WATimeInput.md)
 - (Pro) [WAToast](/docs/WAToast.md)
 - [WATooltip](/docs/WATooltip.md)
 - [WATree](/docs/WATree.md)
@@ -139,10 +143,6 @@ Additional components built on top of the Web Awesome library for additional fun
 - [AutoCompleteInput](/docs/Extended/AutoComplete.md)
 - [DarkModeToggle](/docs/Extended/DarkModeToggle.md)
 - [ConfirmDialog](/docs/Extended/ConfirmDialog.md)
-
-## Coming soon:
-- NavTree
-
 
 # Credits
 This project contains inspiration of elements from:

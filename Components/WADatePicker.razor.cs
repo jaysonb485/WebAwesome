@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace WebAwesomeBlazor.Components
 {
-    public partial class WADateInput<TValue> : WAComponentBase
+    public partial class WADatePicker<TValue> : WAComponentBase
     {
         #region Parameters
 
@@ -26,21 +26,6 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public EventCallback<DateRange<TValue>> ValueRangeChanged { get; set; } = default!;
         [Parameter] public Expression<Func<DateRange<TValue>>> ValueRangeExpression { get; set; } = default!;
-
-        /// <summary>
-        /// The input's visual appearance.
-        /// </summary>
-        [Parameter]
-        public InputAppearance Appearance { get; set; } = InputAppearance.Outlined;
-
-
-        /// <summary>
-        /// Specifies what permission the browser has to provide assistance in filling out form field values. Refer to this page on MDN for available values.
-        /// <see href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete"/>
-        /// </summary>
-        [Parameter]
-        public string? Autocomplete { get; set; }
-
 
         /// <summary>
         /// Makes the input disabled.
@@ -73,31 +58,10 @@ namespace WebAwesomeBlazor.Components
         public bool DisablePastDates { get; set; } = false;
 
         /// <summary>
-        /// Distance in pixels between the popup and the input.
-        /// </summary>
-        [Parameter]
-        public int PopupDistance { get; set; } = 0;
-
-        /// <summary>
         /// The first day of the week. The default uses the current locale's week info.
         /// </summary>
         [Parameter]
         public DatePickerDayOfTheWeek? FirstDayOfWeek { get; set; }
-
-
-        /// <summary>
-        /// The input's hint text.
-        /// </summary>
-        [Parameter]
-        public string? Hint { get; set; }
-
-
-        /// <summary>
-        /// The input's label
-        /// </summary>
-        [Parameter]
-        public string? Label { get; set; }
-
 
         /// <summary>
         /// The latest selectable date 
@@ -110,6 +74,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public int? MaximumRange { get; set; } = 0;
+
         /// <summary>
         /// The earliest selectable date
         /// </summary>
@@ -133,19 +98,6 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public bool PageByMonths { get; set; } = true;
 
-        /// <summary>
-        /// Draws a pill-style input with rounded edges.
-        /// </summary>
-        [Parameter]
-        public bool Pill { get; set; } = false;
-
-        [Parameter]
-        public DateInputPlacement PopupPlacement { get; set; } = DateInputPlacement.BottomStart;
-
-        /// <summary>
-        /// Makes the input readonly.
-        /// </summary>
-        [Parameter]
         public bool ReadOnly { get; set; } = false;
         /// <summary>
         /// /// Makes the input required for form submission.
@@ -162,12 +114,6 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public DateOnly? Today { get; set; }
 
-
-        /// <summary>
-        /// Adds a clear button (with-clear) when the input is not empty.
-        /// </summary>
-        [Parameter]
-        public bool Clearable { get; set; } = false;
 
         /// <summary>
         /// An icon used for the previous paging slot.
@@ -191,12 +137,6 @@ namespace WebAwesomeBlazor.Components
         public Icon? NextIcon { get; set; }
 
         /// <summary>
-        /// Indicates that the input should receive focus on page load.
-        /// </summary>
-        [Parameter]
-        public bool Autofocus { get; set; } = false;
-
-        /// <summary>
         /// Show leading/trailing days from adjacent months in the popup calendar.
         /// </summary>
         [Parameter]
@@ -218,31 +158,18 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public RenderFragment? CustomDayContent { get; set; }
 
+        [Parameter]
+        public RenderFragment? HeaderContent { get; set; }
+
         /// <summary>
-        /// Weekday header format in the popup calendar.
+        /// The weekday header format.
         /// </summary>
         [Parameter]
         public DatePickerWeekdayFormat WeekdayFormat { get; set; } = DatePickerWeekdayFormat.Short;
 
-
         #endregion
 
         #region Computed  Properties
-
-        string AppearanceString
-        {
-            get
-            {
-                return Appearance switch
-                {
-                    InputAppearance.Filled => "filled",
-                    InputAppearance.Outlined => "outlined",
-                    InputAppearance.FilledOutlined => "filled-outlined",
-                    _ => "outlined"
-                    //Only filled and outlined are valid for inputs
-                };
-            }
-        }
 
         string SizeString
         {
@@ -323,28 +250,6 @@ namespace WebAwesomeBlazor.Components
             }
         }
 
-        string PopupPlacementString
-        {
-            get
-            {
-                return PopupPlacement switch
-                {
-                    DateInputPlacement.BottomStart => "bottom-start",
-                    DateInputPlacement.BottomEnd => "bottom-end",
-                    DateInputPlacement.TopStart => "top-start",
-                    DateInputPlacement.TopEnd => "top-end",
-                    DateInputPlacement.Top => "top",
-                    DateInputPlacement.Bottom => "bottom",
-                    DateInputPlacement.Right => "right",
-                    DateInputPlacement.RightStart => "right-start",
-                    DateInputPlacement.RightEnd => "right-end",
-                    DateInputPlacement.Left => "left",
-                    DateInputPlacement.LeftStart => "left-start",
-                    DateInputPlacement.LeftEnd => "left-end",
-                    _ => "bottom-start"
-                };
-            }
-        }
 
         string WeekdayFormatString
         {
@@ -359,7 +264,6 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
-
         #endregion
 
         #region Lifecycle
@@ -538,7 +442,7 @@ namespace WebAwesomeBlazor.Components
         private DateRange<TValue>? oldValueRange;
 
         private FieldIdentifier fieldIdentifier = default!;
-        private DotNetObjectReference<WADateInput<TValue>> objRef = default!;
+        private DotNetObjectReference<WADatePicker<TValue>> objRef = default!;
         #endregion
 
         #region Private Methods
@@ -583,7 +487,7 @@ namespace WebAwesomeBlazor.Components
             else
             {
                 Value = newValue;
-                formattedValue = WADateInput<TValue>.GetFormattedValue(Value);
+                formattedValue = WADatePicker<TValue>.GetFormattedValue(Value);
             }
 
 
@@ -675,18 +579,26 @@ namespace WebAwesomeBlazor.Components
 
         public void SetFocus() => _ = SetFocusAsync();
 
-        public async Task ShowPickerAsync()
+        public async Task GoToDateAsync(DateOnly date)
         {
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-            await SafeInvokeVoidAsync("datetimeInputShowPicker", Id!);
+            await SafeInvokeVoidAsync("pickerGoToDate", Id!, GetFormattedValue(date));
         }
-        public async Task HidePickerAsync()
+
+        public async Task GoToDateAsync(DateTime date)
         {
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
-            await SafeInvokeVoidAsync("datetimeInputHidePicker", Id!);
+            await GoToDateAsync(DateOnly.FromDateTime(date));
+        }
+
+        public async Task GoToTodayAsync()
+        {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WAInput.razor.js");
+            await SafeInvokeVoidAsync("pickerGoToToday", Id!);
         }
         #endregion
     }
+
 
 }
 

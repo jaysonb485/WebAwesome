@@ -6,7 +6,7 @@
 @typeparam TValue
 @inherits WAComponentBase
 
-<wa-date-input @ref="@Element"
+<wa-date-picker @ref="@Element"
                id="@Id"
                @attributes="@AdditionalAttributes"
                style="@StyleNames"
@@ -14,17 +14,9 @@
                slot="@Slot"
                value="@formattedValue"
                size="@SizeString"
-               appearance="@AppearanceString"
-               pill="@Pill"
-               label="@Label"
-               hint="@Hint"
-               with-clear="@Clearable"
                readonly="@ReadOnly"
                required="@Required"
                disabled="@Disabled"
-               autocomplete="@Autocomplete"
-               autofocus="@Autofocus"
-               distance="@PopupDistance"
                disabled-dates="@DisabledDatesString"
                disabled-days-of-week="@DisabledDaysOfTheWeekString"
                disable-future="@DisableFutureDates"
@@ -37,12 +29,11 @@
                mode="@SelectionModeString"
                months="@(ShowTwoMonths ? "2" : "1")"
                page-by="@(PageByMonths ? "months" : "single")"
-               placement="@PopupPlacementString"
                today="@Today?.ToString("yyyy-MM-dd")"
                with-outside-days="@ShowOutsideDays"
                with-week-numbers=@ShowWeekNumbers"
-               @onchange="OnValueChanged"
-               weekday-format="@WeekdayFormatString">
+                weekday-format="@WeekdayFormatString"
+               @onchange="OnValueChanged">
     @if (PreviousIcon != null || !String.IsNullOrWhiteSpace(PreviousIconName))
     {
         <WAIcon Icon="@PreviousIcon" IconName="@PreviousIconName" Slot="previous-icon"></WAIcon>
@@ -57,6 +48,13 @@
             @FooterContent
         </span>
     }
+    @if (HeaderContent is not null)
+    {
+        <span slot="header">
+            @HeaderContent
+        </span>
+    }
+
     @CustomDayContent
     @ChildContent
-</wa-date-input>
+</wa-date-picker>

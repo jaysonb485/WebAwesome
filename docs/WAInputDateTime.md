@@ -16,7 +16,7 @@ An input component that accepts date only, date time, or time selection.
 | TValue | Type | |The type of value the input will process. Accepted types are DateOnly, DateOnly?, DateTime, DateTime?, TimeOnly, TimeOnly?
 | Value | TValue |  | The current value of the input |
 | Type | DateTimeInputType | DateTimeInputType.DateTimeLocal | The type of input (Valid input types are Date, DateTimeLocal, Text, Time). |
-| ValueChanged | EventCallback<TValue> |  | Triggered when the input's value has changed |
+| ValueChanged | EventCallback\<TValue> |  | Triggered when the input's value has changed |
 | Appearance | InputAppearance | InputAppearance.Outlined | The input's visual appearance. |
 | Size | InputSize | InputSize.Inherit | The input's size. |
 | Pill | bool | False | Draws a pill-style input with rounded edges. |

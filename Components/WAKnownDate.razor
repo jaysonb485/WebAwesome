@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+@using System.Globalization
+
+@typeparam TValue
+@inherits WAComponentBase
+
+<wa-known-date @ref="@Element"
+               id="@Id"
+               @attributes="@AdditionalAttributes"
+               style="@StyleNames"
+               class="@ClassNames"
+               slot="@Slot"
+               value="@formattedValue"
+               size="@SizeString"
+               appearance="@AppearanceString"
+               pill="@Pill"
+               label="@Label"
+               hint="@Hint"
+               readonly="@ReadOnly"
+               required="@Required"
+               disabled="@Disabled"
+               autocomplete="@Autocomplete"
+               max="@MaximumDate?.ToString("yyyy-MM-dd")"
+               min="@MinimumDate?.ToString("yyyy-MM-dd")"
+               @onchange="OnValueChanged">
+    @ChildContent
+</wa-known-date>

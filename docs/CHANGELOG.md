@@ -6,6 +6,9 @@
 - Added new property to [WAFileInput](/docs/WAFileInput.md): `Capture` to allow for capture of media directly from supported devices.
 - New component [WAAccordion](/docs/WAAccordion.md) with child component [WAAccordionItem](/docs/WAAccordionItem.md) to provide an expandable/collapsible container for content.
 - New component [WADateInput](/docs/WADateInput.md)
+- New component [WADatePicker](/docs/WADatePicker.md)
+- New component [WATimePicker](/docs/WATimePicker.md)
+- New component [WAKnownDate](/docs/WAKnownDate.md)
 
 ## Version 1.7.1.1 
 - Reverted changes to ConfirmDialog parameters - It wasn't working 100% in production so will rework and re-release in a future update.

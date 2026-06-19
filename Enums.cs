@@ -492,6 +492,13 @@
         Range
     }
 
+    public enum DatePickerWeekdayFormat
+    {
+        Short,
+        Narrow,
+        Long
+    }
+
     #endregion
     #region DateInput Enums
     public enum DateInputPlacement
@@ -1030,6 +1037,30 @@
         Large,
         XLarge,
         Inherit
+    }
+    #endregion
+    #region Time Input enums
+    public enum TimeInputHourFormat
+    {
+        Auto,
+        Twelve,
+        TwentyFour
+    }
+
+    public enum TimeInputPlacement
+    {
+        Top,
+        TopStart,
+        TopEnd,
+        Bottom,
+        BottomStart,
+        BottomEnd,
+        Right,
+        RightStart,
+        RightEnd,
+        Left,
+        LeftStart,
+        LeftEnd
     }
     #endregion
     #region Tooltip Enums
