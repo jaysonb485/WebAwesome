@@ -1,0 +1,19 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+
+<wa-checkbox-group @ref="@Element"
+                id="@Id"
+                @attributes="@AdditionalAttributes"
+                style="@StyleNames"
+                class="@ClassNames"
+                slot="@Slot"
+                label="@Label"
+                hint="@Hint"
+                name="@Id"
+                orientation="@OrientationString"
+                size="@SizeString"
+                required="@Required"
+                disabled="@Disabled">
+    @ChildContent
+</wa-checkbox-group>

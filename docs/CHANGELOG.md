@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## Version 1.9.0
+- Upgraded to [Web Awesome 3.9.0](https://webawesome.com/docs/resources/changelog#wa_390) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- New component [WACheckboxGroup](/docs/WACheckboxGroup.md)
+- [WATree](/docs/WATree.md) now allows `LeafMultiple` selection type.
+- Change to [WARadioGroup](/docs/WARadioGroup.md) size is no longer set by default and can be null. 
+
 ## Version 1.8.0
 - Upgraded to [Web Awesome 3.8.0](https://webawesome.com/docs/resources/changelog#wa_380) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - Added new properties to [WAQRCode](/docs/WAQRCode.md): `ImageUrl` and `ImageCoverage` to allow for an image to be placed in the center of the QR code with adjustable coverage.

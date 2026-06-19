@@ -27,7 +27,7 @@ namespace WebAwesomeBlazor.Components
         /// The radio group's size. This size will be applied to all child radios and radio buttons, except when explicitly overridden.
         /// </summary>
         [Parameter]
-        public RadioGroupSize Size { get; set; } = RadioGroupSize.Inherit;
+        public RadioGroupSize? Size { get; set; }
         /// <summary>
         /// The radio groups's hint.
         /// </summary>
@@ -65,7 +65,7 @@ namespace WebAwesomeBlazor.Components
                     RadioGroupSize.Large => "l",
                     RadioGroupSize.XLarge => "xl",
                     RadioGroupSize.Inherit => "inherit",
-                    _ => "m"
+                    _ => ""
                 };
             }
         }

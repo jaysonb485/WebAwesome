@@ -85,6 +85,7 @@ namespace WebAwesomeBlazor.Components
                     TreeSelection.Single => "single",
                     TreeSelection.Multiple => "multiple",
                     TreeSelection.Leaf => "leaf",
+                    TreeSelection.LeafMultiple => "leaf-multiple",
                     _ => "single"
                 };
             }

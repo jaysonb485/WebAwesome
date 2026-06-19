@@ -19,7 +19,7 @@ Radio groups are used to group multiple [WARadioOption](/docs/WARadioOption) com
 | TValue | type |  |  |
 | Value | TValue |  | The current value of the radio group, submitted as a name/value pair with form data. |
 | Label | string? |  |  A custom label for assistive devices. |
-| Size | RadioGroupSize | RadioGroupSize.Inherit | The radio group's size. This size will be applied to all child radios and radio buttons, except when explicitly overridden. |
+| Size | RadioGroupSize | RadioGroupSize.Medium | The radio group's size. This size will be applied to all child radios and radio buttons, except when explicitly overridden. |
 | Hint | string |  | The radio groups's hint. |
 | Orientation | RadioGroupOrientation | RadioGroupOrientation.Vertical | The orientation in which to show radio items. |
 | Required | bool | false | Ensures a child radio is checked before allowing the containing form to submit. |
