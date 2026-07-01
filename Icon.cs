@@ -18,6 +18,7 @@
         /// <summary>
         /// Sets the width of the icon to match the cropped SVG viewBox.This operates like the Font fa-width-auto class.
         /// </summary>
+        [Obsolete("Use Canvas property instead. AutoWidth will be removed in a future version.", DiagnosticId = "WAB0001")]
         public bool AutoWidth { get; set; } = false;
         /// <summary>
         /// Swaps the opacity of duotone icons.
@@ -52,6 +53,10 @@
         /// Sets the rotation degree of the icon
         /// </summary>
         public int? Rotate { get; set; } = 0;
+        /// <summary>
+        /// Sets the icon canvas — the box the icon is centered within. Default is fixed.
+        /// </summary>
+        public IconCanvas Canvas { get; set; } = IconCanvas.Fixed;
     }
 
     public static class Icons

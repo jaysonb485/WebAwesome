@@ -8,17 +8,19 @@ Where an Icon can be used, the component will also provide an alternative IconNa
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Name | string |  | The name of the icon to draw. Available names depend on the icon library being used. |
+| Animation | IconAnimation | | An optional animation to apply to the icon. |
+| AutoWidth | bool | false | (Deprecated - use Canvas property instead.) Sets the width of the icon to match the cropped SVG viewBox.This operates like the Font fa-width-auto class. |
+| Canvas| IconCanvas | IconCanvas.Fixed | Sets the icon canvas — the box the icon is centered within. Default is fixed. |
 | Family | string |  | The family of icons to choose from.For Font Awesome Free, valid options include classic and brands. For Font Awesome Pro subscribers, valid options include, classic, sharp, duotone, sharp-duotone, and brands. A valid kit code must be present to show pro icons via CDN.You can set `<html data-fa-kit-code = "..." >` to provide one. |
-| Variant | string |  | The name of the icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property. |
-| AutoWidth | bool | false | Sets the width of the icon to match the cropped SVG viewBox.This operates like the Font fa-width-auto class. |
-| SwapOpacity | bool | false | Swaps the opacity of duotone icons. |
-| SourceUrl | string |  | An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and can result in XSS attacks. |
+| Flip | IconFlip | | An optional flip transformation to apply to the icon. |
 | Label | string |  | An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and ignored by assistive devices. |
 | Library | string | `default` | The name of a registered custom icon library. |
-| Animation | IconAnimation | | An optional animation to apply to the icon. |
-| Flip | IconFlip | | An optional flip transformation to apply to the icon. |
+| Name | string |  | The name of the icon to draw. Available names depend on the icon library being used. |
+| SwapOpacity | bool | false | Swaps the opacity of duotone icons. |
+| SourceUrl | string |  | An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and can result in XSS attacks. |
 | Rotate | int | 0 | An optional rotation in degrees to apply to the icon. |
+| Variant | string |  | The name of the icon's variant. For Font Awesome, valid options include thin, light, regular, and solid for the classic and sharp families. Some variants require a Font Awesome Pro subscription. Custom icon libraries may or may not use this property. |
+
 
 #### Pre-defined Icons
 Some Icons are pre-defined for ease of access:

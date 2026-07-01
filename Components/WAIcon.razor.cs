@@ -37,6 +37,7 @@ namespace WebAwesomeBlazor.Components
         /// Sets the width of the icon to match the cropped SVG viewBox. This operates like the Font fa-width-auto class.
         /// </summary>
         [Parameter]
+        [Obsolete("Use Canvas property instead. AutoWidth will be removed in a future version.", DiagnosticId = "WAB0001")]
         public bool AutoWidth { get; set; } = false;
 
         /// <summary>
@@ -86,6 +87,25 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public string? Tooltip { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Sets the animation for the icon
+        /// </summary>
+        public IconAnimation Animation { get; set; } = IconAnimation.None;
+
+        /// <summary>
+        /// Sets the flip direction of the icon along the horizontal (x), vertical (y), or 'both' axes.
+        /// </summary>
+        public IconFlip Flip { get; set; } = IconFlip.None;
+
+        /// <summary>
+        /// Sets the rotation degree of the icon
+        /// </summary>
+        public int? Rotate { get; set; } = 0;
+        /// <summary>
+        /// Sets the icon canvas — the box the icon is centered within. Default is fixed.
+        /// </summary>
+        public IconCanvas Canvas { get; set; } = IconCanvas.Fixed;
+
         #endregion
 
         #region Computed  Properties
@@ -100,7 +120,7 @@ namespace WebAwesomeBlazor.Components
         #region Private Methods
         private Dictionary<string, object> GetAttributesWithIcon()
         {
-            Dictionary<string, object> AdditionalAttributesWithIcon = new();
+            Dictionary<string, object> AdditionalAttributesWithIcon = [];
             if (AdditionalAttributes is not null)
             {
                 foreach (var attr in AdditionalAttributes)
@@ -115,7 +135,6 @@ namespace WebAwesomeBlazor.Components
                 AdditionalAttributesWithIcon["variant"] = Icon.Variant ?? string.Empty;
                 AdditionalAttributesWithIcon["family"] = Icon.Family ?? string.Empty;
                 AdditionalAttributesWithIcon["label"] = Icon.Label ?? string.Empty;
-                AdditionalAttributesWithIcon["auto-width"] = Icon.AutoWidth;
                 AdditionalAttributesWithIcon["swap-opacity"] = Icon.SwapOpacity;
                 AdditionalAttributesWithIcon["src"] = Icon.SourceUrl ?? string.Empty;
                 AdditionalAttributesWithIcon["library"] = Icon.Library ?? "default";
@@ -129,7 +148,16 @@ namespace WebAwesomeBlazor.Components
                     IconAnimation.Flip => "flip",
                     IconAnimation.Shake => "shake",
                     IconAnimation.Spin => "spin",
-                    _ => string.Empty
+                    IconAnimation.Flip360 => "flip-360",
+                    IconAnimation.SpinSnap => "spin-snap",
+                    IconAnimation.SpinSnap4 => "spin-snap-4",
+                    IconAnimation.SpinSnap8 => "spin-snap-8",
+                    IconAnimation.Buzz => "buzz",
+                    IconAnimation.Float => "float",
+                    IconAnimation.Jello => "jello",
+                    IconAnimation.Swing => "swing",
+                    IconAnimation.Wag => "wag",
+                    _ => "",
                 };
                 AdditionalAttributesWithIcon["flip"] = Icon.Flip switch
                 {
@@ -141,6 +169,17 @@ namespace WebAwesomeBlazor.Components
                 };
                 AdditionalAttributesWithIcon["rotate"] = Icon.Rotate ?? 0;
 
+#pragma warning disable WAB0001
+                AdditionalAttributesWithIcon["canvas"] = Icon.Canvas switch
+                {
+                    IconCanvas.Fixed => "fixed",
+                    IconCanvas.Square => "square",
+                    IconCanvas.Auto => "auto",
+                    IconCanvas.Roomy => "roomy",
+                    _ => Icon.AutoWidth ? "auto" : "fixed"
+                };
+#pragma warning restore WAB0001
+
                 return AdditionalAttributesWithIcon;
             }
             ;
@@ -149,10 +188,50 @@ namespace WebAwesomeBlazor.Components
             AdditionalAttributesWithIcon["variant"] = IconVariant ?? string.Empty;
             AdditionalAttributesWithIcon["family"] = IconFamily ?? string.Empty;
             AdditionalAttributesWithIcon["label"] = Label ?? string.Empty;
-            AdditionalAttributesWithIcon["auto-width"] = AutoWidth;
             AdditionalAttributesWithIcon["swap-opacity"] = SwapOpacity;
             AdditionalAttributesWithIcon["src"] = IconSourceUrl ?? string.Empty;
             AdditionalAttributesWithIcon["library"] = Library ?? "default";
+            AdditionalAttributesWithIcon["animation"] = Animation switch
+            {
+                IconAnimation.None => string.Empty,
+                IconAnimation.Beat => "beat",
+                IconAnimation.Fade => "fade",
+                IconAnimation.BeatFade => "beat-fade",
+                IconAnimation.Bounce => "bounce",
+                IconAnimation.Flip => "flip",
+                IconAnimation.Shake => "shake",
+                IconAnimation.Spin => "spin",
+                IconAnimation.Flip360 => "flip-360",
+                IconAnimation.SpinSnap => "spin-snap",
+                IconAnimation.SpinSnap4 => "spin-snap-4",
+                IconAnimation.SpinSnap8 => "spin-snap-8",
+                IconAnimation.Buzz => "buzz",
+                IconAnimation.Float => "float",
+                IconAnimation.Jello => "jello",
+                IconAnimation.Swing => "swing",
+                IconAnimation.Wag => "wag",
+                _ => "",
+            };
+            AdditionalAttributesWithIcon["flip"] = Flip switch
+            {
+                IconFlip.None => string.Empty,
+                IconFlip.Horizontal => "x",
+                IconFlip.Vertical => "y",
+                IconFlip.Both => "both",
+                _ => string.Empty
+            };
+            AdditionalAttributesWithIcon["rotate"] = Rotate ?? 0;
+
+#pragma warning disable WAB0001
+            AdditionalAttributesWithIcon["canvas"] = Canvas switch
+            {
+                IconCanvas.Fixed => "fixed",
+                IconCanvas.Square => "square",
+                IconCanvas.Auto => "auto",
+                IconCanvas.Roomy => "roomy",
+                _ => AutoWidth ? "auto" : "fixed"
+            };
+#pragma warning restore WAB0001
 
             return AdditionalAttributesWithIcon;
         }

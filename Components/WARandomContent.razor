@@ -1,0 +1,17 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-random-content @ref="@Element"
+                   id="@Id"
+                   @attributes="@AdditionalAttributes"
+                   style="@StyleNames"
+                   class="@ClassNames"
+                   slot="@Slot"
+                   animation="@AnimationString"
+                   autoplay="@AutoPlay"
+                   autoplay-interval="@AutoPlayInterval"
+                   items="@DisplayItemsComputed"
+                   mode="@ModeString">
+    @ChildContent
+</wa-random-content>

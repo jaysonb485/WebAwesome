@@ -134,6 +134,7 @@ namespace WebAwesomeBlazor.Components
         public async Task<JsFileInfo[]> GetFilesAsync()
         {
             var files = await SafeInvokeAsync<List<Dictionary<string, JsonElement>>>("getFiles", Id!);
+            if (files is null) return null!;
             return [.. files.Select((f, index) => new JsFileInfo(Id!)
             {
                 Index = index,

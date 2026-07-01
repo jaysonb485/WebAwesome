@@ -630,8 +630,25 @@
         BeatFade,
         Bounce,
         Flip,
+        Flip360,
         Shake,
-        Spin
+        Spin,
+        SpinSnap,
+        SpinSnap4,
+        SpinSnap8,
+        Buzz,
+        Float,
+        Jello,
+        Swing,
+        Wag
+    }
+
+    public enum IconCanvas
+    {
+        Fixed,
+        Auto,
+        Square,
+        Roomy
     }
 
     public enum IconFlip
@@ -854,6 +871,24 @@
         Button
     }
 
+    #endregion
+    #region Random Content Enums
+    public enum RandomContentAnimation
+    {
+        None,
+        Fade,
+        FadeUp,
+        FadeDown,
+        FadeLeft,
+        FadeRight
+    }
+
+    public enum RandomContentMode
+    {
+        Unique,
+        Random,
+        Sequence
+    }
     #endregion
     #region Rating Enums
     public enum RatingSize

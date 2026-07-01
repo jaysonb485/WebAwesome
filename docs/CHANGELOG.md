@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## Version 1.10.0
+- Upgraded to [Web Awesome 3.10.0](https://webawesome.com/docs/resources/changelog#wa_3100) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- New component [WARandomContent](/docs/WARandomContent.md) - Displays a random piece of content from a list of items, useful for showing random quotes, tips, or other content.
+- Added new properties to [WAIcon](/docs/WAIcon.md) and [IconClass](/docs/IconClass.md): 
+	* Additional animation styles - Flip360, Float, Jello, SpinSnap, SpinSnap4, SpinSnap8, Swing, Wag
+	* New canvas property - Sets the icon canvas — the box the icon is centered within. 
+- Deprecated `AutoWidth` property on [WAIcon](/docs/WAIcon.md) and [IconClass](/docs/IconClass.md) - use the new `Canvas` property instead.
+
 ## Version 1.9.0
 - Upgraded to [Web Awesome 3.9.0](https://webawesome.com/docs/resources/changelog#wa_390) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - New component [WACheckboxGroup](/docs/WACheckboxGroup.md)
