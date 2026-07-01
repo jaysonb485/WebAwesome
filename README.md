@@ -98,6 +98,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAQRCode](/docs/WAQRCode.md)
 - [WARadioGroup](/docs/WARadioGroup.md)
   - [WARadioOption](/docs/WARadioOption.md)
+- [WARandomContent](/docs/WARandomContent.md)
 - [WARating](/docs/WARating.md)
 - [WARelativeTime](/docs/WARelativeTime.md)
 - [WAResizeObserver](/docs/WAResizeObserver.md)
