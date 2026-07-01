@@ -18,8 +18,8 @@ dotnet add package WebAwesomeBlazor
 ### Free components
 Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<head>` section along with the extra utility files for this package:
 ```HTML
-<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css">
-<script type="module" src="https://ka-f.webawesome.com/webawesome@3.9.0/webawesome.loader.js"></script>
+<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.10.0/styles/webawesome.css">
+<script type="module" src="https://ka-f.webawesome.com/webawesome@3.10.0/webawesome.loader.js"></script>
 ```
 
 ### Web Awesome Pro components
