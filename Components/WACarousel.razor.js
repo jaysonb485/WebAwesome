@@ -35,3 +35,13 @@ export function previousSlide(elementId) {
     if (!element) return;
     element.previous();
 }
+
+export function addSlide(element, html) {
+    const slide = document.createElement('wa-carousel-item');
+    slide.innerHTML = html;
+    element.addSlide(slide);
+}
+
+export function removeSlide(element, index) {
+    element.removeSlide(index);
+}

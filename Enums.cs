@@ -491,6 +491,42 @@
         None
     }
     #endregion
+    #region DataGrid Enums
+    public enum DataGridAppearance
+    {
+        Outlined,
+        Plain
+    }
+    public enum DataGridRowSelection
+    {
+        Single,
+        Multiple,
+        None
+    }
+
+    public enum DataGridSize
+    {
+        XSmall,
+        Small,
+        Medium,
+        Large,
+        XLarge,
+    }
+    public enum DataGridColumnSortMethod
+    {
+        Alphanumeric,
+        AlphanumericCaseSensitive,
+        Text,
+        TextCaseSensitive,
+        Datetime,
+        Basic
+    }
+    public enum DataGridColumnPinDirection
+    {
+        Left,
+        Right
+    }
+    #endregion
     #region DatePicker Enums
     public enum DatePickerDayOfTheWeek
     {
@@ -800,11 +836,55 @@
         Send
     }
     #endregion
+    #region OtpInput Enums
+    public enum OtpAllowedCharacters
+    {
+        Numeric,
+        Alpha,
+        Alphanumeric
+    }
+    public enum OtpAppearance
+    {
+        Filled,
+        Outlined,
+        FilledOutlined,
+        Contained
+    }
+
+    public enum OtpCaseTransformation
+    {
+        Preserve,
+        Upper,
+        Lower
+    }
+    public enum OtpSize
+    {
+        XSmall,
+        Small,
+        Medium,
+        Large,
+        XLarge
+    }
+    #endregion
     #region Page Enums
     public enum PageNavigationPlacement
     {
         Start,
         End
+    }
+    #endregion
+    #region Pagionation Enums
+    public enum PaginationFormat
+    {
+        Standard,
+        Compact
+    }
+
+    public enum PaginationAppearance
+    {
+        Outlined,
+        Filled,
+        Plain
     }
     #endregion
     #region Popover Enums

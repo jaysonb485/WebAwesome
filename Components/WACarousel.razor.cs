@@ -170,6 +170,23 @@ namespace WebAwesomeBlazor.Components
 
         public void PreviousSlide() => _ = PreviousSlideAsync();
 
+        /// <summary>
+        /// Adds a new slide to the end of the sequence.
+        /// </summary>
+        /// <param name="html">HTML string to represent.</param>
+        public async Task AddSlideAsync(string html)
+        {
+            await SafeInvokeVoidAsync("addSlide", Element, html);
+        }
+        /// <summary>
+        /// Removes a slide from the coursel.
+        /// </summary>
+        /// <param name="index">Zero-based index of the slide to remove</param>
+        public async Task RemoveSlideAsync(int index)
+        {
+            await SafeInvokeVoidAsync("removeSlide", Element, index);
+        }
+
         #endregion
         #region State
         private DotNetObjectReference<WACarousel> objRef = default!;

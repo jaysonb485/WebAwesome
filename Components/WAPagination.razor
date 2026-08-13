@@ -1,0 +1,42 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+
+
+<wa-pagination @ref="@Element"
+        id="@Id"
+        @attributes="@AdditionalAttributes"
+        style="@StyleNames"
+        class="@ClassNames"
+        slot="@Slot"
+               appearance="@AppearanceString"
+               boundary-count="@BoundaryCount"
+               disabled="@Disabled"
+               format="@FormatString"
+               hide-single-page="@HideSinglePage"
+               href-template="@LinkTemplate"
+               label="@Label"
+               page="@Page"
+               page-size="@PageSize"
+               sibling-count="@SiblingCount"
+               total="@TotalItems"
+               with-edges="@ShowEdgeButtons"
+               without-nav="@(!ShowNavButtons)"
+               with-summary="@ShowSummary">
+    @if (FirstIcon != null || !String.IsNullOrWhiteSpace(FirstIconName))
+    {
+        <WAIcon Icon="@FirstIcon" IconName="@FirstIconName" Slot="first-icon"></WAIcon>
+    }
+    @if (LastIcon != null || !String.IsNullOrWhiteSpace(LastIconName))
+    {
+        <WAIcon Icon="@LastIcon" IconName="@LastIconName" Slot="end-icon"></WAIcon>
+    }
+    @if (NextIcon != null || !String.IsNullOrWhiteSpace(NextIconName))
+    {
+        <WAIcon Icon="@NextIcon" IconName="@NextIconName" Slot="next-icon"></WAIcon>
+    }
+    @if (PreviousIcon != null || !String.IsNullOrWhiteSpace(PreviousIconName))
+    {
+        <WAIcon Icon="@PreviousIcon" IconName="@PreviousIconName" Slot="previous-icon"></WAIcon>
+    }
+    @ChildContent
+</wa-pagination>

@@ -41,6 +41,8 @@ Carousels display an arbitrary number of content slides along a horizontal or ve
 | NextSlideAsync |  | Move the carousel forward by SlidesPerMove slides.|
 | PreviousSlide |  | Move the carousel backward by SlidesPerMove slides. |
 | PreviousSlideAsync |  | Move the carousel backward by SlidesPerMove slides. |
+| AddSlideAsync | html: string | Add a slide to the end of the sequence with the provided HTML. Use [HTMLRenderer](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-components-outside-of-aspnetcore?view=aspnetcore-10.0) for programatic generation.
+| RemoveSlideAsync | index: int | Remove a slide at the given zero-based index. |
 
 ### Examples
 
@@ -78,6 +80,70 @@ Carousels display an arbitrary number of content slides along a horizontal or ve
         <img src="https://picsum.photos/200" />
     </WACarouselItem>
 </WACarousel>
+```
+
+#### Add slide
+
+Program.cs
+```HTML+Razor
+...
+builder.Services.AddScoped<HtmlRenderer>();
+...
+```
+
+MyComponent.Razor
+```HTML+Razor
+<div class="wa-stack">
+<h3>MyComponent</h3>
+<h4>@Title</h4>
+    <strong>Random Number: @RandomNumber</strong>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public int RandomNumber { get; set; }
+}
+```
+
+Home.razor
+```HTML+Razor
+@inject HtmlRenderer HtmlRenderer
+
+<WACarousel Orientation="CarouselOrientation.Horizontal" Autoplay="true" AutoplayInterval="750" @ref="carousel">
+    <WACarouselItem>
+        <img src="https://picsum.photos/200" />
+    </WACarouselItem>
+</WACarousel>
+
+<WAButton OnClick="AddSlide" Text="Add slide" />
+
+@code {
+    WACarousel carousel { get; set; }
+
+    async Task AddSlide()
+    {
+        string html = await htmlRenderer.Dispatcher.InvokeAsync(async () =>
+        {
+            var dictionary = ParameterView.FromDictionary(new Dictionary<string, object?>
+            {
+                { "Title", "Hello from Blazor!" },
+                { "RandomNumber", new Random().Next()}
+            });
+
+            var output = await htmlRenderer.RenderComponentAsync<MyComponent>(dictionary);
+            return output.ToHtmlString();
+        });
+
+        await carousel.AddSlideAsync(html);
+
+    }
+
+}
 ```
 
 ![WACarousel](https://github.com/user-attachments/assets/aa9a54c5-9757-442a-8fb9-e53054e97e44)

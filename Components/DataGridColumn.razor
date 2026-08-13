@@ -1,0 +1,33 @@
+﻿@using System.Text.Json.Serialization
+@typeparam TItem
+
+@code {
+    [CascadingParameter] private WADataGrid<TItem>? ParentGrid { get; set; }
+
+    [Parameter] public string? Field { get; set; }
+    [Parameter] public string? Id { get; set; }
+    [Parameter] public string? Label { get; set; }
+    [Parameter] public bool Sortable { get; set; } = true;
+    [JsonPropertyName("sortFn")]
+    [Parameter] public DataGridColumnSortMethod? SortMethod { get; set; } 
+    [Parameter] public bool Searchable { get; set; } = true;
+    [Parameter] public bool Filterable { get; set; } = false;
+    [Parameter] public bool Hidden { get; set; } = false;
+    [Parameter] public bool Hideable { get; set; } = true;
+    [Parameter] public bool Resizable { get; set; } = true;
+    [Parameter] public bool Movable { get; set; } = false;
+    [Parameter] public bool Pinnable { get; set; } = false;
+    [JsonPropertyName("pinned")]
+    [Parameter] public DataGridColumnPinDirection? PinDirection { get; set; } 
+    [Parameter] public int? Flex { get; set; }
+    [Parameter] public int? Width { get; set; }
+    [Parameter] public int? MinWidth { get; set; }
+    [Parameter] public string? Align { get; set; }
+
+    [Parameter] public RenderFragment<TItem>? Template { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ParentGrid?.AddColumn(this);
+    }
+}

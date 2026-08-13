@@ -18,7 +18,7 @@
 
         public void SetResult(bool result)
         {
-            _tcs?.SetResult(result);
+            _tcs?.TrySetResult(result);
         }
     }
 
