@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+
+
+@inherits WAComponentBase
+
+<wa-otp-input @ref="@Element"
+          id="@Id"
+          @attributes="@AdditionalAttributes"
+          style="@StyleNames"
+          class="@ClassNames"
+              appearance="@AppearanceString"
+              autocomplete="@Autocomplete"
+              autofocus="@Autofocus"
+              autosubmit="@AutoSubmit"
+              case="@CaseTransformationString"
+              disabled="@Disabled"
+              format="@SegmentFormat"
+              hint="@Hint"
+              label="@Label"
+              length="@Length"
+              mask="@Mask"
+              readonly="@ReadOnly"
+              required="@Required"
+              size="@SizeString"
+              type="@AllowedCharactersString"
+              value="@Value"
+              with-mask="@ShowEmptyMask"
+          slot="@Slot"
+          @onchange="OnValueChanged">
+    @ChildContent
+</wa-otp-input>
+

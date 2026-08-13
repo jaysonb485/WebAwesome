@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.10.0. 
+Currently supports Web Awesome 3.11.0. 
 
 # Changelog
-[Version 1.10.0](/docs/CHANGELOG.md)
+[Version 1.11.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -18,8 +18,8 @@ dotnet add package WebAwesomeBlazor
 ### Free components
 Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<head>` section along with the extra utility files for this package:
 ```HTML
-<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.10.0/styles/webawesome.css">
-<script type="module" src="https://ka-f.webawesome.com/webawesome@3.10.0/webawesome.loader.js"></script>
+<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.11.0/styles/webawesome.css">
+<script type="module" src="https://ka-f.webawesome.com/webawesome@3.11.0/webawesome.loader.js"></script>
 ```
 
 ### Web Awesome Pro components
@@ -71,6 +71,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
   - [WAComboboxOption](/docs/WAComboboxOption.md)
 - [WAComparison](/docs/WAComparison.md)
 - [WACopyButton](/docs/WACopyButton.md)
+- [WADataGrid](/docs/WADataGrid.md)
 - (Pro) [WADateInput](/docs/WADateInput.md)
 - (Pro) [WADatePicker](/docs/WADatePicker.md)
 - [WADetails](/docs/WADetails.md)
@@ -90,8 +91,10 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAKnownDate](/docs/WAKnownDate.md)
 - [WAMarkdown](/docs/WAMarkdown.md)
 - [WANumberInput](/docs/WANumberInput.md)
+- [WAOTPInput](/docs/WAOTPInput.md)
 - [WAPage](/docs/WAPage.md)
   - [WALayoutContent](/docs/WALayoutContent.md)
+- [WAPagination](/docs/WAPagination.md)
 - [WAPopover](/docs/WAPopover.md)
 - [WAProgressBar](/docs/WAProgressBar.md)
 - [WAProgressRing](/docs/WAProgressRing.md)
@@ -115,7 +118,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WATag](/docs/WATag.md)
 - [WATextArea](/docs/WATextArea.md)
 - [WATimeInput](/docs/WATimeInput.md)
-- (Pro) [WAToast](/docs/WAToast.md)
+- [WAToast](/docs/WAToast.md)
 - [WATooltip](/docs/WATooltip.md)
 - [WATree](/docs/WATree.md)
   - [WATreeItem](/docs/WATreeItem.md)

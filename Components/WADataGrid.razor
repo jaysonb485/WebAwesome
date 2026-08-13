@@ -1,0 +1,74 @@
+﻿@using Microsoft.JSInterop
+@inherits WAComponentBase
+@typeparam TItem
+
+<CascadingValue Value="this" IsFixed="true">
+    @Columns
+</CascadingValue>
+
+<wa-data-grid @ref="@Element"
+              id="@Id"
+              @attributes="@AdditionalAttributes"
+              style="@StyleNames"
+              class="@ClassNames"
+              slot="@Slot"
+              appearance="@AppearanceString"
+              filter-debounce="@FilterDebounce"
+              label="@Label"
+              max-multi-sort="@MaxMultiSort"
+              page="@CurrentPage"
+              paginate="@ShowPagination"
+              page-size="@PageSize"
+              pinnable="@Pinnable"
+              reorderable="@Reorderable"
+              resizable="@Resizable"
+              row-key="@RowKey"
+              server="@ServerSideData"
+              selectable="@RowSelectionModeString"
+              size="@SizeString"
+              sort-desc-first="@SortDescendingFirst"
+              with-search="@Searchable"
+              with-columns-menu="@ShowColumnVisibilityMenu"
+              with-column-menu="@ShowColumnMenus"
+              without-sort-removal="@AllowSortRemoval" >
+    @if (LoadingTemplate is not null)
+    {
+        <div slot="loading">
+            @LoadingTemplate
+        </div>
+    }
+    @if (EmptyDataTemplate is not null)
+    {
+        <div slot="empty">
+            @EmptyDataTemplate
+        </div>
+    }
+    @if(NoResultsTemplate is not null)
+    {
+        <div slot="no-results">
+            @NoResultsTemplate
+        </div>
+    }
+    @ChildContent
+    
+</wa-data-grid>
+
+
+<!-- Hidden DOM Portal Cache for ONLY the current page items -->
+<div id="@($"portal-cache-{Id}")" style="display: none;">
+    @if (_currentPageItems.Any() && _columns.Any(c => c.Template is not null))
+    {
+        @foreach (var item in _currentPageItems)
+        {
+            var rowId = GetRowKeyValue(item);
+            @foreach (var col in _columns.Where(c => c.Template is not null))
+            {
+                var colId = col.Id ?? col.Field;
+                <div id="cell-portal-@Id-@rowId-@colId">
+                    @col.Template!(item)
+                </div>
+            }
+        }
+
+    }
+</div>
