@@ -8,8 +8,7 @@ export function initialize(elementId, dotnetHelper, setValue) {
     const element = document.getElementById(elementId);
     if (!element) return null;
 
-    console.log('init input ' + elementId + ' with value: ' + setValue);
-
+    
     // Only set the value if explicitly provided
     if (setValue !== undefined && setValue !== null) {
         element.value = setValue;

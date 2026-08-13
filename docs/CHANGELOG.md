@@ -1,5 +1,14 @@
 ﻿# Changelog
 
+## Version 1.11.0
+- Upgraded to [Web Awesome 3.11.0](https://webawesome.com/docs/resources/changelog#wa_3110) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- Updated [WAInclude](/docs/WAInclude.md) docs to reference including part of a file via `#id` in the URL.
+- New component [WAOTPInput](/docs/WAOTPInput.md) to collect one-time passcodes, PINs, and other fixed-length codes, one character per segment.
+- New component [WAPagination](/docs/WAPagination.md) to provide a simple way to navigate through paginated data.
+- Initial relase of new pro component [WADatagrid](/docs/WADatagrid.md) display tabular data with sorting, selection, filtering, pinning. More features to come.
+- [WAToast](/docs/WAToast.md) is now a core component.
+- New methods AddSlideAsync and RemoveSlideAsync to dynamically add and remove carousel items to [WACarousel](/docs/WACarousel.md)
+
 ## Version 1.10.0
 - Upgraded to [Web Awesome 3.10.0](https://webawesome.com/docs/resources/changelog#wa_3100) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - New component [WARandomContent](/docs/WARandomContent.md) - Displays a random piece of content from a list of items, useful for showing random quotes, tips, or other content.

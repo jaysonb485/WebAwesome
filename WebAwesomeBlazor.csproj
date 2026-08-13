@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>true</IsPackable>
-		<AssemblyVersion>1.10.0</AssemblyVersion>
+		<AssemblyVersion>1.11.0</AssemblyVersion>
 		<RootNamespace>WebAwesomeBlazor</RootNamespace>
 		<Title>Web Awesome Blazor</Title>
 		<PackageProjectUrl>https://github.com/jaysonb485/WebAwesome/</PackageProjectUrl>
@@ -31,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Components\WAOTPInput.razor.js" />
 	  <Content Include="Components\WAInput.razor.js" />
 	</ItemGroup>
 
