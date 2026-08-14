@@ -16,7 +16,7 @@ namespace WebAwesomeBlazor.Components
     public class DataGridDataRequestArgs : EventArgs
     {
         public IEnumerable<DataGridColumnSort>? Sort { get; set; }
-        public string[]? Filters { get; set; }
+        public IEnumerable<DataGridColumnFilter>? Filters { get; set; }
         public string? Search { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
@@ -29,5 +29,13 @@ namespace WebAwesomeBlazor.Components
         public string Id { get; set; } = default!;
         [JsonPropertyName("desc")]
         public bool Descending { get; set; }
+    }
+
+    public class DataGridColumnFilter
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = default!;
+        [JsonPropertyName("value")]
+        public string Value { get; set; } = default!;
     }
 }

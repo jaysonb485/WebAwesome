@@ -1,30 +1,146 @@
-﻿@using System.Text.Json.Serialization
+﻿@using System.Text.Json
+@using System.Text.Json.Serialization
 @typeparam TItem
 
 @code {
     [CascadingParameter] private WADataGrid<TItem>? ParentGrid { get; set; }
 
+    /// <summary>
+    /// The field name from the data set to associate with the column
+    /// </summary>
     [Parameter] public string? Field { get; set; }
+    /// <summary>
+    /// The identifier of the column
+    /// </summary>
     [Parameter] public string? Id { get; set; }
+    /// <summary>
+    /// Header text for the column
+    /// </summary>
     [Parameter] public string? Label { get; set; }
+    /// <summary>
+    /// True to enable column sorting
+    /// </summary>
     [Parameter] public bool Sortable { get; set; } = true;
+    /// <summary>
+    /// By default, the grid infers a sort algorithm from each column's values, and plain Date objects are detected and sorted chronologically automatically. Set sortFn to pick a specific built-in algorithm, most usefully 'datetime' for columns holding date strings, which would otherwise sort alphabetically.
+    /// </summary>
     [JsonPropertyName("sortFn")]
-    [Parameter] public DataGridColumnSortMethod? SortMethod { get; set; } 
+    [Parameter] public DataGridColumnSortMethod? SortMethod { get; set; }
+    /// <summary>
+    /// Set to false to prevent column from being searched via global search.
+    /// </summary>
     [Parameter] public bool Searchable { get; set; } = true;
+    /// <summary>
+    /// Add a filter to the column
+    /// </summary>
     [Parameter] public bool Filterable { get; set; } = false;
+    /// <summary>
+    /// For client-side data, how the filter panel renders. Refer Web Awesome docs.
+    /// </summary>
+    [Parameter][JsonIgnore] public DataGridColumnFilterType FilterType { get; set; } = DataGridColumnFilterType.Text;
+    /// <summary>
+    /// Set true on a column to hide it initially
+    /// </summary>
     [Parameter] public bool Hidden { get; set; } = false;
+    /// <summary>
+    /// Set false to prevent a column from being toggled hidden
+    /// </summary>
     [Parameter] public bool Hideable { get; set; } = true;
+    /// <summary>
+    /// True to allow resizing
+    /// </summary>
     [Parameter] public bool Resizable { get; set; } = true;
+    /// <summary>
+    /// Allow column to be moved
+    /// </summary>
     [Parameter] public bool Movable { get; set; } = false;
+    /// <summary>
+    /// Allow column to be pinned
+    /// </summary>
     [Parameter] public bool Pinnable { get; set; } = false;
+    /// <summary>
+    /// Set for initial pin direction
+    /// </summary>
     [JsonPropertyName("pinned")]
-    [Parameter] public DataGridColumnPinDirection? PinDirection { get; set; } 
+    [Parameter] public DataGridColumnPinDirection? PinDirection { get; set; }
+    /// <summary>
+    /// The flex grow factor for this column
+    /// </summary>
     [Parameter] public int? Flex { get; set; }
+    /// <summary>
+    /// The width of this column in pixels.
+    /// </summary>
     [Parameter] public int? Width { get; set; }
+    /// <summary>
+    /// The minimum width of this column in pixels.
+    /// </summary>
     [Parameter] public int? MinWidth { get; set; }
+    /// <summary>
+    /// The text alignment for this column. Can be "left", "center", or "right".
+    /// </summary>
     [Parameter] public string? Align { get; set; }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    [Parameter] public DataGridColumnAggregation? Aggregation { get; set; }
     [Parameter] public RenderFragment<TItem>? Template { get; set; }
+    [JsonIgnore]
+    public string FilterTypeString
+    {
+        get
+        {
+            return FilterType switch
+            {
+                DataGridColumnFilterType.Text => "text",
+                DataGridColumnFilterType.Equals => "equals",
+                DataGridColumnFilterType.NumberRange => "number-range",
+                DataGridColumnFilterType.DateRange => "date-range",
+                DataGridColumnFilterType.Set => "set",
+                DataGridColumnFilterType.IncludesAny => "includes-any",
+                DataGridColumnFilterType.IncludesAll => "includes-all",
+                _ => "text"
+            };
+        }
+    }
+
+    [JsonIgnore]
+    public string SortMethodString
+    {
+        get
+        {
+            return SortMethod switch
+            {
+                DataGridColumnSortMethod.Alphanumeric => "alphanumeric",
+                DataGridColumnSortMethod.AlphanumericCaseSensitive => "alphanumericCaseSensitive",
+                DataGridColumnSortMethod.Text => "text",
+                DataGridColumnSortMethod.TextCaseSensitive => "textCaseSensitive",
+                DataGridColumnSortMethod.Datetime => "datetime",
+                DataGridColumnSortMethod.Basic => "basic",
+                _ => string.Empty
+            };
+        }
+    }
+
+    [JsonIgnore]
+    public string AggregationString
+    {
+        get
+        {
+            return Aggregation switch
+            {
+                 DataGridColumnAggregation.Sum => "sum",
+                 DataGridColumnAggregation.Min => "min",
+                 DataGridColumnAggregation.Max => "max",
+                 DataGridColumnAggregation.Mean => "mean",
+                 DataGridColumnAggregation.Median => "median",
+                 DataGridColumnAggregation.Count => "count",
+                DataGridColumnAggregation.Extent => "extent",
+                DataGridColumnAggregation.Unique => "unique",
+                DataGridColumnAggregation.UniqueCount => "uniqueCount",
+                _ => string.Empty
+            };
+        }
+    }
 
     protected override void OnInitialized()
     {

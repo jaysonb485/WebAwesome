@@ -1,13 +1,15 @@
 ﻿
 import { html } from 'https://cdn.jsdelivr.net/npm/lit@3/+esm';
 
-export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetRef, columns) {
+export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetRef, columnsJson, hasRowDetails) {
 
     await customElements.whenDefined("wa-data-grid");
     await gridElement.updateComplete;
 
     const cacheContainerId = `portal-cache-${gridId}`;
 
+    const columns = JSON.parse(columnsJson);
+    console.log(columns);
     // Identify columns that have templates and set up the formatter to render a placeholder
     gridElement.columns = columns.map(col => {
         const colConfig = { ...col };
@@ -23,9 +25,32 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             };
         }
 
-        console.log(colConfig);
         return colConfig;
     });
+
+    if (hasRowDetails) {
+        gridElement.rowDetail = row => html`<div class="wa-row-detail-placeholder" data-row-id="${row[rowKeyProperty]}">
+        </div>`
+
+        gridElement.addEventListener('wa-row-expand', async (event) => {
+
+            await gridElement.updateComplete;
+
+            const row = event.detail.row;
+            const rowId = row[rowKeyProperty];
+
+            // Find the row's detail container (checking both shadow DOM and light DOM)
+            const root = gridElement.shadowRoot || gridElement;
+            const placeholder = root.querySelector(`.wa-row-detail-placeholder[data-row-id="${rowId}"]`);
+            if (placeholder) {
+                // Request Blazor to render the RenderFragment using HtmlRenderer
+                const htmlContent = await dotNetRef.invokeMethodAsync('RenderRowDetail', rowId.toString());
+
+                placeholder.innerHTML = htmlContent;
+                placeholder.dataset.loaded = "true"; // Cache so collapsing/re-expanding is instant
+            }
+        });
+    }
 
     // Monitor scrolling and DOM changes to allow for dynamic swapping of Blazor nodes into the correct slots
     const observer = new MutationObserver((mutations) => {
@@ -59,15 +84,20 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             gridElement.loading = true;
 
             const requestDetails = event.detail; // Contains page, pageSize, sort array, etc.
-
+            console.log(requestDetails);
             // Request data slice from Blazor via Interop
-            const response = await dotNetRef.invokeMethodAsync('HandleDataRequest', {
+            const responseJson = await dotNetRef.invokeMethodAsync('HandleDataRequest', {
                 page: requestDetails.page,
                 pageSize: requestDetails.pageSize,
-                sort: requestDetails.sort || []
+                sort: requestDetails.sort || [],
+                search: requestDetails.search,
+                filters: requestDetails.filters
             });
 
             // Provide items and total count back to Web Awesome Data Grid
+            
+            const response = JSON.parse(responseJson);
+
             gridElement.data = response.items;
             gridElement.total = response.total;
 
@@ -105,7 +135,9 @@ function returnBlazorNodeToCache(slot, cacheContainerId) {
     }
 }
 
-export function setData(gridElement, data) {
+export function setData(gridElement, dataJson) {
+    console.log(dataJson);
+    const data = JSON.parse(dataJson);
     gridElement.data = data;
 }
 function getPageCount(gridElement) {
