@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## Version 1.11.1
+- [WADataGrid](/docs/WADataGrid.md) updates:
+    * Fix - Search and filter attributes weren't passing through to DataGridDataRequestArgs
+    * Fix - Prevent default JSON case conversion for field and Id names
+    * Added - FilterType on columns
+    * Added - Row details template.
+
 ## Version 1.11.0
 - Upgraded to [Web Awesome 3.11.0](https://webawesome.com/docs/resources/changelog#wa_3110) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - Updated [WAInclude](/docs/WAInclude.md) docs to reference including part of a file via `#id` in the URL.

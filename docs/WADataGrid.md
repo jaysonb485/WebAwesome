@@ -23,6 +23,7 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 | Appearance | DataGridAppearance | `Outlined` | The grid's visual appearance. Outlined or plain. |
 | CurrentPage | int | `0` | The current page index (0-based). |
 | FilterDebounce | int | `250` | How long (in milliseconds) to wait after a search or filter keystroke before requesting data in server mode. Client-side filtering is always immediate. Sort and page changes are never debounced. |
+| GroupBy | string[] | `null` | Array of column id(s) to group on. Use column aggregator functions to define other grouped data (e.g. sum, min, max) |
 | Label | string | `null` | An accessible label for the grid. |
 | MaxMultiSort | int | `0` | The maximum number of columns that can participate in a multi-column sort. 0 (default) means no limit. |
 | PageSize | int | `20` | The number of rows per page. |
@@ -42,6 +43,7 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 | LoadingTemplate | RenderFragment | `null` | A custom template to show when the grid is loading. |
 | EmptyTemplate | RenderFragment | `null` | A custom template to show when the grid has no data. |
 | NoResultsTemplate | RenderFragment | `null` | A custom template to show when the grid has no results after filtering. |
+| RowDetailsTemplate | RenderFragment | | A custom template to show when a row is expanded. Set context to access underlying row data |
 | OnDataRequest | EventCallback<DataRequestEventArgs> | `null` | An event that is triggered when the grid needs data in server-side mode. The consumer should handle this event and return the requested data. |
 
 #### DataGridRequesArgs Properties
@@ -56,24 +58,29 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 #### DataGridColumn Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
+| Align | string | `null` | The text alignment for this column. Can be "left", "center", or "right". |
+| Aggregation | DataGridColumnAggregation | `null` | Give columns an aggregation (sum, min, max, mean, median, count, unique, uniqueCount, extent, or a custom function) to summarize the group on its row when another column is grouped. |
 | Field | string | `null` | The field name in the data source that this column displays. |
-| Id | string | `null` | The unique identifier for this column. If not provided, the field name is used. |
-| Label | string | `null` | The column header label. If not provided, the field name is used. |
-| Sortable | bool | `true` | Whether this column can be sorted. |
-| SortMethod | DataGridColumnSortMethod | `null` | The sort method for this column. |
-| Searchable | bool | `true` | Whether this column can be searched. |
 | Filterable | bool | `false` | Whether this column can be filtered. |
+| FilterType | DataGridColumnFilterType | `DataGridColumnFilterType.Text` | For client-side data, how the filter panel renders. Refer Web Awesome docs. |
+| Flex | int | `null` | The flex grow factor for this column. |
 | Hidden | bool | `false` | Whether this column is hidden. |
 | Hideable | bool | `true` | Whether this column can be hidden. |
-| Resizable | bool | `true` | Whether this column can be resized. |
+| Id | string | `null` | The unique identifier for this column. If not provided, the field name is used. |
+| Label | string | `null` | The column header label. If not provided, the field name is used. |
+| MinWidth | int | `null` | The minimum width of this column in pixels. |
 | Movable | bool | `false` | Whether this column can be moved. |
 | Pinnable | bool | `false` | Whether this column can be pinned. |
 | PinDirection | DataGridColumnPinDirection | `null` | The pin direction for this column. |
-| Flex | int | `null` | The flex grow factor for this column. |
-| Width | int | `null` | The width of this column in pixels. |
-| MinWidth | int | `null` | The minimum width of this column in pixels. |
-| Align | string | `null` | The text alignment for this column. Can be "left", "center", or "right". |
+| Resizable | bool | `true` | Whether this column can be resized. |
+| Sortable | bool | `true` | Whether this column can be sorted. |
+| SortMethod | DataGridColumnSortMethod | `null` | The sort method for this column. |
+| Searchable | bool | `true` | Whether this column can be searched. |
 | Template | RenderFragment<TItem> | `null` | A custom template for rendering the cell content of this column. Set Context to access row data. |
+| Width | int | `null` | The width of this column in pixels. |
+
+> [!NOTE]
+> CSS page styles RowDetailsTemplate and Column Templates sit in the shadow DOM where Web Awesome's loaded cannot see it. Refer to [Web Awesome docs](https://webawesome.com/docs/components/data-grid/#preloading-rendered-components) for component rendering. 
 
 ### Methods
 | Method      | Parameters       | Description                              |
@@ -90,16 +97,16 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 <WADataGrid TItem="PullRequest" RowKey="Id" @ref="PRDataGrid"
     ShowPagination="true" >
     <Columns>
-        <DataGridColumn TItem="PullRequest" Field="title" Label="Title" Sortable="true" Flex="3" MinWidth="180" Filterable="true" />
-        <DataGridColumn TItem="PullRequest" Field="author" Label="Author" Flex="1" MinWidth="130" Filterable="true" />
-        <DataGridColumn TItem="PullRequest" Field="state" Label="State" Width="120">
+        <DataGridColumn TItem="PullRequest" Field="Title" Label="Title" Sortable="true" Flex="3" MinWidth="180" Filterable="true" />
+        <DataGridColumn TItem="PullRequest" Field="Author" Label="Author" Flex="1" MinWidth="130" Filterable="true" />
+        <DataGridColumn TItem="PullRequest" Field="State" Label="State" Width="120">
             <Template Context="pr">
                 <wa-badge variant="@GetStateVariant(pr.State)" appearance="filled">
                     @pr.Author
                 </wa-badge>
             </Template>
         </DataGridColumn>
-        <DataGridColumn TItem="PullRequest" Id="actions" Label="Actions" Align="right" Width="140">
+        <DataGridColumn TItem="PullRequest" Id="Actions" Label="Actions" Align="right" Width="140">
             <Template Context="pr">
                 <button class="btn btn-sm btn-outline-primary" @onclick="() => ApproveRequest(pr)">
                     Approve
@@ -144,22 +151,21 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 }
 ```
 
-#### Server-side data.
+#### Server-side data and Row Details
 ```HTML+Razor
 <WADataGrid TItem="PullRequest" RowKey="Id" @ref="PRDataGrid"
     ShowPagination="true" ServerSideMode="true" OnDataRequest="DataRequested" >
     <Columns>
-        <DataGridColumn TItem="PullRequest" Field="title" Label="Title" Sortable="true" Flex="3" MinWidth="180" Filterable="true" />
-        <DataGridColumn TItem="PullRequest" Field="author" Label="Author" Flex="1" MinWidth="130" Filterable="true" />
-        <DataGridColumn TItem="PullRequest" Field="state" Label="State" Width="120">
+        <DataGridColumn TItem="PullRequest" Field="Title" Label="Title" Sortable="true" Flex="3" MinWidth="180" Filterable="true" />
+        <DataGridColumn TItem="PullRequest" Field="Author" Label="Author" Flex="1" MinWidth="130" Filterable="true" />
+        <DataGridColumn TItem="PullRequest" Field="State" Label="State" Width="120">
             <Template Context="pr">
                 <wa-badge variant="@GetStateVariant(pr.State)" appearance="filled">
                     @pr.Author
                 </wa-badge>
             </Template>
         </DataGridColumn>
-
-        <DataGridColumn TItem="PullRequest" Id="actions" Label="Actions" Align="right" Width="140">
+        <DataGridColumn TItem="PullRequest" Id="Actions" Label="Actions" Align="right" Width="140">
             <Template Context="pr">
                 <button class="btn btn-sm btn-outline-primary" @onclick="() => ApproveRequest(pr)">
                     Approve
@@ -182,6 +188,18 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
             <p>No results found</p>
         </div>
     </NoResultsTemplate>
+    <RowDetailsTemplate Context="pr">
+        <div class="wa-grid" style="--min-column-size: 14ch; gap: var(--wa-space-l);">
+            <div>
+                <small style="color: var(--wa-color-text-quiet);">Author</small><br />
+                <strong>@pr.Author</strong>
+            </div>
+            <div><small style="color: var(--wa-color-text-quiet);">State</small><br />@pr.State</div>
+            <div style="grid-column: 1 / -1;">
+                <small style="color: var(--wa-color-text-quiet);">Title</small><br />@pr.Title
+            </div>
+        </div>
+    </RowDetailsTemplate>
 </WADataGrid>
 
 @code 

@@ -526,6 +526,30 @@
         Left,
         Right
     }
+
+    public enum DataGridColumnFilterType
+    {
+        Text,
+        Equals,
+        NumberRange,
+        DateRange,
+        Set,
+        IncludesAny,
+        IncludesAll
+    }
+
+    public enum DataGridColumnAggregation
+    {
+        Sum,
+        Min,
+        Max,
+        Mean,
+        Median,
+        Count,
+        Unique,
+        UniqueCount,
+        Extent
+    }
     #endregion
     #region DatePicker Enums
     public enum DatePickerDayOfTheWeek

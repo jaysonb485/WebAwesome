@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using WebAwesomeBlazor.Extended;
 
 namespace WebAwesomeBlazor
@@ -9,6 +11,7 @@ namespace WebAwesomeBlazor
         {
             services.AddScoped<IConfirmDialog, ConfirmDialogService>();
             services.AddScoped<ToastService>();
+            services.TryAddScoped<HtmlRenderer>();
             return services;
         }
 

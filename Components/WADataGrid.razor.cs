@@ -120,6 +120,11 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public Func<DataGridDataRequestArgs, Task<GridDataResult<TItem>>> OnDataRequest { get; set; } = null!;
 
+        /// <summary>
+        /// Custom template rendered dynamically inside the expanded row accordion.
+        /// </summary>
+        [Parameter] public RenderFragment<TItem>? RowDetailTemplate { get; set; }
+
 
         #endregion
         #region State
@@ -127,7 +132,7 @@ namespace WebAwesomeBlazor.Components
         private DotNetObjectReference<WADataGrid<TItem>>? objRef;
         private readonly List<DataGridColumn<TItem>> _columns = new();
         private IEnumerable<TItem> _currentPageItems = Enumerable.Empty<TItem>();
-
+        private JsonSerializerOptions jsonOptions = new() { PropertyNamingPolicy = null };
         #endregion
 
         #region Computed Properties
@@ -193,9 +198,10 @@ namespace WebAwesomeBlazor.Components
                     id = c.Id ?? c.Field,
                     label = c.Label,
                     sortable = c.Sortable,
-                    sortFn = c.SortMethod is not null ? (object)c.SortMethod : null,
+                    sortFn = c.SortMethod is not null ? c.SortMethodString : null,
                     searchable = c.Searchable,
                     filterable = c.Filterable,
+                    filterType = c.FilterTypeString,
                     hidden = c.Hidden,
                     resizable = c.Resizable,
                     movable = c.Movable,
@@ -205,10 +211,13 @@ namespace WebAwesomeBlazor.Components
                     width = c.Width,
                     minWidth = c.MinWidth,
                     align = c.Align,
-                    hasTemplate = c.Template is not null
+                    hasTemplate = c.Template is not null,
+                    aggregation = c.AggregationString
                 }).ToList();
 
-                await SafeInvokeVoidAsync("initEventGrid", Element, Id!, JsonNamingPolicy.CamelCase.ConvertName(RowKey), objRef, columnConfigs);
+                string jsonString = JsonSerializer.Serialize(columnConfigs, jsonOptions);
+
+                await SafeInvokeVoidAsync("initEventGrid", Element, Id!, RowKey, objRef, jsonString, RowDetailTemplate is not null);
             }
         }
 
@@ -229,7 +238,7 @@ namespace WebAwesomeBlazor.Components
                 {
                 }
                 objRef?.Dispose();
-
+                _htmlRenderer?.Dispose();
             }
 
         }
@@ -249,14 +258,43 @@ namespace WebAwesomeBlazor.Components
             _currentPageItems = result.Items ?? Enumerable.Empty<TItem>();
 
             // 2. Re-render Blazor portal DOM cache for current page
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
 
             // 3. Return JSON payload matching what wa-data-grid expects
-            return new
+
+
+
+            return
+                JsonSerializer.Serialize(new
+                {
+                    items = _currentPageItems,
+                    total = result.TotalCount
+                }, jsonOptions);
+
+        }
+
+        /// <summary>
+        /// Invoked by JS when 'wa-row-expand' fires to render the row detail HTML string.
+        /// </summary>
+        [JSInvokable]
+        public async Task<string> RenderRowDetail(string rowKey)
+        {
+            if (RowDetailTemplate is null || _htmlRenderer is null) return string.Empty;
+
+            var item = _currentPageItems.FirstOrDefault(i => GetRowKeyValue(i) == rowKey);
+            if (item is null) return string.Empty;
+
+            // Render the RenderFragment<TItem> into an HTML string using HtmlRenderer Dispatcher
+            return await _htmlRenderer.Dispatcher.InvokeAsync(async () =>
             {
-                items = _currentPageItems,
-                total = result.TotalCount
-            };
+                var parameters = ParameterView.FromDictionary(new Dictionary<string, object?>
+            {
+                { nameof(RenderFragmentWrapper.ChildContent), RowDetailTemplate(item) }
+            });
+
+                var output = await _htmlRenderer.RenderComponentAsync<RenderFragmentWrapper>(parameters);
+                return output.ToHtmlString();
+            });
         }
 
         /// <summary>
@@ -315,7 +353,7 @@ namespace WebAwesomeBlazor.Components
                 throw new InvalidOperationException("SetDataAsync can only be used in client-side mode. In server-side mode, use the OnDataRequest callback to provide data.");
             }
             _currentPageItems = items ?? [];
-            await SafeInvokeVoidAsync("setData", Element, _currentPageItems);
+            await SafeInvokeVoidAsync("setData", Element, JsonSerializer.Serialize(_currentPageItems, jsonOptions));
             StateHasChanged();
         }
 
@@ -340,5 +378,23 @@ namespace WebAwesomeBlazor.Components
     {
         public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
         public int TotalCount { get; set; }
+    }
+
+    public class RenderFragmentWrapper : IComponent
+    {
+        private RenderHandle _renderHandle;
+
+        public void Attach(RenderHandle renderHandle) => _renderHandle = renderHandle;
+
+        public Task SetParametersAsync(ParameterView parameters)
+        {
+            if (parameters.TryGetValue<RenderFragment>(nameof(ChildContent), out var content) && content is not null)
+            {
+                _renderHandle.Render(content);
+            }
+            return Task.CompletedTask;
+        }
+
+        [Parameter] public RenderFragment? ChildContent { get; set; }
     }
 }

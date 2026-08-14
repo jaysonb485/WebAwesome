@@ -1,8 +1,9 @@
 ﻿@using Microsoft.JSInterop
 @inherits WAComponentBase
+@inject HtmlRenderer _htmlRenderer
 @typeparam TItem
 
-<CascadingValue Value="this" IsFixed="true">
+<CascadingValue Value="this" IsFixed="true" >
     @Columns
 </CascadingValue>
 
@@ -30,7 +31,7 @@
               with-search="@Searchable"
               with-columns-menu="@ShowColumnVisibilityMenu"
               with-column-menu="@ShowColumnMenus"
-              without-sort-removal="@AllowSortRemoval" >
+              without-sort-removal="@AllowSortRemoval">
     @if (LoadingTemplate is not null)
     {
         <div slot="loading">
