@@ -1,5 +1,14 @@
 ﻿# Changelog
 
+## Version 1.12.0
+- Upgraded to [Web Awesome 3.12.0](https://webawesome.com/docs/resources/changelog#wa_3120) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- [WADataGrid](/docs/WADataGrid.md) added new methods:
+    * `CopySelectedRowsAsync` to enable interactive row copy to clipboard.
+	* `ExpandAllRowsAsync` to expand all rows with details panels.
+	* `ExpandRowAsync` to expand a specific row.
+	* `ExportDataAsCsvAsync` for browser download of data as a CSV file.
+- [WADataGrid](/docs/WADataGrid.md) - new `filterOptions` property to set possible filter values for set / includes-all / includes-any filter types in server data mode.
+
 ## Version 1.11.1
 - [WADataGrid](/docs/WADataGrid.md) updates:
     * Fix - Search and filter attributes weren't passing through to DataGridDataRequestArgs

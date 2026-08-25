@@ -1,4 +1,6 @@
-﻿namespace WebAwesomeBlazor
+﻿using System.Text.Json.Serialization;
+
+namespace WebAwesomeBlazor
 {
     #region Button Enums
     public enum ButtonVariant
@@ -511,6 +513,13 @@
         Medium,
         Large,
         XLarge,
+    }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum DataGridCopyFormat
+    {
+        Tsv,
+        Csv
     }
     public enum DataGridColumnSortMethod
     {

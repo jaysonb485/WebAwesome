@@ -89,6 +89,7 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 | SetPageSizeOptions | int[] | Sets the available page size options for the grid. |
 | GetSelectedRowKeysAsync | string columnId, bool descending | Sorts the grid by the specified column. |
 | SetDataAsync | IEnumerable<TItem> items | Provide the grid data. When ServerSideMode is false. Enables sorting, filtering, and pagination on the client side. |
+| CopySelectedRowsAsync | columnIds: string[]?, includeHeaders: bool = true, format: DataGridCopyFormat = DataGridCopyFormat.Tsv, escapeFormulas: bool = true | Copies the selected rows (or every processed row when nothing is selected) to the clipboard, honoring the active sort, filters, and column visibility/order. The default tab-separated format pastes into spreadsheet cells; format: 'csv' copies comma-separated text instead.|
 
 ### Examples
 
@@ -151,25 +152,28 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 }
 ```
 
-#### Server-side data and Row Details
+#### Server-side data, Row Details and filtering example
 ```HTML+Razor
-<WADataGrid TItem="PullRequest" RowKey="Id" @ref="PRDataGrid"
-    ShowPagination="true" ServerSideMode="true" OnDataRequest="DataRequested" >
+
+<WADataGrid TItem="PullRequest" RowKey="Id" @ref="PRDataGrid" Pinnable="true" RowSelectionMode="DataGridRowSelection.Multiple"
+            ShowPagination="true" ServerSideData="true" OnDataRequest="LoadGridDataAsync" group-by="Author">
     <Columns>
         <DataGridColumn TItem="PullRequest" Field="Title" Label="Title" Sortable="true" Flex="3" MinWidth="180" Filterable="true" />
-        <DataGridColumn TItem="PullRequest" Field="Author" Label="Author" Flex="1" MinWidth="130" Filterable="true" />
-        <DataGridColumn TItem="PullRequest" Field="State" Label="State" Width="120">
+        <DataGridColumn TItem="PullRequest" Field="Created" Label="Created" Sortable="true" Filterable="true" FilterType="DataGridColumnFilterType.DateRange" />
+        <DataGridColumn TItem="PullRequest" Field="Author" Pinnable="true" PinDirection="DataGridColumnPinDirection.Left" Label="Author" Flex="1" MinWidth="130" Filterable="true" FilterType="DataGridColumnFilterType.Set" />
+        <DataGridColumn TItem="PullRequest" Field="State" Label="State" Width="120" Filterable="true" FilterType="DataGridColumnFilterType.Set" FilterOptions="StateOptions">
             <Template Context="pr">
-                <wa-badge variant="@GetStateVariant(pr.State)" appearance="filled">
-                    @pr.Author
+                <wa-badge appearance="filled">
+                    @pr.State
                 </wa-badge>
             </Template>
         </DataGridColumn>
-        <DataGridColumn TItem="PullRequest" Id="Actions" Label="Actions" Align="right" Width="140">
+
+        <DataGridColumn TItem="PullRequest" Id="Actions" Label="Actions" Align="right" Width="140" Field="">
             <Template Context="pr">
-                <button class="btn btn-sm btn-outline-primary" @onclick="() => ApproveRequest(pr)">
+                <WAButton >
                     Approve
-                </button>
+                </WAButton>
             </Template>
         </DataGridColumn>
     </Columns>
@@ -188,7 +192,7 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
             <p>No results found</p>
         </div>
     </NoResultsTemplate>
-    <RowDetailsTemplate Context="pr">
+   <RowDetailTemplate Context="pr">
         <div class="wa-grid" style="--min-column-size: 14ch; gap: var(--wa-space-l);">
             <div>
                 <small style="color: var(--wa-color-text-quiet);">Author</small><br />
@@ -197,40 +201,136 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
             <div><small style="color: var(--wa-color-text-quiet);">State</small><br />@pr.State</div>
             <div style="grid-column: 1 / -1;">
                 <small style="color: var(--wa-color-text-quiet);">Title</small><br />@pr.Title
+
             </div>
+
         </div>
-    </RowDetailsTemplate>
+    </RowDetailTemplate>
 </WADataGrid>
 
-@code 
+
+@code
 {
     WADataGrid<PullRequest> PRDataGrid = default!;
 
     public class PullRequest
     {
         public int Id { get; set; }
-        public string Title { get; set; } = "";
+        public DateTime Created { get; set; }
+        public string Title { get
+            {
+                return $"Mock request - {Author} - {State}";
+            } 
+        }
         public string Author { get; set; } = "";
         public string State { get; set; } = "";
     }
 
-        private async Task<GridDataResult<PullRequest>> LoadGridDataAsync(DataGridDataRequestArgs args)
+    List<PullRequest> prData { get; set; } = default!;
+    IEnumerable<DataGridColumnFilterOptions> StateOptions { get; set; } = default!;
+
+    async Task copyRows()
+    {
+        var rows = await PRDataGrid.CopySelectedRowsAsync();
+        await ToastService.CreateAsync(new ToastMessage { Message = $"Copied {rows} rows." });
+    }
+
+    private async Task<GridDataResult<PullRequest>> LoadGridDataAsync(DataGridDataRequestArgs args)
     {
         await Task.Delay(1000); // Simulate network latency
 
-        var prData = await GetPRData();
-        var pagedItems = prData
+        // Get data if we haven't previously
+        prData ??= await GetPRData();
+
+        //Apply any column filters from the data request
+        var filteredData = ApplyFilters(prData, args.Filters);
+
+        //Select the items from the page args
+        var pagedItems = filteredData
             .Skip((args.Page) * args.PageSize)
             .Take(args.PageSize)
             .ToList();
 
-        // Apply other filters and sorting per event args.
-
         return new GridDataResult<PullRequest>
         {
             Items = pagedItems,
-            TotalCount = prData.Count
+            TotalCount = filteredData.Count()
         };
     }
+
+    async Task<List<PullRequest>> GetPRData()
+    {
+        var rnd = new Random();
+        var authors = new[] { "Jay", "Alex", "Morgan", "Sam", "Taylor", "Jordan" };
+        var states = new[] { "open", "closed", "merged" };
+
+        List<PullRequest> pullRequests =
+            Enumerable.Range(1, 200)
+                .Select(i => new PullRequest
+                {
+                    Id = i,
+                    Created = DateTime.UtcNow.AddDays(-rnd.Next(0, 365)),
+                    Author = authors[rnd.Next(authors.Length)],
+                    State = states[rnd.Next(states.Length)]
+                })
+                .ToList();
+
+        // Set the values for the State column filter set and their counts
+        await PRDataGrid.SetColumnFilterOptionsAsync("State", pullRequests
+        .GroupBy(pr => pr.State)
+        .Select(g => new DataGridColumnFilterOptions
+        {
+            Value = g.Key,
+            Count = g.Count()
+        }));
+
+        return pullRequests;
+    }
+
+    public IEnumerable<PullRequest> ApplyFilters(
+        IEnumerable<PullRequest> source,
+        IEnumerable<DataGridColumnFilter>? filters)
+    {
+        if (filters is null) return source;
+
+        foreach (var filter in filters)
+        {
+            var values = filter.Value;
+
+            if (filter.Id == "Author")
+            {
+                source = source.Where(pr =>
+                    values.Contains(pr.Author, StringComparer.OrdinalIgnoreCase));
+            }
+            else if (filter.Id == "State")
+            {
+                source = source.Where(pr =>
+                    values.Contains(pr.State, StringComparer.OrdinalIgnoreCase));
+            }
+            else if (filter.Id == "Title")
+            {
+                source = source.Where(pr =>
+                    values.Any(v => pr.Title.Contains(v, StringComparison.OrdinalIgnoreCase)));
+            }
+            else if (filter.Id == "Created")
+            {
+                //Ensure valid filter - If a column filter is a dateRange type, there should always be two values in the array.
+                if(values.Count() == 2)
+                {
+                    //Check if the first value (start date) is a valid date and apply the filter
+                    if(DateTime.TryParse(values[0], out var start))
+                        source = source.Where(pr => pr.Created >= start);
+
+                    //Check if the second value (end date) is a valid date and apply the filter
+                    if (DateTime.TryParse(values[1], out var end))
+                        source = source.Where(pr => pr.Created <= end);
+                }
+            }
+        }
+
+        return source;
+    }
+
 }
+
 ```

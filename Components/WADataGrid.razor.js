@@ -84,14 +84,23 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             gridElement.loading = true;
 
             const requestDetails = event.detail; // Contains page, pageSize, sort array, etc.
-            console.log(requestDetails);
+            console.log('requestDetails', requestDetails);
             // Request data slice from Blazor via Interop
+            const normalizedFilters = requestDetails.filters.map(f => ({
+                ...f,
+                value: (f.value ?? []).map(v =>
+                    v === undefined ? null : v
+                )
+            }));
+
+            console.log('normalizedFilters', normalizedFilters);
+
             const responseJson = await dotNetRef.invokeMethodAsync('HandleDataRequest', {
                 page: requestDetails.page,
                 pageSize: requestDetails.pageSize,
                 sort: requestDetails.sort || [],
                 search: requestDetails.search,
-                filters: requestDetails.filters
+                filters: normalizedFilters
             });
 
             // Provide items and total count back to Web Awesome Data Grid
@@ -101,6 +110,7 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             gridElement.data = response.items;
             gridElement.total = response.total;
 
+            await gridElement.updateComplete;
             // After Lit updates elements in DOM, swap Blazor nodes into Web Awesome cells
             requestAnimationFrame(() => projectBlazorPortals(gridElement));
 
@@ -113,26 +123,71 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
     }
 }
 
-function projectBlazorPortals(gridElement) {
-    const slots = gridElement.shadowRoot.querySelectorAll('.wa-blazor-portal-slot');
-    slots.forEach(slot => {
-        const portalId = slot.getAttribute('data-portal-id');
-        if (!portalId) return;
+/**
+ * Projects pre-rendered Blazor DOM nodes into matching portal slots.
+ * Cleans up any mismatched/recycled nodes automatically.
+ */
+/**
+ * Projects pre-rendered Blazor DOM nodes into matching portal slots.
+ */
+function projectBlazorPortals(gridElement, cacheContainerId) {
+    const root = gridElement.shadowRoot || gridElement;
+    const slots = root.querySelectorAll('.wa-blazor-portal-slot');
+    const cacheContainer = document.getElementById(cacheContainerId);
 
-        const blazorNode = document.getElementById(portalId);
-        if (blazorNode && !slot.contains(blazorNode)) {
-            slot.appendChild(blazorNode);
+    slots.forEach(slot => {
+        const targetPortalId = slot.getAttribute('data-portal-id');
+        if (!targetPortalId) return;
+
+        // 1. If slot already contains the single correct node, skip it
+        if (slot.children.length === 1 && slot.firstElementChild.id === targetPortalId) {
+            return;
+        }
+
+        // 2. Evict any mismatched nodes currently inside this slot back to cache
+        if (cacheContainer) {
+            Array.from(slot.children).forEach(child => {
+                if (child.id !== targetPortalId) {
+                    cacheContainer.appendChild(child);
+                }
+            });
+        }
+
+        // 3. Find the target node wherever it currently lives (cache container, global doc, or shadow root)
+        let targetNode = document.getElementById(targetPortalId);
+        if (!targetNode && cacheContainer) {
+            targetNode = cacheContainer.querySelector(`[id="${targetPortalId}"]`);
+        }
+        if (!targetNode) {
+            targetNode = root.querySelector(`[id="${targetPortalId}"]`);
+        }
+
+        // 4. Attach the matching node
+        if (targetNode && !slot.contains(targetNode)) {
+            slot.appendChild(targetNode);
         }
     });
 }
 
+/**
+ * Rescues all child nodes from a slot before destruction/recycling
+ */
 function returnBlazorNodeToCache(slot, cacheContainerId) {
-    const blazorNode = slot.firstElementChild;
     const cacheContainer = document.getElementById(cacheContainerId);
+    if (!cacheContainer) return;
 
-    if (blazorNode && cacheContainer) {
-        cacheContainer.appendChild(blazorNode);
+    while (slot.firstElementChild) {
+        cacheContainer.appendChild(slot.firstElementChild);
     }
+}
+
+/**
+ * Evacuates all active slots back to cache container before data reloads/filters
+ */
+function evacuateAllPortals(gridElement, cacheContainerId) {
+    const root = gridElement.shadowRoot || gridElement;
+    const slots = root.querySelectorAll('.wa-blazor-portal-slot');
+    slots.forEach(slot => returnBlazorNodeToCache(slot, cacheContainerId));
 }
 
 export function setData(gridElement, dataJson) {
@@ -140,7 +195,7 @@ export function setData(gridElement, dataJson) {
     const data = JSON.parse(dataJson);
     gridElement.data = data;
 }
-function getPageCount(gridElement) {
+export function getPageCount(gridElement) {
     return gridElement.pageCount;
 }
 
@@ -154,6 +209,27 @@ export function getSelectedRows(gridElement) {
 
 export function sortColumn(gridElement, columnId, direction) {
     gridElement.sort({ id: columnId, desc: direction === 'desc' });
+}
+
+export function copySelectedRows(gridElement, columnIds, includeHeaders, dataGridCopyFormat, escapeFormulas) {
+    return gridElement.copySelectedRows(columnIds, includeHeaders, dataGridCopyFormat, escapeFormulas);
+}
+
+export function expandAllRows(gridElement) {
+    gridElement.expandAllRows();
+}
+
+export function expandRow(gridElement, rowKey)
+{
+    gridElement.expandRow(rowKey);
+}
+
+export function exportDataAsCsv(gridElement, fileName, columnIds, includeHeaders, delimiter, escapeFormulas) {
+    gridElement.exportDataAsCsv(fileName, columnIds, includeHeaders, delimiter, escapeFormulas);
+}
+
+export function setColumnFilterOptions(gridElement, columnId, filterOptions) {
+    gridElement.columns.find(c => c.id === columnId).filterOptions = filterOptions;
 }
 
         
