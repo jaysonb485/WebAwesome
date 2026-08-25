@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -212,7 +213,8 @@ namespace WebAwesomeBlazor.Components
                     minWidth = c.MinWidth,
                     align = c.Align,
                     hasTemplate = c.Template is not null,
-                    aggregation = c.AggregationString
+                    aggregation = c.AggregationString,
+                    filterOptions = c.FilterOptions
                 }).ToList();
 
                 string jsonString = JsonSerializer.Serialize(columnConfigs, jsonOptions);
@@ -251,14 +253,60 @@ namespace WebAwesomeBlazor.Components
         /// Called by JavaScript when wa-data-request fires
         /// </summary>
         [JSInvokable]
-        public async Task<object> HandleDataRequest(DataGridDataRequestArgs args)
+        public async Task<object> HandleDataRequest(JSDataGridDataRequestArgs jsArgs)
         {
             // 1. Fetch data for current view from consumer C# delegate
+            var args = new DataGridDataRequestArgs
+            {
+                Page = jsArgs.Page,
+                PageSize = jsArgs.PageSize,
+                Search = jsArgs.Search,
+                Sort = jsArgs.Sort,
+                Filters = jsArgs.Filters?.Select(x => new DataGridColumnFilter
+                {
+                    Id = x.Id,
+                    //Value = x.Value.ValueKind switch
+                    //{
+                    //    JsonValueKind.String =>
+                    //        [x.Value.GetString()!],
+
+                    //    JsonValueKind.Array =>
+                    //        [.. x.Value.EnumerateArray()
+                    //     .Where(e => e.ValueKind == JsonValueKind.String)
+                    //     .Select(e => e.GetString()!)],
+
+                    //    _ => []
+
+
+                    //}
+                    Value = x.Value.ValueKind switch
+                    {
+                        JsonValueKind.String =>
+                            [x.Value.GetString()!],
+
+                        JsonValueKind.Array =>
+                            [.. x.Value.EnumerateArray()
+                                   .Select(e =>
+                                       e.ValueKind switch
+                                       {
+                                           JsonValueKind.String => e.GetString(),
+                                           JsonValueKind.Null => null,
+                                           _ => null
+                                       }
+                                   )!],
+
+                        _ => []
+                    }
+                })
+            };
+
+
             var result = await OnDataRequest(args);
             _currentPageItems = result.Items ?? Enumerable.Empty<TItem>();
 
             // 2. Re-render Blazor portal DOM cache for current page
-            await InvokeAsync(StateHasChanged);
+            StateHasChanged();
+            await Task.Yield();
 
             // 3. Return JSON payload matching what wa-data-grid expects
 
@@ -357,6 +405,54 @@ namespace WebAwesomeBlazor.Components
             StateHasChanged();
         }
 
+        public async Task SetColumnFilterOptionsAsync(string columnId, IEnumerable<DataGridColumnFilterOptions> filterOptions)
+        {
+            await SafeInvokeVoidAsync("setColumnFilterOptions", Element, columnId, filterOptions);
+        }
+        /// <summary>
+        /// Copies the selected rows to the client clipboard.
+        /// </summary>
+        /// <param name="columnIds">Optional - array of column IDs to copy</param>
+        /// <param name="includeHeaders">Include column header row</param>
+        /// <param name="format">Copy format - csv or tsv</param>
+        /// <param name="EscapeFormulas">Formulas should be escaped</param>
+        /// <returns>Number of rows copied.</returns>
+        public async Task<int> CopySelectedRowsAsync(string[]? columnIds = null, bool includeHeaders = true, DataGridCopyFormat format = DataGridCopyFormat.Tsv, bool escapeFormulas = true)
+        {
+            return await SafeInvokeAsync<int>("copySelectedRows", Element, columnIds ?? [], includeHeaders, format, escapeFormulas);
+        }
+
+        /// <summary>
+        /// Expands every row (all detail panels, or every branch of a tree).
+        /// </summary>
+        public async Task ExpandAllRowsAsync()
+        {
+            await SafeInvokeVoidAsync("expandAllRows", Element);
+        }
+
+        /// <summary>
+        /// Expands the row with the given key (its rowKey value).
+        /// </summary>
+        /// <param name="rowKey">Row key (ID) to expand</param>
+        public async Task ExpandRowAsync(string rowKey)
+        {
+            await SafeInvokeVoidAsync("expandRow", Element, rowKey);
+        }
+
+        /// <summary>
+        /// Exports the current rows as a CSV file (browser download). Respects the active sort, filters, search, and column visibility/order, and runs each column's formatter. In server mode, only the currently loaded page is exported.
+        /// </summary>
+        /// <param name="fileName">File name of the export</param>
+        /// <param name="columnIds">Column IDs to include in the export</param>
+        /// <param name="includeHeaders">Include column header row</param>
+        /// <param name="delimiter">Column delimiter, default ,</param>
+        /// <param name="EscapeFormulas">Formulas should be escaped</param>
+        public async Task ExportDataAsCsvAsync(string? fileName, string[]? columnIds = null, bool includeHeaders = true, string delimiter = ",", bool EscapeFormulas = true)
+        {
+            await SafeInvokeVoidAsync("exportDataAsCsv", Element, fileName ?? "", columnIds ?? [], includeHeaders, delimiter, EscapeFormulas);
+
+        }
+
         #endregion
         #region Private Methods
 
@@ -367,34 +463,52 @@ namespace WebAwesomeBlazor.Components
                 System.Reflection.BindingFlags.IgnoreCase | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
             return prop?.GetValue(item)?.ToString() ?? string.Empty;
         }
-
-
-
-        #endregion 
-
     }
 
-    public class GridDataResult<TItem>
-    {
-        public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
-        public int TotalCount { get; set; }
-    }
 
-    public class RenderFragmentWrapper : IComponent
-    {
-        private RenderHandle _renderHandle;
+        #endregion
 
-        public void Attach(RenderHandle renderHandle) => _renderHandle = renderHandle;
-
-        public Task SetParametersAsync(ParameterView parameters)
-        {
-            if (parameters.TryGetValue<RenderFragment>(nameof(ChildContent), out var content) && content is not null)
-            {
-                _renderHandle.Render(content);
-            }
-            return Task.CompletedTask;
-        }
-
-        [Parameter] public RenderFragment? ChildContent { get; set; }
-    }
 }
+
+public class GridDataResult<TItem>
+{
+    public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
+    public int TotalCount { get; set; }
+}
+
+
+public class RenderFragmentWrapper : IComponent
+{
+    private RenderHandle _renderHandle;
+
+    public void Attach(RenderHandle renderHandle) => _renderHandle = renderHandle;
+
+    public Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<RenderFragment>(nameof(ChildContent), out var content) && content is not null)
+        {
+            _renderHandle.Render(content);
+        }
+        return Task.CompletedTask;
+    }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
+
+public class JSDataGridDataRequestArgs
+{
+    public IEnumerable<WebAwesomeBlazor.Components.DataGridColumnSort>? Sort { get; set; }
+    public IEnumerable<JSDataGridColumnFilters>? Filters { get; set; }
+    public string? Search { get; set; }
+    public int Page { get; set; }
+    public int PageSize { get; set; }
+}
+
+public class JSDataGridColumnFilters
+{
+    [JsonPropertyName("id")]
+    public string Id { get; set; } = default!;
+    [JsonPropertyName("value")]
+    public JsonElement Value { get; set; } = default!;
+}
+

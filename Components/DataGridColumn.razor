@@ -35,6 +35,10 @@
     /// </summary>
     [Parameter] public bool Filterable { get; set; } = false;
     /// <summary>
+    /// A collection of DataGridColumnFilterOptions to define the filter options selectable when FilterType = Set, IncludesAll or IncludesAny and ServerSideData is true.
+    /// </summary>
+    [Parameter] public IEnumerable<DataGridColumnFilterOptions>? FilterOptions { get; set; }
+    /// <summary>
     /// For client-side data, how the filter panel renders. Refer Web Awesome docs.
     /// </summary>
     [Parameter][JsonIgnore] public DataGridColumnFilterType FilterType { get; set; } = DataGridColumnFilterType.Text;
@@ -84,6 +88,7 @@
     /// </summary>
     [Parameter] public DataGridColumnAggregation? Aggregation { get; set; }
     [Parameter] public RenderFragment<TItem>? Template { get; set; }
+
     [JsonIgnore]
     public string FilterTypeString
     {
@@ -128,12 +133,12 @@
         {
             return Aggregation switch
             {
-                 DataGridColumnAggregation.Sum => "sum",
-                 DataGridColumnAggregation.Min => "min",
-                 DataGridColumnAggregation.Max => "max",
-                 DataGridColumnAggregation.Mean => "mean",
-                 DataGridColumnAggregation.Median => "median",
-                 DataGridColumnAggregation.Count => "count",
+                DataGridColumnAggregation.Sum => "sum",
+                DataGridColumnAggregation.Min => "min",
+                DataGridColumnAggregation.Max => "max",
+                DataGridColumnAggregation.Mean => "mean",
+                DataGridColumnAggregation.Median => "median",
+                DataGridColumnAggregation.Count => "count",
                 DataGridColumnAggregation.Extent => "extent",
                 DataGridColumnAggregation.Unique => "unique",
                 DataGridColumnAggregation.UniqueCount => "uniqueCount",
@@ -146,4 +151,5 @@
     {
         ParentGrid?.AddColumn(this);
     }
+
 }

@@ -36,6 +36,13 @@ namespace WebAwesomeBlazor.Components
         [JsonPropertyName("id")]
         public string Id { get; set; } = default!;
         [JsonPropertyName("value")]
-        public string Value { get; set; } = default!;
+        public string[] Value { get; set; } = default!;
+    }
+
+
+    public class DataGridColumnFilterOptions
+    {
+        public string Value { get; set; } = string.Empty;
+        public int? Count { get; set; }
     }
 }
