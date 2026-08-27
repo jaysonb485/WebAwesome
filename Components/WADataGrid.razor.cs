@@ -353,6 +353,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (ShowPagination)
             {
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
                 return await SafeInvokeAsync<int>("getPageCount", Element);
             }
             return 1;
@@ -366,6 +367,7 @@ namespace WebAwesomeBlazor.Components
         {
             if (ShowPagination)
             {
+                await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
                 await SafeInvokeVoidAsync("setPageSizeOptions", Element, PageSizeOptions);
             }
         }
@@ -376,6 +378,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns></returns>
         public async Task<string[]> GetSelectedRowKeysAsync()
         {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             return await SafeInvokeAsync<string[]>("getSelectedRows", Element);
         }
 
@@ -386,6 +389,7 @@ namespace WebAwesomeBlazor.Components
         /// <param name="descending">Indicates whether to sort in descending order</param>
         public async Task SortColumnAsync(string columnId, bool descending)
         {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             await SafeInvokeVoidAsync("sortColumn", Element, columnId, descending);
         }
         /// <summary>
@@ -401,12 +405,20 @@ namespace WebAwesomeBlazor.Components
                 throw new InvalidOperationException("SetDataAsync can only be used in client-side mode. In server-side mode, use the OnDataRequest callback to provide data.");
             }
             _currentPageItems = items ?? [];
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             await SafeInvokeVoidAsync("setData", Element, JsonSerializer.Serialize(_currentPageItems, jsonOptions));
             StateHasChanged();
         }
 
+        /// <summary>
+        /// Set the filter options available for server mode data when column filter type is set, include all, or include any
+        /// </summary>
+        /// <param name="columnId"></param>
+        /// <param name="filterOptions"></param>
+        /// <returns></returns>
         public async Task SetColumnFilterOptionsAsync(string columnId, IEnumerable<DataGridColumnFilterOptions> filterOptions)
         {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             await SafeInvokeVoidAsync("setColumnFilterOptions", Element, columnId, filterOptions);
         }
         /// <summary>
@@ -419,6 +431,7 @@ namespace WebAwesomeBlazor.Components
         /// <returns>Number of rows copied.</returns>
         public async Task<int> CopySelectedRowsAsync(string[]? columnIds = null, bool includeHeaders = true, DataGridCopyFormat format = DataGridCopyFormat.Tsv, bool escapeFormulas = true)
         {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             return await SafeInvokeAsync<int>("copySelectedRows", Element, columnIds ?? [], includeHeaders, format, escapeFormulas);
         }
 
@@ -427,6 +440,7 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         public async Task ExpandAllRowsAsync()
         {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             await SafeInvokeVoidAsync("expandAllRows", Element);
         }
 
@@ -436,6 +450,7 @@ namespace WebAwesomeBlazor.Components
         /// <param name="rowKey">Row key (ID) to expand</param>
         public async Task ExpandRowAsync(string rowKey)
         {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             await SafeInvokeVoidAsync("expandRow", Element, rowKey);
         }
 
@@ -449,8 +464,18 @@ namespace WebAwesomeBlazor.Components
         /// <param name="EscapeFormulas">Formulas should be escaped</param>
         public async Task ExportDataAsCsvAsync(string? fileName, string[]? columnIds = null, bool includeHeaders = true, string delimiter = ",", bool EscapeFormulas = true)
         {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             await SafeInvokeVoidAsync("exportDataAsCsv", Element, fileName ?? "", columnIds ?? [], includeHeaders, delimiter, EscapeFormulas);
 
+        }
+        /// <summary>
+        /// Re-runs the current server request (server mode only), even if its parameters haven't changed.
+        /// </summary>
+        /// <returns></returns>
+        public async Task ReloadAsync()
+        {
+            await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
+            await SafeInvokeVoidAsync("reload", Element);
         }
 
         #endregion
@@ -463,6 +488,7 @@ namespace WebAwesomeBlazor.Components
                 System.Reflection.BindingFlags.IgnoreCase | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
             return prop?.GetValue(item)?.ToString() ?? string.Empty;
         }
+
     }
 
 

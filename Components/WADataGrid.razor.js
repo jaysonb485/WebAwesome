@@ -86,12 +86,22 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             const requestDetails = event.detail; // Contains page, pageSize, sort array, etc.
             console.log('requestDetails', requestDetails);
             // Request data slice from Blazor via Interop
-            const normalizedFilters = requestDetails.filters.map(f => ({
-                ...f,
-                value: (f.value ?? []).map(v =>
-                    v === undefined ? null : v
-                )
-            }));
+            // const normalizedFilters = requestDetails.filters.map(f => ({
+            //     ...f,
+            //     value: (f.value ?? []).map(v =>
+            //         v === undefined ? null : v
+            //     )
+            // }));
+            const normalizedFilters = (requestDetails.filters || []).map(f => {
+                const rawArray = Array.isArray(f.value)
+                    ? f.value
+                    : (f.value !== undefined && f.value !== null ? [f.value] : []);
+
+                return {
+                    ...f,
+                    value: rawArray.map(v => (v === undefined ? null : v))
+                };
+            });
 
             console.log('normalizedFilters', normalizedFilters);
 
@@ -118,8 +128,6 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
         });
 
 
-        // Initial load trigger
-        gridElement.reload();
     }
 }
 
@@ -232,4 +240,6 @@ export function setColumnFilterOptions(gridElement, columnId, filterOptions) {
     gridElement.columns.find(c => c.id === columnId).filterOptions = filterOptions;
 }
 
-        
+export function reload(gridElement) {
+    gridElement.reload();
+}

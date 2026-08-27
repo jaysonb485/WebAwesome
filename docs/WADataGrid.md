@@ -44,12 +44,12 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 | EmptyTemplate | RenderFragment | `null` | A custom template to show when the grid has no data. |
 | NoResultsTemplate | RenderFragment | `null` | A custom template to show when the grid has no results after filtering. |
 | RowDetailsTemplate | RenderFragment | | A custom template to show when a row is expanded. Set context to access underlying row data |
-| OnDataRequest | EventCallback<DataRequestEventArgs> | `null` | An event that is triggered when the grid needs data in server-side mode. The consumer should handle this event and return the requested data. |
+| OnDataRequest | EventCallback\<DataRequestEventArgs> | `null` | An event that is triggered when the grid needs data in server-side mode. The consumer should handle this event and return the requested data. |
 
 #### DataGridRequesArgs Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Sort | IEnumerable<DataGridColumnSort> | `null` | The sort state of the grid. |
+| Sort | IEnumerable\<DataGridColumnSort> | `null` | The sort state of the grid. |
 | Filters | string[] | `null` | The filter state of the grid. |
 | Search | string | `null` | The search state of the grid. |
 | Page | int | `0` | The page index (0-based). |
@@ -76,7 +76,7 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 | Sortable | bool | `true` | Whether this column can be sorted. |
 | SortMethod | DataGridColumnSortMethod | `null` | The sort method for this column. |
 | Searchable | bool | `true` | Whether this column can be searched. |
-| Template | RenderFragment<TItem> | `null` | A custom template for rendering the cell content of this column. Set Context to access row data. |
+| Template | RenderFragment\<TItem> | `null` | A custom template for rendering the cell content of this column. Set Context to access row data. |
 | Width | int | `null` | The width of this column in pixels. |
 
 > [!NOTE]
@@ -88,8 +88,14 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 | GetPageCountAsync |  | Returns the total number of pages based on the current data and page size. (always 1 when paginate is off) |
 | SetPageSizeOptions | int[] | Sets the available page size options for the grid. |
 | GetSelectedRowKeysAsync | string columnId, bool descending | Sorts the grid by the specified column. |
-| SetDataAsync | IEnumerable<TItem> items | Provide the grid data. When ServerSideMode is false. Enables sorting, filtering, and pagination on the client side. |
+| SetDataAsync | IEnumerable\<TItem> items | Provide the grid data. When ServerSideMode is false. Enables sorting, filtering, and pagination on the client side. |
 | CopySelectedRowsAsync | columnIds: string[]?, includeHeaders: bool = true, format: DataGridCopyFormat = DataGridCopyFormat.Tsv, escapeFormulas: bool = true | Copies the selected rows (or every processed row when nothing is selected) to the clipboard, honoring the active sort, filters, and column visibility/order. The default tab-separated format pastes into spreadsheet cells; format: 'csv' copies comma-separated text instead.|
+| SortColumnAsync | columnId: string, descending, bool | Sorts the grid by the specified column. |
+| SetColumnFilterOptionsAsync | columnId: string, filterOptions: IEnumerable\<DataGridFilterOptions> | Set the filter options available for server mode data when column filter type is set, include all, or include any. `DataGridFilterOptions`: Value (columnId) of the column, Count of the items for the specified filter value. |
+| ExpandAllRowsAsync | | Expands every row (all detail panels, or every branch of a tree). |
+| ExpandRowAsync | rowKey: string | Expands the row tithe the given key (its rowKey value) |
+| ExportDataAsCsvAsync | fileName: string, columnIds: string[]?, includeHeaders: bool, delimiter: string, EscapeFormulas: bool | Exports the current rows as a CSV file (browser download). Respects the active sort, filters, search, and column visibility/order, and runs each column's formatter. In server mode, only the currently loaded page is exported. |
+| ReloadAsync | | Re-runs the current server request (server mode only), even if its parameters haven't changed. Use this function for first load in Server Mode also. |
 
 ### Examples
 
@@ -212,6 +218,14 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 @code
 {
     WADataGrid<PullRequest> PRDataGrid = default!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await PRDataGrid.ReloadAsync();
+        }
+    }
 
     public class PullRequest
     {
