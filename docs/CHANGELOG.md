@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## Version 1.12.1.1
+- Fixed timing of WADataGrid JS module loading to ensure it is ready if calling any functions from AfterRender.
+
+## Version 1.12.1
+- Minor breaking change: [WADataGrid](/docs/WADataGrid.md) will no longer request data on first load. Instead call WADataGrid.ReloadAsync() when ready (e.g. OnAfterRenderAsync).
+- Fix - Text filters were broken on [WADataGrid](/docs/WADataGrid.md).
+
 ## Version 1.12.0
 - Upgraded to [Web Awesome 3.12.0](https://webawesome.com/docs/resources/changelog#wa_3120) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - [WADataGrid](/docs/WADataGrid.md) added new methods:
