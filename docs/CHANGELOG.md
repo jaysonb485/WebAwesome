@@ -1,5 +1,8 @@
 ﻿# Changelog
 
+## Version 1.12.1.2
+- Reverted breaking change: [WADataGrid](/docs/WADataGrid.md) will request data after initialising due to possible timing conflicts in lifecycle events.
+
 ## Version 1.12.1.1
 - Fixed timing of WADataGrid JS module loading to ensure it is ready if calling any functions from AfterRender.
 

@@ -121,12 +121,17 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             gridElement.total = response.total;
 
             await gridElement.updateComplete;
+
+
             // After Lit updates elements in DOM, swap Blazor nodes into Web Awesome cells
             requestAnimationFrame(() => projectBlazorPortals(gridElement));
+
 
             gridElement.loading = false;
         });
 
+        // Initial load trigger
+        gridElement.reload();
 
     }
 }
