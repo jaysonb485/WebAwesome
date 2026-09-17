@@ -23,15 +23,27 @@ export function initialize(elementId, dotnetHelper, setValue) {
         dotnetHelper.invokeMethodAsync('HandleInputChange', element.value);
     };
 
+    const onFocus = () => {
+        dotnetHelper.invokeMethodAsync('HandleInputFocus');
+    };
+
+    const onBlur = () => {
+        dotnetHelper.invokeMethodAsync('HandleInputBlur');
+    };
+
     // Register listeners
     element.addEventListener('wa-clear', onClear);
     element.addEventListener('change', onChange);
+    element.addEventListener('focus', onFocus);
+    element.addEventListener('blur', onBlur);
 
     // Return cleanup object
     return {
         dispose: () => {
             element.removeEventListener('wa-clear', onClear);
             element.removeEventListener('change', onChange);
+            element.removeEventListener('focus', onFocus);
+            element.removeEventListener('blur', onBlur);
         }
     };
 }

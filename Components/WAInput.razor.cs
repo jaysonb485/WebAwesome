@@ -152,6 +152,11 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool Spellcheck { get; set; } = false;
+
+        [Parameter]
+        public EventCallback Focused { get; set; }
+        [Parameter]
+        public EventCallback Blurred { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -332,6 +337,18 @@ namespace WebAwesomeBlazor.Components
         {
             await ValueChanged.InvokeAsync(value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
+        }
+
+        [JSInvokable]
+        public async Task HandleInputFocus()
+        {
+            await Focused.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleInputBlur()
+        {
+            await Blurred.InvokeAsync();
         }
         #endregion
 

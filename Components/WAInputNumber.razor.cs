@@ -140,6 +140,17 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public string? Autocomplete { get; set; }
+
+        /// <summary>
+        /// Triggered when the input is focused.
+        /// </summary>
+        [Parameter]
+        public EventCallback Focused { get; set; }
+        /// <summary>
+        /// Triggered when the input is blurred.
+        /// </summary>
+        [Parameter]
+        public EventCallback Blurred { get; set; }
         #endregion
 
         #region Computed  Properties
@@ -313,6 +324,18 @@ namespace WebAwesomeBlazor.Components
 
             await ValueChanged.InvokeAsync(Value);
             EditContext?.NotifyFieldChanged(fieldIdentifier);
+        }
+
+        [JSInvokable]
+        public async Task HandleInputFocus()
+        {
+            await Focused.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleInputBlur()
+        {
+            await Blurred.InvokeAsync();
         }
         #endregion
 
