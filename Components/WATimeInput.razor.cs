@@ -152,6 +152,16 @@ namespace WebAwesomeBlazor.Components
         public RenderFragment? EndContent { get; set; }
         [Parameter]
         public RenderFragment? StartContent { get; set; }
+        /// <summary>
+        /// Triggered when the input is focused.
+        /// </summary>
+        [Parameter]
+        public EventCallback Focused { get; set; }
+        /// <summary>
+        /// Triggered when the input is blurred.
+        /// </summary>
+        [Parameter]
+        public EventCallback Blurred { get; set; }
 
         #endregion
 
@@ -321,6 +331,18 @@ namespace WebAwesomeBlazor.Components
             EditContext?.NotifyFieldChanged(fieldIdentifier);
 
 
+        }
+
+        [JSInvokable]
+        public async Task HandleInputFocus()
+        {
+            await Focused.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleInputBlur()
+        {
+            await Blurred.InvokeAsync();
         }
         private async Task OnValueChanged(ChangeEventArgs e)
         {

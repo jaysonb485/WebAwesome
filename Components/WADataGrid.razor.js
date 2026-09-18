@@ -9,7 +9,7 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
     const cacheContainerId = `portal-cache-${gridId}`;
 
     const columns = JSON.parse(columnsJson);
-    console.log(columns);
+    
     // Identify columns that have templates and set up the formatter to render a placeholder
     gridElement.columns = columns.map(col => {
         const colConfig = { ...col };
@@ -69,7 +69,7 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
         });
 
         // B. Handle New Visible Slots -> Borrow Blazor nodes from Cache
-        projectBlazorPortals(gridElement);
+        projectBlazorPortals(gridElement, cacheContainerId);
     });
 
     // Watch for DOM changes in both light and shadow DOM
@@ -84,14 +84,8 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             gridElement.loading = true;
 
             const requestDetails = event.detail; // Contains page, pageSize, sort array, etc.
-            console.log('requestDetails', requestDetails);
+
             // Request data slice from Blazor via Interop
-            // const normalizedFilters = requestDetails.filters.map(f => ({
-            //     ...f,
-            //     value: (f.value ?? []).map(v =>
-            //         v === undefined ? null : v
-            //     )
-            // }));
             const normalizedFilters = (requestDetails.filters || []).map(f => {
                 const rawArray = Array.isArray(f.value)
                     ? f.value
@@ -102,8 +96,6 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
                     value: rawArray.map(v => (v === undefined ? null : v))
                 };
             });
-
-            console.log('normalizedFilters', normalizedFilters);
 
             const responseJson = await dotNetRef.invokeMethodAsync('HandleDataRequest', {
                 page: requestDetails.page,
@@ -121,12 +113,17 @@ export async function initEventGrid(gridElement, gridId, rowKeyProperty, dotNetR
             gridElement.total = response.total;
 
             await gridElement.updateComplete;
+
+
             // After Lit updates elements in DOM, swap Blazor nodes into Web Awesome cells
-            requestAnimationFrame(() => projectBlazorPortals(gridElement));
+            requestAnimationFrame(() => projectBlazorPortals(gridElement, cacheContainerId));
+
 
             gridElement.loading = false;
         });
 
+        // Initial load trigger
+        gridElement.reload();
 
     }
 }
@@ -198,10 +195,15 @@ function evacuateAllPortals(gridElement, cacheContainerId) {
     slots.forEach(slot => returnBlazorNodeToCache(slot, cacheContainerId));
 }
 
-export function setData(gridElement, dataJson) {
-    console.log(dataJson);
+export async function setData(gridElement, dataJson) {
     const data = JSON.parse(dataJson);
     gridElement.data = data;
+    await gridElement.updateComplete;
+
+    // After Lit updates elements in DOM, swap Blazor nodes into Web Awesome cells
+
+    const cacheContainerId = `portal-cache-${gridElement.id}`;
+    requestAnimationFrame(() => projectBlazorPortals(gridElement, cacheContainerId));
 }
 export function getPageCount(gridElement) {
     return gridElement.pageCount;

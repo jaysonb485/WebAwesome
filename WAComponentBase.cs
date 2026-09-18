@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Reflection;
 
 namespace WebAwesomeBlazor
 {
     public abstract class WAComponentBase : ComponentBase, IDisposable, IAsyncDisposable
     {
+        #region Private properties
+
+        const string ModuleVersion = "1.13.0";
+
+        #endregion
+
         #region Parameters
         [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; } = default!;
 
@@ -181,12 +188,10 @@ namespace WebAwesomeBlazor
         #region Private Methods
         protected async Task<IJSObjectReference> LoadModuleAsync(string? moduleFileName = "")
         {
+            var projectVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "0";
             _moduleFileName ??= string.IsNullOrWhiteSpace(moduleFileName) ? $"./_content/WebAwesomeBlazor/Components/{GetType().Name}.razor.js" : moduleFileName;
 
-            if (_module is null)
-            {
-                _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", _moduleFileName);
-            }
+            _module ??= await JSRuntime.InvokeAsync<IJSObjectReference>("import", $"{_moduleFileName}?{projectVersion}");
 
             return _module;
         }
