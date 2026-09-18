@@ -125,10 +125,10 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public bool Spellcheck { get; set; } = true;
 
-        [Parameter]
-        public EventCallback<InputTagCreatingEventArgs> TagCreating { get; set; } = default!;
-        [Parameter]
-        public Func<string, Task<bool>>? TagCreatingFunc { get; set; } = null;
+        //[Parameter]
+        //public EventCallback<InputTagCreatingEventArgs> TagCreating { get; set; } = default!;
+        //[Parameter]
+        //public Func<string, Task<bool>>? TagCreatingFunc { get; set; } = null;
 
 
         [Parameter]
@@ -261,27 +261,27 @@ namespace WebAwesomeBlazor.Components
             await Blurred.InvokeAsync();
         }
 
-        /// <summary>
-        /// Captures when the remove button is pressed
-        /// </summary>
-        [JSInvokable]
-        public async Task<bool> HandleTagCreating(string tag)
-        {
-            if (TagCreatingFunc != null)
-            {
-                return await TagCreatingFunc(tag);
-            }
+        ///// <summary>
+        ///// Captures when the remove button is pressed
+        ///// </summary>
+        //[JSInvokable]
+        //public async Task<bool> HandleTagCreating(string tag)
+        //{
+        //    if (TagCreatingFunc != null)
+        //    {
+        //        return await TagCreatingFunc(tag);
+        //    }
 
-            return false;
+        //    return false;
 
-            //var args = new InputTagCreatingEventArgs
-            //{
-            //    Tag = tag
-            //};
-            //await TagCreating.InvokeAsync(args);
+        //    //var args = new InputTagCreatingEventArgs
+        //    //{
+        //    //    Tag = tag
+        //    //};
+        //    //await TagCreating.InvokeAsync(args);
 
-            //return args.Cancel;
-        }
+        //    //return args.Cancel;
+        //}
         #endregion
 
         #region State

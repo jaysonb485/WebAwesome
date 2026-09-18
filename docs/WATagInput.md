@@ -20,9 +20,11 @@ Tag inputs allow users to enter and manage a list of tags.
 | AutoCapitalize | TagInputAutoCapitalize | `null` | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. |
 | Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
 | AutoCorrectEnabled | bool | true | Indicates whether the browser's autocorrect feature is on or off. |
+| Blur | EventCallback | | Triggered when the input loses focus. |
 | Clearable | bool | false | Adds a clear button when the input is not empty. |
 | Delimeter | string | "" | The character(s) that turn typed text into a tag. Each character is a separate delimiter, so ",;" accepts both commas and semicolons. Empty string for enter. |
 | Disabled | bool | false | Maked the input disabled. |
+| Focus | EventCallback | | Triggered when the input receives focus. |
 | Hint | string |  | The input's hint text. |
 | Label | string |  | The input's label |
 | MaxTags | int | | The maximum number of tags allowed. |
@@ -48,20 +50,5 @@ Tag inputs allow users to enter and manage a list of tags.
 
 #### Basic Usage
 ```HTML+Razor
-<WAInput @bind-Value="@inputValue" 
-	Label="Enter some text"
-	Hint="You can enter anything"
-	Placeholder="Text" />
+<WATagInput @bind-Value="tagValues"  />
 ```
-
-#### Clearable, password type with start icon, and password toggle
-```HTML+Razor
-<WAInput @bind-Value="@userPassword"
-	Label="Enter your password"
-	Type="InputType.Password"
-	Clearable="true"
-	PasswordToggle="true"
-	StartIconName="lock" />
-```
-
-![WAInput](https://github.com/user-attachments/assets/8bb3c022-a348-4f1f-8998-75a92703d3fe)

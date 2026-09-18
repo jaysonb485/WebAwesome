@@ -152,9 +152,14 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public bool Spellcheck { get; set; } = false;
-
+        /// <summary>
+        /// Invoked when the input receives focus.
+        /// </summary>
         [Parameter]
         public EventCallback Focused { get; set; }
+        /// <summary>
+        /// Invoked when the input loses focus.
+        /// </summary>
         [Parameter]
         public EventCallback Blurred { get; set; }
         #endregion
