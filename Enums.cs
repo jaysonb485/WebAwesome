@@ -1134,6 +1134,34 @@ namespace WebAwesomeBlazor
         Start
     }
     #endregion
+    #region Tag Input Enums
+    public enum TagInputAppearance
+    {
+        Filled,
+        Outlined,
+        FilledOutlined,
+    }
+
+    public enum TagInputAutoCapitalize
+    {
+        Off,
+        None,
+        On,
+        Sentences,
+        Words,
+        Characters
+    }
+
+    public enum TagInputSize
+    {
+        XSmall,
+        Small,
+        Medium,
+        Large,
+        XLarge,
+    }
+
+    #endregion
     #region Tag Enums
     public enum TagVariant
     {

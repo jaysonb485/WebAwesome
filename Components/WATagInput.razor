@@ -1,0 +1,32 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Forms
+@inherits WAComponentBase
+<wa-tag-input @ref="@Element"
+              id="@Id"
+              @attributes="@AdditionalAttributes"
+              style="@StyleNames"
+              class="@ClassNames"
+              slot="@Slot"
+              value="@Value"
+              allow-duplicates="@AllowDuplicates"
+              appearance="@AppearanceString"
+              autocapitalize="@AutoCapitalizeString"
+              autocomplete="@Autocomplete"
+              autocorrect="@(AutoCorrectEnabled ? "on" : "off")"
+              with-clear="@Clearable"
+              delimeter="@Delimiter"
+              disabled="@Disabled"
+              hint="@Hint"
+              label="@Label"
+              max-tags="@MaxTags"
+              min-tags="@MinTags"
+              pill="@Pill"
+              placeholder="@Placeholder"
+              readonly="@ReadOnly"
+              required="@Required"
+              size="@SizeString"
+              spellcheck="@Spellcheck"
+              @onchange="OnValueChanged">
+    @ChildContent
+</wa-tag-input>
+

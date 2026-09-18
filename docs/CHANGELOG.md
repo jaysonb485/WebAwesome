@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## Version 1.13.0
+- Upgraded to [Web Awesome 3.13.0](https://webawesome.com/docs/resources/changelog#wa_3130) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- Updated to .NET 10.0 - Make sure you have updated your project to target .NET 10.0.
+- New component [WATagInput](/docs/WATagInput.md) to allow users to  collect a list of short values, such as keywords, email addresses, or labels, as removable tags.
+- 
+
 ## Version 1.12.1.1
 - Fixed timing of WADataGrid JS module loading to ensure it is ready if calling any functions from AfterRender.
 

@@ -7,6 +7,12 @@ namespace WebAwesomeBlazor.Components
         public bool Cancel { get; set; } = false;
     }
 
+    public class InputTagCreatingEventArgs : EventArgs
+    {
+        public string Tag { get; set; } = string.Empty;
+        public bool Cancel { get; set; } = false;
+    }
+
     public class PaginationPageChangedEventArgs : EventArgs
     {
         public int Page { get; set; }
