@@ -183,10 +183,7 @@ namespace WebAwesomeBlazor
         {
             _moduleFileName ??= string.IsNullOrWhiteSpace(moduleFileName) ? $"./_content/WebAwesomeBlazor/Components/{GetType().Name}.razor.js" : moduleFileName;
 
-            if (_module is null)
-            {
-                _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", _moduleFileName);
-            }
+            _module ??= await JSRuntime.InvokeAsync<IJSObjectReference>("import", _moduleFileName);
 
             return _module;
         }

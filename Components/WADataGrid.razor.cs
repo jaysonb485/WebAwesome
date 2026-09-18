@@ -405,6 +405,8 @@ namespace WebAwesomeBlazor.Components
                 throw new InvalidOperationException("SetDataAsync can only be used in client-side mode. In server-side mode, use the OnDataRequest callback to provide data.");
             }
             _currentPageItems = items ?? [];
+            await InvokeAsync(StateHasChanged);
+            //await Task.Yield();
             await LoadModuleAsync("./_content/WebAwesomeBlazor/Components/WADataGrid.razor.js");
             await SafeInvokeVoidAsync("setData", Element, JsonSerializer.Serialize(_currentPageItems, jsonOptions));
             StateHasChanged();
