@@ -8,18 +8,18 @@
 ### Description
 Progress bars are used to show the status of an ongoing operation.
 
-[WebAwesome docs](https://webawesome.com/docs/components/progress-bar/)
+[Web Awesome docs](https://webawesome.com/docs/components/progress-bar/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | decimal | 0 | The current progress as a percentage, 0 to 100. |
 | Indeterminate | bool | false | When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state. |
+| IndicatorColor | string |  | The color of the indicator. |
 | Label | string |  |  A custom label for assistive devices. |
 | Text | string |  | Text to display over the progress bar. |
-| TrackHeight | string |  | Height of the progress bar in CSS units. |
 | TrackColor | string |  |  The color of the track. |
-| IndicatorColor | string |  | The color of the indicator. |
+| TrackHeight | string |  | Height of the progress bar in CSS units. |
+| Value | decimal | 0 | The current progress as a percentage, 0 to 100. |
 
 ### Examples
 

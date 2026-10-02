@@ -12,14 +12,15 @@
 ### Description
 Button groups can be used to group related buttons into sections.
 
-[WebAwesome docs](https://webawesome.com/docs/components/button-group/)
+[Web Awesome docs](https://webawesome.com/docs/components/button-group/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
 | Label    | string |  | A label to use for the button group. This won't be displayed on the screen, but it will be announced by assistive devices when interacting with the control and is strongly recommended.                     |
-| Variant    | ButtonGroupVariant | ButtonGroupVariant.Neutral       | The button group's theme variant. Defaults to neutral if not within another element with a variant.                     |
 | Orientation    | ButtonGroupOrientation | ButtonGroupOrientation.Horizontal   | The button group's orientation.                     |
+| Variant    | ButtonGroupVariant | ButtonGroupVariant.Neutral       | The button group's theme variant. Defaults to neutral if not within another element with a variant.                     |
+
 
 ### Examples
 

@@ -68,13 +68,13 @@ Inject `ToastService` on pages where a toast notification would be called and ca
 ### ToastMessage Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Message | string |  | The message to display for a simple toast. If HTMLContent is populated, this property is ignored. |
+| Duration | int | 5000 | The length of time in milliseconds before the toast item is automatically dismissed. Set to 0 to keep the toast item open until the user dismisses it. |
+| HTMLContent | RenderFragment |  | The content to display for a rich toast. If left blank, message will be used instead. |
 | Icon | [Icon](/docs/IconClass.md) || The icon to draw on the toast. Alternatively, use IconName to specify the name of the icon. |
 | IconName | string | | The name of the icon to draw on the toast. Available names depend on the icon library being used. |
-| Duration | int | 5000 | The length of time in milliseconds before the toast item is automatically dismissed. Set to 0 to keep the toast item open until the user dismisses it. |
+| Message | string |  | The message to display for a simple toast. If HTMLContent is populated, this property is ignored. |
 | Size | ToastMessageSize | `ToastMessageSize.Medium` | The toast item's size. |
 | Variant | ToastMessageVariant | `ToastMessageVariant.Brand` | The toast item's variant. |
-| HTMLContent | RenderFragment |  | The content to display for a rich toast. If left blank, message will be used instead. |
 
 
 ### Examples

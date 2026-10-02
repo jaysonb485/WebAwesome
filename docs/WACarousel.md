@@ -12,7 +12,7 @@
 ### Description
 Carousels display an arbitrary number of content slides along a horizontal or vertical axis.
 
-[WebAwesome docs](https://webawesome.com/docs/components/carousel/)
+[Web Awesome docs](https://webawesome.com/docs/components/carousel/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
@@ -29,8 +29,11 @@ Carousels display an arbitrary number of content slides along a horizontal or ve
 | AspectRatio | string | `16/9` | The aspect ratio of each slide. Default is 16/9 |
 | ScrollHint | string |  | The amount of padding to apply to the scroll area, allowing adjacent slides to become partially visible as a scroll hint. |
 | SlideGap | string | `var(--wa-space-m)` | The space between each slide. |
-| SlideChanged | EventCallback<int> |  | Triggered when the active slide has changed. Provides the index of the new slide. |
 
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| SlideChanged(int) | Triggered when the active slide has changed. Provides the index of the new slide. |
 
 ### Methods
 | Method      | Parameters       | Description                              |

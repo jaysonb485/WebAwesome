@@ -20,9 +20,28 @@ Video playlists wrap multiple [WAVideo](/docs/WAVideo.md) elements into a playli
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Videos | RenderFragment | | The WAVideos to render in the playlist. |
 | DefaultVideoControls | VideoControls | `VideoControls.Full` | The controls preset forwarded to each child WAVideo |
-| VideoChanged | EventCallback\<VideoChangedCallbackArgs> | | Emitted when the active video changes. Provides previous video index, current (new) video index, and new video metadata. |
+| Videos | RenderFragment | | The WAVideos to render in the playlist. |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| VideoChanged (VideoChangedCallbackArgs) | Emitted when the active video changes. Provides previous video index, current (new) video index, and new video metadata. |
+
+#### VideoChangedCallbackArgs
+| Property | Type   | Default | Description                              |
+|----------|--------|---------|------------------------------------------|
+| PreviousIndex | int |  | The index of the previous video in the playlist. |
+| CurrentIndex | int |  | The index of the current (new) video in the playlist. |
+| Video | VideoMetadata |  | The metadata of the current (new) video in the playlist. |
+
+#### VideoMetadata
+| Property | Type   | Default | Description                              |
+|----------|--------|---------|------------------------------------------|
+| Title | string |  | The title of the video. |
+| PosterUrl | string |  | The URL of the video's poster image. |
+| Sources | string[] |  | The list of video source URLs. |
+| Tracks | string[] |  | The list of video track URLs. |
 
 ### Methods
 | Method      | Parameters       | Description                              |

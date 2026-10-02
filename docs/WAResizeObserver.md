@@ -10,7 +10,7 @@
 ### Description
 The resize observer will report changes to the dimensions of the elements it wraps.
 
-[WebAwesome docs](https://webawesome.com/docs/components/resize-observer/)
+[Web Awesome docs](https://webawesome.com/docs/components/resize-observer/)
 
 ### Properties
 | Property | Type   | Default | Description                              |

@@ -32,22 +32,36 @@ export function initialize(elementId, dotnetHelper, setValue) {
         dotnetHelper.invokeMethodAsync('HandleInputBlur');
     };
 
-    // const onTagCreating = (event) => {
-    //     event.detail.promise = dotnetHelper.invokeMethodAsync('HandleTagCreating', event.detail.inputValue)
-    //         .then(result => {
-    //             if (result) {
-    //                 console.log('preventing');
-    //                 event.preventDefault();
-    //             }
-    //         });
-    // };
+    let isInternalChange = false;
+
+    // Capture handler so it can be removed later
+    const onTagCreating = async (event) => {
+        if (isInternalChange) return;
+
+        event.preventDefault();
+
+        const newTag = event.detail.inputValue;
+
+        var result = await dotnetHelper.invokeMethodAsync('HandleTagCreating', event.detail.inputValue);
+
+        if (!result.cancel) {
+            isInternalChange = true;
+
+            element.value = [...element.value, newTag];
+            element.inputValue = '';
+
+            setTimeout(() => { isInternalChange = false; }, 0);
+        }
+
+    };
+
 
     // Register listeners
     element.addEventListener('wa-clear', onClear);
     element.addEventListener('change', onChange);
     element.addEventListener('focus', onFocus);
     element.addEventListener('blur', onBlur);
-    //element.addEventListener('wa-create', onTagCreating);
+    element.addEventListener('wa-create', onTagCreating);
 
     // Return cleanup object
     return {
@@ -56,7 +70,7 @@ export function initialize(elementId, dotnetHelper, setValue) {
             element.removeEventListener('change', onChange);
             element.removeEventListener('focus', onFocus);
             element.removeEventListener('blur', onBlur);
-            //element.removeEventListener('wa-create', onTagCreating);
+            element.removeEventListener('wa-create', onTagCreating);
         }
     };
 }

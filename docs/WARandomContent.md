@@ -16,21 +16,26 @@ Selects one or more child elements at random and displays them, hiding the rest.
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| ChildContent | RenderFragment |  | The content to display randomly. Only direct children will be randomized. Set ID attribute to identify each child on ContentChanged event. |
 | Animation | RandomContentAnimation | RandomContentAnimation.None | Entrance animation for newly shown children. |
-| AutoPlay | bool | `false` | Rotate the content automatically. Set the cadence with `AutoPlayInterval`. |
-| AutoPlayInterval | int | `3000` | Autoplay cadence in milliseconds. |
-| DisplayItems | int | `1` | Number of child elements to display at once. Minimum is 1, maximum is the number of elements in the pool. |
-| Mode | RandomContentMode | RandomContentMode.Unique | The mode of randomization. `Unique` never repeats the previous selection. `Random` will select elements randomly, while `Sequential` will display them in order. |
-| ContentChanged | EventCallback<string[]> |  | Event triggered when the displayed content changes. Provides an array of ID strings of the elements displayed. |
 | AnimationDuration | int | `300` | Duration of the entrance animation in milliseconds. |
 | AnimationEasing | string | `ease` | CSS easing function for the entrance animation. |
 | AnimationTranslate | string | `0.5em` | CSS translate value for the entrance animation. |
+| AutoPlay | bool | `false` | Rotate the content automatically. Set the cadence with `AutoPlayInterval`. |
+| AutoPlayInterval | int | `3000` | Autoplay cadence in milliseconds. |
+| ChildContent | RenderFragment |  | The content to display randomly. Only direct children will be randomized. Set ID attribute to identify each child on ContentChanged event. |
+| DisplayItems | int | `1` | Number of child elements to display at once. Minimum is 1, maximum is the number of elements in the pool. |
+| Mode | RandomContentMode | RandomContentMode.Unique | The mode of randomization. `Unique` never repeats the previous selection. `Random` will select elements randomly, while `Sequential` will display them in order. |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| ContentChanged (string[]) | Event triggered when the displayed content changes. Provides an array of ID strings of the elements displayed. |
+
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| RandomizeAsync()  |  | Selects a new set of children using the current mode. Returns an array of ID strings of the elements now shown. Note: ContentChanged event will also be fired as a result.  |
+| RandomizeAsync  |  | Selects a new set of children using the current mode. Returns an array of ID strings of the elements now shown. Note: ContentChanged event will also be fired as a result.  |
 
 ### Examples
 

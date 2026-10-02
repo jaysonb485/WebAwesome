@@ -8,7 +8,7 @@
 ### Description
 The markdown component turns raw markdown into rendered HTML using the Marked library. Indentation is handled automatically. You can nest your markdown at any depth to match the surrounding HTML structure and the common leading whitespace will be stripped before parsing.
 
-[WebAwesome docs](https://webawesome.com/docs/components/markdown)
+[Web Awesome docs](https://webawesome.com/docs/components/markdown)
 
 ### Properties
 | Property | Type   | Default | Description                              |

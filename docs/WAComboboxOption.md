@@ -12,7 +12,7 @@ Options define the selectable items within a Combobox component.
 
 This component must be used as a child of [WACombobox](/docs/WACombobox.md).
 
-[WebAwesome docs](https://webawesome.com/docs/components/combobox/)
+[Web Awesome docs](https://webawesome.com/docs/components/combobox/)
 
 > [!IMPORTANT]
 > WACombobox requires access to WebAwesome Pro.
@@ -20,13 +20,13 @@ This component must be used as a child of [WACombobox](/docs/WACombobox.md).
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | string |  | The option's value. |
-| Label | string |  | The option's label. Alternatively, the label will be the ChildContent |
 | Disabled | bool | false | Disables the option |
-| StartIconName | string |  | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| StartIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the start slot. |
-| EndIconName | string |  | The name of the icon to draw in the end slot. Available names depend on the icon library being used. |
 | EndIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. |
+| EndIconName | string |  | The name of the icon to draw in the end slot. Available names depend on the icon library being used. |
+| Label | string |  | The option's label. Alternatively, the label will be the ChildContent |
+| StartIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the start slot. |
+| StartIconName | string |  | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
+| Value | string |  | The option's value. |
 
 ### Examples
 

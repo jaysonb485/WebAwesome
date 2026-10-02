@@ -44,7 +44,6 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 | EmptyTemplate | RenderFragment | `null` | A custom template to show when the grid has no data. |
 | NoResultsTemplate | RenderFragment | `null` | A custom template to show when the grid has no results after filtering. |
 | RowDetailsTemplate | RenderFragment | | A custom template to show when a row is expanded. Set context to access underlying row data |
-| OnDataRequest | EventCallback\<DataRequestEventArgs> | `null` | An event that is triggered when the grid needs data in server-side mode. The consumer should handle this event and return the requested data. |
 
 #### DataGridRequesArgs Properties
 | Property | Type   | Default | Description                              |
@@ -81,6 +80,11 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 
 > [!NOTE]
 > CSS page styles RowDetailsTemplate and Column Templates sit in the shadow DOM where Web Awesome's loaded cannot see it. Refer to [Web Awesome docs](https://webawesome.com/docs/components/data-grid/#preloading-rendered-components) for component rendering. 
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| DataRequested (DataRequestEventArgs) | Triggered when the grid needs data in server-side mode. The consumer should handle this event and return the requested data. |
 
 ### Methods
 | Method      | Parameters       | Description                              |
@@ -162,7 +166,7 @@ Data grids display tabular data with sorting, selection, filtering, pinning, tre
 ```HTML+Razor
 
 <WADataGrid TItem="PullRequest" RowKey="Id" @ref="PRDataGrid" Pinnable="true" RowSelectionMode="DataGridRowSelection.Multiple"
-            ShowPagination="true" ServerSideData="true" OnDataRequest="LoadGridDataAsync" group-by="Author">
+            ShowPagination="true" ServerSideData="true" DataRequested="LoadGridDataAsync" group-by="Author">
     <Columns>
         <DataGridColumn TItem="PullRequest" Field="Title" Label="Title" Sortable="true" Flex="3" MinWidth="180" Filterable="true" />
         <DataGridColumn TItem="PullRequest" Field="Created" Label="Created" Sortable="true" Filterable="true" FilterType="DataGridColumnFilterType.DateRange" />

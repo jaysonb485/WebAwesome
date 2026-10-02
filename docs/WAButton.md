@@ -8,7 +8,7 @@
 ### Description
 Buttons represent actions that are available to the user.
 
-[WebAwesome docs](https://webawesome.com/docs/components/button/)
+[Web Awesome docs](https://webawesome.com/docs/components/button/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
@@ -19,7 +19,6 @@ Buttons represent actions that are available to the user.
 | EndIcon    | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. Alternatively, use EndIconName to specify the name of the icon. |
 | EndIconName    | string  |       |The name of the icon to draw in the end slot. Available names depend on the icon library being used.  |
 | Loading | bool | false | Draws the button in a loading state. |
-| OnClick | EventCallback<MouseEventArgs?> | | Triggered when the button is clicked |
 | Pill | bool | false | Draws a pill-style button with rounded edges. |
 | Size | ButtonSize | ButtonSize.Medium | The button's size (Small, medium, large). |
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Alternatively, use StartIconName to specify the name of the icon. |
@@ -27,6 +26,11 @@ Buttons represent actions that are available to the user.
 | Text    | string |  | The button's label. Alternatively, use ChildContent to populate the button's content.                   |
 | Type | ButtonType | ButtonType.Button | The type of button (Button, Submit, Reset). When the type is submit, the button will submit the surrounding form. |
 | Variant | ButtonVariant | Inherit | The button's theme variant. Defaults to neutral if not within another element with a variant. |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| OnClick(MouseEventArgs)     | Triggered when the button is clicked. |
 
 ### Methods
 | Method      | Parameters       | Description                              |

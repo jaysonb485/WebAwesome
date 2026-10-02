@@ -12,22 +12,26 @@
 ### Description
 Dialogs (modals) appear above the page and require the user's immediate attention.
 
-[WebAwesome docs](https://webawesome.com/docs/components/dialog/)
+[Web Awesome docs](https://webawesome.com/docs/components/dialog/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Title | string  |   | The dialog's title as displayed in the header. You should always include a relevant title, as it is required for proper accessibility.  |
-| DialogFooter | RenderFragment |   | The dialog's footer, usually one or more buttons representing various options.  |
+| BackdropFilter | string | | A CSS filter to apply to the backdrop behind the dialog. e.g. "blur(5px)" |
 | DialogBody | RenderFragment |   | The dialog's main content. |
+| DialogFooter | RenderFragment |   | The dialog's footer, usually one or more buttons representing various options.  |
 | HeaderActions  | RenderFragment |   | Optional actions to add to the header. Works best with WAButton.  |
+| HideDuration | string | 200ms | The animation duration when hiding the dialog.Default `200ms` |
 | LightDismiss | bool | true  | When enabled, the drawer will be closed when the user clicks outside of it. Defaults to true.  |
 | PreferredWidth  | string  |   | The preferred width of the dialog in CSS units. Note that the dialog will shrink to accommodate smaller screens.  |
-| DialogClosed  | EventCallback<string>  |   | Triggered when the dialog is closed. Argument provides ID of the triggering component  |
-| BackdropFilter | string | | A CSS filter to apply to the backdrop behind the dialog. e.g. "blur(5px)" |
-| HideDuration | string | 200ms | The animation duration when hiding the dialog.Default `200ms` |
 | ShowDuration | string | 200ms | The animation duration when showing the dialog. Default `200ms` |
 | Spacing | string | | The amount of space around and between the dialog's content. |
+| Title | string  |   | The dialog's title as displayed in the header. You should always include a relevant title, as it is required for proper accessibility.  |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| DialogClosed (string)  | Triggered when the dialog is closed. Argument provides ID of the triggering component  |
 
 
 ### Methods

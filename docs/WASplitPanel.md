@@ -15,26 +15,26 @@
 ### Description
 Split panels display two adjacent panels, allowing the user to reposition them.
 
-[WebAwesome docs](https://webawesome.com/docs/components/split-panel/)
+[Web Awesome docs](https://webawesome.com/docs/components/split-panel/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| StartContent | RenderFragment  |  | Content to place in the start panel. |
+| Disabled | bool | false | Disables resizing. Note that the position may still change as a result of resizing the host element. |
+| DividerIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the Divider. |
+| DividerIconName | string |  | The name of the icon to draw for the Divider. Available names depend on the icon library being used. |
 | EndContent | RenderFragment  |  | Content to place in the end panel. |
+| Height | string |  | Height of the container in CSS units. |
+| Orientation | SplitPanelOrientation | SplitPanelOrientation.Horizontal | Sets the split panel's orientation. |
 | PositionPercent | int | `50` | The current position of the divider from the primary panel's edge as a percentage 0-100. Defaults to 50% of the container's initial size. To set as a number of pixels use `PositionPixels`. |
 | PositionPixels | int |  | The current position of the divider from the primary panel's edge in pixels. To set as a percentage of the primary panel's width, use `PositionPercent` |
-| Orientation | SplitPanelOrientation | SplitPanelOrientation.Horizontal | Sets the split panel's orientation. |
-| Disabled | bool | false | Disables resizing. Note that the position may still change as a result of resizing the host element. |
+| PrimaryMaxWidth | string |  | If set, defines the maximum allowed width of the primary panel in CSS units. |
+| PrimaryMinWidth | string |  | If set, defines the minimum allowed width of the primary panel in CSS units. |
 | PrimaryPanel | SplitPanelPrimaryPanel |  | If no primary panel is designated, both panels will resize proportionally when the host element is resized. If a primary panel is designated, it will maintain its size and the other panel will grow or shrink as needed when the host element is resized. |
 | SnapPoints | string |  | One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g. "100px 50%". |
 | SnapThreshold | int | `12` | How close the divider must be to a snap point until snapping occurs. |
-| DividerIconName | string |  | The name of the icon to draw for the Divider. Available names depend on the icon library being used. |
-| DividerIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the Divider. |
-| PrimaryMinWidth | string |  | If set, defines the minimum allowed width of the primary panel in CSS units. |
-| Height | string |  | Height of the container in CSS units. |
+| StartContent | RenderFragment  |  | Content to place in the start panel. |
 | Width | string |  | Width of the container in CSS units. |
-| PrimaryMaxWidth | string |  | If set, defines the maximum allowed width of the primary panel in CSS units. |
 
 ### Examples
 

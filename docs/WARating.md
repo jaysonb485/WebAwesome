@@ -8,21 +8,21 @@
 ### Description
 Ratings give users a way to quickly view and provide feedback.
 
-[WebAwesome docs](https://webawesome.com/docs/components/rating/)
+[Web Awesome docs](https://webawesome.com/docs/components/rating/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | int | 0 | The current rating. |
+| Disabled | bool | false | Disables the rating. |
 | Label | string |  | A label that describes the rating to assistive devices. |
 | MaximumRating | int | 5 | The highest rating to show. |
 | RatingPrecision | decimal | 1 | The precision at which the rating will increase and decrease. For example, to allow half-star ratings, set this attribute to 0.5. |
 | ReadOnly | bool | false | Makes the rating readonly. |
-| Disabled | bool | false | Disables the rating. |
 | Size | RatingSize | RatingSize.Inherit | The component's size. |
 | SymbolColor | string |  | The inactive color for symbols. |
 | SymbolColorActive | string |  | The active color for symbols. |
 | SymbolSpacing | string |  | The spacing to use around symbols. |
+| Value | int | 0 | The current rating. |
 
 ### Examples
 

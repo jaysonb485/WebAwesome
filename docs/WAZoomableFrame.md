@@ -8,26 +8,29 @@
 ### Description
 Zoomable frames render iframe content with zoom and interaction controls.
 
-[WebAwesome docs](https://webawesome.com/docs/components/zoomable-frame)
+[Web Awesome docs](https://webawesome.com/docs/components/zoomable-frame)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| ZoomInIconName | string |  | The name of the icon to draw for the ZoomIn icon. Available names depend on the icon library being used. |
-| ZoomInIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the ZoomIn icon. |
-| ZoomOutIconName | string |  | The name of the icon to draw for the ZoomOut icon. Available names depend on the icon library being used. |
-| ZoomOutIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the ZoomOut icon. |
-| SourceUrl | string |  | The URL of the content to display. If both `SourceUrl` and `SourceHtml` are provided, `SourceHtml` takes precendence. |
-| SourceHtml | string |  | Inline HTML to display. |
 | AllowFulLScreen | bool | false | Allows fullscreen mode. |
+| AllowPolicy | string | | A [Permissions Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Permissions_Policy) that controls which features the embedded content can use, e.g. `clipboard-write; fullscreen`. The browser reads this when the frame loads, so changing it afterwards has no effect until the frame navigates again.
+| DisableInteraction | bool | false | Disables interaction. |
+| HideZoomControls | bool | false | Removes the zoom controls. |
+| Label | string | | An accessible name for the frame. Screen readers announce it when moving between frames, so set one that describes the frame's content. | 
 | LazyLoad | bool | false | Controls iframe loading behavior. Default is eager loading. |
 | ReferrerPolicy | string |  | Controls referrer information. |
 | Sandbox | string |  | Security restrictions for the iframe. |
-| Zoom | double |  | The current zoom of the frame, e.g. 0 = 0% and 1 = 100%. |
-| ZoomLevels | string |  | The zoom levels to step through when using zoom controls. This does not restrict programmatic changes to the zoom. Provide space-separated values, e.g. "25% 50% 75% 100% 125% 150% 175% 200%". |
-| HideZoomControls | bool | false | Removes the zoom controls. |
-| DisableInteraction | bool | false | Disables interaction. |
+| SourceHtml | string |  | Inline HTML to display. |
+| SourceUrl | string |  | The URL of the content to display. If both `SourceUrl` and `SourceHtml` are provided, `SourceHtml` takes precendence. |
 | SyncThemes | bool | false | Enables automatic theme syncing (light/dark mode and theme selector classes) from the host document to the iframe. |
+| Zoom | double |  | The current zoom of the frame, e.g. 0 = 0% and 1 = 100%. |
+| ZoomInIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the ZoomIn icon. |
+| ZoomInIconName | string |  | The name of the icon to draw for the ZoomIn icon. Available names depend on the icon library being used. |
+| ZoomLevels | string |  | The zoom levels to step through when using zoom controls. This does not restrict programmatic changes to the zoom. Provide space-separated values, e.g. "25% 50% 75% 100% 125% 150% 175% 200%". |
+| ZoomOutIcon | [Icon](/docs/IconClass.md) |  | The icon to draw for the ZoomOut icon. |
+| ZoomOutIconName | string |  | The name of the icon to draw for the ZoomOut icon. Available names depend on the icon library being used. |
+
 
 ### Events
 | Event Name  | Description                              |
@@ -38,9 +41,7 @@ Zoomable frames render iframe content with zoom and interaction controls.
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| ZoomIn  |   | Zooms in to the next available zoom level.      |
 | ZoomInAsync  |   | Zooms in to the next available zoom level.      |
-| ZoomOut |  | Zooms out to the previous available zoom level. |
 | ZoomOutAsync |  | Zooms out to the previous available zoom level. |
 
 

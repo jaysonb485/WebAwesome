@@ -8,32 +8,30 @@
 ### Description
 Textareas collect data from the user and allow multiple lines of text.
 
-[WebAwesome docs](https://webawesome.com/docs/components/textarea/)
+[Web Awesome docs](https://webawesome.com/docs/components/textarea/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value |  |  | The current value of the input |
-| Rows | int | 4 | The number of rows to display by default. |
 | Appearance | TextAreaAppearance | TextAreaAppearance.Outlined | The textarea's visual appearance. |
-| Size | TextAreaSize | TextAreaSize.Inherit | The textarea's size. |
-| Label | string |  | The textarea's label |
+| AutoCapitalize | TextAreaAutoCapitalize |  | Controls whether and how text input is automatically capitalized as it is entered by the user. (Off, None, On, Sentences, Words, Characters) |
+| AutoCorrectEnabled | bool | true | Indicates whether the browser's autocorrect feature is on or off. |
+| Disabled | bool | false | Disables the textarea. |
 | Hint | string |  | The textarea's hint text. |
+| Label | string |  | The textarea's label |
 | Placeholder | string |  | Placeholder text to show as a hint when the textarea is empty. |
 | ReadOnly | bool | false | Makes the textarea readonly. |
-| Disabled | bool | false | Disables the textarea. |
 | Required | bool | false | Makes the textarea a required field. |
 | ResizeMode | TextAreaResize | TextAreaResize.Vertical | Controls how the textarea can be resized. Defaults to vertical. |
-| AutoCorrectEnabled | bool | true | Indicates whether the browser's autocorrect feature is on or off. |
+| Rows | int | 4 | The number of rows to display by default. |
+| Size | TextAreaSize | TextAreaSize.Inherit | The textarea's size. |
 | Spellcheck | bool | true | Enables spell checking on the textarea. |
-| AutoCapitalize | TextAreaAutoCapitalize |  | Controls whether and how text input is automatically capitalized as it is entered by the user. (Off, None, On, Sentences, Words, Characters) |
+| Value |  |  | The current value of the input |
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| SetValue  | value: string   | Set the value of the text area      |
 | SetValueAsync  | value: string   | Set the value of the text area      |
-| SetFocus |  | Sets focus to the text area. |
 | SetFocusAsync |  | Sets focus to the  text area. |
 
 ### Examples

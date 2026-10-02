@@ -11,19 +11,20 @@
 ### Description
 Radio groups are used to group multiple [WARadioOption](/docs/WARadioOption) components so they function as a single form control.
 
-[WebAwesome docs](https://webawesome.com/docs/components/radio-group/)
+[Web Awesome docs](https://webawesome.com/docs/components/radio-group/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| TValue | type |  |  |
-| Value | TValue |  | The current value of the radio group, submitted as a name/value pair with form data. |
-| Label | string? |  |  A custom label for assistive devices. |
-| Size | RadioGroupSize | RadioGroupSize.Medium | The radio group's size. This size will be applied to all child radios and radio buttons, except when explicitly overridden. |
+| Disabled | bool | false | Disables the radio group and all child radios. |
 | Hint | string |  | The radio groups's hint. |
+| Label | string? |  |  A custom label for assistive devices. |
 | Orientation | RadioGroupOrientation | RadioGroupOrientation.Vertical | The orientation in which to show radio items. |
 | Required | bool | false | Ensures a child radio is checked before allowing the containing form to submit. |
-| Disabled | bool | false | Disables the radio group and all child radios. |
+| Size | RadioGroupSize | RadioGroupSize.Medium | The radio group's size. This size will be applied to all child radios and radio buttons, except when explicitly overridden. |
+| TValue | type |  |  |
+| Value | TValue |  | The current value of the radio group, submitted as a name/value pair with form data. |
+
 
 ### Examples
 

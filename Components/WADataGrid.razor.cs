@@ -119,7 +119,13 @@ namespace WebAwesomeBlazor.Components
         /// Event driven data provider callback.
         /// </summary>
         [Parameter]
+        public Func<DataGridDataRequestArgs, Task<GridDataResult<TItem>>> DataRequested { get; set; } = null!;
+
+        [Parameter]
+        [Obsolete("Use DataRequested instead. This property will be removed in a future version.")]
         public Func<DataGridDataRequestArgs, Task<GridDataResult<TItem>>> OnDataRequest { get; set; } = null!;
+
+
 
         /// <summary>
         /// Custom template rendered dynamically inside the expanded row accordion.
@@ -180,6 +186,10 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+#pragma warning disable CS0618 // Type or member is obsolete
+        private Func<DataGridDataRequestArgs, Task<GridDataResult<TItem>>> DataRequestedCallback => DataRequested ?? OnDataRequest;
+#pragma warning restore CS0618
+
 
         #endregion
 
@@ -265,20 +275,7 @@ namespace WebAwesomeBlazor.Components
                 Filters = jsArgs.Filters?.Select(x => new DataGridColumnFilter
                 {
                     Id = x.Id,
-                    //Value = x.Value.ValueKind switch
-                    //{
-                    //    JsonValueKind.String =>
-                    //        [x.Value.GetString()!],
 
-                    //    JsonValueKind.Array =>
-                    //        [.. x.Value.EnumerateArray()
-                    //     .Where(e => e.ValueKind == JsonValueKind.String)
-                    //     .Select(e => e.GetString()!)],
-
-                    //    _ => []
-
-
-                    //}
                     Value = x.Value.ValueKind switch
                     {
                         JsonValueKind.String =>
@@ -301,7 +298,7 @@ namespace WebAwesomeBlazor.Components
             };
 
 
-            var result = await OnDataRequest(args);
+            var result = await DataRequestedCallback(args);
             _currentPageItems = result.Items ?? Enumerable.Empty<TItem>();
 
             // 2. Re-render Blazor portal DOM cache for current page

@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -16,7 +11,14 @@ namespace WebAwesomeBlazor.Components
         /// Triggered when the breadcrumb item is clicked.
         /// </summary>
         [Parameter]
+        [Obsolete("Use Clicked instead.")]
         public EventCallback<MouseEventArgs?> OnClick { get; set; }
+
+        /// <summary>
+        /// Triggered when the breadcrumb item is clicked.
+        /// </summary>
+        [Parameter]
+        public EventCallback<MouseEventArgs?> Clicked { get; set; }
 
         /// <summary>
         /// The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon.
@@ -52,6 +54,13 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public string? EndIconName { get; set; }
+
+        #endregion
+
+        #region Private Properties
+#pragma warning disable CS0618 // Type or member is obsolete
+        private EventCallback<MouseEventArgs?> ClickedEventCallback => Clicked.HasDelegate ? Clicked : OnClick;
+#pragma warning restore CS0618 // Type or member is obsolete
         #endregion
 
     }

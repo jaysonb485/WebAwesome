@@ -8,14 +8,11 @@
 ### Description
 An input component that accepts date only, date time, or time selection.
 
-[WebAwesome docs](https://webawesome.com/docs/components/input/)
+[Web Awesome docs](https://webawesome.com/docs/components/input/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| TValue | Type | |The type of value the input will process. Accepted types are DateOnly, DateOnly?, DateTime, DateTime?
-| Value | TValue |  | The current value of the input |
-| ValueChanged | EventCallback\<TValue> |  | Triggered when the input's value has changed |
 | Appearance | InputAppearance | InputAppearance.Outlined | The input's visual appearance. |
 | Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
 | Autofocus | bool | false | Automatically focuses the input when it is rendered. |
@@ -30,11 +27,17 @@ An input component that accepts date only, date time, or time selection.
 | Size | InputSize | InputSize.Inherit | The input's size. |
 | ReadOnly | bool | false | Makes the input readonly. |
 | Required | bool | false | Makes the input a required field. |
+| TValue | Type | |The type of value the input will process. Accepted types are DateOnly, DateOnly?, DateTime, DateTime?
+| Value | TValue |  | The current value of the input |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| ValueChanged (\<TValue>) | Triggered when the input's value has changed |
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| SetFocus |  | Sets focus to the input element. |
 | SetFocusAsync |  | Sets focus to the input element. |
 
 ### Examples

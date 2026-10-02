@@ -12,23 +12,28 @@
 ### Description
 Drawers slide in from a container to expose additional options and information.
 
-[WebAwesome docs](https://webawesome.com/docs/components/drawer/)
+[Web Awesome docs](https://webawesome.com/docs/components/drawer/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Title | string |  | The drawer's title as displayed in the header. You should always include a relevant title, as it is required for proper accessibility. |
-| DrawerFooter  | RenderFragment |  | The drawer's footer, usually one or more buttons representing various options. |
+| BackdropFilter | string | | A CSS filter to apply to the backdrop behind the drawer. e.g. "blur(5px)" |
 | DrawerBody | RenderFragment |  | The drawer's main content. |
+| DrawerFooter  | RenderFragment |  | The drawer's footer, usually one or more buttons representing various options. |
+| HideDuration | string | 200ms | The animation duration when hiding the drawer. Default `200ms` |
 | HeaderActions | RenderFragment |  | Optional actions to add to the header. Works best with WAButton. |
 | LightDismiss | bool | true | When enabled, the drawer will be closed when the user clicks outside of it. Defaults to true. |
 | Placement |DrawerPlacement  | DrawerPlacement.End | The direction from which the drawer will open. Valid options are top, end, bottom, start. Default is end. |
-| DrawerClosed  | EventCallback<string>  |   | Triggered when the drawer is closed. Argument provides ID of the triggering component  |
 | PreferredSize | string | | The preferred size of the drawer in CSS units. This will be applied to the drawer's width or height depending on its placement. |
-| BackdropFilter | string | | A CSS filter to apply to the backdrop behind the drawer. e.g. "blur(5px)" |
-| HideDuration | string | 200ms | The animation duration when hiding the drawer. Default `200ms` |
 | ShowDuration | string | 200ms | The animation duration when showing the drawer. Default `200ms` |
 | Spacing | string | | The amount of space around and between the drawer's content. |
+| Title | string |  | The drawer's title as displayed in the header. You should always include a relevant title, as it is required for proper accessibility. |
+
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| DrawerClosed  (string) | Triggered when the drawer is closed. Argument provides ID of the triggering component  |
 
 
 ### Methods

@@ -10,15 +10,15 @@
 ### Description
 A tree item serves as a hierarchical node that lives inside a [WATree](/docs/WATree.md).
 
-[WebAwesome docs](https://webawesome.com/docs/components/tree-item/)
+[Web Awesome docs](https://webawesome.com/docs/components/tree-item/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
 | Expanded | bool | false | Expands the tree item. |
 | Disabled | bool | false | Disables the tree item. |
-| ShowDuration | string | `200ms` | The animation duration when expanding tree items. |
 | HideDuration | string | `200ms` | The animation duration when collapsing tree items. |
+| ShowDuration | string | `200ms` | The animation duration when expanding tree items. |
 | Value | string |  |  The value of the tree item. The value will be passed when selection chage is emitted on the WATree |
 
 ### Examples

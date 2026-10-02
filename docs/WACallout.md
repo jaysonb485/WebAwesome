@@ -8,16 +8,16 @@
 ### Description
 Callouts are used to display important messages inline.
 
-[WebAwesome docs](https://webawesome.com/docs/components/callout/)
+[Web Awesome docs](https://webawesome.com/docs/components/callout/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
+| Appearance | CalloutAppearance | CalloutAppearance.OutlinedFilled | The callout's visual appearance. |
 | Icon    | [Icon](/docs/IconClass.md) |  | The icon to draw in the prefix slot. Alternatively, use EndIconName to specify the name of the icon. |
 | IconName    | string  |       |The name of the icon to draw in the prefix slot. Available names depend on the icon library being used.  |
-| Variant    | CalloutVariant | CalloutVariant.Inherit   | The callout's theme variant. Defaults to brand if not within another element with a variant.                     |
-| Appearance | CalloutAppearance | CalloutAppearance.OutlinedFilled | The callout's visual appearance. |
 | Size | CalloutSize | CalloutSize.Inherit | The callout's size. |
+| Variant    | CalloutVariant | CalloutVariant.Inherit   | The callout's theme variant. Defaults to brand if not within another element with a variant.                     |
 
 ### Examples
 

@@ -8,7 +8,7 @@
 ### Description
 Avatars are used to represent a person or object.
 
-[WebAwesome docs](https://webawesome.com/docs/components/avatar/)
+[Web Awesome docs](https://webawesome.com/docs/components/avatar/)
 
 ### Properties
 | Property | Type   | Default | Description                              |

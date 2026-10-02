@@ -12,20 +12,20 @@
 ### Description
 Tab panels are used inside [WATabGroup](/docs/WATabGroup) to display tabbed content. This implementation combines `<wa-tab>` and `<wa-tab-panel>` components.
 
-[WebAwesome docs - Tab Panel](https://webawesome.com/docs/components/tab-panel/)
-[WebAwesome docs - Tab](https://webawesome.com/docs/components/tab/)
+[Web Awesome docs - Tab Panel](https://webawesome.com/docs/components/tab-panel/)
+[Web Awesome docs - Tab](https://webawesome.com/docs/components/tab/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| PanelContent | RenderFragment |  | The content of the panel |
-| TabContent | RenderFragment |  | The content of the tab. Use this property for full control of the tab display. Otherwise, use `Label` for basic text tab. |
+| Disabled | bool | false |  Disables the tab and prevents selection. |
 | Label | string |  | Label to display on the tab. Use this to display simple text label. Otherwise, use `TabContent` |
 | Name | string |  | Required. The name of the tab panel. |
-| Disabled | bool | false |  Disables the tab and prevents selection. |
+| PanelContent | RenderFragment |  | The content of the panel |
+| PanelClass | string |  | CSS class to apply to the tab panel. Use `Class` to apply classes to the tab. |
 | PanelPadding | string |  | The tab panel's padding. |
 | PanelStyle | string |  | CSS style to apply to the tab panel. Use `Style` to apply styles to the tab. |
-| PanelClass | string |  | CSS class to apply to the tab panel. Use `Class` to apply classes to the tab. |
+| TabContent | RenderFragment |  | The content of the tab. Use this property for full control of the tab display. Otherwise, use `Label` for basic text tab. |
 
 
 ### Examples
