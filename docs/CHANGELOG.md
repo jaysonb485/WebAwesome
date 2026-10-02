@@ -1,5 +1,20 @@
 ﻿# Changelog
 
+## Version 1.14.0
+- Upgraded to [Web Awesome 3.14.0](https://webawesome.com/docs/resources/changelog#wa_3140) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- New component [WAStepper](/docs/WAStepper.md) and associated [WAStep](/docs/WAStep.md) to allow users to navigate through a sequence of steps in a process.
+- Added label to [WADivider](/docs/WADivider.md) including spacing, offset, and plaement attributes.
+- Added `TagCreating` event to [WATagInput](/docs/WATagInput.md)
+- Added `AllowPolicy` and Label to [WAZoomableFrame](/docs/WAZoomableFrame.md)
+- Added `ServerSideData` property to [WACombobox](/docs/WACombobox.md) to allow for server-side data handling with sorting, filtering, and pagination, along with a new `DataRequest` event to handle data requests from the combobox.
+- Clean up docs - alphabetised properties.
+- Changed to more consistent naming of event callbacks across components:
+    - Deprecated `OnClick` event on [WABreadcrumbItem](/docs/WABreadcrumbItem.md) - use `Clicked` instead.
+    - Deprecated `OnDataRequest` event on [WADataGrid](/docs/WADataGrid.md) - use `DataRequested` instead.
+    - Deprecated `OnLeaving` and `OnIntersecting` events on [WAIntersectionObserver](/docs/WAIntersectionObserver.md) - use `Leaving` and `Intersecting` instead.
+    - Deprecated `OnResize` in [WAPage](/docs/WAPage.md) - use `Resized` instead.
+- VideoChangedCallbackArgs in [WAVideoPlaylist](/docs/WAVideoPlaylist.md) now extends `EventArgs`.
+
 ## Version 1.13.0
 - Upgraded to [Web Awesome 3.13.0](https://webawesome.com/docs/resources/changelog#wa_3130) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - Updated to .NET 10.0 - Make sure you have updated your project to target .NET 10.0.

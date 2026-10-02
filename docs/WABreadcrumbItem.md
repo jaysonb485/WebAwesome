@@ -11,7 +11,7 @@
 ### Description
 Breadcrumb Items are used inside [WABreadcrumb](/docs/WABreadcrumb.md) to represent different links.
 
-[WebAwesome docs](https://webawesome.com/docs/components/breadcrumb-item/)
+[Web Awesome docs](https://webawesome.com/docs/components/breadcrumb-item/)
 
 
 ### Properties
@@ -23,7 +23,11 @@ Breadcrumb Items are used inside [WABreadcrumb](/docs/WABreadcrumb.md) to repres
 | SeparatorIconName | string | | The name of the icon to draw in the separator slot. Available names depend on the icon library being used.  This will only change the separator for this item.  If you want to change it for all items in the group, set the separator on <WABreadcrumb> instead. |
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| OnClick | EventCallBack<MouseEventArgs?> | | Triggered when the breadcrumb item is clicked. |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| Clicked(MouseEventArgs)     | Triggered when the breadcrumb item is clicked. |
 
 ### Examples
 

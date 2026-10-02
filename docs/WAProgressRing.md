@@ -8,19 +8,19 @@
 ### Description
 Progress rings are used to show the progress of a determinate operation in a circular fashion.
 
-[WebAwesome docs](https://webawesome.com/docs/components/progress-ring/)
+[Web Awesome docs](https://webawesome.com/docs/components/progress-ring/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | int | 0 | The current progress as a percentage, 0 to 100. |
-| Label | string |  | A custom label for assistive devices. |
-| Text | string |  | Text to show inside the ring. |
-| Size | string |  | Size of the progress ring in CSS units. |
-| TrackWidth | string |  | The width of the track  in CSS units. |
+| IndicatorColor | string |  |  The colour of the indicator. Defaults
 | IndicatorWidth | string |  | The width of the indicator. Defaults to the track width. |
-| TrackColor | string |  | The colour of the track  in CSS units. |
-| IndicatorColor | string |  |  The colour of the indicator. Defaults to the track width. |
+| Label | string |  | A custom label for assistive devices. |
+| Size | string |  | Size of the progress ring in CSS units. |
+| Text | string |  | Text to show inside the ring. |
+| TrackColor | string |  | The colour of the track  in CSS units. | to the track width. |
+| TrackWidth | string |  | The width of the track  in CSS units. |
+| Value | int | 0 | The current progress as a percentage, 0 to 100. |
 
 ### Examples
 

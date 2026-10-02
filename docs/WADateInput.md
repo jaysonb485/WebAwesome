@@ -17,11 +17,6 @@ Date inputs let users enter a date through a segmented field or select one visua
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| TValue | Type | |The type of value the input will process. Accepted types are DateOnly, DateOnly?, DateTime, DateTime? |
-| Value | TValue |  | The current value of the input |
-| ValueChanged | EventCallback\<TValue> |  | Triggered when the input's value has changed |
-| ValueRange | DateRange\<TValue> |  | The current value range of the input. When set, the input will allow selection of a date range instead of a single date. |
-| ValueRangeChanged | EventCallback<DateRange\<TValue>> |  | Triggered when the input's value range has changed |
 | Appearance | InputAppearance | InputAppearance.Outlined | The input's visual appearance. |
 | Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
 | Autofocus | bool | false | Automatically focuses the input when it is rendered. |
@@ -40,10 +35,14 @@ Date inputs let users enter a date through a segmented field or select one visua
 | MaximumRange | int? | 0 | The maximum number of days that can be selected when ValueRange is set. 0 disables the check.|
 | MinimumDate | DateOnly? |  | The minimum date that can be selected. |
 | MinimumRange | int? | 0 | The minimum number of days that can be selected when ValueRange is set. 0 disables the check. |
+| NextIcon | [Icon](/docs/IconClass.md) || An icon used for the next paging slot.. Altneratively, use StartIconName to specify the name of the icon. |
+| NextIconName | string | | An icon used for the next paging slot.. Available names depend on the icon library being used. |
 | PageByMonths | bool | true | Whether previous and next page by the visible range or on month at a time. The default is true (page by month). |
 | Pill | bool | False | Draws a pill-style input with rounded edges. |
 | PopupDistance | int | 0 | The distance in pixels between the input and the popup calendar. |
 | PopupPlacement | DateInputPlacement | DateInputPlacement.BottomStart | The placement of the popup calendar relative to the input. |
+| PreviousIcon    | [Icon](/docs/IconClass.md) |  | An icon used for the previous paging slot. Alternatively, use EndIconName to specify the name of the icon. |
+| PreviousIconName    | string  |       |An icon used for the previous paging slot.. Available names depend on the icon library being used.  |
 | ReadOnly | bool | false | Makes the input readonly. |
 | Required | bool | false | Makes the input a required field. |
 | SelectionMode | DatePickerSelectionMode | DatePickerSelectionMode.Single | The selection mode of the input. Valid values are Single or Range. |
@@ -51,19 +50,24 @@ Date inputs let users enter a date through a segmented field or select one visua
 | ShowTwoMonths | bool | false | When true, the popup calendar will show two months side by side. |
 | ShowWeekNumbers | bool | false | Show week numbers in the popup calendar. |
 | Size | InputSize | InputSize.Medium | The input's size. |
-| PreviousIcon    | [Icon](/docs/IconClass.md) |  | An icon used for the previous paging slot. Alternatively, use EndIconName to specify the name of the icon. |
-| PreviousIconName    | string  |       |An icon used for the previous paging slot.. Available names depend on the icon library being used.  |
-| NextIcon | [Icon](/docs/IconClass.md) || An icon used for the next paging slot.. Altneratively, use StartIconName to specify the name of the icon. |
-| NextIconName | string | | An icon used for the next paging slot.. Available names depend on the icon library being used. |
 | WeekdayFormat | DatePickerWeekdayFormat | DatePickerWeekdayFormat.Short | Weekday header format in the popup calendar. Values are narrow, short, long. |
+| TValue | Type | |The type of value the input will process. Accepted types are DateOnly, DateOnly?, DateTime, DateTime? |
+| Value | TValue |  | The current value of the input |
+| ValueRange | DateRange\<TValue> |  | The current value range of the input. When set, the input will allow selection of a date range instead of a single date. |
+
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| ValueChanged (TValue) | Triggered when the input's value has changed. |
+| ValueRangeChanged (DateRange\<TValue>) | Triggered when the input's value range has changed. |
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| SetFocus |  | Sets focus to the input element. |
+| HidePickerAsync | | Hides the date picker |
 | SetFocusAsync |  | Sets focus to the input element. |
 | ShowPickerAsync | | Shows the date picker | 
-| HidePickerAsync | | Hides the date picker |
 
 ### Examples
 

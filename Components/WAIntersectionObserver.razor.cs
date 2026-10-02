@@ -42,11 +42,25 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public bool Disabled { get; set; } = false;
 
+        [Obsolete("Use Intersecting instead.")]
         [Parameter]
         public EventCallback OnIntersecting { get; set; }
 
+        [Obsolete("Use Leaving instead.")]
         [Parameter]
         public EventCallback OnLeaving { get; set; }
+
+        /// <summary>
+        /// Event triggered when an observed element enters the viewport.
+        /// </summary>
+        [Parameter]
+        public EventCallback Intersecting { get; set; }
+
+        /// <summary>
+        /// Event triggered when an observed element exits the viewport.
+        /// </summary>
+        [Parameter]
+        public EventCallback Leaving { get; set; }
         #endregion
 
         #region Lifecycle
@@ -90,21 +104,24 @@ namespace WebAwesomeBlazor.Components
         [JSInvokable]
         public async Task HandleIntersecting()
         {
-            Console.WriteLine($"Intersecting: ");
-            await OnIntersecting.InvokeAsync(null);
+            await IntersectingCallback.InvokeAsync(null);
         }
 
         [JSInvokable]
         public async Task HandleLeaving()
         {
-            Console.WriteLine($"Leaving: ");
-            await OnLeaving.InvokeAsync(null);
+            await LeavingCallback.InvokeAsync(null);
         }
 
         #endregion
 
         #region State
         private DotNetObjectReference<WAIntersectionObserver> objRef = default!;
+
+#pragma warning disable CS0618 // Type or member is obsolete
+        private EventCallback IntersectingCallback => Intersecting.HasDelegate ? Intersecting : OnIntersecting;
+        private EventCallback LeavingCallback => Leaving.HasDelegate ? Leaving : OnLeaving;
+#pragma warning restore CS0618 // Type or member is obsolete
         #endregion
 
     }

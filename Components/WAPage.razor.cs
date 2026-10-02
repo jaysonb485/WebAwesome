@@ -16,7 +16,13 @@ namespace WebAwesomeBlazor.Components
         /// Event callback when the page is resized. Only invoked if ObserveResize is true. 
         /// </summary>
         [Parameter]
+        [Obsolete("Use Resized instead")]
         public EventCallback<bool> OnResize { get; set; }
+        /// <summary>
+        /// Event callback when the page is resized. Only invoked if ObserveResize is true. 
+        /// </summary>
+        [Parameter]
+        public EventCallback<bool> Resized { get; set; }
 
         /// <summary>
         /// Use WALayoutContent components to render the page layout.
@@ -118,6 +124,10 @@ namespace WebAwesomeBlazor.Components
                 return string.Empty;
             }
         }
+
+#pragma warning disable  CS0618 // Type or member is obsolete
+        private EventCallback<bool> ResizedCallback => Resized.HasDelegate ? Resized : OnResize;
+#pragma warning restore CS0618
         #endregion
 
         #region Lifecycle
@@ -177,8 +187,8 @@ namespace WebAwesomeBlazor.Components
         {
             IsMobilePageView = view == "mobile";
             await InvokeAsync(StateHasChanged);
-            if (ObserveResize && OnResize.HasDelegate)
-                await OnResize.InvokeAsync(IsMobilePageView);
+            if (ObserveResize && ResizedCallback.HasDelegate)
+                await ResizedCallback.InvokeAsync(IsMobilePageView);
         }
         #endregion
 

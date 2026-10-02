@@ -198,6 +198,16 @@ namespace WebAwesomeBlazor.Components
         /// </summary>
         [Parameter]
         public EventCallback<string> OptionCreating { get; set; }
+
+        /// <summary>
+        /// When ServerSideData = true, triggered when the user types in the input field. The developer is expected to provide a list of options in response.
+        /// </summary>
+        [Parameter]
+        public EventCallback<ComboboxDataRequestEventArgs> DataRequested { get; set; }
+        /// <summary>
+        /// When true, the combobox will request data from the server when the user types in the input field. The DataRequest event will be triggered with the current query string, and the developer is expected to provide a list of options in response.
+        /// </summary>
+        [Parameter] public bool ServerSideData { get; set; } = false;
         #endregion
 
         #region Computed  Properties
@@ -358,7 +368,8 @@ namespace WebAwesomeBlazor.Components
                 "initialize",
                 Id!,
                 objRef,
-                initValue
+                initValue,
+                ServerSideData
             );
         }
 
@@ -459,6 +470,18 @@ namespace WebAwesomeBlazor.Components
         {
             if (OptionCreating.HasDelegate)
                 await OptionCreating.InvokeAsync(text);
+        }
+
+        [JSInvokable]
+        public async Task<List<ComboboxOption>> HandleDataRequest(string query)
+        {
+            if (DataRequested.HasDelegate)
+            {
+                var args = new ComboboxDataRequestEventArgs { Query = query };
+                await DataRequested.InvokeAsync(args);
+                return args.Options ?? [];
+            }
+            return [];
         }
 
 

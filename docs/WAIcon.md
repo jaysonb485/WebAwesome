@@ -8,7 +8,7 @@
 ### Description
 Icons are symbols that can be used to represent various options within an application.
 
-[WebAwesome docs](https://webawesome.com/docs/components/icon/)
+[Web Awesome docs](https://webawesome.com/docs/components/icon/)
 
 ### Properties
 | Property | Type   | Default | Description                              |

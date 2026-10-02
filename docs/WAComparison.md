@@ -15,17 +15,17 @@
 ### Description
 Compare visual differences between similar content with a sliding panel.
 
-[WebAwesome docs](https://webawesome.com/docs/components/comparison/)
+[Web Awesome docs](https://webawesome.com/docs/components/comparison/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| BeforeContent | RenderFragment |  | The content to show in the before panel, usually an img or svg |
 | AfterContent | RenderFragment |  | The content to show in the after panel, usually an img or svg |
+| BeforeContent | RenderFragment |  | The content to show in the before panel, usually an img or svg |
 | DividerPosition | double | 50 | The position of the divider as a percentage. |
-| HandleIconName | string |  | The icon used inside the handle. Available names depend on the icon library being used. |
-| HandleIcon | [Icon](/docs/IconClass.md) |  | The icon used inside the handle. Alternatively use HandleIconName |
 | DividerWidth | string |  | The width of the dividing line in CSS width units. |
+| HandleIcon | [Icon](/docs/IconClass.md) |  | The icon used inside the handle. Alternatively use HandleIconName |
+| HandleIconName | string |  | The icon used inside the handle. Available names depend on the icon library being used. |
 | HandleSize | string |  | The size of the compare handle in CSS units. |
 
 ### Events

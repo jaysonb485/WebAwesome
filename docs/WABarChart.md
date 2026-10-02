@@ -8,7 +8,7 @@
 ### Description
 Bar charts compare quantities across categories using rectangular bars. They work well for showing rankings, highlighting differences between groups, and tracking changes across time periods.
 
-[WebAwesome docs](https://webawesome.com/docs/components/bar-chart)
+[Web Awesome docs](https://webawesome.com/docs/components/bar-chart)
 
 > [!IMPORTANT]
 > WebAwesome charts require access to WebAwesome Pro.
@@ -21,32 +21,31 @@ Bar charts compare quantities across categories using rectangular bars. They wor
 #### BarChartDataSet Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Label | string |  | The label for the dataset which appears in the legend and tooltips. |
-| Data | double[] |  | An array of values representing the set data |
-| FillColor | string? |  | The bar fill color in CSS color. If not provided, colors associated with the WA Theme will be selected. |
 | BorderColor | string? | | The bar border color in CSS color.  If not provided, colors associated with the WA Theme will be selected. |
+| FillColor | string? |  | The bar fill color in CSS color. If not provided, colors associated with the WA Theme will be selected. |
+| Data | double[] |  | An array of values representing the set data |
+| Label | string |  | The label for the dataset which appears in the legend and tooltips. |
 
 #### BarChartOptions Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Label | string? |  | A title for the chart, also used for accessibility. |
-| XLabel | string? |  | A label for the x-axis. |
-| YLabel | string? |  | A label for the y-axis. |
-| ShowLegend | bool | `true` | Shows the legend |
 | Animate | bool | `true` | Enables chart animations |
-| ShowTooltips | bool | `true` | Shows tooltips over data points. |
-| Horizontal | bool | `false` | Displays the chart horizontally |
-| Stacked | bool | `false` | Stacks datasets on top of each other along the value axis |
-| Min | double? | | The minimum value for the value axis |
-| Max | double? | | The maximum value for the value axis |
-| Description | string? | | A description of the chart, used for accessibility. |
-| LegendPosition | ChartLegendPosition | `ChartLegendPosition.Top` | The position of the legend relative to the chart. |
-| GridLines | ChartGridLines | `ChartGridLines.Both` | Which axes to show grid lines on. |
 | BorderRadius | string? | | Border radius for bar charts in CSS units. |
 | BorderWidth | string? | | Border width for bars in CSS units. |
+| Description | string? | | A description of the chart, used for accessibility. |
 | GridBorderWidth | string? | | Border width for chart grid lines and axis borders in CSS units. |
 | GridColor | string? | | CSS color of the chart grid lines and axis borders. |
-
+| GridLines | ChartGridLines | `ChartGridLines.Both` | Which axes to show grid lines on. |
+| Horizontal | bool | `false` | Displays the chart horizontally |
+| Label | string? |  | A title for the chart, also used for accessibility. |
+| LegendPosition | ChartLegendPosition | `ChartLegendPosition.Top` | The position of the legend relative to the chart. |
+| Max | double? | | The maximum value for the value axis |
+| Min | double? | | The minimum value for the value axis |
+| ShowLegend | bool | `true` | Shows the legend |
+| ShowTooltips | bool | `true` | Shows tooltips over data points. |
+| Stacked | bool | `false` | Stacks datasets on top of each other along the value axis |
+| XLabel | string? |  | A label for the x-axis. |
+| YLabel | string? |  | A label for the y-axis. |
 
 ### Examples
 

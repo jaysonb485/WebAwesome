@@ -8,7 +8,7 @@
 ### Description
 Line charts show trends over time by connecting data points with line segments. Use them when the x-axis represents a sequential dimension and you want to emphasize the shape and direction of the data.
 
-[WebAwesome docs](https://webawesome.com/docs/components/line-chart)
+[Web Awesome docs](https://webawesome.com/docs/components/line-chart)
 
 > [!IMPORTANT]
 > WebAwesome charts require access to WebAwesome Pro.
@@ -21,31 +21,31 @@ Line charts show trends over time by connecting data points with line segments. 
 #### LineChartDataSet Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Label | string |  | The label for the dataset which appears in the legend and tooltips. |
+| BorderColor | string? | | The line color in CSS color.  If not provided, colors associated with the WA Theme will be selected. |
 | Data | double[] |  | An array of values representing the set data |
 | FillArea | bool | `false` | Fill the area beneath the line |
 | FillColor | string? |  | The fill color for the line area, if FillArea = `true` in CSS color. If not provided, colors associated with the WA Theme will be selected. |
-| BorderColor | string? | | The line color in CSS color.  If not provided, colors associated with the WA Theme will be selected. |
+| Label | string |  | The label for the dataset which appears in the legend and tooltips. |
 
 #### LineChartOptions Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Label | string? |  | A title for the chart, also used for accessibility. |
-| XLabel | string? |  | A label for the x-axis. |
-| YLabel | string? |  | A label for the y-axis. |
-| ShowLegend | bool | `true` | Shows the legend |
 | Animate | bool | `true` | Enables chart animations |
-| ShowTooltips | bool | `true` | Shows tooltips over data points. |
-| Stacked | bool | `false` | Stacks datasets on top of each other along the value axis |
-| Min | double? | | The minimum value for the value axis |
-| Max | double? | | The maximum value for the value axis |
 | Description | string? | | A description of the chart, used for accessibility. |
-| LegendPosition | ChartLegendPosition | `ChartLegendPosition.Top` | The position of the legend relative to the chart. |
-| GridLines | ChartGridLines | `ChartGridLines.Both` | Which axes to show grid lines on. |
 | GridBorderWidth | string? | | Border width for chart grid lines and axis borders in CSS units. |
 | GridColor | string? | | CSS color of the chart grid lines and axis borders. |
+| GridLines | ChartGridLines | `ChartGridLines.Both` | Which axes to show grid lines on. |
+| Label | string? |  | A title for the chart, also used for accessibility. |
+| LegendPosition | ChartLegendPosition | `ChartLegendPosition.Top` | The position of the legend relative to the chart. |
 | LineBorderWidth | string? | | Border width for line and radar charts. |
+| Min | double? | | The minimum value for the value axis |
+| Max | double? | | The maximum value for the value axis |
 | PointRadius | string? | | Radius of data point dots in CSS units |
+| ShowLegend | bool | `true` | Shows the legend |
+| ShowTooltips | bool | `true` | Shows tooltips over data points. |
+| Stacked | bool | `false` | Stacks datasets on top of each other along the value axis |
+| XLabel | string? |  | A label for the x-axis. |
+| YLabel | string? |  | A label for the y-axis. |
 
 
 ### Examples

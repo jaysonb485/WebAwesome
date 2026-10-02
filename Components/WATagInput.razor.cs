@@ -125,10 +125,12 @@ namespace WebAwesomeBlazor.Components
         [Parameter]
         public bool Spellcheck { get; set; } = true;
 
-        //[Parameter]
-        //public EventCallback<InputTagCreatingEventArgs> TagCreating { get; set; } = default!;
-        //[Parameter]
-        //public Func<string, Task<bool>>? TagCreatingFunc { get; set; } = null;
+        /// <summary>
+        /// Triggered when a tag is being created. Prevent tag creation with `args.Cancel = true`
+        /// </summary>
+        [Parameter]
+        public EventCallback<InputTagCreatingEventArgs> TagCreating { get; set; } = default!;
+
 
 
         [Parameter]
@@ -186,6 +188,14 @@ namespace WebAwesomeBlazor.Components
                 };
             }
         }
+
+        private string ValueString
+        {
+            get
+            {
+                return string.Join(Delimiter, Value ?? []);
+            }
+        }
         #endregion
 
 
@@ -224,7 +234,7 @@ namespace WebAwesomeBlazor.Components
             if (FirstRender)
             {
                 await LoadModuleAsync();
-                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef, Value!);
+                _instance = await SafeInvokeAsync<IJSObjectReference>("initialize", Id!, objRef, ValueString!);
             }
         }
 
@@ -236,7 +246,7 @@ namespace WebAwesomeBlazor.Components
 
                 // Run your JS update logic here
                 await LoadModuleAsync();
-                await SafeInvokeVoidAsync("setValue", Id!, Value!);
+                await SafeInvokeVoidAsync("setValue", Id!, ValueString!);
             }
         }
 
@@ -261,27 +271,21 @@ namespace WebAwesomeBlazor.Components
             await Blurred.InvokeAsync();
         }
 
-        ///// <summary>
-        ///// Captures when the remove button is pressed
-        ///// </summary>
-        //[JSInvokable]
-        //public async Task<bool> HandleTagCreating(string tag)
-        //{
-        //    if (TagCreatingFunc != null)
-        //    {
-        //        return await TagCreatingFunc(tag);
-        //    }
+        /// <summary>
+        /// Captures when the remove button is pressed
+        /// </summary>
+        [JSInvokable]
+        public async Task<InputTagCreatingEventArgs> HandleTagCreating(string tag)
+        {
 
-        //    return false;
+            var args = new InputTagCreatingEventArgs
+            {
+                Tag = tag
+            };
+            await TagCreating.InvokeAsync(args);
 
-        //    //var args = new InputTagCreatingEventArgs
-        //    //{
-        //    //    Tag = tag
-        //    //};
-        //    //await TagCreating.InvokeAsync(args);
-
-        //    //return args.Cancel;
-        //}
+            return args;
+        }
         #endregion
 
         #region State

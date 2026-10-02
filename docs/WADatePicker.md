@@ -23,11 +23,6 @@ Date pickers display a month grid for selecting a single date or a date range in
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| TValue | Type | |The type of value the input will process. Accepted types are DateOnly, DateOnly?, DateTime, DateTime? |
-| Value | TValue |  | The current value of the input |
-| ValueChanged | EventCallback\<TValue> |  | Triggered when the input's value has changed |
-| ValueRange | DateRange\<TValue> |  | The current value range of the input. When set, the input will allow selection of a date range instead of a single date. |
-| ValueRangeChanged | EventCallback<DateRange\<TValue>> |  | Triggered when the input's value range has changed |
 | CustomDayContent | RenderFragment |  | Customise the content of day cells in the date picker. Use type `<WADatePickerDay>` |
 | Disabled | bool | false | Maked the input disabled. |
 | DisabledDates | DateOnly[]? |  | An array of dates that should be disabled for selection. |
@@ -42,7 +37,11 @@ Date pickers display a month grid for selecting a single date or a date range in
 | MaximumRange | int? | 0 | The maximum number of days that can be selected when ValueRange is set. 0 disables the check.|
 | MinimumDate | DateOnly? |  | The minimum date that can be selected. |
 | MinimumRange | int? | 0 | The minimum number of days that can be selected when ValueRange is set. 0 disables the check. |
+| NextIcon | [Icon](/docs/IconClass.md) || An icon used for the next paging slot.. Altneratively, use StartIconName to specify the name of the icon. |
+| NextIconName | string | | An icon used for the next paging slot.. Available names depend on the icon library being used. |
 | PageByMonths | bool | true | Whether previous and next page by the visible range or on month at a time. The default is true (page by month). |
+| PreviousIcon    | [Icon](/docs/IconClass.md) |  | An icon used for the previous paging slot. Alternatively, use EndIconName to specify the name of the icon. |
+| PreviousIconName    | string  |       |An icon used for the previous paging slot.. Available names depend on the icon library being used.  |
 | ReadOnly | bool | false | Makes the input readonly. |
 | Required | bool | false | Makes the input a required field. |
 | SelectionMode | DatePickerSelectionMode | DatePickerSelectionMode.Single | The selection mode of the input. Valid values are Single or Range. |
@@ -50,19 +49,23 @@ Date pickers display a month grid for selecting a single date or a date range in
 | ShowTwoMonths | bool | false | When true, the popup calendar will show two months side by side. |
 | ShowWeekNumbers | bool | false | Show week numbers in the popup calendar. |
 | Size | InputSize | InputSize.Medium | The input's size. |
-| PreviousIcon    | [Icon](/docs/IconClass.md) |  | An icon used for the previous paging slot. Alternatively, use EndIconName to specify the name of the icon. |
-| PreviousIconName    | string  |       |An icon used for the previous paging slot.. Available names depend on the icon library being used.  |
-| NextIcon | [Icon](/docs/IconClass.md) || An icon used for the next paging slot.. Altneratively, use StartIconName to specify the name of the icon. |
-| NextIconName | string | | An icon used for the next paging slot.. Available names depend on the icon library being used. |
+| TValue | Type | |The type of value the input will process. Accepted types are DateOnly, DateOnly?, DateTime, DateTime? |
+| Value | TValue |  | The current value of the input |
+| ValueRange | DateRange\<TValue> |  | The current value range of the input. When set, the input will allow selection of a date range instead of a single date. |
 | WeekdayFormat | DatePickerWeekdayFormat | DatePickerWeekdayFormat.Short | Weekday header format. Values are narrow, short, long. |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| ValueChanged (TValue) | Triggered when the input's value has changed. |
+| ValueRangeChanged (DateRange\<TValue>) | Triggered when the input's value range has changed. |
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| SetFocus |  | Sets focus to the input element. |
-| SetFocusAsync |  | Sets focus to the input element. |
 | GoToDateAsync | | Scrolls the view to show the given date and sets the focused day |
 | GoToTodayAsync | | Equivalent to GoToDateAsync(Today) |
+| SetFocusAsync |  | Sets focus to the input element. |
 
 ### Examples
 

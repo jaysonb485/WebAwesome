@@ -8,7 +8,7 @@
 ### Description
 Bubble charts add a third dimension to scatter plots by varying the size of each data point. They are useful for visualizing relationships where a third variable adds meaning beyond a simple x/y correlation.
 
-[WebAwesome docs](https://webawesome.com/docs/components/bubble-chart)
+[Web Awesome docs](https://webawesome.com/docs/components/bubble-chart)
 
 > [!IMPORTANT]
 > WebAwesome charts require access to WebAwesome Pro.
@@ -21,31 +21,32 @@ Bubble charts add a third dimension to scatter plots by varying the size of each
 #### BubbleChartDataSet Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Label | string |  | The label for the dataset which appears in the legend and tooltips. |
-| Data | BubbleChartPoint[] |  | An array of BubbleChartPoint objects representing the set data as an x,y,r point |
 | BorderColor | string? | | The bubble color in CSS color.  If not provided, colors associated with the WA Theme will be selected. |
+| Data | BubbleChartPoint[] |  | An array of BubbleChartPoint objects representing the set data as an x,y,r point |
+| Label | string |  | The label for the dataset which appears in the legend and tooltips. |
+
 
 #### BubbleChartPoint Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
+| Radius | double | | The bubble radius in pixels (not scaled) |
 | X | double | | The X value |
 | Y | double | | The Y value |
-| Radius | double | | The bubble radius in pixels (not scaled) |
 
 #### BubbleChartOptions Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Label | string? |  | A title for the chart, also used for accessibility. |
-| XLabel | string? |  | A label for the x-axis. |
-| YLabel | string? |  | A label for the y-axis. |
-| ShowLegend | bool | `true` | Shows the legend |
 | Animate | bool | `true` | Enables chart animations |
-| ShowTooltips | bool | `true` | Shows tooltips over data points. |
 | Description | string? | | A description of the chart, used for accessibility. |
-| LegendPosition | ChartLegendPosition | `ChartLegendPosition.Top` | The position of the legend relative to the chart. |
-| GridLines | ChartGridLines | `ChartGridLines.Both` | Which axes to show grid lines on. |
 | GridBorderWidth | string? | | Border width for chart grid lines and axis borders in CSS units. |
 | GridColor | string? | | CSS color of the chart grid lines and axis borders. |
+| GridLines | ChartGridLines | `ChartGridLines.Both` | Which axes to show grid lines on. |
+| Label | string? |  | A title for the chart, also used for accessibility. |
+| LegendPosition | ChartLegendPosition | `ChartLegendPosition.Top` | The position of the legend relative to the chart. |
+| ShowLegend | bool | `true` | Shows the legend |
+| ShowTooltips | bool | `true` | Shows tooltips over data points. |
+| XLabel | string? |  | A label for the x-axis. |
+| YLabel | string? |  | A label for the y-axis. |
 
 
 ### Examples

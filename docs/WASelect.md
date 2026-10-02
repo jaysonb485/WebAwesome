@@ -10,34 +10,35 @@
 ### Description
 Selects allow you to choose items from a menu of [WASelectOption](/docs/WASelectOption).
 
-[WebAwesome docs](https://webawesome.com/docs/components/select/)
+[Web Awesome docs](https://webawesome.com/docs/components/select/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
+| Appearance | SelectAppearance | SelectAppearance.Outlined | The select's visual appearance. |
+| Clearable | bool | false | Adds a clear button (with-clear) when the select is not empty. |
+| Disabled | bool | false | Disables the select control. |
+| ClearIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the clear slot. |
+| ClearIconName | string |  | The name of the icon to draw in the clear slot. Available names depend on the icon library being used. |
+| EndIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. |
+| EndIconName | string |  | The name of the icon to draw in the end slot. Available names depend on the icon library being used. |
+| ExpandIcon | [Icon](/docs/IconClass.md) |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. |
+| ExpandIconName | string |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. Available names depend on the icon library being used. |
+| HideDuration | string | `100ms` | The duration of the hide animation. |
+| Hint | string |  | The select's hint. |
+| Label | string |  | The select's label.  |
+| MaxOptionsVisible | int | 3 | The maximum number of selected options to show when Multiselect is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the limit. |
+| Multiselect | bool | false | Allows more than one option to be selected. |
+| Pill | bool | false | Draws a pill-style select with rounded edges. |
+| Placeholder | string |  | Placeholder text to show as a hint when the select is empty. |
+| Required | bool | false | The select's required attribute. |
+| ShowDuration | string | `100ms` | The duration of the show animation. |
+| Size | SelectSize | SelectSize.Inherit | The select's size. |
+| StartIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the start slot. |
+| StartIconName | string |  | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
 | Value | string |  | The select's value. Only available where multiselect = false |
 | Values | string[] | | The select's values. Only available where multiselect = true |
-| Label | string |  | The select's label.  |
-| Size | SelectSize | SelectSize.Inherit | The select's size. |
-| Hint | string |  | The select's hint. |
-| Placeholder | string |  | Placeholder text to show as a hint when the select is empty. |
-| Clearable | bool | false | Adds a clear button (with-clear) when the select is not empty. |
-| Required | bool | false | The select's required attribute. |
-| Appearance | SelectAppearance | SelectAppearance.Outlined | The select's visual appearance. |
-| Disabled | bool | false | Disables the select control. |
-| Pill | bool | false | Draws a pill-style select with rounded edges. |
-| StartIconName | string |  | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| StartIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the start slot. |
-| EndIconName | string |  | The name of the icon to draw in the end slot. Available names depend on the icon library being used. |
-| EndIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. |
-| ClearIconName | string |  | The name of the icon to draw in the clear slot. Available names depend on the icon library being used. |
-| ClearIcon | [Icon](/docs/IconClass.md) |  | The icon to draw in the clear slot. |
-| ExpandIconName | string |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. Available names depend on the icon library being used. |
-| ExpandIcon | [Icon](/docs/IconClass.md) |  | The name of the icon to draw in the when the control is expanded and collapsed. Rotates on open and close. |
-| ShowDuration | string | `100ms` | The duration of the show animation. |
-| HideDuration | string | `100ms` | The duration of the hide animation. |
-| Multiselect | bool | false | Allows more than one option to be selected. |
-| MaxOptionsVisible | int | 3 | The maximum number of selected options to show when Multiselect is true. After the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the limit. |
+
 
 ### Examples
 

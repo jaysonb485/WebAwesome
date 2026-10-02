@@ -1,0 +1,26 @@
+﻿@inherits WAComponentBase
+<wa-step @ref="@Element"
+         id="@Id"
+         @attributes="@AdditionalAttributes"
+         style="@StyleNames"
+         class="@ClassNames"
+         slot="@Slot"
+         attention="@AttentionString"
+         completed="@Completed"
+         disabled="@Disabled"
+         loading="@Loading"
+         name="@Name"
+         variant="@VariantString">
+    @if (DescriptionContent != null || !String.IsNullOrWhiteSpace(Description))
+    {
+        <span slot="description">
+            @Description
+            @DescriptionContent
+        </span>
+    }
+    @if (Icon != null || !String.IsNullOrWhiteSpace(IconName))
+    {
+        <WAIcon Icon="@Icon" IconName="@IconName" Slot="icon"></WAIcon>
+    }
+    @ChildContent
+</wa-step>

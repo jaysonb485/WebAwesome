@@ -19,6 +19,18 @@ namespace WebAwesomeBlazor.Components
         public int PageSize { get; set; }
     }
 
+    public class ComboboxDataRequestEventArgs : EventArgs
+    {
+        public string Query { get; set; } = string.Empty;
+        public List<ComboboxOption>? Options { get; set; }
+    }
+
+    public class ComboboxOption
+    {
+        public string Value { get; set; } = string.Empty;
+        public string Label { get; set; } = string.Empty;
+    }
+
     public class DataGridDataRequestArgs : EventArgs
     {
         public IEnumerable<DataGridColumnSort>? Sort { get; set; }
@@ -51,4 +63,37 @@ namespace WebAwesomeBlazor.Components
         public string Value { get; set; } = string.Empty;
         public int? Count { get; set; }
     }
+
+    public class StepperChangingEventArgs : EventArgs
+    {
+        public string Step { get; set; } = string.Empty;
+        public string PreviousStep { get; set; } = string.Empty;
+        public bool Cancel { get; set; } = false;
+
+    }
+
+    public class StepperChangedEventArgs : EventArgs
+    {
+        public string Step { get; set; } = string.Empty;
+        public string PreviousStep { get; set; } = string.Empty;
+    }
+
+    public class VideoChangedCallbackArgs : EventArgs
+    {
+        public int PreviousIndex { get; set; }
+
+        public int CurrentIndex { get; set; }
+
+        public VideoMetadata Video { get; set; } = new();
+    }
+
+    public class VideoMetadata
+    {
+        public string? Title { get; set; }
+        [JsonPropertyName("poster")]
+        public string? PosterUrl { get; set; }
+        public string[]? Sources { get; set; }
+        public string[]? Tracks { get; set; }
+    }
+
 }

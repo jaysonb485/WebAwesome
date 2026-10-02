@@ -8,23 +8,28 @@
 ### Description
 Tags are used as labels to organize things or to indicate a selection.
 
-[WebAwesome docs](https://webawesome.com/docs/components/tag/)
+[Web Awesome docs](https://webawesome.com/docs/components/tag/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Text | string |  | The text to display in the tag. |
-| Variant | TagVariant |  | The tag's theme variant. Defaults to neutral if not within another element with a variant. |
 | Appearance | TagAppearance | TagAppearance.FilledOutlined | The tag's visual appearance. Valid options for tag are: Accent, AccentOutlined, Filled, FilledOutlined, Outlined. |
 | Pill | bool | false | Draws a pill-style tag with rounded edges |
 | Removable | bool | false | Makes the tag removable (with-remove) and shows a remove button. |
 | Size | TagSize | TagSize.Inherit | The tag's size |
+| Text | string |  | The text to display in the tag. |
+| Variant | TagVariant |  | The tag's theme variant. Defaults to neutral if not within another element with a variant. |
 
 ### Events
 | Event Name  | Description                              |
 |-------------|------------------------------------------|
 | TagRemoving<TagRemovingEventArgs> | When Removable, triggered when the tag's remove button is clicked, before the tag is removed. To cancel removal set `TagRemovingEventArgs.Cancel = true`. See example below. |
 | TagRemoved | Triggered when the tag is removed. |
+
+#### TagRemovingEventArgs
+| Property | Type   | Default | Description                              |
+|----------|--------|---------|------------------------------------------|
+| Cancel | bool | false | Set to `true` to cancel the tag removal. |
 
 ### Methods
 | Method      | Parameters       | Description                              |

@@ -624,6 +624,13 @@ namespace WebAwesomeBlazor
         Horizontal,
         Vertical
     }
+
+    public enum DividerLabelPlacement
+    {
+        Center,
+        Start,
+        End
+    }
     #endregion
     #region Drawer Enums
 
@@ -1112,6 +1119,31 @@ namespace WebAwesomeBlazor
     {
         Start,
         End
+    }
+    #endregion
+    #region Step Enums
+    public enum StepAttention
+    {
+        None,
+        Pulse,
+        Bounce
+    }
+
+    public enum StepVariant
+    {
+        Brand,
+        Neutral,
+        Success,
+        Warning,
+        Danger
+    }
+    #endregion
+    #region Stepper Enums
+    public enum StepperOrientation
+    {
+        Horizontal,
+        Vertical,
+        Auto
     }
     #endregion
     #region Switch Enums

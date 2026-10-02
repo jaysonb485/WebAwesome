@@ -21,23 +21,23 @@
 ### Description
 Cards can be used to group related subjects in a container.
 
-[WebAwesome docs](https://webawesome.com/docs/components/card/)
+[Web Awesome docs](https://webawesome.com/docs/components/card/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| CardFooter    | RenderFragment | | An optional footer for the card.                     |
-| CardMedia    | RenderFragment |        | An optional media section to render at the start of the card.                    |
-| CardHeader    | RenderFragment |    | An optional header for the card.                     |
+| Appearance | CardAppearance | CardAppearance.Outlined | The card's visual appearance. |
 | CardBody | RenderFragment | | The card's main content |
-| HorizontalActions | RenderFragment | | An optional actions section to render at the end for the horizontal card. |
-| HeaderActions | RenderFragment | | An optional actions section to render in the header of the vertical card. |
+| CardFooter    | RenderFragment | | An optional footer for the card.                     |
+| CardHeader    | RenderFragment |    | An optional header for the card.                     |
+| CardMedia    | RenderFragment |        | An optional media section to render at the start of the card.                    |
 | FooterActions | RenderFragment | | An optional actions section to render in the footer of the vertical card. |
 | FooterCSSClass | string | | CSS class to apply to the footer section of the card. |
+| HeaderActions | RenderFragment | | An optional actions section to render in the header of the vertical card. |
 | HeaderCSSClass | string | | CSS class to apply to the header section of the card. |
-| Appearance | CardAppearance | CardAppearance.Outlined | The card's visual appearance. |
-| ImageSource | string | | An optional image to render at the start of the card. |
+| HorizontalActions | RenderFragment | | An optional actions section to render at the end for the horizontal card. |
 | ImageAltText | string | | Alt text for the optional image. |
+| ImageSource | string | | An optional image to render at the start of the card. |
 | Orientation | CardOrientation | CardOrientation.Vertical | Renders the card's orientation. |
 | Spacing | string | `var(--wa-space-l)` | The amount of space around and between sections of the card. Expects a single value. |
 

@@ -8,21 +8,21 @@
 ### Description
 Badges are used to draw attention and display statuses or counts.
 
-[WebAwesome docs](https://webawesome.com/docs/components/badge/)
+[Web Awesome docs](https://webawesome.com/docs/components/badge/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
 | Appearance    | BadgeAppearance | BadgeAppearance.Accent | The badge's visual appearance. Valid options for badge are: Accent, AccentOutlined, Filled, FilledOutlined, Outlined.                     |
+| EndIcon    | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. Alternatively, use EndIconName to specify the name of the icon. |
+| EndIconName    | string  |       |The name of the icon to draw in the end slot. Available names depend on the icon library being used.  |
 | Pill    | bool | false       | Draws a pill-style badge with rounded edges.                     |
 | Pulse    | BadgePulse | BadgePulse.None   | Adds an animation to draw attention to the badge (None, Pulse, Bounce).                     |
 | PulseColor | string |        | The color of the badge's pulse effect when using `BadgePulse.Pulse`. Provide a CSS-valid color value.                     |
-| Text    | string |        | The text to display inside the badge.                     |
-| Variant | BadgeVariant | BadgeVariant.Brand | The badge's theme variant. Defaults to brand if not within another element with a variant.  |
-| EndIcon    | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. Alternatively, use EndIconName to specify the name of the icon. |
-| EndIconName    | string  |       |The name of the icon to draw in the end slot. Available names depend on the icon library being used.  |
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Alternatively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
+| Text    | string |        | The text to display inside the badge.                     |
+| Variant | BadgeVariant | BadgeVariant.Brand | The badge's theme variant. Defaults to brand if not within another element with a variant.  |
 
 
 ### Examples

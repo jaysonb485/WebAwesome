@@ -1,9 +1,16 @@
-﻿export function initialize(elementId, dotnetHelper, setValue) {
+﻿export function initialize(elementId, dotnetHelper, setValue, server) {
     const element = document.getElementById(elementId);
     if (!element) return null;
 
     if (setValue !== undefined && setValue !== null) {
         element.value = setValue;
+    }
+
+    if (server) {
+        element.dataSource = async ({ query, signal }) => {
+            const responseJson = await dotnetHelper.invokeMethodAsync('HandleDataRequest', query);
+            return responseJson;
+        }
     }
 
     // Capture handlers so they can be removed later

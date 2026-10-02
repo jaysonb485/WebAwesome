@@ -12,30 +12,28 @@
 ### Description
 Details show a brief summary and expand to show additional content.
 
-[WebAwesome docs](https://webawesome.com/docs/components/details/)
+[Web Awesome docs](https://webawesome.com/docs/components/details/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
 | Appearance  | DetailsAppearance  | DetailsAppearance.Outlined  | The element's visual appearance.  |
-| Disabled  |  bool | false  | Disables the details so it can't be toggled.  |
-| Title | string  |   |  The summary to show in the header. |
-| DetailsTitle  | RenderFragment  |   | The details' summary. Alternatively, you can use the Title property.  |
-| DetailsBody  | RenderFragment  |   |  The details' main content. |
-| IsOpen  | bool  | false  | Indicates whether or not the details is open.  |
-| ExpandIcon  | [Icon](/docs/IconClass.md)  |   | The name of the icon to draw for the expand indicator.  |
-| ExpandIconName  | string  |   |  The name of the icon to draw for the expand indicator. Available names depend on the icon library being used. |
 | CollapseIcon  | [Icon](/docs/IconClass.md) |   |  The name of the icon to draw on for the collapse indicator. |
 | CollapseIconName | string |   | The name of the icon to draw on for the collapse indicator. Available names depend on the icon library being used.  |
+| DetailsBody  | RenderFragment  |   |  The details' main content. |
+| DetailsTitle  | RenderFragment  |   | The details' summary. Alternatively, you can use the Title property.  |
+| Disabled  |  bool | false  | Disables the details so it can't be toggled.  |
+| ExpandIcon  | [Icon](/docs/IconClass.md)  |   | The name of the icon to draw for the expand indicator.  |
+| ExpandIconName  | string  |   |  The name of the icon to draw for the expand indicator. Available names depend on the icon library being used. |
 | GroupName  | string  |   | Groups related details elements. When one opens, others with the same name will close.  |
 | IconPlacement  | DetailsIconPlacement  | DetailsIconPlacement.End  | The location of the expand/collapse icon. |
+| IsOpen  | bool  | false  | Indicates whether or not the details is open.  |
+| Title | string  |   |  The summary to show in the header. |
 
 ### Methods
 | Method | Parameters | Description                              |
 |----------| ------ | ------------------------------------------|
-| Show | | Shows the details.  |
 | ShowAsync | | Shows the details.  |
-| Hide | | Hides the details.  |
 | HideAsync | | Hides the details.  |
 
 

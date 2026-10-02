@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Text.Json.Serialization;
 
 namespace WebAwesomeBlazor.Components
 {
@@ -130,23 +129,6 @@ namespace WebAwesomeBlazor.Components
 
     }
 
-    public class VideoChangedCallbackArgs
-    {
-        public int PreviousIndex { get; set; }
-
-        public int CurrentIndex { get; set; }
-
-        public VideoMetadata Video { get; set; } = new();
-    }
-
-    public class VideoMetadata
-    {
-        public string? Title { get; set; }
-        [JsonPropertyName("poster")]
-        public string? PosterUrl { get; set; }
-        public string[]? Sources { get; set; }
-        public string[]? Tracks { get; set; }
-    }
 
 
 }

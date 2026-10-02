@@ -10,27 +10,24 @@
 ### Description
 Popovers display contextual content and interactive elements in a floating panel.
 
-[WebAwesome docs](https://webawesome.com/docs/components/popover/)
+[Web Awesome docs](https://webawesome.com/docs/components/popover/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| TargetId | string |  |  The ID of the popover's anchor element. This must be an interactive/focusable element such as a button. |
-| Placement | PopoverPlacement | PopoverPlacement.Top | The preferred placement of the popover. Note that the actual placement may vary as needed to keep the popover inside of the viewport. |
-| Open | bool | false | Shows or hides the popover. |
 | Distance | int | 0 | The distance in pixels from which to offset the popover away from its trigger. |
+| Open | bool | false | Shows or hides the popover. |
+| Placement | PopoverPlacement | PopoverPlacement.Top | The preferred placement of the popover. Note that the actual placement may vary as needed to keep the popover inside of the viewport. |
 | Skidding | int | 0 | The distance in pixels from which to offset the popover along its target. |
+| TargetId | string |  |  The ID of the popover's anchor element. This must be an interactive/focusable element such as a button. |
 | WithoutArrow | bool | false | Removes the arrow from the popover. |
 
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| ShowPopover  |   | Shows the popover      |
 | ShowPopoverAsync  |   | Shows the popover      |
-| HidePopover  |   | Hides the popover      |
 | HidePopoverAsync  |   | Hides the popover      |
-| TogglePopover  |   | Toggles the popover      |
 | TogglePopoverAsync  |   | Toggles the popover      |
 
 ### Examples

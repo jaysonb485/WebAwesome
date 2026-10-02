@@ -13,25 +13,29 @@ Copies text data to the clipboard when the user clicks the trigger.
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value    | string |  | The text value to copy.                     |
+| ChildContent | RenderFragment |  | By default, a copy icon button is rendered so this is optional. If desired, you can slot in a custom element such as [WAButton](/docs/WAButton.md) |
+| Disabled | bool  | false  | Disables the copy button.  |
+| ErrorLabel | string | "Not supported" | A custom label to show in the tooltip when a copy error occurs. |
+| ErrorIcon | [Icon](/docs/IconClass.md) | Icons.XMark | The icon to show when a copy error occurs. Defaults to FontAwesome xmark icon. |
+| ErrorIconName | string |   | The icon to show when a copy error occurs  |
+| FeedbackDuration  | int  | 1000 | The length of time to show feedback before restoring the default trigger.  |
 | FromElementId | string |  | An id that references an element in the same document from which data will be copied. If both this and value are present, this value will take precedence. <br /> By default, the target element's textContent will be copied. Specify an alternate attribute using FromElementAttribute. |
 | FromElementAttribute | string |  | The attribute name of the element referenced by FromElementId from which to copy data. If not specified, the target element's textContent will be copied. |
 | HoverLabel | string | "Copy" | A custom label to show in the tooltip. |
-| SuccessLabel | string | "Copied" | A custom label to show in the tooltip after copying. |
-| ErrorLabel | string | "Not supported" | A custom label to show in the tooltip when a copy error occurs. |
 | Icon | [Icon](/docs/IconClass.md) | Icons.Copy | The icon to show in the default copy state. Defaults to FontAwesome copy icon. |
-| SuccessIcon | [Icon](/docs/IconClass.md) | Icons.Check | The icon to show when the content is copied. Defaults to FontAwesome check icon. |
-| ErrorIcon | [Icon](/docs/IconClass.md) | Icons.XMark | The icon to show when a copy error occurs. Defaults to FontAwesome xmark icon. |
 | IconName | string |  | The icon to show in the default copy state. |
+| SuccessIcon | [Icon](/docs/IconClass.md) | Icons.Check | The icon to show when the content is copied. Defaults to FontAwesome check icon. |
 | SuccessIconName | string | | The icon to show when the content is copied. |
-| ErrorIconName | string |   | The icon to show when a copy error occurs  |
-| Disabled | bool  | false  | Disables the copy button.  |
-| FeedbackDuration  | int  | 1000 | The length of time to show feedback before restoring the default trigger.  |
+| SuccessLabel | string | "Copied" | A custom label to show in the tooltip after copying. |
 | TooltipPlacement  | CopyButtonTooltipPlacement  |  CopyButtonTooltipPlacement.Top | The preferred placement of the tooltip.  |
 | TooltipMode | CopyButtonTooltipMode  | CopyButtonTooltipMode.Full | The trigger mode for showing the tooltip. <br/> `Full`: Shows the tooltip on hover and focus, and is reused to display copy feedback. <br/> `Copy`: he tooltip stays silent on hover and focus, and only appears briefly to confirm a successful or failed copy. <br/> `None`: no tooltip is shown in any state. |
-| Copied | EventCallback |  | Emitted when the data has been copied.  |
-| CopyFailed | EventCallback |  | Emitted when the copy operation fails. |
-| ChildContent | RenderFragment |  | By default, a copy icon button is rendered so this is optional. If desired, you can slot in a custom element such as [WAButton](/docs/WAButton.md) |
+| Value    | string |  | The text value to copy.                     |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| Copied     | Triggered when the data has been copied. |
+| CopyFailed     | Triggered when the copy operation fails. |
 
 ### Examples
 

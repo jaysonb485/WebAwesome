@@ -8,45 +8,47 @@
 ### Description
 Inputs collect data from the user.
 
-[WebAwesome docs](https://webawesome.com/docs/components/input/)
+[Web Awesome docs](https://webawesome.com/docs/components/input/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Value | string |  | The current value of the input |
-| Type | InputType | InputType.Text | The type of input (Valid input types are Date, DateTimeLocal, Email, Number, Password, Search, Telephone, Text, Time, Url). |
-| ValueChanged | EventCallback<string> |  | Triggered when the input's value has changed |
 | Appearance | InputAppearance | InputAppearance.Outlined | The input's visual appearance. |
-| Size | InputSize | InputSize.Inherit | The input's size. |
-| Pill | bool | False | Draws a pill-style input with rounded edges. |
-| Label | string |  | The input's label |
-| Hint | string |  | The input's hint text. |
-| Placeholder | string |  | Placeholder text to show as a hint when the input is empty. |
+| AutoCapitalize | InputAutoCapitalize | `null` | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. |
+| Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
+| AutoCorrect | bool | true | Indicates whether the browser's autocorrect feature is on or off. |
+| Autofocus | bool | false | Automatically focuses the input when it is rendered. |
 | Clearable | bool | false | Adds a clear button when the input is not empty. |
-| ReadOnly | bool | false | Makes the input readonly. |
 | Disabled | bool | false | Maked the input disabled. |
-| PasswordToggle | bool | false | Adds a button to toggle the password's visibility. Only applies to password types. |
-| Required | bool | false | Makes the input a required field. |
-| WithoutSpinButtons | bool | false | Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false. |
 | EndIcon    | [Icon](/docs/IconClass.md) |  | The icon to draw in the end slot. Alternatively, use EndIconName to specify the name of the icon. |
 | EndIconName    | string  |       |The name of the icon to draw in the end slot. Available names depend on the icon library being used.  |
+| EnterKeyHint | InputEnterKeyHint | `null` | Used to customize the label or icon of the Enter key on virtual keyboards. |
+| Hint | string |  | The input's hint text. |
+| InputMode | InputInputMode | InputInputMode.Text | Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices. |
+| Label | string |  | The input's label |
+| PasswordToggle | bool | false | Adds a button to toggle the password's visibility. Only applies to password types. |
+| Pill | bool | False | Draws a pill-style input with rounded edges. |
+| Placeholder | string |  | Placeholder text to show as a hint when the input is empty. |
+| ReadOnly | bool | false | Makes the input readonly. |
+| Required | bool | false | Makes the input a required field. |
+| Size | InputSize | InputSize.Inherit | The input's size. |
+| Spellcheck | bool | false | Enables spellchecking on the input |
 | StartIcon | [Icon](/docs/IconClass.md) || The icon to draw in the start slot. Altneratively, use StartIconName to specify the name of the icon. |
 | StartIconName | string | | The name of the icon to draw in the start slot. Available names depend on the icon library being used. |
-| Autofocus | bool | false | Automatically focuses the input when it is rendered. |
-| Autocomplete | string |  | Specifies what permission the browser has to provide assistance in filling out form field values. Refer to [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.. |
-| AutoCapitalize | InputAutoCapitalize | `null` | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. |
-| AutoCorrect | bool | true | Indicates whether the browser's autocorrect feature is on or off. |
-| EnterKeyHint | InputEnterKeyHint | `null` | Used to customize the label or icon of the Enter key on virtual keyboards. |
-| InputMode | InputInputMode | InputInputMode.Text | Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual keyboard on supportive devices. |
-| Spellcheck | bool | false | Enables spellchecking on the input |
+| Type | InputType | InputType.Text | The type of input (Valid input types are Date, DateTimeLocal, Email, Number, Password, Search, Telephone, Text, Time, Url). |
+| Value | string |  | The current value of the input |
+| WithoutSpinButtons | bool | false | Hides the browser's built-in increment/decrement spin buttons for number inputs. Defaults to false. |
+
+### Events
+| Event Name  | Description                              |
+|-------------|------------------------------------------|
+| ValueChanged (string) | Triggered when the input's value has changed |
 
 
 ### Methods
 | Method      | Parameters       | Description                              |
 |-------------|------------------|------------------------------------------|
-| SetValue  | value: string   | Sets the value of the input |
 | SetValueAsync  | value: string   | Sets the value of the input |
-| SetFocus |  | Sets focus to the input element. |
 | SetFocusAsync |  | Sets focus to the input element. |
 
 

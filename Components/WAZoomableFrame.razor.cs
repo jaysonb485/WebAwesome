@@ -6,78 +6,23 @@ namespace WebAwesomeBlazor.Components
     public partial class WAZoomableFrame : WAComponentBase
     {
         #region Parameters
-        /// <summary>
-        /// The name of the icon to draw for the ZoomIn icon. Available names depend on the icon library being used.
-        /// </summary>
-        [Parameter]
-        public string? ZoomInIconName { get; set; }
-
-        /// <summary>
-        /// The icon to draw for the ZoomIn icon.
-        /// </summary>
-        [Parameter]
-        public Icon? ZoomInIcon { get; set; }
-
-        /// <summary>
-        /// The name of the icon to draw for the ZoomOut icon. Rotates on open and close. Available names depend on the icon library being used.
-        /// </summary>
-        [Parameter]
-        public string? ZoomOutIconName { get; set; }
-
-        /// <summary>
-        /// The icon to draw for the ZoomOut icon.
-        /// </summary>
-        [Parameter]
-        public Icon? ZoomOutIcon { get; set; }
-
-        /// <summary>
-        /// The URL of the content to display.
-        /// </summary>
-        [Parameter]
-        public string? SourceUrl { get; set; }
-
-        /// <summary>
-        /// Inline HTML to display.
-        /// </summary>
-        [Parameter]
-        public string? SourceHtml { get; set; }
 
         /// <summary>
         /// Allows fullscreen mode.
         /// </summary>
         [Parameter]
         public bool AllowFullScreen { get; set; } = false;
-
         /// <summary>
-        /// Controls iframe loading behavior. Default is eager loading.
+        /// A Permissions Policy that controls which features the embedded content can use, e.g. clipboard-write; fullscreen. The browser reads this when the frame loads, so changing it afterwards has no effect until the frame navigates again.
         /// </summary>
         [Parameter]
-        public bool LazyLoad { get; set; } = false;
+        public string? AllowPolicy { get; set; }
 
         /// <summary>
-        /// Controls referrer information.
+        /// Disables interaction.
         /// </summary>
         [Parameter]
-        public string? ReferrerPolicy { get; set; }
-
-        /// <summary>
-        /// Security restrictions for the iframe.
-        /// </summary>
-        [Parameter]
-        public string? Sandbox { get; set; }
-
-        /// <summary>
-        /// The current zoom of the frame, e.g. 0 = 0% and 1 = 100%.
-        /// </summary>
-        [Parameter]
-        public double Zoom { get; set; } = 1;
-
-        /// <summary>
-        /// The zoom levels to step through when using zoom controls. This does not restrict programmatic changes to the zoom.
-        /// Provide space-separated values, e.g. "25% 50% 75% 100% 125% 150% 175% 200%".
-        /// </summary>
-        [Parameter]
-        public string ZoomLevels { get; set; } = "25% 50% 75% 100% 125% 150% 175% 200%";
+        public bool DisableInteraction { get; set; } = false;
 
         /// <summary>
         /// Removes the zoom controls.
@@ -86,10 +31,17 @@ namespace WebAwesomeBlazor.Components
         public bool HideZoomControls { get; set; } = false;
 
         /// <summary>
-        /// Disables interaction.
+        /// An accessible name for the frame. Screen readers announce it when moving between frames, so set one that describes the frame's content.
         /// </summary>
         [Parameter]
-        public bool DisableInteraction { get; set; } = false;
+        public string? Label { get; set; }
+
+        /// <summary>
+        /// Controls iframe loading behavior. Default is eager loading.
+        /// </summary>
+        [Parameter]
+        public bool LazyLoad { get; set; } = false;
+
         /// <summary>
         /// Emitted when the internal iframe when it finishes loading.
         /// </summary>
@@ -102,10 +54,72 @@ namespace WebAwesomeBlazor.Components
         public EventCallback<string> LoadError { get; set; }
 
         /// <summary>
+        /// Controls referrer information.
+        /// </summary>
+        [Parameter]
+        public string? ReferrerPolicy { get; set; }
+
+        /// <summary>
+        /// Security restrictions for the iframe.
+        /// </summary>
+        [Parameter]
+        public string? Sandbox { get; set; }
+        /// <summary>
+        /// Inline HTML to display.
+        /// </summary>
+        [Parameter]
+        public string? SourceHtml { get; set; }
+        /// <summary>
+        /// The URL of the content to display.
+        /// </summary>
+        [Parameter]
+        public string? SourceUrl { get; set; }
+
+        /// <summary>
         /// Enables automatic theme syncing (light/dark mode and theme selector classes) from the host document to the iframe.
         /// </summary>
         [Parameter]
         public bool SyncThemes { get; set; } = false;
+
+        /// <summary>
+        /// The current zoom of the frame, e.g. 0 = 0% and 1 = 100%.
+        /// </summary>
+        [Parameter]
+        public double Zoom { get; set; } = 1;
+        /// <summary>
+        /// The icon to draw for the ZoomIn icon.
+        /// </summary>
+        [Parameter]
+        public Icon? ZoomInIcon { get; set; }
+        /// <summary>
+        /// The name of the icon to draw for the ZoomIn icon. Available names depend on the icon library being used.
+        /// </summary>
+        [Parameter]
+        public string? ZoomInIconName { get; set; }
+
+        /// <summary>
+        /// The zoom levels to step through when using zoom controls. This does not restrict programmatic changes to the zoom.
+        /// Provide space-separated values, e.g. "25% 50% 75% 100% 125% 150% 175% 200%".
+        /// </summary>
+        [Parameter]
+        public string ZoomLevels { get; set; } = "25% 50% 75% 100% 125% 150% 175% 200%";
+
+
+        /// <summary>
+        /// The icon to draw for the ZoomOut icon.
+        /// </summary>
+        [Parameter]
+        public Icon? ZoomOutIcon { get; set; }
+
+
+        /// <summary>
+        /// The name of the icon to draw for the ZoomOut icon. Rotates on open and close. Available names depend on the icon library being used.
+        /// </summary>
+        [Parameter]
+        public string? ZoomOutIconName { get; set; }
+
+
+
         #endregion
         #region Lifecycle
         protected override void OnInitialized()

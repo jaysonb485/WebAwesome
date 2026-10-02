@@ -8,16 +8,16 @@
 ### Description
 Outputs a localized time phrase relative to the current date and time.
 
-[WebAwesome docs](https://webawesome.com/docs/components/relative-time/)
+[Web Awesome docs](https://webawesome.com/docs/components/relative-time/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| DateTimeValue | datetime |  | The date from which to calculate time from. If not set, the current date and time will be used.  |
-| AutoRefresh | bool | false | Keep the displayed value up to date as time passes. |
-| Format | RelativeTimeFormat | RelativeTimeFormat.Long | The formatting style to use (Long, Short, Narrow) |
 | AlwaysNumeric | bool | false | Always show numeric values ('1 day ago') instead of 'yesterday' |
+| AutoRefresh | bool | false | Keep the displayed value up to date as time passes. |
 | Culture | CultureInfo | CultureInfo.CurrentCulture | Used to set the desired locale. |
+| DateTimeValue | datetime |  | The date from which to calculate time from. If not set, the current date and time will be used.  |
+| Format | RelativeTimeFormat | RelativeTimeFormat.Long | The formatting style to use (Long, Short, Narrow) |
 
 ### Examples
 

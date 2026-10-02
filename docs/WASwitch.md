@@ -8,19 +8,19 @@
 ### Description
 Switches allow the user to toggle an option on or off.
 
-[WebAwesome docs](https://webawesome.com/docs/components/switch/)
+[Web Awesome docs](https://webawesome.com/docs/components/switch/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| Label | string |  | The label for the switch. |
-| Value | bool | false | The value of the switch. |
-| Size | SwitchSize | SwitchSize.Inherit | The switch's size. |
 | Disabled | bool | false | Disables the switch. |
 | Hint | string |  | The switch's hint. If you need to display HTML, use the hint slot instead. |
-| SwitchWidth | string |  | The width of the switch in CSS units. |
+| Label | string |  | The label for the switch. |
+| Size | SwitchSize | SwitchSize.Inherit | The switch's size. |
 | SwitchHeight | string |  | The height of the switch in CSS units.  |
+| SwitchWidth | string |  | The width of the switch in CSS units. |
 | ThumbSize | string |  | The size of the thumb (inner toggle) in CSS units. |
+| Value | bool | false | The value of the switch. |
 
 ### Examples
 

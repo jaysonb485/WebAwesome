@@ -10,21 +10,21 @@
 ### Description
 Trees allow you to display a hierarchical list of selectable [WATreeItem](/docs/WATreeItem.md). Items with children can be expanded and collapsed as desired by the user.
 
-[WebAwesome docs](https://webawesome.com/docs/components/tree/)
+[Web Awesome docs](https://webawesome.com/docs/components/tree/)
 
 ### Properties
 | Property | Type   | Default | Description                              |
 |----------|--------|---------|------------------------------------------|
-| SelectionMode | TreeSelection | TreeSelection.Single | The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple displays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected. Leaf-multiple allows multiple leaf nodes to be selected while parent nodes only expand and collapse. |
-| IndentSize | string |  | The size of the indentation for nested items. |
+| CollapseIcon | [Icon](/docs/IconClass.md) |  | The icon to show when the tree item is collapsed |
+| CollapseIconName | string |  | The icon to show when the tree item is collapsed. Available names depend on the icon library being used. |
+| ExpandIcon |  | [Icon](/docs/IconClass.md) | The icon to show when the tree item is expanded. |
+| ExpandIconName | string |  | The icon to show when the tree item is expanded. Available names depend on the icon library being used. |
 | IndentGuideColor | string |  | The color of the indentation line. |
 | IndentGuideOffset | string |  | The amount of vertical spacing to leave between the top and bottom of the indentation line's starting position. |
 | IndentGuideStyle | TreeIndentStyle | TreeIndentStyle.Solid | The style of the indentation line, e.g. solid, dotted, dashed. |
 | IndentGuideWidth | string | `0px` | The width of the indentation line. Defaults to 0px. |
-| ExpandIconName | string |  | The icon to show when the tree item is expanded. Available names depend on the icon library being used. |
-| ExpandIcon |  | [Icon](/docs/IconClass.md) | The icon to show when the tree item is expanded. |
-| CollapseIconName | string |  | The icon to show when the tree item is collapsed. Available names depend on the icon library being used. |
-| CollapseIcon | [Icon](/docs/IconClass.md) |  | The icon to show when the tree item is collapsed |
+| IndentSize | string |  | The size of the indentation for nested items. |
+| SelectionMode | TreeSelection | TreeSelection.Single | The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple displays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected. Leaf-multiple allows multiple leaf nodes to be selected while parent nodes only expand and collapse. |
 
 ### Events
 | Event Name  | Description                              |
