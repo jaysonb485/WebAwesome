@@ -1,5 +1,8 @@
 ﻿# Changelog
 
+## Version 1.14.1
+- Bug fix: [WADateInput](/docs/WADateInput.md) - Fixed a missing " in the underlying component properties that caused testing errors.
+
 ## Version 1.14.0
 - Upgraded to [Web Awesome 3.14.0](https://webawesome.com/docs/resources/changelog#wa_3140) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - New component [WAStepper](/docs/WAStepper.md) and associated [WAStep](/docs/WAStep.md) to allow users to navigate through a sequence of steps in a process.

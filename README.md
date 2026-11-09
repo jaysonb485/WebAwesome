@@ -4,7 +4,7 @@
 Currently supports Web Awesome 3.14.0. 
 
 # Changelog
-[Version 1.14.0](/docs/CHANGELOG.md)
+[Version 1.14.1](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
