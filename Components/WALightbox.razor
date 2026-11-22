@@ -1,0 +1,48 @@
+﻿@inherits WAComponentBase
+<CascadingValue Value="@(this)" IsFixed="true">
+    <wa-lightbox @ref="@Element"
+                 id="@Id"
+                 @attributes="@AdditionalAttributes"
+                 slot="@Slot"
+                 style="@StyleNames"
+                 class="@ClassNames"
+    index="@ItemIndex"
+    label="@Label"
+    loop="@Loop"
+    open=@Open"
+    without-counter="@(!ShowCounter)"
+    without-navigation="@(!ShowNavigation)"
+    without-zoom="@(!ShowZoom)"
+    with-thumbnails="@(ShowThumbnails)">
+        @if (CloseIcon is not null || !String.IsNullOrWhiteSpace(CloseIconName))
+        {
+            <WAIcon Icon="@CloseIcon" IconName="@CloseIconName" Slot="close-icon"></WAIcon>
+        }
+        @if (NextIcon is not null || !String.IsNullOrWhiteSpace(NextIconName))
+        {
+            <WAIcon Icon="@NextIcon" IconName="@NextIconName" Slot="next-icon"></WAIcon>
+        }
+        @if (PreviousIcon is not null || !String.IsNullOrWhiteSpace(PreviousIconName))
+        {
+            <WAIcon Icon="@PreviousIcon" IconName="@PreviousIconName" Slot="previous-icon"></WAIcon>
+        }
+        @if (ZoomInIcon is not null || !String.IsNullOrWhiteSpace(ZoomInIconName))
+        {
+            <WAIcon Icon="@ZoomInIcon" IconName="@ZoomInIconName" Slot="zoom-in-icon"></WAIcon>
+        }
+        @if (ZoomOutIcon is not null || !String.IsNullOrWhiteSpace(ZoomOutIconName))
+        {
+            <WAIcon Icon="@ZoomOutIcon" IconName="@ZoomOutIconName" Slot="zoom-out-icon"></WAIcon>
+        }
+        
+        @if(Actions is not null)
+        {
+        <span slot="actions">
+                @Actions
+        </span>    
+        }
+        
+        @ChildContent
+    </wa-lightbox>
+</CascadingValue>
+

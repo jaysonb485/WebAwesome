@@ -1,0 +1,49 @@
+﻿@using System.Globalization
+@inherits WAComponentBase
+<wa-counter @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  slot="@Slot"
+                  class="@ClassNames"
+                  date="@DateTimeISOString"
+                  delimiter="@Delimiter"
+                  direction="@(Direction.GetDescription())"
+                  duration="@Duration"
+                  format="@(Format.GetDescription())"
+                  label="@Label"
+                  largest-unit="@(LargestUnit.GetDescription())"
+                  paused="@Paused"
+                  smallest-unit="@(SmallestUnit.GetDescription())"
+                  without-labels="@(!ShowLabels)"
+                
+>
+@if(DaysContent is not null)
+    {
+        <span slot="days">@DaysContent</span>
+    }
+    @if (SecondsContent is not null)
+    {
+        <span slot="seconds">@SecondsContent</span>
+    }
+    @if (MinutesContent is not null)
+    {
+        <span slot="minutes">@MinutesContent</span>
+    }
+    @if (HoursContent is not null)
+    {
+        <span slot="hours">@HoursContent</span>
+    }
+    @if (MonthsContent is not null)
+    {
+        <span slot="months">@MonthsContent</span>
+    }
+    @if (YearsContent is not null)
+    {
+        <span slot="years">@YearsContent</span>
+    }
+    @if (FinishedContent is not null)
+    {
+        <span slot="finished">@FinishedContent</span>
+    }
+</wa-counter>

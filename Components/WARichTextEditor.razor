@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using Microsoft.JSInterop
+
+
+@inherits WAComponentBase
+
+<wa-rich-text-editor @ref="@Element"
+                     id="@Id"
+                     @attributes="@AdditionalAttributes"
+                     style="@StyleNames"
+                     class="@ClassNames"
+                     appearance="@AppearanceString"
+                     autocapitalize="@AutoCapitaliseString"
+                     autocorrect="@(AutoCorrect ? "on" : "off")"
+                     disabled="@Disabled"
+                     disabled-features="@Options.DisabledFeatures.ToString()"
+                     enterkeyhint="@EnterKeyHintString"
+                     format="@(Options.UseMarkdown ? "markdown" : "html")"
+                     heading-levels="@Options.HeadingLevels.ToString()"
+                     highlight-colors="@Options.HighlightColors?.ToString()"
+                     hint="@Hint"
+                     icon-library="@Options.IconLibrary"
+                     inputmode="@InputModeString"
+                     label="@Label"
+                     link-rel="@Options.LinkRel"
+                     link-target="@Options.LinkTarget"
+                     maxlength="@Options.MaxLength"
+                     minlength="@Options.MinLength"
+                     placeholder="@Placeholder"
+                     readonly="@ReadOnly"
+                     required="@Required"
+                     size="@SizeString"
+                     spellcheck="@Spellcheck"
+                     text-colors="@Options.TextColors?.ToString()"
+                     toolbar="@Options.Toolbar.ToString()"
+                     toolbar-placement="@Options.ToolbarPlacement.GetDescription()"
+                     with-count="@Options.ShowCount"
+                     without-autolink="@(!Options.AutoLink)"
+                     without-markdown-shortcuts="@(Options.DisableMarkdownShortcuts)"
+                     without-smart-punctuation="@(Options.DisableSmartPunctuation)"
+                     slot="@Slot"
+                     value="@Value"
+                     >
+</wa-rich-text-editor>
+

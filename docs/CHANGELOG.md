@@ -1,5 +1,16 @@
 ﻿# Changelog
 
+## Version 1.15.0
+- Upgraded to [Web Awesome 3.15.0](https://webawesome.com/docs/resources/changelog#wa_3150) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
+- Fix missing Focused and Blurred event callbacks on [WADateInput](/docs/WADateInput.md)
+- Deprecated [WAInputDateTime](/docs/WAInputDateTime.md) component - use [WADateInput](/docs/WADateInput.md) instead.
+- New components:
+	- [WARichTextEditor](/docs/WARichTextEditor.md)
+	- [WALightbox](/docs/WALightbox.md)
+	- [WACodeHighlighter](/docs/WACodeHighlighter.md)
+	- [WACounter](/docs/WACounter.md)
+	- [WANumberTicker](/docs/WANumberTicker.md)
+
 ## Version 1.14.0
 - Upgraded to [Web Awesome 3.14.0](https://webawesome.com/docs/resources/changelog#wa_3140) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - New component [WAStepper](/docs/WAStepper.md) and associated [WAStep](/docs/WAStep.md) to allow users to navigate through a sequence of steps in a process.

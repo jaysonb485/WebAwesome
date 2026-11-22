@@ -8,7 +8,7 @@
 ### Description
 A brief description of what the Component Name does and its purpose within the Vengage WebAwesome library.
 
-[WebAwesome docs](https://webawesome.com/docs/component)
+[Web Awesome docs](https://webawesome.com/docs/component)
 
 ### Properties
 | Property | Type   | Default | Description                              |

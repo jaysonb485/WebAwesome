@@ -1,0 +1,23 @@
+﻿@inherits WAComponentBase
+<wa-lightbox-item @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  class="@ClassNames"
+                  slot="@Slot"
+                  alt="@AltText"
+                  caption="@Caption"
+                  height="@Height"
+                  sizes="@Sizes"
+                  src="@SourceUrl"
+                  srcset="@SourceSet"
+                  thumbnail="@ThumbnailUrl"
+                  type="@MediaType.GetDescription()"
+                  width="@Width">
+    @if (PlayIcon is not null || !String.IsNullOrWhiteSpace(PlayIconName))
+    {
+        <WAIcon Icon="@PlayIcon" IconName="@PlayIconName" Slot="play-icon"></WAIcon>
+    }
+    @ChildContent
+</wa-lightbox-item>
+
