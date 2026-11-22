@@ -1,0 +1,24 @@
+﻿@using System.Globalization
+@inherits WAComponentBase
+<wa-number-ticker @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  slot="@Slot"
+                  class="@ClassNames"
+                  currency="@CurrencyCode"
+                  currency-display="@(CurrencyDisplay.GetDescription())"
+                  delay="@Delay"
+                  ondurationchange="@Duration"
+                  eager="@Eager"
+                  easing="@Easing"
+                  maximum-fraction-digits="@MaximumFractionDigits"
+                  maximum-significant-digits="@MaximumSignificantDigits"
+                  minimum-fraction-digits="@MinimumFractionDigits"
+                  minimum-significant-digits="@MinimumSignificantDigits"
+                  start-value="@StartValue"
+                  Type="@(FormatType.GetDescription())"
+                  Value="@Value"
+                  without-grouping="@(!GroupDigits)">
+
+</wa-number-ticker>

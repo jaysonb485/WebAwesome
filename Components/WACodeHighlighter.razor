@@ -1,0 +1,16 @@
+﻿@using System.Globalization
+@inherits WAComponentBase
+<wa-code-highlighter @ref="@Element"
+                  id="@Id"
+                  @attributes="@AdditionalAttributes"
+                  style="@StyleNames"
+                  slot="@Slot"
+                  class="@ClassNames"
+                  code="@Code"
+                  label="@Label"
+                  language="@CodeLanguage"
+                  without-copy="@(!ShowCopyButton)"
+                  without-dedent="@(!Dedent)"
+                  wrap="@Wrap">
+                @ChildContent
+                </wa-code-highlighter>

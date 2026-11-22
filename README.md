@@ -1,10 +1,10 @@
 ﻿I'm a hobbyist developer. This is an open source project to provide Blazor components for the Web Awesome UI framework. Feedback and contributions are welcome!
 # WebAwesomeBlazor
 
-Currently supports Web Awesome 3.14.0. 
+Currently supports Web Awesome 3.15.0. 
 
 # Changelog
-[Version 1.14.0](/docs/CHANGELOG.md)
+[Version 1.15.0](/docs/CHANGELOG.md)
 
 # Installation
 Get the latest package from [NuGet](https://www.nuget.org/packages/WebAwesomeBlazor/)
@@ -18,8 +18,8 @@ dotnet add package WebAwesomeBlazor
 ### Free components
 Add the project code to your `App.razor` or `wwwroot/index.html` file in the `<head>` section along with the extra utility files for this package:
 ```HTML
-<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.14.0/styles/webawesome.css">
-<script type="module" src="https://ka-f.webawesome.com/webawesome@3.14.0/webawesome.loader.js"></script>
+<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.15.0/styles/webawesome.css">
+<script type="module" src="https://ka-f.webawesome.com/webawesome@3.15.0/webawesome.loader.js"></script>
 ```
 
 ### Web Awesome Pro components
@@ -64,13 +64,15 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WACallout](/docs/WACallout.md)
 - [WACard](/docs/WACard.md)
 - [WACarousel](/docs/WACarousel.md)
-- [WACheckboxGroup](/docs/WACheckboxGroup.md)
 - [WACheckbox](/docs/WACheckbox.md)
+- [WACheckboxGroup](/docs/WACheckboxGroup.md)
+- [WACodeHighlighter](/docs/WACodeHighlighter.md)
 - [WAColorPicker](/docs/WAColorPicker.md)
 - (Pro) [WACombobox](/docs/WACombobox.md)
   - [WAComboboxOption](/docs/WAComboboxOption.md)
 - [WAComparison](/docs/WAComparison.md)
 - [WACopyButton](/docs/WACopyButton.md)
+- [WACounter](/docs/WACounter.md)
 - (Pro) [WADataGrid](/docs/WADataGrid.md)
 - (Pro) [WADateInput](/docs/WADateInput.md)
 - (Pro) [WADatePicker](/docs/WADatePicker.md)
@@ -85,12 +87,14 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WAIcon](/docs/WAIcon.md)
 - [WAInclude](/docs/WAInclude.md)
 - [WAInput](/docs/WAInput.md)
-- [WAInputDateTime](/docs/WAInputDateTime.md)
+- (Deprecated) [WAInputDateTime](/docs/WAInputDateTime.md)
 - [WAInputNumber](/docs/WAInputNumber.md)
 - [WAIntersectionObserver](/docs/WAIntersectionObserver.md)
 - [WAKnownDate](/docs/WAKnownDate.md)
+- [WALightbox](/docs/WALightbox.md)
 - [WAMarkdown](/docs/WAMarkdown.md)
 - [WANumberInput](/docs/WANumberInput.md)
+- [WANumberTicker](/docs/WANumberTicker.md)
 - [WAOTPInput](/docs/WAOTPInput.md)
 - [WAPage](/docs/WAPage.md)
   - [WALayoutContent](/docs/WALayoutContent.md)
@@ -105,6 +109,7 @@ Refer to [IconClass](/docs/IconClass.md) for usage.
 - [WARating](/docs/WARating.md)
 - [WARelativeTime](/docs/WARelativeTime.md)
 - [WAResizeObserver](/docs/WAResizeObserver.md)
+- (Pro) [WARichTextEditor](/docs/WARichTextEditor.md)
 - [WAScroller](/docs/WAScroller.md)
 - [WASelect](/docs/WASelect.md)
   - [WASelectOption](/docs/WASelectOption.md)

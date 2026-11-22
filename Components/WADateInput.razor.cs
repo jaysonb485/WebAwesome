@@ -225,41 +225,41 @@ namespace WebAwesomeBlazor.Components
         public DatePickerWeekdayFormat WeekdayFormat { get; set; } = DatePickerWeekdayFormat.Short;
 
 
+        /// <summary>
+        /// Triggered when the input is focused.
+        /// </summary>
+        [Parameter]
+        public EventCallback Focused { get; set; }
+        /// <summary>
+        /// Triggered when the input is blurred.
+        /// </summary>
+        [Parameter]
+        public EventCallback Blurred { get; set; }
+
+
         #endregion
 
         #region Computed  Properties
 
-        string AppearanceString
+        string AppearanceString => Appearance switch
         {
-            get
-            {
-                return Appearance switch
-                {
-                    InputAppearance.Filled => "filled",
-                    InputAppearance.Outlined => "outlined",
-                    InputAppearance.FilledOutlined => "filled-outlined",
-                    _ => "outlined"
-                    //Only filled and outlined are valid for inputs
-                };
-            }
-        }
+            InputAppearance.Filled => "filled",
+            InputAppearance.Outlined => "outlined",
+            InputAppearance.FilledOutlined => "filled-outlined",
+            _ => "outlined"
+            //Only filled and outlined are valid for inputs
+        };
 
-        string SizeString
+        string SizeString => Size switch
         {
-            get
-            {
-                return Size switch
-                {
-                    InputSize.XSmall => "xs",
-                    InputSize.Small => "s",
-                    InputSize.Medium => "m",
-                    InputSize.Large => "l",
-                    InputSize.XLarge => "xl",
-                    InputSize.Inherit => "inherit",
-                    _ => "m"
-                };
-            }
-        }
+            InputSize.XSmall => "xs",
+            InputSize.Small => "s",
+            InputSize.Medium => "m",
+            InputSize.Large => "l",
+            InputSize.XLarge => "xl",
+            InputSize.Inherit => "inherit",
+            _ => "m"
+        };
 
         string DisabledDatesString
         {
@@ -292,73 +292,49 @@ namespace WebAwesomeBlazor.Components
             }
         }
 
-        string FirstDayOfTheWeekString
+        string FirstDayOfTheWeekString => FirstDayOfWeek switch
         {
-            get
-            {
-                return FirstDayOfWeek switch
-                {
-                    DatePickerDayOfTheWeek.Sunday => "sun",
-                    DatePickerDayOfTheWeek.Monday => "mon",
-                    DatePickerDayOfTheWeek.Tuesday => "tue",
-                    DatePickerDayOfTheWeek.Wednesday => "wed",
-                    DatePickerDayOfTheWeek.Thursday => "thu",
-                    DatePickerDayOfTheWeek.Friday => "fri",
-                    DatePickerDayOfTheWeek.Saturday => "sat",
-                    _ => "auto"
-                };
-            }
-        }
+            DatePickerDayOfTheWeek.Sunday => "sun",
+            DatePickerDayOfTheWeek.Monday => "mon",
+            DatePickerDayOfTheWeek.Tuesday => "tue",
+            DatePickerDayOfTheWeek.Wednesday => "wed",
+            DatePickerDayOfTheWeek.Thursday => "thu",
+            DatePickerDayOfTheWeek.Friday => "fri",
+            DatePickerDayOfTheWeek.Saturday => "sat",
+            _ => "auto"
+        };
 
-        string SelectionModeString
+        string SelectionModeString => SelectionMode switch
         {
-            get
-            {
-                return SelectionMode switch
-                {
-                    DatePickerSelectionMode.Single => "single",
-                    DatePickerSelectionMode.Range => "range",
-                    _ => "single"
-                };
-            }
-        }
+            DatePickerSelectionMode.Single => "single",
+            DatePickerSelectionMode.Range => "range",
+            _ => "single"
+        };
 
-        string PopupPlacementString
+        string PopupPlacementString => PopupPlacement switch
         {
-            get
-            {
-                return PopupPlacement switch
-                {
-                    DateInputPlacement.BottomStart => "bottom-start",
-                    DateInputPlacement.BottomEnd => "bottom-end",
-                    DateInputPlacement.TopStart => "top-start",
-                    DateInputPlacement.TopEnd => "top-end",
-                    DateInputPlacement.Top => "top",
-                    DateInputPlacement.Bottom => "bottom",
-                    DateInputPlacement.Right => "right",
-                    DateInputPlacement.RightStart => "right-start",
-                    DateInputPlacement.RightEnd => "right-end",
-                    DateInputPlacement.Left => "left",
-                    DateInputPlacement.LeftStart => "left-start",
-                    DateInputPlacement.LeftEnd => "left-end",
-                    _ => "bottom-start"
-                };
-            }
-        }
+            DateInputPlacement.BottomStart => "bottom-start",
+            DateInputPlacement.BottomEnd => "bottom-end",
+            DateInputPlacement.TopStart => "top-start",
+            DateInputPlacement.TopEnd => "top-end",
+            DateInputPlacement.Top => "top",
+            DateInputPlacement.Bottom => "bottom",
+            DateInputPlacement.Right => "right",
+            DateInputPlacement.RightStart => "right-start",
+            DateInputPlacement.RightEnd => "right-end",
+            DateInputPlacement.Left => "left",
+            DateInputPlacement.LeftStart => "left-start",
+            DateInputPlacement.LeftEnd => "left-end",
+            _ => "bottom-start"
+        };
 
-        string WeekdayFormatString
+        string WeekdayFormatString => WeekdayFormat switch
         {
-            get
-            {
-                return WeekdayFormat switch
-                {
-                    DatePickerWeekdayFormat.Narrow => "narrow",
-                    DatePickerWeekdayFormat.Short => "short",
-                    DatePickerWeekdayFormat.Long => "long",
-                    _ => "short"
-                };
-            }
-        }
+            DatePickerWeekdayFormat.Narrow => "narrow",
+            DatePickerWeekdayFormat.Short => "short",
+            DatePickerWeekdayFormat.Long => "long",
+            _ => "short"
+        };
 
         #endregion
 
@@ -497,6 +473,19 @@ namespace WebAwesomeBlazor.Components
                 }
             }
         }
+
+        [JSInvokable]
+        public async Task HandleInputFocus()
+        {
+            await Focused.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task HandleInputBlur()
+        {
+            await Blurred.InvokeAsync();
+        }
+
         private async Task OnValueChanged(ChangeEventArgs e)
         {
             var oldValue = Value;
@@ -673,7 +662,10 @@ namespace WebAwesomeBlazor.Components
             await SafeInvokeVoidAsync("setFocus", Id!);
         }
 
-        public void SetFocus() => _ = SetFocusAsync();
+        public void SetFocus()
+        {
+            _ = SetFocusAsync();
+        }
 
         public async Task ShowPickerAsync()
         {

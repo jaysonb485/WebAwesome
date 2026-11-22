@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace WebAwesomeBlazor
 {
@@ -493,6 +494,40 @@ namespace WebAwesomeBlazor
         None
     }
     #endregion
+    #region Counter Enums
+    public enum CounterDirection
+    {
+        [Description("up")]
+        Up,
+        [Description("down")]
+        Down
+    }
+    public enum CounterFormat
+    {
+        [Description("long")]
+        Long,
+        [Description("short")]
+        Short,
+        [Description("narrow")]
+        Narrow
+    }
+
+    public enum CounterUnit
+    {
+        [Description("seconds")]
+        Seconds,
+        [Description("minutes")]
+        Minutes,
+        [Description("hours")]
+        Hours,
+        [Description("days")]
+        Days,
+        [Description("months")]
+        Months,
+        [Description("years")]
+        Years
+    }
+    #endregion
     #region DataGrid Enums
     public enum DataGridAppearance
     {
@@ -838,6 +873,15 @@ namespace WebAwesomeBlazor
         Footer,
     }
     #endregion
+    #region LightboxItem Enums
+    public enum LightboxItemMediaType
+    {
+        [Description("image")]
+        Image,
+        [Description("video")]
+        Video
+    }
+    #endregion
     #region NavTree Enums
     public enum NavTreeSelection
     {
@@ -874,6 +918,29 @@ namespace WebAwesomeBlazor
         Previous,
         Search,
         Send
+    }
+    #endregion
+    #region NumberTicker Enums
+    public enum NumberTickerFormatType
+    {
+        [Description("currency")]
+        Currency,
+        [Description("decimal")]
+        Decimal,
+        [Description("percent")]
+        Percent
+    }
+
+    public enum NumberTickerCurrencyDisplay
+    {
+        [Description("symbol")]
+        Symbol,
+        [Description("narrowSymbol")]
+        NarrowSymbol,
+        [Description("code")]
+        Code,
+        [Description("name")]
+        Name
     }
     #endregion
     #region OtpInput Enums
@@ -1027,6 +1094,137 @@ namespace WebAwesomeBlazor
         Long,
         Short,
         Narrow
+    }
+    #endregion
+    #region RichTextEditor Enums
+    public enum RichTextEditorToolbarItem
+    {
+        [Description("block")]
+        Block,
+        [Description("bold")]
+        Bold,
+        [Description("italic")]
+        Italic,
+        [Description("underline")]
+        Underline,
+        [Description("strikethrough")]
+        Strikethrough,
+        [Description("highlight")]
+        Highlight,
+        [Description("code")]
+        Code,
+        [Description("subscript")]
+        Subscript,
+        [Description("superscript")]
+        Superscript,
+        [Description("color")]
+        Color,
+        [Description("format-menu")]
+        FormatMenu,
+        [Description("align")]
+        Align,
+        [Description("lists")]
+        Lists,
+        [Description("bullet-list")]
+        BulletList,
+        [Description("ordered-list")]
+        OrderedList,
+        [Description("indent")]
+        Indent,
+        [Description("outdent")]
+        Outdent,
+        [Description("block-quote")]
+        BlockQuote,
+        [Description("code-block")]
+        CodeBlock,
+        [Description("link")]
+        Link,
+        [Description("image")]
+        Image,
+        [Description("embed")]
+        Embed,
+        [Description("table")]
+        Table,
+        [Description("horizontal-rule")]
+        HorizontalRule,
+        [Description("clear-formatting")]
+        ClearFormatting,
+        [Description("paste-plain-text")]
+        PasteAsPlainText,
+        [Description("undo")]
+        Undo,
+        [Description("redo")]
+        Redo,
+        [Description("actions")]
+        CustomActions,
+        [Description("|")]
+        Divider
+    }
+    public enum RichTextEditorToolbarPlacement
+    {
+        [Description("top")]
+        Top,
+        [Description("bottom")]
+        Bottom
+    }
+    public enum RichTextEditorFeatureOption
+    {
+        [Description("bold")]
+        Bold,
+        [Description("italic")]
+        Italic,
+        [Description("underline")]
+        Underline,
+        [Description("strikethrough")]
+        Strikethrough,
+        [Description("highlight")]
+        Highlight,
+        [Description("code")]
+        Code,
+        [Description("subscript")]
+        Subscript,
+        [Description("superscript")]
+        Superscript,
+        [Description("color")]
+        Color,
+        [Description("link")]
+        Link,
+        [Description("image")]
+        Image,
+        [Description("embed")]
+        Embed,
+        [Description("table")]
+        Table,
+        [Description("blockquote")]
+        BlockQuote,
+        [Description("code-block")]
+        CodeBlock,
+        [Description("bullet-list")]
+        BulletList,
+        [Description("ordered-list")]
+        OrderedList,
+        [Description("horizontal-rule")]
+        HorizontalRule,
+        [Description("align")]
+        Align,
+        [Description("lists")]
+        Lists
+    }
+
+    public enum RichTextEditorHeadingLevel
+    {
+        [Description("1")]
+        H1,
+        [Description("2")]
+        H2,
+        [Description("3")]
+        H3,
+        [Description("4")]
+        H4,
+        [Description("5")]
+        H5,
+        [Description("6")]
+        H6
     }
     #endregion
     #region Scroller Enums
@@ -1346,5 +1544,27 @@ namespace WebAwesomeBlazor
         Auto
     }
     #endregion
+
+
+    internal static class EnumExtensions
+    {
+        extension(Enum e)
+        {
+            internal string GetDescription()
+            {
+                var field = e.GetType().GetField(e.ToString());
+                if (field == null)
+                    return e.ToString();
+
+                var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attribute)
+                {
+                    return attribute.Description;
+                }
+
+                return e.ToString();
+            }
+        }
+    }
 
 }

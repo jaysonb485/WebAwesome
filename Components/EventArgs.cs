@@ -7,6 +7,23 @@ namespace WebAwesomeBlazor.Components
         public bool Cancel { get; set; } = false;
     }
 
+    public class LightboxShowingEventArgs : EventArgs
+    {
+        public bool Cancel { get; set; } = false;
+    }
+
+    public class LightboxHidingEventArgs : EventArgs
+    {
+        public bool Cancel { get; set; } = false;
+    }
+
+    public class LightboxItemChangeEventArgs : EventArgs
+    {
+        public int Index { get; set; }
+        public int PreviousIndex { get; set; }
+
+    }
+
     public class InputTagCreatingEventArgs : EventArgs
     {
         public string Tag { get; set; } = string.Empty;
@@ -95,5 +112,13 @@ namespace WebAwesomeBlazor.Components
         public string[]? Sources { get; set; }
         public string[]? Tracks { get; set; }
     }
+
+    public class RichTextEditorSuggestionError
+    {
+        public string ErrorMessage { get; set; } = string.Empty;
+        public string Trigger { get; set; } = string.Empty;
+        public string Query { get; set; } = string.Empty;
+    }
+
 
 }
