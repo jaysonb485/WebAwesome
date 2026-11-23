@@ -1,5 +1,8 @@
 ﻿# Changelog
 
+## Version 1.15.1
+- Fixed broken duration on [WANumberTicker](/docs/WANumberTicker.md)
+
 ## Version 1.15.0
 - Upgraded to [Web Awesome 3.15.0](https://webawesome.com/docs/resources/changelog#wa_3150) - Make sure you have updated your project version on [Web Awesome Teams](https://webawesome.com/teams), and update the versions in your `App.razor` file.
 - Fix missing Focused and Blurred event callbacks on [WADateInput](/docs/WADateInput.md)

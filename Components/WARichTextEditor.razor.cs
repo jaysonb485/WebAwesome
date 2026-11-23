@@ -326,10 +326,6 @@ namespace WebAwesomeBlazor.Components
         private string previousValue = string.Empty;
 
         private List<RichTextEditorSuggestion> suggestions { get; set; } = new();
-
-        private bool ColorUpdateRequired { get; set; } = false;
-        private object? textColor;
-        private object? highlightColor;
         private RichTextEditorOptions Options { get; set; } = new RichTextEditorOptions();
 
         #endregion
