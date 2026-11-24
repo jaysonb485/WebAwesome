@@ -40,7 +40,7 @@
                placement="@PopupPlacementString"
                today="@Today?.ToString("yyyy-MM-dd")"
                with-outside-days="@ShowOutsideDays"
-               with-week-numbers=@ShowWeekNumbers"
+               with-week-numbers="@ShowWeekNumbers"
                @onchange="OnValueChanged"
                weekday-format="@WeekdayFormatString">
     @if (PreviousIcon != null || !String.IsNullOrWhiteSpace(PreviousIconName))

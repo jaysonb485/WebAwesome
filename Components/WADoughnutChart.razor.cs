@@ -119,37 +119,25 @@ namespace WebAwesomeBlazor.Components
         [JsonPropertyName("cutout")]
         public string CutoutSize { get; set; } = "50%";
 
-        internal string LegendPositionString
+        internal string LegendPositionString => LegendPosition switch
         {
-            get
-            {
-                return LegendPosition switch
-                {
-                    ChartLegendPosition.Top => "top",
-                    ChartLegendPosition.Bottom => "bottom",
-                    ChartLegendPosition.Left => "left",
-                    ChartLegendPosition.Right => "right",
-                    ChartLegendPosition.Start => "start",
-                    ChartLegendPosition.End => "end",
-                    _ => "top",
-                };
-            }
-        }
+            ChartLegendPosition.Top => "top",
+            ChartLegendPosition.Bottom => "bottom",
+            ChartLegendPosition.Left => "left",
+            ChartLegendPosition.Right => "right",
+            ChartLegendPosition.Start => "start",
+            ChartLegendPosition.End => "end",
+            _ => "top",
+        };
 
-        internal string GridLinesString
+        internal string GridLinesString => GridLines switch
         {
-            get
-            {
-                return GridLines switch
-                {
-                    ChartGridLines.Both => "both",
-                    ChartGridLines.HorizontalOnly => "y",
-                    ChartGridLines.VerticalOnly => "x",
-                    ChartGridLines.None => "none",
-                    _ => "both"
-                };
-            }
-        }
+            ChartGridLines.Both => "both",
+            ChartGridLines.HorizontalOnly => "y",
+            ChartGridLines.VerticalOnly => "x",
+            ChartGridLines.None => "none",
+            _ => "both"
+        };
 
     }
 
