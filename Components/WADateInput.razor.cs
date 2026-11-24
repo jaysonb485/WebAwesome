@@ -378,7 +378,7 @@ namespace WebAwesomeBlazor.Components
 
             objRef ??= DotNetObjectReference.Create(this);
 
-            AdditionalAttributes ??= [];
+            AdditionalAttributes ??= new Dictionary<string, object>();
 
             if (ValueExpression != null)
                 fieldIdentifier = FieldIdentifier.Create(ValueExpression);

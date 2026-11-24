@@ -1,5 +1,8 @@
 ﻿# Changelog
 
+## Version 1.15.2
+- Fixed missing " on [WADateInput](/docs/WADateInput.md) causing validation issues.. Was intended as 1.14.1 - but some reason never got merged... 🤔
+
 ## Version 1.15.1
 - Fixed broken duration on [WANumberTicker](/docs/WANumberTicker.md)
 
